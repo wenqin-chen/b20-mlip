@@ -1,0 +1,47 @@
+{#- train_replay.sbatch.j2 — multihead replay fine-tune (SPEC.md section 6, bracket B2) on the
+    GPU partition. One node, one task, one GPU, a single unit (the train run id). Implements the
+    unit protocol of templates/slurm/README.md: a resubmission after a timeout skips a finished
+    unit and otherwise re-runs mace_run_train, whose --restart_latest (always in the argv the
+    train tier renders) resumes from the latest checkpoint in the work directory.
+
+    resources: argv (the shell-quoted mace_run_train argument string; paths relative to the
+    work directory, which the job cd's into), partition (default cluster.partition_gpu),
+    gpus (1), cpus_per_task (threads), mem (64G), time (12:00:00). Without argv the job runs
+    script.sh like the generic template. -#}
+#!/bin/bash
+#SBATCH --job-name={{ job_name }}
+#SBATCH --account={{ account }}
+#SBATCH --partition={{ resources.partition | default(cluster.partition_gpu or partition, true) }}
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task={{ resources.cpus_per_task | default(threads) }}
+#SBATCH --gpus={{ resources.gpus | default(1) }}
+#SBATCH --mem={{ resources.mem | default('64G') }}
+#SBATCH --time={{ resources.time | default('12:00:00') }}
+#SBATCH --output={{ workdir }}/logs/slurm-%j.out
+set -euo pipefail
+{% for m in cluster.modules %}module load {{ m }}
+{% endfor %}
+export OMP_NUM_THREADS={{ threads }} MKL_NUM_THREADS={{ threads }} OPENBLAS_NUM_THREADS={{ threads }}
+{% for k, v in env.items() %}export {{ k }}={{ v }}
+{% endfor %}
+export B20_WORKDIR={{ workdir }} B20_JOB_NAME={{ job_name }}
+export B20_UNIT_INDEX=1
+export B20_UNIT=$(sed -n "1p" "$B20_WORKDIR/{{ units_name }}")
+mkdir -p "$B20_WORKDIR/units" "$B20_WORKDIR/logs"
+slug=$(printf '%s' "$B20_UNIT" | tr -c 'A-Za-z0-9._-' '_')
+[ -f "$B20_WORKDIR/units/$slug.done" ] && { echo "unit $B20_UNIT already done"; exit 0; }
+rm -f "$B20_WORKDIR/units/$slug.failed"
+cd "$B20_WORKDIR"
+{% if resources.argv is defined %}
+run_unit() { uv run --no-sync mace_run_train {{ resources.argv }}; }
+{% else %}
+run_unit() { bash "$B20_WORKDIR/{{ script_name }}"; }
+{% endif %}
+if run_unit > "$B20_WORKDIR/logs/$slug.log" 2>&1; then
+  printf '{"unit": "%s", "state": "done", "returncode": 0}\n' "$B20_UNIT" > "$B20_WORKDIR/units/$slug.done"
+else
+  rc=$?
+  printf '{"unit": "%s", "state": "failed", "returncode": %d}\n' "$B20_UNIT" "$rc" > "$B20_WORKDIR/units/$slug.failed"
+  exit $rc
+fi

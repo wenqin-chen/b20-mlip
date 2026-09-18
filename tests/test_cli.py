@@ -10,11 +10,19 @@ import pytest
 from typer.testing import CliRunner
 
 from b20mlip import __version__
-from b20mlip.cli import CLIState, ExecutorKind, app
+from b20mlip.cli import REGISTERED, CLIState, ExecutorKind, app
+from b20mlip.cli import _toplevel_registered as TOPLEVEL_REGISTERED
 from b20mlip.executors import LocalExecutor, SlurmExecutor
 from b20mlip.models import StageResult
 
 runner = CliRunner()
+
+
+def _is_registered(argv: list[str]) -> bool:
+    """True once a tier package registered the command (it is then no longer a stub)."""
+    if argv[0] in REGISTERED:
+        return len(argv) > 1 and argv[1] in REGISTERED[argv[0]]
+    return argv[0] in TOPLEVEL_REGISTERED
 
 
 def test_version() -> None:
@@ -57,24 +65,23 @@ def test_help_lists_every_group() -> None:
         ["sampling", "wham", "--run", "R"],
         ["active", "select"],
         ["agent", "run", "--backend", "mock"],
-        ["cluster", "bootstrap"],
-        ["report", "build", "--readme"],
         ["screen"],
         ["export", "--model", "M"],
     ],
 )
 def test_stubs_exit_2_with_message(argv: list[str]) -> None:
+    if _is_registered(argv):
+        pytest.skip(f"{' '.join(argv[:2])}: registered by its tier, no longer a stub")
     result = runner.invoke(app, argv)
     assert result.exit_code == 2, result.output
     assert "not implemented in this tier" in result.output
 
 
-def test_bench_and_audit_exit_2_until_their_modules_exist() -> None:
-    assert "b20mlip.bench" not in sys.modules and "b20mlip.report.audit" not in sys.modules
+def test_bench_exits_2_until_its_module_exists() -> None:
+    assert "b20mlip.bench" not in sys.modules
     result = runner.invoke(app, ["bench", "--out", "runs/bench"])
     assert result.exit_code == 2 and "b20mlip.bench" in result.output
-    result = runner.invoke(app, ["report", "audit", "--strict"])
-    assert result.exit_code == 2 and "b20mlip.report.audit" in result.output
+    # `report build` / `report audit` are wired to the report tier (tests/report/).
 
 
 def test_global_options_build_state(tmp_path: Path, repo: Path) -> None:

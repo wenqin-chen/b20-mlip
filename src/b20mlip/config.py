@@ -74,6 +74,17 @@ class ClusterConfig(B20Model):
     qe_cmd: str | None = None
     lammps_cmd: str | None = None
     micromamba_env: str | None = None
+    # cluster tier (SPEC.md section 8). `qos` is discovered (the association's DefaultQOS);
+    # the rest are build knobs for `b20mlip cluster bootstrap`, never discovered.
+    qos: str | None = None
+    install_qe: bool = False  # run the micromamba QE fallback (else it is only planned)
+    lammps_sha: str | None = "4d222cb3ee2a6b14083c778968497bf9e0efc4b4"  # ACEsuit/lammps mace
+    libtorch_cpu_url: str = (
+        "https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-2.14.0%2Bcpu.zip"
+    )
+    libtorch_cuda_url: str = (
+        "https://download.pytorch.org/libtorch/cu126/libtorch-shared-with-deps-2.14.0%2Bcu126.zip"
+    )
 
 
 class DataConfig(B20Model):
@@ -96,6 +107,11 @@ class DFTThresholds(B20Model):
 
 
 class DFTConfig(B20Model):
+    """QE PBE settings. Cutoffs, pseudopotential file names and md5s come from the SSSP efficiency
+    1.3.0 PBE metadata (``configs/dft/sssp_efficiency_1.3_pbe.json``, Materials Cloud record
+    rcyfm-68h65, retrieved 2026-09-17): ``ecut_ry``/``ecut_rho`` are the maxima over
+    Fe/Mn/Co/Si/Ge (Fe: 90/1080 Ry, dual 12) until ``dft converge`` says otherwise."""
+
     ecut_ry: float = 90.0
     ecut_rho: float = 1080.0
     k_spacing_inv_A: float = 0.25
@@ -104,12 +120,31 @@ class DFTConfig(B20Model):
     nspin: dict[str, int] = {"FeSi": 1, "CoSi": 1, "MnSi": 2, "FeGe": 2, "MnGe": 2}
     starting_magnetization: dict[str, float] = {"Mn": 0.5, "Fe": 0.5, "Co": 0.0}
     pseudo_dir: str = "pseudos/sssp_efficiency"
-    pseudo_md5s: dict[str, str] = {}
+    pseudo_family: str = "SSSP-efficiency-1.3"
+    pseudos: dict[str, str] = {
+        "Fe": "Fe.pbe-spn-kjpaw_psl.0.2.1.UPF",
+        "Mn": "mn_pbe_v1.5.uspp.F.UPF",
+        "Co": "Co_pbe_v1.2.uspp.F.UPF",
+        "Si": "Si.pbe-n-rrkjus_psl.1.0.0.UPF",
+        "Ge": "ge_pbe_v1.4.uspp.F.UPF",
+    }
+    pseudo_md5s: dict[str, str] = {
+        "Fe": "e86618425769142926afa95317d90200",
+        "Mn": "82ef2b46521d7a7d9e736dc3972e4928",
+        "Co": "5f91765df6ddd3222702df6e7b74a16d",
+        "Si": "0b0bb1205258b0d07b9f9672cf965d36",
+        "Ge": "9c9eaa91e581c3f09632fb3098b2c6b2",
+    }
+    sssp_json: str = "configs/dft/sssp_efficiency_1.3_pbe.json"
     conv_thr: float = 1.0e-8
     mixing_beta: float = 0.4
     electron_maxstep: int = 100
     branch_tol_muB: float = 0.3
+    m_ref_muB: dict[str, float] = {}
     noise_floor_n: int = 20
+    isolated_atom_box_A: float = 12.0
+    converge_ecuts_ry: list[float] = [40.0, 50.0, 60.0, 70.0, 80.0, 90.0]
+    converge_k_spacings: list[float] = [0.35, 0.3, 0.25, 0.2]
     thresholds: DFTThresholds = DFTThresholds()
 
 
@@ -136,6 +171,12 @@ class TrainConfig(B20Model):
     replay: ReplayConfig = ReplayConfig()
     e0s_file: str = "configs/dft/E0s_qe.json"
     scratch: ScratchConfig = ScratchConfig()
+    # mace_run_train --loss; "universal" (Huber on E/F/stress) is what MACE forces for multihead
+    # replay, so every bracket trains with the same loss unless overridden.
+    loss: Literal["weighted", "stress", "huber", "universal", "forces_only", "ef"] = "universal"
+    # Extra mace_run_train flags appended verbatim (e.g. the tiny CI architecture:
+    # ["--num_interactions", "1", "--max_ell", "1", "--correlation", "2"]).
+    extra_args: list[str] = []
 
 
 class EvalConfig(B20Model):

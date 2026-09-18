@@ -26,6 +26,11 @@ cluster:            # discovered by `b20mlip cluster bootstrap` into configs/clu
   qe_cmd: null
   lammps_cmd: null
   micromamba_env: null
+  qos: null                              # discovered: the association's DefaultQOS (sacctmgr)
+  install_qe: false                      # bootstrap only plans the micromamba QE fallback unless true
+  lammps_sha: 4d222cb3ee2a6b14083c778968497bf9e0efc4b4   # ACEsuit/lammps `mace` head, 2026-09-17
+  libtorch_cpu_url: https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-2.14.0%2Bcpu.zip
+  libtorch_cuda_url: https://download.pytorch.org/libtorch/cu126/libtorch-shared-with-deps-2.14.0%2Bcu126.zip
 
 data:               # SPEC section 4: strain +-6 %, shear +-4 %, rattle <= 0.15 A, EOS +-8 %, NVT 300/600/900 K
   compounds: [FeSi, CoSi, MnSi, FeGe]      # MnGe is a stretch goal added by the data tier if found
@@ -40,21 +45,40 @@ data:               # SPEC section 4: strain +-6 %, shear +-4 %, rattle <= 0.15 
   wbm_sample_n: 1000
   wbm_seed: 0
 
-dft:                # QE PBE, SSSP efficiency; cutoffs are SSSP maxima for Fe/Mn until `dft converge`
+dft:                # QE PBE, SSSP efficiency 1.3.0 (configs/dft/sssp_efficiency_1.3_pbe.json, Materials Cloud
+                    # record rcyfm-68h65, retrieved 2026-09-17); cutoffs = SSSP maxima over Fe/Mn/Co/Si/Ge
+                    # (Fe 90/1080 Ry, dual 12) until `dft converge` writes qe_<compound>_converged.json
   ecut_ry: 90.0
   ecut_rho: 1080.0
-  k_spacing_inv_A: 0.25
+  k_spacing_inv_A: 0.25                    # |b_i|/n_i <= 0.25 1/A, |b_i| includes 2*pi (ASE/VASP KSPACING convention)
   smearing: mv
   degauss_ry: 0.01
   nspin: {FeSi: 1, CoSi: 1, MnSi: 2, FeGe: 2, MnGe: 2}
   starting_magnetization: {Mn: 0.5, Fe: 0.5, Co: 0.0}
   pseudo_dir: pseudos/sssp_efficiency      # cited + md5 in manifests, never redistributed
-  pseudo_md5s: {}
+  pseudo_family: SSSP-efficiency-1.3
+  pseudos:                                 # element -> UPF file name (SSSP efficiency 1.3.0 PBE)
+    Fe: Fe.pbe-spn-kjpaw_psl.0.2.1.UPF
+    Mn: mn_pbe_v1.5.uspp.F.UPF
+    Co: Co_pbe_v1.2.uspp.F.UPF
+    Si: Si.pbe-n-rrkjus_psl.1.0.0.UPF
+    Ge: ge_pbe_v1.4.uspp.F.UPF
+  pseudo_md5s:                             # from the SSSP metadata JSON; verified at `cluster bootstrap`
+    Fe: e86618425769142926afa95317d90200
+    Mn: 82ef2b46521d7a7d9e736dc3972e4928
+    Co: 5f91765df6ddd3222702df6e7b74a16d
+    Si: 0b0bb1205258b0d07b9f9672cf965d36
+    Ge: 9c9eaa91e581c3f09632fb3098b2c6b2
+  sssp_json: configs/dft/sssp_efficiency_1.3_pbe.json
   conv_thr: 1.0e-8
   mixing_beta: 0.4
   electron_maxstep: 100
   branch_tol_muB: 0.3
+  m_ref_muB: {}                            # compound -> reference moment per TM atom (muB); empty = branch_ok unknown
   noise_floor_n: 20
+  isolated_atom_box_A: 12.0                # E0s: one spin-polarised atom per cubic box, Gamma only
+  converge_ecuts_ry: [40.0, 50.0, 60.0, 70.0, 80.0, 90.0]
+  converge_k_spacings: [0.35, 0.3, 0.25, 0.2]
   thresholds:
     E_meV_atom: 1.0
     F_meV_A: 5.0
@@ -76,6 +100,8 @@ train:              # B1 naive lr from a {1e-4,3e-4,1e-3} sweep; B2 replay lr 1e
   scratch:
     hidden_irreps: 64x0e+64x1o
     r_max: 5.0
+  loss: universal      # mace_run_train --loss (Huber E/F/stress; forced by MACE for replay anyway)
+  extra_args: []       # extra mace_run_train flags appended verbatim (tiny CI architecture in tests)
 
 eval:
   bootstrap_n: 2000

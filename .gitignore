@@ -22,16 +22,16 @@ venv/
 .env.*
 !.env.example
 
-# --- large / generated data (never committed) ---
-data/raw/
-data/frames/
-data/omat24/
-runs/
-models/
-dft/
-checkpoints/
-logs/
-cassettes/
+# --- large / generated data (never committed; anchored to the repo root so package dirs like src/b20mlip/dft/ are not ignored) ---
+/data/raw/
+/data/frames/
+/data/omat24/
+/runs/
+/models/
+/dft/
+/checkpoints/
+/logs/
+/cassettes/
 *.duckdb
 *.lmdb
 *.aselmdb

@@ -10,8 +10,12 @@ from __future__ import annotations
 
 import os
 import socket
+import subprocess
+import time
 from collections.abc import Iterator
+from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 import numpy as np
 import pytest
@@ -155,3 +159,102 @@ def settings(tmp_path: Path) -> Settings:
 @pytest.fixture
 def repo() -> Path:
     return Path(__file__).resolve().parents[1]
+
+
+# --- tiny MACE model (CONTRACTS.md section 7), shared by the train / phonons / evaluate / md tiers
+
+TINY_MACE_NAME = "tiny_b20"
+TINY_MACE_HIDDEN_IRREPS = "8x0e"
+TINY_MACE_R_MAX = 4.0
+TINY_MACE_EXTRA_ARGS: tuple[str, ...] = (
+    "--num_interactions", "1", "--max_ell", "1", "--correlation", "2", "--num_radial_basis", "4",
+)  # fmt: skip
+
+
+@dataclass(frozen=True)
+class TinyMace:
+    """A MACE model trained in-test on the tiny B20 fixture (1 epoch, 8x0e, r_max 4 A).
+
+    ``model_path`` is the ``.model`` MACE saved, ``lammps_path`` its ``mace_create_lammps_model``
+    export (``<model>-lammps.pt``). The elements are Si, Mn, Fe, Co, Ge (every fixture compound),
+    so any B20 fixture cell can be evaluated with ``calculator()``. Random labels: the model is
+    numerically valid but physically meaningless.
+    """
+
+    model_path: Path
+    lammps_path: Path
+    sha256: str
+    lammps_sha256: str
+    work_dir: Path
+    argv: tuple[str, ...]
+    seconds: float
+    elements: tuple[int, ...] = (14, 25, 26, 27, 32)
+
+    def calculator(self) -> Any:
+        """A fresh ``mace.calculators.MACECalculator`` for this model (CPU, float64)."""
+        from mace.calculators import MACECalculator
+
+        return MACECalculator(
+            model_paths=str(self.model_path), device="cpu", default_dtype="float64"
+        )
+
+
+def tiny_mace_settings(root: Path) -> Settings:
+    """Settings that make ``train --variant scratch`` produce the tiny CI architecture."""
+    return Settings.model_validate(
+        {
+            "paths": {
+                "data_dir": str(root / "data"),
+                "runs_dir": str(root / "runs"),
+                "models_dir": str(root / "models"),
+                "dft_dir": str(root / "dft"),
+                "reports_dir": str(root / "reports"),
+            },
+            "train": {
+                "epochs": 1,
+                "batch_size": 4,
+                "scratch": {"hidden_irreps": TINY_MACE_HIDDEN_IRREPS, "r_max": TINY_MACE_R_MAX},
+                "extra_args": list(TINY_MACE_EXTRA_ARGS),
+            },
+        }
+    )
+
+
+@pytest.fixture(scope="session")
+def tiny_mace(tmp_path_factory: pytest.TempPathFactory, tiny_frames: list[Frame]) -> TinyMace:
+    """Train the tiny model once per session with ``mace_run_train`` (< 30 s) and export it."""
+    from b20mlip.provenance import sha256_file
+    from b20mlip.train import export, finetune
+
+    root = tmp_path_factory.mktemp("tiny_mace")
+    cfg = tiny_mace_settings(root)
+    valid = [f for f in tiny_frames if f.config_type == "strain"]  # one per compound, labelled
+    train = [f for f in tiny_frames if f.config_type != "strain"]  # incl. the qe weight-0 frames
+    files = finetune.write_split_files(
+        {"train": train, "valid": valid, "test": valid}, root / "data"
+    )
+    argv = finetune.build_args(
+        cfg, "scratch", files, 0, root,
+        energy_scale=finetune.frames_energy_scale(tiny_frames), name=TINY_MACE_NAME,
+    )  # fmt: skip
+    env = dict(os.environ, OMP_NUM_THREADS="4", MKL_NUM_THREADS="4", OPENBLAS_NUM_THREADS="4")
+    log = root / "mace_stdout.log"
+    t0 = time.perf_counter()
+    with open(log, "w", encoding="utf-8") as fh:
+        proc = subprocess.run(
+            finetune.train_command(argv), cwd=root, env=env, stdout=fh, stderr=subprocess.STDOUT
+        )
+    if proc.returncode != 0:
+        pytest.fail(f"tiny mace_run_train failed ({proc.returncode}):\n{log.read_text()[-3000:]}")
+    model = finetune.locate_model(root, TINY_MACE_NAME)
+    lammps = Path(export.to_lammps(model, "Default"))
+    seconds = time.perf_counter() - t0
+    return TinyMace(
+        model_path=model,
+        lammps_path=lammps,
+        sha256=sha256_file(model),
+        lammps_sha256=sha256_file(lammps),
+        work_dir=root,
+        argv=tuple(argv),
+        seconds=seconds,
+    )
