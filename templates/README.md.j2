@@ -1,13 +1,51 @@
+{#-
+README skeleton rendered by `b20mlip report build --readme` (b20mlip.report.build.render).
+Rules the template itself must obey so that an EMPTY numbers.json passes `report audit --strict`:
+  * outside gen blocks no bare numerals (spell them out or generate them inside a gen block);
+  * no "first", "state-of-the-art", "SOTA", "leaderboard", "outperforms all" in claim sections;
+  * "LAMMPS" only inside "## Plan" / "## Limitations" / "## Non-goals" (until parity passes);
+  * every number is a <!-- num:key --> marker; every table sits in a gen block.
+Context: N (NumberView), status, engines, parity_ok, tables, parity, bullet, protocol.
+-#}
+{% macro table(t) %}
+<!-- gen:start:{{ t.name }} -->
+{% if t.present %}
+| {{ t.header | join(' | ') }} |
+| {{ (['---'] * (t.header | length)) | join(' | ') }} |
+{% for row in t.rows %}
+| {{ row.label }} | {{ row.cells | join(' | ') }} |
+{% endfor %}
+{% if t.pending_rows %}
+
+_Pending rows (no number published yet): {{ t.pending_rows | join(', ') }}._
+{% endif %}
+{% else %}
+_Not yet run: no `{{ t.namespace }}` numbers are published in `reports/numbers.json`._
+{% endif %}
+
+_{{ t.caption }}_
+{% if t.prov %}
+
+<details><summary>Provenance (one line per cell)</summary>
+
+{% for line in t.prov %}
+- {{ line }}
+{% endfor %}
+
+</details>
+{% endif %}
+<!-- gen:end -->
+{% endmacro %}
 # b20-mlip
 
 <!-- gen:start:oneliner -->
 `b20-mlip` (package `b20mlip`, MIT): fine-tune MACE-MPA-0 (equivariant GNN) on in-house
 spin-polarised Quantum ESPRESSO frames of B20 skyrmion hosts (FeSi, CoSi, MnSi, FeGe); measure
-what it fixes (force/phonon softening) and costs (forgetting); deploy in ASE MD;
+what it fixes (force/phonon softening) and costs (forgetting); deploy in {{ engines }} MD;
 umbrella-sample a vacancy hop; drive it with a provenance-checked tool-calling agent.
 <!-- gen:end -->
 
-**Status: under construction.** <!-- gen:start:status -->0 numbers from 0 runs are published in `reports/numbers.json` (0 stale).<!-- gen:end -->
+**Status: under construction.** <!-- gen:start:status -->{{ status.n_numbers }} numbers from {{ status.n_runs }} runs are published in `reports/numbers.json` ({{ status.n_stale }} stale).<!-- gen:end -->
 Every number on this page is regenerated from `reports/numbers.json`, which is itself built from
 run manifests and gated by `b20mlip report audit --strict` (honesty gates A1–A11 in
 `CONTRACTS.md`). A value that reads `pending` has not been produced by any run; nothing here is
@@ -42,83 +80,43 @@ run; a table without any number says so explicitly.
 
 ### Force errors by tier
 
-<!-- gen:start:forces -->
-_Not yet run: no `eval.errors` numbers are published in `reports/numbers.json`._
-
-_Force MAE in meV/Å over all force components with 95 % bootstrap CIs (2,000 resamples over groups). Each tier row cites one reference code + functional (T0–T2 the project's QE PBE, T3 OMat24 VASP PBE, T4a MPtrj VASP PBE; the provenance list says which). T3 cells carry the cross-code noise floor._
-<!-- gen:end -->
-
+{{ table(tables.forces) }}
 
 ### Energy errors by tier
 
-<!-- gen:start:energies -->
-_Not yet run: no `eval.errors` numbers are published in `reports/numbers.json`._
-
-_Energy MAE in meV/atom on the reference's own energy scale; B1 energies are on the QE scale (E0s from isolated-atom QE), B0/B0′/B2 `pt_head` numbers on the MP scale._
-<!-- gen:end -->
-
+{{ table(tables.energies) }}
 
 ### Forgetting on the WBM sample
 
-<!-- gen:start:discovery -->
-_Not yet run: no `eval.discovery` numbers are published in `reports/numbers.json`._
-
-_Labelled, seeded 1,000-structure WBM sample at natural prevalence (16.7 % stable), vendored Matbench-Discovery metrics; F1 only as a paired difference vs B0 on the identical sample with a bootstrap CI. No public ranking is claimed or comparable._
-<!-- gen:end -->
-
+{{ table(tables.discovery) }}
 
 ### Phonons
 
-<!-- gen:start:phonons -->
-_Not yet run: no `eval.phonons` numbers are published in `reports/numbers.json`._
-
-_ω-MAE over sorted branches at 100 seekpath q-points, model at the DFT cell; s = median ω_model/ω_ref; imaginary = ω < −0.4 meV. B20 rows cite the project's own QE PBE; phononDB103 rows cite VASP PBE (other code, same functional). The last column is the only place a PBEsol reference appears._
-<!-- gen:end -->
-
+{{ table(tables.phonons) }}
 
 ### Molecular dynamics and thermal expansion
 
 <!-- gen:start:parity -->
-Parity gate (twenty frames, ASE against the second MD engine): **not yet run**;
-max|ΔF| <!-- num:md.parity.max_dF_eVA -->pending<!-- /num --> eV/Å, max|ΔE| <!-- num:md.parity.max_dE_eV_atom -->pending<!-- /num --> eV/atom.
+Parity gate (twenty frames, ASE against the second MD engine): **{{ parity.state }}**;
+max|ΔF| {{ parity.max_df }} eV/Å, max|ΔE| {{ parity.max_de }} eV/atom.
 <!-- gen:end -->
 
-<!-- gen:start:thermal -->
-_Not yet run: no `md` numbers are published in `reports/numbers.json`._
+{{ table(tables.thermal) }}
 
-_NPT thermal expansion at 300 K, 64-atom cells, 2 fs steps, against experiment: every cell of a row cites reference code `experiment` (the literature lattice constant is itself a published number). Rows of a second engine appear only after the parity gate passes._
-<!-- gen:end -->
-
-
-<!-- gen:start:stability -->
-_Not yet run: no `md` numbers are published in `reports/numbers.json`._
-
-_NVE energy drift of the same trajectories; self-consistency numbers cite reference code `mace` with the training functional._
-<!-- gen:end -->
-
+{{ table(tables.stability) }}
 
 ### Vacancy hop: umbrella sampling versus NEB
 
-<!-- gen:start:sampling -->
-_Not yet run: no `sampling` numbers are published in `reports/numbers.json`._
-
-_Vacancy hop at 300 K: 12 umbrella windows × 15 ps, MBAR/WHAM free energy with block error, against the NEB barrier on the same model (reference code `mace`)._
-<!-- gen:end -->
-
+{{ table(tables.sampling) }}
 
 ### Agent evaluation
 
-<!-- gen:start:agent -->
-_Not yet run: no `agent.eval` numbers are published in `reports/numbers.json`._
-
-_Twelve-task eval (`evals/agent_tasks.jsonl`, gold from `b20mlip screen`); backend and model id are in the provenance list. Mock-backend replays (CI) are never shown here._
-<!-- gen:end -->
-
+{{ table(tables.agent) }}
 
 ### One-line summary
 
 <!-- gen:start:bullet -->
-> Fine-tuned MACE-MPA-0 (equivariant GNN) on <!-- num:data.n_qe_frames -->pending<!-- /num --> in-house spin-polarised Quantum ESPRESSO frames of B20 skyrmion hosts (FeSi/MnSi/CoSi): held-out force MAE <!-- num:eval.errors.T0.B0.mae_f -->pending<!-- /num -->→<!-- num:eval.errors.T0.B1.mae_f -->pending<!-- /num --> meV/Å, phonon ω-MAE vs same-code DFT <!-- num:eval.phonons.FeSi.B0.omega_mae_meV -->pending<!-- /num -->→<!-- num:eval.phonons.FeSi.B1.omega_mae_meV -->pending<!-- /num --> meV (FeSi), never-trained FeGe <!-- num:eval.errors.T2.B1.mae_f -->pending<!-- /num --> meV/Å; forgetting quantified as paired ΔF1 = <!-- num:eval.discovery.B1.delta_f1 -->pending<!-- /num --> [CI pending] on a labelled 1,000-structure WBM sample (Matbench-Discovery protocol, no public ranking claimed); deployed in ASE MD (thermal expansion within <!-- num:md.ase.MnSi.a_dev_pct -->pending<!-- /num --> % of experiment), umbrella-sampled a vacancy-hop free energy (ΔF = <!-- num:sampling.umbrella.FeSi.dF_eV -->pending<!-- /num --> eV vs NEB <!-- num:sampling.neb.FeSi.Ea_eV -->pending<!-- /num --> eV), an active-learning round (pending); open-sourced (MIT) with a provenance-checked tool-calling agent.
+> {{ bullet }}
 <!-- gen:end -->
 
 ## How to reproduce
@@ -182,18 +180,18 @@ explicitly with `uv run pytest -m network`.
 <!-- gen:start:protocol -->
 | Constant | Value |
 | --- | --- |
-| WBM sample size / seed | 1000 / 0 |
-| Bootstrap resamples (over groups) | 2000 |
-| Seeds per fine-tuning bracket | 3 |
-| Noise-floor frames (OMat24 relabelled by QE) | 20 |
-| Offset-map gate for B1 WBM energies (meV/atom) | 20.0 |
-| Magnetic-branch tolerance (μB per TM atom) | 0.3 |
-| Force cap on training frames (eV/Å) | 15.0 |
-| Maximum training temperature (K); T1 is hotter | 600 |
-| Parity gate: frames / max abs ΔF (eV/Å) / max abs ΔE (eV/atom) | 20 / 0.001 / 0.0001 |
-| Phonon path q-points / imaginary threshold (meV) | 100 / -0.4 |
-| Elastic strains (%) | 0.5 / 1 |
-| QE k-spacing (1/Å) / MV smearing (Ry) | 0.25 / 0.01 |
+| WBM sample size / seed | {{ protocol.wbm_sample_n }} / {{ protocol.wbm_seed }} |
+| Bootstrap resamples (over groups) | {{ protocol.bootstrap_n }} |
+| Seeds per fine-tuning bracket | {{ protocol.seeds }} |
+| Noise-floor frames (OMat24 relabelled by QE) | {{ protocol.noise_floor_n }} |
+| Offset-map gate for B1 WBM energies (meV/atom) | {{ protocol.offset_gate_meV }} |
+| Magnetic-branch tolerance (μB per TM atom) | {{ protocol.branch_tol_muB }} |
+| Force cap on training frames (eV/Å) | {{ protocol.force_cap_eVA }} |
+| Maximum training temperature (K); T1 is hotter | {{ protocol.max_train_T }} |
+| Parity gate: frames / max abs ΔF (eV/Å) / max abs ΔE (eV/atom) | {{ protocol.parity_frames }} / {{ protocol.parity_tol_f_eVA }} / {{ protocol.parity_tol_e_eV_atom }} |
+| Phonon path q-points / imaginary threshold (meV) | {{ protocol.qpoints }} / {{ protocol.imaginary_threshold_meV }} |
+| Elastic strains (%) | {{ protocol.elastic_strains_pct }} |
+| QE k-spacing (1/Å) / MV smearing (Ry) | {{ protocol.k_spacing }} / {{ protocol.degauss_ry }} |
 <!-- gen:end -->
 
 ## Limitations and negative results

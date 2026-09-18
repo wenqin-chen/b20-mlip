@@ -4,11 +4,12 @@ Global options come before the sub-command::
 
     b20mlip --config configs/cluster/tillicum.yaml --set compute.threads=4 --seed 0 report audit
 
-This tier wires ``--version``, ``bench`` and ``report audit`` to their contract signatures; the
-implementing modules (``b20mlip.bench``, ``b20mlip.report.audit``) belong to later build rows
-and are imported lazily, so until they exist those commands exit 2 with a clear message. Every
-other command is registered as a stub that exits 2 ("not implemented in this tier"); nothing
-here fakes behaviour. A command exits 0 only when its ``StageResult.status == "ok"``.
+This file wires ``--version``, ``bench``, ``report build`` and ``report audit`` to their contract
+signatures; the implementing modules (``b20mlip.bench``, ``b20mlip.report.{build,audit}``) are
+imported lazily, so a missing one makes its command exit 2 with a clear message. Every other
+command is registered as a stub that exits 2 ("not implemented in this tier") unless its tier
+package registers it (plugin hook below); nothing here fakes behaviour. A command exits 0 only
+when its ``StageResult.status == "ok"``.
 """
 
 from __future__ import annotations
@@ -282,10 +283,33 @@ for _group, _commands in STUB_COMMANDS.items():
 report_app = GROUPS["report"]
 
 
-@report_app.command("build", context_settings=_STUB_SETTINGS)
-def report_build(ctx: typer.Context) -> None:
-    """Collect numbers.json from manifests and render README. [stub]"""
-    _not_implemented("report build")
+@report_app.command("build")
+def report_build(
+    ctx: typer.Context,
+    readme: Annotated[
+        bool,
+        typer.Option("--readme", help="Also render README.md from templates/README.md.j2."),
+    ] = False,
+    readme_path: Annotated[
+        Path, typer.Option("--readme-path", help="Where --readme writes the README.")
+    ] = Path("README.md"),
+) -> None:
+    """Harvest runs/ into reports/numbers.json (stage "report"); --readme also renders README."""
+    state = _state(ctx)
+    build = _import_or_exit("b20mlip.report.build", "report build")
+    cfg = state.settings()
+    result = run_stage(
+        "report",
+        cfg,
+        build.run,
+        seed=state.seed,
+        resume=state.resume,
+        executor=state.make_executor(cfg),
+        dry_run=state.dry_run,
+        readme=readme,
+        readme_path=readme_path,
+    )
+    _finish(result)
 
 
 @report_app.command("audit")
