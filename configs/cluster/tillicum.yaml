@@ -1,16 +1,18 @@
 # Tillicum (UW Hyak) overlay: `b20mlip --config configs/cluster/tillicum.yaml ...`
-# PLACEHOLDER — account, partitions, scratch and modules are discovered by
-# `b20mlip cluster bootstrap` (SPEC.md section 8) after the user opens the ControlMaster socket
-# with `ssh -fN tillicum` (MFA). Until then every discovered field is null and SlurmExecutor
-# refuses to submit (cluster.scratch unset).
+# PLACEHOLDER — account, partitions, QOS, scratch and modules are discovered by
+# `b20mlip cluster bootstrap` (SPEC.md section 8, docs/CLUSTER.md) after the user opens the
+# ControlMaster socket with `ssh -fN tillicum` (MFA). Until then every discovered field is null
+# and SlurmExecutor refuses to submit (cluster.scratch unset). Bootstrap rewrites only the values
+# below (comments survive); an ambiguous discovery stays null with the candidates in its comment.
 cluster:
   alias: tillicum
   control_path: ~/.ssh/tillicum-cm
-  account: null            # discovered: sacctmgr show assoc user=$USER
-  partition_cpu: null      # discovered: sinfo
-  partition_gpu: null      # H200 partition for replay/LAMMPS
-  scratch: null            # discovered: $SCRATCH or /gscratch/...
-  modules: []              # e.g. [gcc, openmpi, quantum-espresso]
-  qe_cmd: null             # `module load ...; pw.x` or $SCRATCH/qe/bin/pw.x (micromamba fallback)
-  lammps_cmd: null         # built by build_lammps_mace.sbatch (ACEsuit/lammps mace branch)
-  micromamba_env: null
+  account: null            # discovered: hyakalloc / sacctmgr show assoc user=$USER
+  partition_cpu: null      # discovered: sinfo (unique partition without GPU GRES; Tillicum has none)
+  partition_gpu: null      # discovered: sinfo (unique partition with gpu/h200 GRES; else null)
+  qos: null                # discovered: the association's DefaultQOS (sacctmgr)
+  scratch: null            # discovered: $SCRATCH, /gpfs/projects/<acct>/$USER, /gpfs/scrubbed/$USER, /gscratch/...
+  modules: []              # discovered: gcc, cuda, cmake, openmpi (+ quantum-espresso when a module exists)
+  qe_cmd: null             # discovered: `module load ... && which pw.x`, else <scratch>/qe/bin/pw.x (micromamba)
+  lammps_cmd: null         # <scratch>/b20-mlip/bin/lmp once build_lammps.sbatch.j2 has run (--build-lammps)
+  micromamba_env: null     # <scratch>/qe when the micromamba QE fallback was installed

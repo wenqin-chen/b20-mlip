@@ -1,0 +1,62 @@
+{#- build_lammps.sbatch.j2 (cluster tier, SPEC.md section 8): ONE unit ("build") that compiles
+    ACEsuit/lammps (branch `mace`, pinned SHA) with libtorch and, on a GPU partition, Kokkos+CUDA
+    (-D PKG_ML-MACE=ON -D PKG_KOKKOS=ON -D Kokkos_ENABLE_CUDA=ON -D Kokkos_ARCH_<arch>=ON).
+    Rendered by SlurmExecutor.render with spec.resources["template"] = "build_lammps".
+    resources: partition, account, qos, cuda (bool), gpus, cpus_per_task, mem, time, build_modules,
+    libtorch_url, lammps_sha, kokkos_arch, prefix. The unit script (spec.script) runs
+    scripts/tillicum/build_lammps.sh build; `lmp` is installed into <prefix>/bin and
+    <prefix>/bin/build.json records the SHA, cmake flags, versions and the build log path.
+    Per-unit resume protocol of templates/slurm/README.md (units/build.done | build.failed). -#}
+#!/bin/bash
+#SBATCH --job-name={{ job_name }}
+{% if account %}
+#SBATCH --account={{ account }}
+{% endif %}
+{% if partition %}
+#SBATCH --partition={{ partition }}
+{% endif %}
+{% set qos = resources.qos | default(cluster.qos) %}
+{% if qos %}
+#SBATCH --qos={{ qos }}
+{% endif %}
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task={{ resources.cpus_per_task | default(8) }}
+#SBATCH --mem={{ resources.mem | default('64G') }}
+#SBATCH --time={{ resources.time | default('04:00:00') }}
+{% set cuda = resources.cuda | default(false) %}
+{% set gpus = resources.gpus | default(1 if cuda else 0) %}
+{% if gpus %}
+#SBATCH --gpus={{ gpus }}
+{% endif %}
+#SBATCH --output={{ workdir }}/logs/slurm-%j.out
+set -euo pipefail
+{% for m in resources.build_modules | default(cluster.modules) %}
+module load {{ m }}
+{% endfor %}
+# pinned BLAS/OpenMP threads for the build and for `lmp` test runs
+export OMP_NUM_THREADS={{ resources.cpus_per_task | default(8) }}
+export MKL_NUM_THREADS=$OMP_NUM_THREADS OPENBLAS_NUM_THREADS=$OMP_NUM_THREADS
+export B20_WORKDIR={{ workdir }} B20_JOB_NAME={{ job_name }} B20_UNIT_INDEX=1
+export B20_UNIT=$(sed -n 1p "$B20_WORKDIR/{{ units_name }}")
+export B20_REPO={{ cluster.scratch }}/b20-mlip
+export B20_PREFIX={{ resources.prefix | default(cluster.scratch ~ '/b20-mlip') }}
+export B20_LIBTORCH_URL={{ resources.libtorch_url | default(cluster.libtorch_cuda_url if cuda else cluster.libtorch_cpu_url) }}
+export B20_LAMMPS_SHA={{ resources.lammps_sha | default(cluster.lammps_sha or '') }}
+export B20_CUDA={{ 1 if cuda else 0 }}
+export B20_KOKKOS_ARCH={{ resources.kokkos_arch | default('HOPPER90') }}
+export B20_JOBS=${SLURM_CPUS_PER_TASK:-{{ resources.cpus_per_task | default(8) }}}
+{% for k, v in env.items() %}
+export {{ k }}="{{ v }}"
+{% endfor %}
+slug=$(printf '%s' "$B20_UNIT" | tr -c 'A-Za-z0-9._-' '_')
+mkdir -p "$B20_WORKDIR/units" "$B20_WORKDIR/logs"
+[ -f "$B20_WORKDIR/units/$slug.done" ] && { echo "unit $B20_UNIT already done"; exit 0; }
+rm -f "$B20_WORKDIR/units/$slug.failed"
+if bash "$B20_WORKDIR/{{ script_name }}" > "$B20_WORKDIR/logs/$slug.log" 2>&1; then
+  printf '{"unit": "%s", "state": "done", "returncode": 0, "log": "%s"}\n' "$B20_UNIT" "$B20_WORKDIR/logs/$slug.log" > "$B20_WORKDIR/units/$slug.done"
+else
+  rc=$?
+  printf '{"unit": "%s", "state": "failed", "returncode": %d, "log": "%s"}\n' "$B20_UNIT" "$rc" "$B20_WORKDIR/logs/$slug.log" > "$B20_WORKDIR/units/$slug.failed"
+  exit $rc
+fi
