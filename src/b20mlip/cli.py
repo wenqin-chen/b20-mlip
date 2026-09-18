@@ -110,9 +110,13 @@ def main(
     )
 
 
-def _state(ctx: typer.Context) -> CLIState:
+def state_of(ctx: typer.Context) -> CLIState:
+    """Global options of this invocation (tier CLIs use this; safe outside a CLI too)."""
     obj = ctx.find_object(CLIState)
     return obj if obj is not None else CLIState()
+
+
+_state = state_of
 
 
 def _not_implemented(command: str, module: str | None = None) -> None:
@@ -132,7 +136,8 @@ def _import_or_exit(module: str, command: str) -> Any:
         raise AssertionError("unreachable") from None  # pragma: no cover
 
 
-def _finish(result: StageResult) -> None:
+def finish(result: StageResult) -> None:
+    """Print the StageResult as JSON and exit 0 only when ``status == "ok"``."""
     typer.echo(
         json.dumps(
             {
@@ -147,6 +152,9 @@ def _finish(result: StageResult) -> None:
         )
     )
     raise typer.Exit(0 if result.status == "ok" else 1)
+
+
+_finish = finish
 
 
 # --- stub registration -------------------------------------------------------------------------
@@ -218,14 +226,54 @@ def _make_stub(command: str) -> Callable[[typer.Context], None]:
     return stub
 
 
+# Tier packages plug their commands in without editing this file: ``b20mlip.<pkg>.cli`` may
+# expose ``register(group: typer.Typer) -> set[str]`` (group commands) and/or
+# ``register_toplevel(app: typer.Typer) -> set[str]`` (top-level commands such as ``train``);
+# each returns the command names it registered. Whatever is not registered stays a stub.
+GROUP_PACKAGES: dict[str, str] = {
+    "data": "b20mlip.data.cli",
+    "dft": "b20mlip.dft.cli",
+    "eval": "b20mlip.evaluate.cli",
+    "md": "b20mlip.md.cli",
+    "sampling": "b20mlip.sampling.cli",
+    "active": "b20mlip.active.cli",
+    "agent": "b20mlip.agent.cli",
+    "cluster": "b20mlip.cluster.cli",
+}
+TOPLEVEL_PACKAGES: tuple[str, ...] = ("b20mlip.train.cli", "b20mlip.agent.cli")
+
+
+def _optional_module(name: str) -> Any | None:
+    try:
+        return importlib.import_module(name)
+    except ImportError as exc:  # missing tier or a broken optional dependency
+        if exc.name is not None and not name.startswith(exc.name.split(".")[0]):
+            raise  # a genuine third-party import error inside an existing tier
+        return None
+
+
 GROUPS: dict[str, typer.Typer] = {}
 for _group_name, _help in GROUP_HELP.items():
     GROUPS[_group_name] = typer.Typer(help=_help, no_args_is_help=True)
     app.add_typer(GROUPS[_group_name], name=_group_name)
 
+REGISTERED: dict[str, set[str]] = {}
+for _group_name, _module_name in GROUP_PACKAGES.items():
+    _module = _optional_module(_module_name)
+    if _module is not None and hasattr(_module, "register"):
+        REGISTERED[_group_name] = set(_module.register(GROUPS[_group_name]))
+_toplevel_registered: set[str] = set()
+for _module_name in TOPLEVEL_PACKAGES:
+    _module = _optional_module(_module_name)
+    if _module is not None and hasattr(_module, "register_toplevel"):
+        _toplevel_registered |= set(_module.register_toplevel(app))
+
 for _group, _commands in STUB_COMMANDS.items():
     _target = app if _group is None else GROUPS[_group]
+    _done = _toplevel_registered if _group is None else REGISTERED.get(_group, set())
     for _name, _doc in _commands:
+        if _name in _done:
+            continue
         _full = _name if _group is None else f"{_group} {_name}"
         _target.command(_name, help=f"{_doc} [stub]", context_settings=_STUB_SETTINGS)(
             _make_stub(_full)
@@ -291,4 +339,13 @@ def run() -> None:  # pragma: no cover - console entry point helper
     app()
 
 
-__all__ = ["CLIState", "ExecutorKind", "NOT_IMPLEMENTED_EXIT", "app", "run"]
+__all__ = [
+    "CLIState",
+    "ExecutorKind",
+    "GROUPS",
+    "NOT_IMPLEMENTED_EXIT",
+    "app",
+    "finish",
+    "run",
+    "state_of",
+]
