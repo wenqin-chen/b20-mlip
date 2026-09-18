@@ -1,0 +1,121 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "b20-mlip"
+version = "0.1.0"
+description = "Fine-tune MACE-MPA-0 on spin-polarised Quantum ESPRESSO frames of B20 skyrmion hosts; measure what it fixes and costs; deploy in MD; drive it with a provenance-checked agent."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{ name = "Wenqin Chen", email = "wenqinchenphy@gmail.com" }]
+requires-python = ">=3.11,<3.13"
+keywords = ["MACE", "machine-learning interatomic potential", "B20", "Quantum ESPRESSO", "phonons", "skyrmion"]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Chemistry",
+  "Topic :: Scientific/Engineering :: Physics",
+]
+# Exact versions are pinned by uv.lock (committed); these are the floors that were proven on
+# macOS arm64 (docs/design/facts_2026-09-18.md). mace-torch is pinned exactly per CONTRACTS.md.
+# matbench-discovery is NEVER a dependency (needs Python 3.14; downloads at import).
+dependencies = [
+  "mace-torch==0.3.16",
+  "ase>=3.25",
+  "phonopy>=2.30",
+  "pymatgen>=2025.1.9",
+  "spglib>=2.5",
+  "seekpath>=2.1",
+  "pymbar>=4.0.3",
+  "pydantic>=2.9",
+  "pydantic-settings>=2.6",
+  "typer>=0.15",
+  "pyyaml>=6.0",
+  "jinja2>=3.1",
+  "numpy>=1.26",
+  "pandas>=2.2",
+  "httpx>=0.27",
+  "anthropic>=0.60",
+]
+
+[project.optional-dependencies]
+# CONTRACT ISSUE (see notes): fairchem-core (every release) needs e3nn>=0.5 while mace-torch==0.3.16
+# pins e3nn==0.4.4, so a strict resolver cannot install both. The data tier reads OMat24 .aselmdb
+# files natively (LMDB of zlib+orjson-encoded ase.db rows) with these two small packages instead.
+omat = ["lmdb>=1.4", "orjson>=3.9"]
+pyscf = ["pyscf>=2.8"]               # optional lower-fidelity PBC baseline
+dev = [
+  "pytest>=8.3",
+  "pytest-cov>=5.0",
+  "ruff>=0.9",
+  "mypy>=1.13",
+  "types-PyYAML",
+  "jsonschema>=4.20",                # manifest round-trip validation against docs/manifest.schema.json
+]
+
+[project.scripts]
+b20mlip = "b20mlip.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/wenqin-chen/b20-mlip"
+Issues = "https://github.com/wenqin-chen/b20-mlip/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/b20mlip"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/b20mlip", "configs", "templates", "docs/manifest.schema.json", "README.md", "LICENSE", "NOTICE"]
+
+# torch comes in through mace-torch. On macOS the PyPI wheel is the CPU build already; on Linux
+# (CI) pull the CPU wheel from the PyTorch index so uv does not download the multi-GB CUDA stack.
+[tool.uv]
+# Only the platforms this project runs on (Mac dev box, Linux CI/cluster); keeps uv.lock small.
+environments = ["sys_platform == 'darwin'", "sys_platform == 'linux'"]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]   # src layout; also survives a lost editable install (see Makefile setup)
+addopts = '-m "not network and not slow and not cluster"'
+markers = [
+  "network: needs internet access (downloads, OPTIMADE, Anthropic API); never run in CI",
+  "slow: takes more than ~1 minute (tiny MACE training, MD); opt in with -m slow",
+  "cluster: needs the live Tillicum SSH ControlMaster socket; opt in with -m cluster",
+]
+filterwarnings = [
+  "ignore::DeprecationWarning:ase.*",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["data", "runs", "models", "dft", "*.md"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["b20mlip"]
+
+[tool.mypy]
+python_version = "3.11"
+files = ["src/b20mlip"]
+ignore_missing_imports = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+show_error_codes = true

@@ -1,0 +1,50 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+build/
+dist/
+.eggs/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# --- environments / secrets ---
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# --- large / generated data (never committed) ---
+data/raw/
+data/frames/
+data/omat24/
+runs/
+models/
+dft/
+checkpoints/
+logs/
+cassettes/
+*.duckdb
+*.lmdb
+*.aselmdb
+*.model
+*.pt
+*.traj
+
+# reports/ is generated but reports/numbers.json is TRACKED (README numbers come from it)
+reports/*
+!reports/numbers.json
+
+# --- editors / OS ---
+.DS_Store
+.idea/
+.vscode/
+*.swp

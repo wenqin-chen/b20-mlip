@@ -1,0 +1,43 @@
+b20-mlip — NOTICE (third-party licences; CONTRACTS.md gate A11)
+================================================================
+
+Code in this repository: MIT (see LICENSE), Copyright (c) 2026 Wenqin Chen.
+
+Model weights
+-------------
+- MACE-MPA-0 (medium) and MACE-MP-0 foundation models — MIT.
+  https://github.com/ACEsuit/mace-foundations, https://github.com/ACEsuit/mace-mp
+  Fine-tuned derivatives shipped by this project inherit the MIT licence.
+- MACE-OMAT-0, MACE-MATPES, MACE-MH-1 are under the Academic Software Licence (ASL) and are
+  NOT used or redistributed here.
+
+Datasets (never redistributed by this repository; downloaded by `b20mlip data pull`)
+--------------------------------------------------------------------------------
+- MPtrj (Materials Project trajectories, Deng et al. 2023) — MIT.
+  https://figshare.com/articles/dataset/23713842
+- sAlex / OMat24 (Barroso-Luque et al. 2024) — CC-BY-4.0.
+  https://huggingface.co/datasets/fairchem/OMAT24
+- WBM structures and summary (Wang, Botti, Marques 2021), as distributed by Matbench Discovery
+  (Riebesell et al.) — CC-BY-4.0. Only a labelled, seeded 1,000-structure sample is used; no
+  leaderboard submission is made and no leaderboard number is claimed.
+- phononDB-PBE-103 structures (Togo; Matbench Discovery packaging) — CC-BY-4.0.
+- Alexandria / Materials Project metadata via OPTIMADE — CC-BY-4.0 (keyless access only).
+- SSSP efficiency pseudopotentials (Prandini et al. 2018, https://www.materialscloud.org/sssp)
+  are CITED with their md5 sums in run manifests and are NEVER redistributed; each UPF file
+  carries its own licence (GBRV, PSlibrary, SG15 ...).
+
+Vendored code
+-------------
+- `b20mlip/evaluate/mbd_vendored.py` (to be added by the evaluate tier) will carry
+  `stable_metrics` / `classify_stable` verbatim from https://github.com/janosh/matbench-discovery
+  at a pinned commit — MIT, Copyright (c) 2023 Janosh Riebesell. matbench-discovery itself is
+  never installed (it needs Python 3.14 and downloads data at import time).
+
+Runtime dependencies (licences as declared upstream on PyPI at the time of pinning)
+--------------------------------------------------------------------------------
+mace-torch (MIT) · torch (BSD-3-Clause) · e3nn (MIT) · ase (LGPL-2.1-or-later) ·
+phonopy (BSD-3-Clause) · pymatgen (MIT) · spglib (BSD-3-Clause) · seekpath (MIT) ·
+pymbar (MIT) · pydantic, pydantic-settings (MIT) · typer (MIT) · PyYAML (MIT) ·
+Jinja2 (BSD-3-Clause) · NumPy (BSD-3-Clause) · pandas (BSD-3-Clause) · httpx (BSD-3-Clause) ·
+anthropic (MIT) · fairchem-core, optional (MIT) · PySCF, optional (Apache-2.0) ·
+Quantum ESPRESSO, cluster-side (GPL-2.0) · LAMMPS, cluster-side (GPL-2.0) · PLUMED, optional (LGPL-3.0)

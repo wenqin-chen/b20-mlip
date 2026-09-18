@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      UV_PYTHON: "3.11"
+      OMP_NUM_THREADS: "2"
+      # No keys in CI: the agent backend must be mock, nothing may reach the network.
+      ANTHROPIC_API_KEY: ""
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.11"
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
+      - name: Sync (frozen lock, CPU torch from the PyTorch index)
+        run: uv sync --frozen --extra dev
+
+      - name: Ruff lint
+        run: uv run --no-sync ruff check .
+
+      - name: Ruff format
+        run: uv run --no-sync ruff format --check .
+
+      - name: mypy (non-blocking)
+        continue-on-error: true
+        run: uv run --no-sync mypy
+
+      - name: Offline tests
+        run: uv run --no-sync pytest -q
+
+      - name: Import guard (matbench_discovery must not be installed)
+        run: |
+          if uv run --no-sync python -c "import importlib.util, sys; sys.exit(0 if importlib.util.find_spec('matbench_discovery') is None else 1)"; then
+            echo "ok: matbench_discovery absent"
+          else
+            echo "matbench_discovery is installed; CONTRACTS.md forbids it" && exit 1
+          fi
+
+      - name: Honesty audit (only once reports/numbers.json exists)
+        run: |
+          if [ -f reports/numbers.json ]; then
+            uv run --no-sync b20mlip report audit --strict
+          else
+            echo "reports/numbers.json not present yet; audit skipped"
+          fi

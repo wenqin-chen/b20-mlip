@@ -1,0 +1,260 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "Artifact": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "title": "Bytes",
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "frames",
+            "model",
+            "json",
+            "log",
+            "traj",
+            "yaml",
+            "other"
+          ],
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes",
+        "kind"
+      ],
+      "title": "Artifact",
+      "type": "object"
+    },
+    "SlurmInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "job_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Job Ids",
+          "type": "array"
+        },
+        "account": {
+          "title": "Account",
+          "type": "string"
+        },
+        "partition": {
+          "title": "Partition",
+          "type": "string"
+        },
+        "nodes": {
+          "title": "Nodes",
+          "type": "integer"
+        },
+        "wall": {
+          "title": "Wall",
+          "type": "string"
+        },
+        "units_done": {
+          "title": "Units Done",
+          "type": "integer"
+        },
+        "units_failed": {
+          "title": "Units Failed",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "job_ids",
+        "account",
+        "partition",
+        "nodes",
+        "wall",
+        "units_done",
+        "units_failed"
+      ],
+      "title": "SlurmInfo",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "stage": {
+      "enum": [
+        "data.pull",
+        "data.sample",
+        "data.filter",
+        "data.split",
+        "dft.converge",
+        "dft.prep",
+        "dft.run",
+        "dft.collect",
+        "dft.phonons",
+        "dft.e0s",
+        "dft.offsets",
+        "train",
+        "export",
+        "eval.errors",
+        "eval.discovery",
+        "eval.phonons",
+        "eval.elastic",
+        "md.ase",
+        "md.lammps",
+        "md.parity",
+        "sampling.neb",
+        "sampling.umbrella",
+        "sampling.wham",
+        "active.select",
+        "agent.run",
+        "agent.eval",
+        "report",
+        "bench",
+        "cluster.bootstrap",
+        "cluster.sync"
+      ],
+      "title": "Stage",
+      "type": "string"
+    },
+    "run_id": {
+      "title": "Run Id",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "host": {
+      "title": "Host",
+      "type": "string"
+    },
+    "user": {
+      "title": "User",
+      "type": "string"
+    },
+    "git_sha": {
+      "title": "Git Sha",
+      "type": "string"
+    },
+    "git_dirty": {
+      "title": "Git Dirty",
+      "type": "boolean"
+    },
+    "uv_lock_sha256": {
+      "title": "Uv Lock Sha256",
+      "type": "string"
+    },
+    "python": {
+      "title": "Python",
+      "type": "string"
+    },
+    "packages": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Packages",
+      "type": "object"
+    },
+    "config_sha256": {
+      "title": "Config Sha256",
+      "type": "string"
+    },
+    "config": {
+      "additionalProperties": true,
+      "title": "Config",
+      "type": "object"
+    },
+    "seed": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Seed"
+    },
+    "inputs": {
+      "items": {
+        "$ref": "#/$defs/Artifact"
+      },
+      "title": "Inputs",
+      "type": "array"
+    },
+    "outputs": {
+      "items": {
+        "$ref": "#/$defs/Artifact"
+      },
+      "title": "Outputs",
+      "type": "array"
+    },
+    "wall_seconds": {
+      "title": "Wall Seconds",
+      "type": "number"
+    },
+    "status": {
+      "enum": [
+        "ok",
+        "failed",
+        "partial"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "slurm": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SlurmInfo"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "extras": {
+      "additionalProperties": true,
+      "default": {},
+      "title": "Extras",
+      "type": "object"
+    }
+  },
+  "required": [
+    "stage",
+    "run_id",
+    "created_at",
+    "host",
+    "user",
+    "git_sha",
+    "git_dirty",
+    "uv_lock_sha256",
+    "python",
+    "packages",
+    "config_sha256",
+    "config",
+    "seed",
+    "inputs",
+    "outputs",
+    "wall_seconds",
+    "status"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}
