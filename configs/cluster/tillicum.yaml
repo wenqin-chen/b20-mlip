@@ -4,7 +4,7 @@
 # ControlMaster socket with `ssh -fN tillicum` (MFA). Until then every discovered field is null
 # and SlurmExecutor refuses to submit (cluster.scratch unset). Bootstrap rewrites only the values
 # below (comments survive); an ambiguous discovery stays null with the candidates in its comment.
-# last discovered: 2026-09-19T06:12:42Z by `b20mlip cluster bootstrap` run 20260919T061210-339b58-none
+# last discovered: 2026-09-19T06:17:04Z by `b20mlip cluster bootstrap` run 20260919T061622-a26b4e-none
 cluster:
   alias: tillicum
   control_path: ~/.ssh/tillicum-cm
@@ -13,7 +13,13 @@ cluster:
   partition_gpu: gpu-h200  # discovered: sinfo (unique partition with gpu/h200 GRES; else null)
   qos: normal              # discovered: the association's DefaultQOS (sacctmgr)
   scratch: /gpfs/projects/stf/wenqin98 # discovered: $SCRATCH, /gpfs/projects/<acct>/$USER, /gpfs/scrubbed/$USER, /gscratch/...
-  modules: []              # discovered: gcc, cuda, cmake, openmpi (+ quantum-espresso when a module exists)
+  modules: [gcc/13.4.0, cuda/12.8.2, cmake/3.31.8, openmpi/5.0.10] # discovered: gcc, cuda, cmake, openmpi (+ quantum-espresso when a module exists)
   qe_cmd: null             # needs micromamba
-  lammps_cmd: null         # submitted (job 303029)
+  lammps_cmd: null         # submitted (job 303048)
   micromamba_env: null     # <scratch>/qe when the micromamba QE fallback was installed
+  # SLURM defaults per template (Tillicum: <= 2 CPUs and <= 34 GB per GPU requested; 1 H200 MIG
+  # slice = the cheapest unit). 8-atom QE units: 2 MPI ranks on one MIG slice (5-6 min each).
+  resources:
+    qe_array: {ntasks: 2, cpus_per_task: 1, gpus: 1, mem: 30G, time: "02:00:00", max_parallel: 24}
+    qe_phonons: {ntasks: 8, cpus_per_task: 1, gpus: 4, mem: 120G, time: "12:00:00", max_parallel: 8}
+

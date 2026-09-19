@@ -85,6 +85,10 @@ class ClusterConfig(B20Model):
     libtorch_cuda_url: str = (
         "https://download.pytorch.org/libtorch/cu126/libtorch-shared-with-deps-2.14.0%2Bcu126.zip"
     )
+    # per-template SLURM resource defaults (ntasks, cpus_per_task, gpus, mem, time, max_parallel,
+    # partition, ...), e.g. {"qe_array": {"ntasks": 2, "gpus": 1, "mem": "30G"}}; a stage's explicit
+    # resources override them. Site-specific: set in the cluster overlay, never here.
+    resources: dict[str, dict[str, Any]] = {}
 
 
 class DataConfig(B20Model):
@@ -188,11 +192,24 @@ class EvalConfig(B20Model):
 
 
 class MDConfig(B20Model):
+    """MD tier (SPEC.md section 5/6). ``friction`` is the ASE Langevin friction in 1/fs; ``taut``
+    / ``taup`` (fs) are the ASE NPT thermostat / barostat time constants (``pfactor = taup**2 *
+    bulk_modulus``); LAMMPS uses ``100*dt`` / ``1000*dt`` (in.mace.j2). ``equil_ps`` is excluded
+    from every average; ``natoms`` is the default supercell size; ``vdos_every_steps`` samples
+    velocities for the VDOS (10 fs at 2 fs steps resolves 60 meV phonons)."""
+
     timestep_fs: float = 2.0
     friction: float = 0.01
     taut: float = 100.0
     taup: float = 1000.0
     equil_ps: float = 10.0
+    natoms: int = 64
+    bulk_modulus_GPa: float = 150.0
+    thermo_every_steps: int = 10
+    dump_every_steps: int = 100
+    vdos_every_steps: int = 5
+    rdf_rmax_A: float = 6.0
+    rdf_nbins: int = 200
 
 
 class SamplingConfig(B20Model):

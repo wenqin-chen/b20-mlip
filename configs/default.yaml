@@ -31,6 +31,7 @@ cluster:            # discovered by `b20mlip cluster bootstrap` into configs/clu
   lammps_sha: 4d222cb3ee2a6b14083c778968497bf9e0efc4b4   # ACEsuit/lammps `mace` head, 2026-09-17
   libtorch_cpu_url: https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-2.14.0%2Bcpu.zip
   libtorch_cuda_url: https://download.pytorch.org/libtorch/cu126/libtorch-shared-with-deps-2.14.0%2Bcu126.zip
+  resources: {}                          # per-template SLURM defaults, set in the cluster overlay (see configs/cluster/tillicum.yaml)
 
 data:               # SPEC section 4: strain +-6 %, shear +-4 %, rattle <= 0.15 A, EOS +-8 %, NVT 300/600/900 K
   compounds: [FeSi, CoSi, MnSi, FeGe]      # MnGe is a stretch goal added by the data tier if found
@@ -113,9 +114,16 @@ eval:
 md:
   timestep_fs: 2.0
   friction: 0.01     # ASE Langevin friction, 1/fs
-  taut: 100.0        # fs
-  taup: 1000.0       # fs
-  equil_ps: 10.0
+  taut: 100.0        # fs (ASE NPT thermostat time constant; LAMMPS uses 100*dt)
+  taup: 1000.0       # fs (ASE NPT barostat time constant, pfactor = taup^2 * B; LAMMPS uses 1000*dt)
+  equil_ps: 10.0     # excluded from every average (a(T), drift, VDOS, RDF)
+  natoms: 64         # default supercell size (8-atom B20 cell -> 2x2x2); `md lammps` asks for 512
+  bulk_modulus_GPa: 150.0   # barostat pfactor only (B20 silicides ~150-200 GPa); never a result
+  thermo_every_steps: 10    # thermo.csv / LAMMPS `thermo N`
+  dump_every_steps: 100     # .traj / LAMMPS dump interval
+  vdos_every_steps: 5       # velocity sampling for the VDOS (10 fs at 2 fs steps)
+  rdf_rmax_A: 6.0           # clipped to half the smallest cell height
+  rdf_nbins: 200
 
 sampling:
   k_eVA2: 5.0

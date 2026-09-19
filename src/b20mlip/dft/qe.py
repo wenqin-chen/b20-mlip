@@ -488,7 +488,11 @@ def job_spec(
         name=name or job_name(r),
         script=UNIT_SCRIPT,
         units=list(unit_ids),
-        resources={"template": template, **dict(resources or {})},
+        resources={
+            "template": template,
+            **dict(cfg.cluster.resources.get(template, {})),  # site defaults (cluster overlay)
+            **dict(resources or {}),  # explicit per-call overrides win
+        },
         env=job_env,
     )
 

@@ -383,3 +383,28 @@ def test_job_spec_and_script(golden_cfg: Settings, tmp_path: Path) -> None:
         "B20_UNITS_ROOT": "/gscratch/x/r0",
         "B20_KEEP_TMP": "1",
     }  # no qe_cmd configured
+
+
+def test_job_spec_merges_cluster_resource_defaults(golden_cfg: Settings, tmp_path: Path) -> None:
+    """Site defaults from cluster.resources[template] apply; explicit resources win."""
+    cfg = golden_cfg.model_copy(
+        update={
+            "cluster": golden_cfg.cluster.model_copy(
+                update={
+                    "resources": {
+                        "qe_array": {"ntasks": 2, "gpus": 1, "mem": "30G", "max_parallel": 24}
+                    }
+                }
+            )
+        }
+    )
+    spec = qe.job_spec(tmp_path, ["u1"], cfg, template="qe_array", resources={"mem": "60G"})
+    assert spec.resources == {
+        "template": "qe_array",
+        "ntasks": 2,
+        "gpus": 1,
+        "mem": "60G",
+        "max_parallel": 24,
+    }
+    other = qe.job_spec(tmp_path, ["u1"], cfg, template="qe_phonons")
+    assert other.resources == {"template": "qe_phonons"}
