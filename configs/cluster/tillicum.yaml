@@ -19,7 +19,7 @@ cluster:
   micromamba_env: /gpfs/projects/stf/wenqin98/qe # micromamba QE fallback installed 2026-09-18
   resources:  # SLURM defaults per template; Tillicum allows <= 2 CPUs and <= 34 GB per GPU, 1 MIG slice = cheapest unit
     # 8-atom QE units: 2 MPI ranks on one MIG slice (5-6 min each); 64-atom phonon/vacancy units: 4 slices = 8 ranks
-    qe_array: {ntasks: 2, cpus_per_task: 1, gpus: 1, mem: 30G, time: "02:00:00", max_parallel: 24}
+    qe_array: {ntasks: 2, cpus_per_task: 1, gpus: 1, mem: 30G, time: "00:45:00", max_parallel: 24}  # 8-atom SCF p50 6 min, p90 9 min, max 12+ min (low-symmetry cells: 172-260 k-points); 12 min timed out 179/265 units on 2026-09-19
     qe_phonons: {ntasks: 8, cpus_per_task: 1, gpus: 4, mem: 120G, time: "12:00:00", max_parallel: 8}
 
 dft:
