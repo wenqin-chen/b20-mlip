@@ -493,3 +493,21 @@ def test_module_set_that_never_loads_fails_the_step(cluster_cfg: Settings, yaml_
     result = run_bootstrap(cfg, fake, yaml_path)
     step = read_manifest(result.manifest_path).extras["steps"]["modules"]
     assert step["status"] == "failed" and step["load_check"]["ok"] is False
+
+
+def test_skipped_steps_keep_configured_values(discovered_cfg: Settings, yaml_path: Path) -> None:
+    """Regression (Tillicum 2026-09-18): `--skip qe` blanked qe_cmd to null in the overlay."""
+    cfg = discovered_cfg.model_copy(
+        update={
+            "cluster": discovered_cfg.cluster.model_copy(
+                update={"qe_cmd": "/scratch/qe/bin/pw.x", "micromamba_env": "/scratch/qe"}
+            )
+        }
+    )
+    fake = FakeRunner(tillicum_scenario())
+    result = run_bootstrap(cfg, fake, yaml_path, skip=("qe", "lammps", "repo"))
+    assert result.status == "ok", result.summary
+    data = read_yaml(yaml_path)["cluster"]
+    assert data["qe_cmd"] == "/scratch/qe/bin/pw.x"
+    assert data["micromamba_env"] == "/scratch/qe"
+    assert data["scratch"] == SCRATCH

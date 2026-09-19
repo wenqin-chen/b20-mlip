@@ -184,6 +184,23 @@ class Discovered:
     lammps_build: dict[str, Any] | None = None
     raw: dict[str, str] = field(default_factory=dict)
 
+    @classmethod
+    def seeded_from(cls, cfg: Settings) -> Discovered:
+        """Start from the configured cluster values so a skipped (or failed) step never blanks a
+        value an earlier bootstrap discovered; each step that runs may still replace them."""
+        cl = cfg.cluster
+        return cls(
+            account=cl.account,
+            partition_cpu=cl.partition_cpu,
+            partition_gpu=cl.partition_gpu,
+            qos=cl.qos,
+            scratch=cl.scratch,
+            modules=list(cl.modules),
+            qe_cmd=cl.qe_cmd,
+            lammps_cmd=cl.lammps_cmd,
+            micromamba_env=cl.micromamba_env,
+        )
+
     def config_values(self, cfg: Settings) -> dict[str, Any]:
         return {
             "alias": cfg.cluster.alias,
@@ -231,7 +248,7 @@ class Bootstrap:
         unknown = self.skip - set(STEPS)
         if unknown:
             raise ValueError(f"unknown bootstrap step(s) {sorted(unknown)}; known: {STEPS}")
-        self.found = Discovered()
+        self.found = Discovered.seeded_from(cfg)
         self.steps: dict[str, dict[str, Any]] = {}
 
     # -- state ---------------------------------------------------------------------------------

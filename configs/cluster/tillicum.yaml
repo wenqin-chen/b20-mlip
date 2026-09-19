@@ -14,9 +14,9 @@ cluster:
   qos: normal              # discovered: the association's DefaultQOS (sacctmgr)
   scratch: /gpfs/projects/stf/wenqin98 # discovered: $SCRATCH, /gpfs/projects/<acct>/$USER, /gpfs/scrubbed/$USER, /gscratch/...
   modules: [gcc/13.4.0, cuda/12.8.2, cmake/3.31.8, openmpi/5.0.10] # discovered: gcc, cuda, cmake, openmpi (+ quantum-espresso when a module exists)
-  qe_cmd: null             # needs micromamba
+  qe_cmd: /gpfs/projects/stf/wenqin98/qe/bin/mpirun -np 2 --bind-to none /gpfs/projects/stf/wenqin98/qe/bin/pw.x -nk 2   # micromamba qe=7.5; -np = resources.qe_array.ntasks
   lammps_cmd: null         # submitted (job 303048)
-  micromamba_env: null     # <scratch>/qe when the micromamba QE fallback was installed
+  micromamba_env: /gpfs/projects/stf/wenqin98/qe # micromamba QE fallback installed 2026-09-18
   # SLURM defaults per template (Tillicum: <= 2 CPUs and <= 34 GB per GPU requested; 1 H200 MIG
   # slice = the cheapest unit). 8-atom QE units: 2 MPI ranks on one MIG slice (5-6 min each).
   resources:
