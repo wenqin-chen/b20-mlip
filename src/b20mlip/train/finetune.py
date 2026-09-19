@@ -609,6 +609,10 @@ def run(
     energy_scale = frames_energy_scale(used)
     if v == "bootstrap":
         parts = {k: with_energy_weight_zero(fr) for k, fr in parts.items()}
+        # rule R4: energies carry weight 0, so the model's energy scale stays the foundation's
+        # ("mp"); the frames' scale (OMat24) is recorded in the manifest, not on the checkpoint
+        ctx.log(frames_energy_scale=energy_scale)
+        energy_scale = "mp"
     split_files = write_split_files(parts, out_dir / DATA_DIR)
 
     foundation: Path | None = None

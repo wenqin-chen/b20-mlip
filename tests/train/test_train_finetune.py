@@ -341,7 +341,8 @@ def test_run_bootstrap_dry_run_writes_energy_weight_zero(
     plan = json.loads((out_dir / "plan.json").read_text())
     assert _opt(plan["argv"], "--energy_weight") == "0.0"
     assert _opt(plan["argv"], "--E0s") == "foundation"
-    assert plan["energy_scale"] == "omat24" and plan["e0_source"] == "foundation"
+    # rule R4: energy weight 0 keeps the checkpoint on the foundation ("mp") scale
+    assert plan["energy_scale"] == "mp" and plan["e0_source"] == "foundation"
     assert "--test_file" not in plan["argv"]  # in-function split has no test set
     for part in ("train", "valid"):
         frames = read_frames(out_dir / "data" / f"{part}.extxyz")
