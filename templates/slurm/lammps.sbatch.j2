@@ -40,6 +40,10 @@ export MKL_NUM_THREADS=$OMP_NUM_THREADS OPENBLAS_NUM_THREADS=$OMP_NUM_THREADS
 export {{ k }}="{{ v }}"
 {% endfor %}
 {% set lammps_cmd = resources.lammps_cmd | default(cluster.lammps_cmd or 'lmp', true) %}
+{# the lmp built by build_lammps.sbatch.j2 links liblammps.so and libtorch from the scratch prefix #}
+{% if cluster.scratch %}
+export LD_LIBRARY_PATH="{{ cluster.scratch }}/b20-mlip/lib:{{ cluster.scratch }}/b20-mlip/lib64:{{ cluster.scratch }}/b20-mlip/build/libtorch/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+{% endif %}
 {% if gpu %}
 export LAMMPS_CMD="{{ lammps_cmd }} -k on g 1 -sf kk -pk kokkos newton on neigh half"
 {% else %}
