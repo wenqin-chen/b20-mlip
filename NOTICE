@@ -41,3 +41,24 @@ pymbar (MIT) · pydantic, pydantic-settings (MIT) · typer (MIT) · PyYAML (MIT)
 Jinja2 (BSD-3-Clause) · NumPy (BSD-3-Clause) · pandas (BSD-3-Clause) · httpx (BSD-3-Clause) ·
 anthropic (MIT) · fairchem-core, optional (MIT) · PySCF, optional (Apache-2.0) ·
 Quantum ESPRESSO, cluster-side (GPL-2.0) · LAMMPS, cluster-side (GPL-2.0) · PLUMED, optional (LGPL-3.0)
+
+matbench-discovery (vendored metrics)
+-------------------------------------
+- `src/b20mlip/evaluate/mbd_vendored.py` carries the functions `classify_stable`, `_safe_div`
+  and `stable_metrics` copied byte-for-byte from
+  https://github.com/janosh/matbench-discovery, file `matbench_discovery/metrics/discovery.py`,
+  commit 25db9e4c2cbb0d4ed72bad60e433b737b4a217cd (2026-08-10), retrieved 2026-09-18 from
+  https://raw.githubusercontent.com/janosh/matbench-discovery/25db9e4c2cbb0d4ed72bad60e433b737b4a217cd/matbench_discovery/metrics/discovery.py
+  (sha256 of the retrieved file 88cfb73b80a6abca05020a17751de3b7a6efa6b56257fc7e637e61644a3721f4).
+  Only the module prologue differs: `STABILITY_THRESHOLD = 0` is copied from the package's
+  `__init__.py` and sklearn's `r2_score` is re-implemented in NumPy (scikit-learn is not a
+  dependency). The function `stable_metrics` is used only on the labelled 1,000-structure
+  WBM sample; its `DAF` output is never published.
+- `src/b20mlip/evaluate/_vendor/mp-elemental-ref-entries.json.gz` is the file
+  `data/mp/2023-02-07-mp-elemental-reference-entries.json.gz` of the same repository at the
+  same commit (sha256 9fd6ef848a91c88840a0d1709b5856d0edb4af22095237e59db52f2acd6bbf79): the
+  Materials Project elemental reference entries (GGA/GGA+U, MP2020-corrected scheme) used to
+  turn model energies into formation energies per atom.
+- Licence of both: MIT, Copyright (c) 2022 Janosh Riebesell. The full licence text is
+  reproduced in the module docstring of `mbd_vendored.py`. The `matbench_discovery` package
+  itself is never installed or imported (it needs Python 3.14 and downloads data at import).

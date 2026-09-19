@@ -1,0 +1,70 @@
+{#- lammps.sbatch.j2 — MD tier (SPEC.md section 5/8): one LAMMPS job (`md lammps` NPT production
+    or the `md parity` single points) on the GPU partition, one node, one task, ONE unit.
+    Rendered by SlurmExecutor.render with spec.resources["template"] = "lammps".
+
+    resources: lammps_cmd (default cluster.lammps_cmd), gpu (bool, default true: Kokkos flags
+    `-k on g 1 -sf kk -pk kokkos newton on neigh half`), input (when set, the unit runs
+    `<lammps_cmd> [kokkos flags] -in <input> -log log.lammps` in the work directory; when unset the
+    unit runs script.sh, which reads $LAMMPS_CMD — the parity loop over frame directories),
+    partition (default cluster.partition_gpu), gpus (1), cpus_per_task (threads), mem (32G),
+    time (04:00:00). Unit protocol of templates/slurm/README.md (units/<unit>.done | .failed);
+    a resubmission after a timeout skips a finished unit. No srun: single task. -#}
+#!/bin/bash
+#SBATCH --job-name={{ job_name }}
+{% if account %}
+#SBATCH --account={{ account }}
+{% endif %}
+#SBATCH --partition={{ resources.partition | default(cluster.partition_gpu or partition, true) }}
+{% set qos = resources.qos | default(cluster.qos) %}
+{% if qos %}
+#SBATCH --qos={{ qos }}
+{% endif %}
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task={{ resources.cpus_per_task | default(threads) }}
+{% set gpu = resources.gpu | default(true) %}
+{% set gpus = resources.gpus | default(1 if gpu else 0) %}
+{% if gpus %}
+#SBATCH --gpus={{ gpus }}
+{% endif %}
+#SBATCH --mem={{ resources.mem | default('32G') }}
+#SBATCH --time={{ resources.time | default('04:00:00') }}
+#SBATCH --output={{ workdir }}/logs/slurm-%j.out
+set -euo pipefail
+{% for m in cluster.modules %}
+module load {{ m }}
+{% endfor %}
+export OMP_NUM_THREADS={{ resources.cpus_per_task | default(threads) }}
+export MKL_NUM_THREADS=$OMP_NUM_THREADS OPENBLAS_NUM_THREADS=$OMP_NUM_THREADS
+{% for k, v in env.items() %}
+export {{ k }}="{{ v }}"
+{% endfor %}
+{% set lammps_cmd = resources.lammps_cmd | default(cluster.lammps_cmd or 'lmp', true) %}
+{% if gpu %}
+export LAMMPS_CMD="{{ lammps_cmd }} -k on g 1 -sf kk -pk kokkos newton on neigh half"
+{% else %}
+export LAMMPS_CMD="{{ lammps_cmd }}"
+{% endif %}
+export B20_WORKDIR={{ workdir }} B20_JOB_NAME={{ job_name }} B20_UNIT_INDEX=1
+export B20_UNIT=$(sed -n 1p "$B20_WORKDIR/{{ units_name }}")
+mkdir -p "$B20_WORKDIR/units" "$B20_WORKDIR/logs"
+slug=$(printf '%s' "$B20_UNIT" | tr -c 'A-Za-z0-9._-' '_')
+[ -f "$B20_WORKDIR/units/$slug.done" ] && { echo "unit $B20_UNIT already done"; exit 0; }
+rm -f "$B20_WORKDIR/units/$slug.failed"
+cd "$B20_WORKDIR"
+{% if resources.input is defined %}
+{% if gpu %}
+run_unit() { {{ lammps_cmd }} -k on g 1 -sf kk -pk kokkos newton on neigh half -in {{ resources.input }} -log log.lammps; }
+{% else %}
+run_unit() { {{ lammps_cmd }} -in {{ resources.input }} -log log.lammps; }
+{% endif %}
+{% else %}
+run_unit() { bash "$B20_WORKDIR/{{ script_name }}"; }
+{% endif %}
+if run_unit > "$B20_WORKDIR/logs/$slug.log" 2>&1; then
+  printf '{"unit": "%s", "state": "done", "returncode": 0}\n' "$B20_UNIT" > "$B20_WORKDIR/units/$slug.done"
+else
+  rc=$?
+  printf '{"unit": "%s", "state": "failed", "returncode": %d}\n' "$B20_UNIT" "$rc" > "$B20_WORKDIR/units/$slug.failed"
+  exit $rc
+fi

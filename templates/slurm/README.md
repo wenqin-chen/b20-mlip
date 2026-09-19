@@ -16,7 +16,7 @@ exists (train tier; GPU partition, one task, a single unit whose command is
 resubmission resumes through MACE's `--restart_latest`; rendered in
 `tests/train/test_train_template.py`). `build_lammps.sbatch.j2` exists (cluster tier: a one-unit ACEsuit/lammps `mace` build with
 libtorch and Kokkos+CUDA on a GPU partition, submitted by `b20mlip cluster bootstrap --build-lammps`;
-rendered in `tests/cluster/test_remote.py`, see `docs/CLUSTER.md`). The md templates do not exist yet.
+rendered in `tests/cluster/test_remote.py`, see `docs/CLUSTER.md`). `lammps.sbatch.j2` exists (md tier: GPU partition, one task, ONE unit; with `resources.input` the unit runs `<lammps_cmd> -k on g 1 -sf kk -pk kokkos newton on neigh half -in <input> -log log.lammps` in the work directory (`resources.gpu=false` drops the Kokkos flags), without it `script.sh` with `$LAMMPS_CMD` exported (the `md parity` loop over frame directories); `resources.lammps_cmd` defaults to `cluster.lammps_cmd`; rendered in `tests/md/test_md_lammps.py`).
 
 ## Rendering context
 
