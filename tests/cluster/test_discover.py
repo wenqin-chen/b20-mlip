@@ -511,3 +511,42 @@ def test_skipped_steps_keep_configured_values(discovered_cfg: Settings, yaml_pat
     assert data["qe_cmd"] == "/scratch/qe/bin/pw.x"
     assert data["micromamba_env"] == "/scratch/qe"
     assert data["scratch"] == SCRATCH
+
+
+def test_overlay_rewrite_keeps_nested_blocks_and_other_sections(tmp_path: Path) -> None:
+    """`resources:` (a nested mapping) and a trailing `dft:` section survive a bootstrap rewrite."""
+    path = tmp_path / "tillicum.yaml"
+    path.write_text(
+        "# header\n"
+        "cluster:\n"
+        "  alias: tillicum\n"
+        "  scratch: /scratch/u   # discovered\n"
+        "  resources:  # per template\n"
+        "    # 8-atom units\n"
+        "    qe_array: {ntasks: 2, gpus: 1, mem: 30G}\n"
+        "    qe_phonons: {ntasks: 8, gpus: 4}\n"
+        "  lammps_cmd: null\n"
+        "\n"
+        "dft:\n"
+        "  pseudo_dir: /scratch/pseudos\n",
+        encoding="utf-8",
+    )
+    write_cluster_yaml(path, {"lammps_cmd": "/scratch/bin/lmp"}, provenance="test")
+    text = path.read_text(encoding="utf-8")
+    nested = "\n".join(
+        [
+            "  resources:  # per template",
+            "    # 8-atom units",
+            "    qe_array: {ntasks: 2, gpus: 1, mem: 30G}",
+            "",
+        ]
+    )
+    assert nested in text
+    assert "dft:\n  pseudo_dir: /scratch/pseudos" in text
+    data = read_yaml(path)
+    assert data["cluster"]["resources"] == {
+        "qe_array": {"ntasks": 2, "gpus": 1, "mem": "30G"},
+        "qe_phonons": {"ntasks": 8, "gpus": 4},
+    }
+    assert data["cluster"]["lammps_cmd"] == "/scratch/bin/lmp"
+    assert data["dft"]["pseudo_dir"] == "/scratch/pseudos"

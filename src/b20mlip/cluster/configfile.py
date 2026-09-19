@@ -38,6 +38,7 @@ DEFAULT_HEADER = (
     "null = unknown.\n"
 )
 _KEY_LINE = re.compile(r"^(?P<indent>[ \t]+)(?P<key>[A-Za-z_]\w*):(?P<rest>.*)$")
+_KEY_INDENT = 2  # indentation of the cluster block's own keys
 _VALUE_COLUMN = 26
 
 
@@ -63,6 +64,7 @@ def parse_cluster_yaml(text: str) -> tuple[list[str], dict[str, str], dict[str, 
     comments: dict[str, str] = {}
     trailing: list[str] = []
     state = "header"
+    current: str | None = None  # key whose nested block (deeper-indented lines) is being read
     for line in text.splitlines():
         if state == "header":
             if re.match(r"^cluster:\s*(#.*)?$", line):
@@ -71,18 +73,27 @@ def parse_cluster_yaml(text: str) -> tuple[list[str], dict[str, str], dict[str, 
                 header.append(line)
             continue
         if state == "block":
-            if line.strip() == "" or line.lstrip().startswith("#"):
-                continue  # blank/comment-only lines inside the block are not kept
+            if line.strip() == "":
+                continue  # blank lines inside the block are not kept
             if not line[0].isspace():
                 state = "trailing"
                 trailing.append(line)
                 continue
             m = _KEY_LINE.match(line)
-            if m:
+            nested = current is not None and (len(line) - len(line.lstrip()) > _KEY_INDENT)
+            if nested or (current is not None and line.lstrip().startswith("#")):
+                # continuation of a nested mapping/list (e.g. ``resources:``): kept verbatim
+                values[current] = values[current] + "\n" + line
+                continue
+            if line.lstrip().startswith("#"):
+                current = None
+                continue  # comment-only lines between keys are not kept
+            if m and len(m.group("indent")) == _KEY_INDENT:
                 value, comment = _split_comment(m.group("rest"))
                 values[m.group("key")] = value
                 if comment:
                     comments[m.group("key")] = comment
+                current = m.group("key") if value == "" else None
             continue
         trailing.append(line)
     return header, values, comments, trailing
@@ -122,6 +133,11 @@ def write_cluster_yaml(
         elif key in old_values:
             value_text = old_values[key]
         else:
+            continue
+        if "\n" in value_text:  # a nested block kept verbatim (its own comments included)
+            comment = merged_comments.get(key, "")
+            head = f"  {key}:" + (f"  # {comment}" if comment else "")
+            lines.append(head + value_text)
             continue
         line = f"  {key}: {value_text}"
         comment = merged_comments.get(key, "")

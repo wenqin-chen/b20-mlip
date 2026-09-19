@@ -17,9 +17,13 @@ cluster:
   qe_cmd: /gpfs/projects/stf/wenqin98/qe/bin/mpirun -np 2 --bind-to none /gpfs/projects/stf/wenqin98/qe/bin/pw.x -nk 2   # micromamba qe=7.5; -np = resources.qe_array.ntasks
   lammps_cmd: null         # submitted (job 303048)
   micromamba_env: /gpfs/projects/stf/wenqin98/qe # micromamba QE fallback installed 2026-09-18
-  # SLURM defaults per template (Tillicum: <= 2 CPUs and <= 34 GB per GPU requested; 1 H200 MIG
-  # slice = the cheapest unit). 8-atom QE units: 2 MPI ranks on one MIG slice (5-6 min each).
-  resources:
+  resources:  # SLURM defaults per template; Tillicum allows <= 2 CPUs and <= 34 GB per GPU, 1 MIG slice = cheapest unit
+    # 8-atom QE units: 2 MPI ranks on one MIG slice (5-6 min each); 64-atom phonon/vacancy units: 4 slices = 8 ranks
     qe_array: {ntasks: 2, cpus_per_task: 1, gpus: 1, mem: 30G, time: "02:00:00", max_parallel: 24}
     qe_phonons: {ntasks: 8, cpus_per_task: 1, gpus: 4, mem: 120G, time: "12:00:00", max_parallel: 8}
 
+
+dft:
+  # absolute cluster path of the SSSP efficiency 1.3.0 PBE UPF files (downloaded 2026-09-18 from
+  # Materials Cloud record rcyfm-68h65 and md5-verified against configs/dft/sssp_efficiency_1.3_pbe.json)
+  pseudo_dir: /gpfs/projects/stf/wenqin98/pseudos/sssp_efficiency_1.3.0_pbe
