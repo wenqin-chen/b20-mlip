@@ -1,0 +1,460 @@
+{
+  "schema": "b20mlip.qe_converged.v1",
+  "compound": "MnSi",
+  "frame_id": "b1bedf3b172907d9",
+  "ecut_ry": 80.0,
+  "ecut_rho": 960.0,
+  "k_spacing_inv_A": 0.2,
+  "kmesh": [
+    7,
+    7,
+    7
+  ],
+  "selected_unit": "MnSi_ec80_k0.2",
+  "reference_unit": "MnSi_ec90_k0.2",
+  "thresholds": {
+    "E_meV_atom": 1.0,
+    "F_meV_A": 5.0
+  },
+  "points": [
+    {
+      "unit_id": "MnSi_ec40_k0.35",
+      "ecut_ry": 40.0,
+      "ecut_rho": 480.0,
+      "k_spacing_inv_A": 0.35,
+      "kmesh": [
+        4,
+        4,
+        4
+      ],
+      "converged": true,
+      "cost": 16190.861620062102,
+      "energy_atom_eV": -1514.9633816328121,
+      "max_force_eVA": 0.019279932724569362,
+      "dE_meV_atom": 6.9730707325561525,
+      "dF_meV_A": 13.357396147423255,
+      "meets": false
+    },
+    {
+      "unit_id": "MnSi_ec40_k0.3",
+      "ecut_ry": 40.0,
+      "ecut_rho": 480.0,
+      "k_spacing_inv_A": 0.3,
+      "kmesh": [
+        5,
+        5,
+        5
+      ],
+      "converged": true,
+      "cost": 31622.776601683792,
+      "energy_atom_eV": -1514.9629821016367,
+      "max_force_eVA": 0.013850790881156413,
+      "dE_meV_atom": 7.372601907945864,
+      "dF_meV_A": 5.73664580461402,
+      "meets": false
+    },
+    {
+      "unit_id": "MnSi_ec40_k0.25",
+      "ecut_ry": 40.0,
+      "ecut_rho": 480.0,
+      "k_spacing_inv_A": 0.25,
+      "kmesh": [
+        6,
+        6,
+        6
+      ],
+      "converged": true,
+      "cost": 54644.157967709594,
+      "energy_atom_eV": -1514.9611563536914,
+      "max_force_eVA": 0.007173892579792954,
+      "dE_meV_atom": 9.198349853249965,
+      "dF_meV_A": 0.9402524967494392,
+      "meets": false
+    },
+    {
+      "unit_id": "MnSi_ec40_k0.2",
+      "ecut_ry": 40.0,
+      "ecut_rho": 480.0,
+      "k_spacing_inv_A": 0.2,
+      "kmesh": [
+        7,
+        7,
+        7
+      ],
+      "converged": true,
+      "cost": 86772.89899502032,
+      "energy_atom_eV": -1514.9623011196943,
+      "max_force_eVA": 0.007775787875087032,
+      "dE_meV_atom": 8.05358385036925,
+      "dF_meV_A": 0.338357201455362,
+      "meets": false
+    },
+    {
+      "unit_id": "MnSi_ec50_k0.35",
+      "ecut_ry": 50.0,
+      "ecut_rho": 600.0,
+      "k_spacing_inv_A": 0.35,
+      "kmesh": [
+        4,
+        4,
+        4
+      ],
+      "converged": true,
+      "cost": 22627.41699796952,
+      "energy_atom_eV": -1514.9673157869747,
+      "max_force_eVA": 0.01926682009746129,
+      "dE_meV_atom": 3.038916569948924,
+      "dF_meV_A": 13.344283520315182,
+      "meets": false
+    },
+    {
+      "unit_id": "MnSi_ec50_k0.3",
+      "ecut_ry": 50.0,
+      "ecut_rho": 600.0,
+      "k_spacing_inv_A": 0.3,
+      "kmesh": [
+        5,
+        5,
+        5
+      ],
+      "converged": true,
+      "cost": 44194.173824159225,
+      "energy_atom_eV": -1514.9669060515298,
+      "max_force_eVA": 0.014839123010635452,
+      "dE_meV_atom": 3.448652014867548,
+      "dF_meV_A": 6.724977934093058,
+      "meets": false
+    },
+    {
+      "unit_id": "MnSi_ec50_k0.25",
+      "ecut_ry": 50.0,
+      "ecut_rho": 600.0,
+      "k_spacing_inv_A": 0.25,
+      "kmesh": [
+        6,
+        6,
+        6
+      ],
+      "converged": true,
+      "cost": 76367.53236814713,
+      "energy_atom_eV": -1514.965087854744,
+      "max_force_eVA": 0.00813522812404949,
+      "dE_meV_atom": 5.26684880060202,
+      "dF_meV_A": 0.4370875702690846,
+      "meets": false
+    },
+    {
+      "unit_id": "MnSi_ec50_k0.2",
+      "ecut_ry": 50.0,
+      "ecut_rho": 600.0,
+      "k_spacing_inv_A": 0.2,
+      "kmesh": [
+        7,
+        7,
+        7
+      ],
+      "converged": true,
+      "cost": 121268.81297349291,
+      "energy_atom_eV": -1514.9662290662598,
+      "max_force_eVA": 0.008798058568845786,
+      "dE_meV_atom": 4.125637284914774,
+      "dF_meV_A": 0.683913492303392,
+      "meets": false
+    },
+    {
+      "unit_id": "MnSi_ec60_k0.35",
+      "ecut_ry": 60.0,
+      "ecut_rho": 720.0,
+      "k_spacing_inv_A": 0.35,
+      "kmesh": [
+        4,
+        4,
+        4
+      ],
+      "converged": true,
+      "cost": 29744.51209887296,
+      "energy_atom_eV": -1514.9679250158938,
+      "max_force_eVA": 0.019348838294470608,
+      "dE_meV_atom": 2.429687650874257,
+      "dF_meV_A": 13.4263017173245,
+      "meets": false
+    },
+    {
+      "unit_id": "MnSi_ec60_k0.3",
+      "ecut_ry": 60.0,
+      "ecut_rho": 720.0,
+      "k_spacing_inv_A": 0.3,
+      "kmesh": [
+        5,
+        5,
+        5
+      ],
+      "converged": true,
+      "cost": 58094.75019311125,
+      "energy_atom_eV": -1514.9675247364053,
+      "max_force_eVA": 0.01432747344308517,
+      "dE_meV_atom": 2.8299671394051984,
+      "dF_meV_A": 6.213328366542776,
+      "meets": false
+    },
+    {
+      "unit_id": "MnSi_ec60_k0.25",
+      "ecut_ry": 60.0,
+      "ecut_rho": 720.0,
+      "k_spacing_inv_A": 0.25,
+      "kmesh": [
+        6,
+        6,
+        6
+      ],
+      "converged": true,
+      "cost": 100387.72833369624,
+      "energy_atom_eV": -1514.9657025429472,
+      "max_force_eVA": 0.007576270254775966,
+      "dE_meV_atom": 4.652160597515831,
+      "dF_meV_A": 0.5378748217664273,
+      "meets": false
+    },
+    {
+      "unit_id": "MnSi_ec60_k0.2",
+      "ecut_ry": 60.0,
+      "ecut_rho": 720.0,
+      "k_spacing_inv_A": 0.2,
+      "kmesh": [
+        7,
+        7,
+        7
+      ],
+      "converged": true,
+      "cost": 159411.9945298973,
+      "energy_atom_eV": -1514.966844315698,
+      "max_force_eVA": 0.008274839036200146,
+      "dE_meV_atom": 3.5103878467452887,
+      "dF_meV_A": 0.16069395965775252,
+      "meets": false
+    },
+    {
+      "unit_id": "MnSi_ec70_k0.35",
+      "ecut_ry": 70.0,
+      "ecut_rho": 840.0,
+      "k_spacing_inv_A": 0.35,
+      "kmesh": [
+        4,
+        4,
+        4
+      ],
+      "converged": true,
+      "cost": 37482.36918872658,
+      "energy_atom_eV": -1514.9693791413415,
+      "max_force_eVA": 0.019389461727472083,
+      "dE_meV_atom": 0.9755622031661915,
+      "dF_meV_A": 13.466925150325975,
+      "meets": false
+    },
+    {
+      "unit_id": "MnSi_ec70_k0.3",
+      "ecut_ry": 70.0,
+      "ecut_rho": 840.0,
+      "k_spacing_inv_A": 0.3,
+      "kmesh": [
+        5,
+        5,
+        5
+      ],
+      "converged": true,
+      "cost": 73207.7523217316,
+      "energy_atom_eV": -1514.9689750522589,
+      "max_force_eVA": 0.014234656611986852,
+      "dE_meV_atom": 1.3796512857879861,
+      "dF_meV_A": 6.120511535444458,
+      "meets": false
+    },
+    {
+      "unit_id": "MnSi_ec70_k0.25",
+      "ecut_ry": 70.0,
+      "ecut_rho": 840.0,
+      "k_spacing_inv_A": 0.25,
+      "kmesh": [
+        6,
+        6,
+        6
+      ],
+      "converged": true,
+      "cost": 126502.99601195221,
+      "energy_atom_eV": -1514.9671505458332,
+      "max_force_eVA": 0.007591696874903109,
+      "dE_meV_atom": 3.2041577114796382,
+      "dF_meV_A": 0.5224482016392843,
+      "meets": false
+    },
+    {
+      "unit_id": "MnSi_ec70_k0.2",
+      "ecut_ry": 70.0,
+      "ecut_rho": 840.0,
+      "k_spacing_inv_A": 0.2,
+      "kmesh": [
+        7,
+        7,
+        7
+      ],
+      "converged": true,
+      "cost": 200882.07237083153,
+      "energy_atom_eV": -1514.968292369605,
+      "max_force_eVA": 0.008167624026316492,
+      "dE_meV_atom": 2.0623339396479423,
+      "dF_meV_A": 0.05347894977409881,
+      "meets": false
+    },
+    {
+      "unit_id": "MnSi_ec80_k0.35",
+      "ecut_ry": 80.0,
+      "ecut_rho": 960.0,
+      "k_spacing_inv_A": 0.35,
+      "kmesh": [
+        4,
+        4,
+        4
+      ],
+      "converged": true,
+      "cost": 45794.672179195695,
+      "energy_atom_eV": -1514.9710871660282,
+      "max_force_eVA": 0.019376606210699466,
+      "dE_meV_atom": 0.7324624834836868,
+      "dF_meV_A": 13.454069633553358,
+      "meets": false
+    },
+    {
+      "unit_id": "MnSi_ec80_k0.3",
+      "ecut_ry": 80.0,
+      "ecut_rho": 960.0,
+      "k_spacing_inv_A": 0.3,
+      "kmesh": [
+        5,
+        5,
+        5
+      ],
+      "converged": true,
+      "cost": 89442.71909999159,
+      "energy_atom_eV": -1514.9706855259703,
+      "max_force_eVA": 0.014045680515429334,
+      "dE_meV_atom": 0.33082242566706554,
+      "dF_meV_A": 5.93153543888694,
+      "meets": false
+    },
+    {
+      "unit_id": "MnSi_ec80_k0.25",
+      "ecut_ry": 80.0,
+      "ecut_rho": 960.0,
+      "k_spacing_inv_A": 0.25,
+      "kmesh": [
+        6,
+        6,
+        6
+      ],
+      "converged": true,
+      "cost": 154557.01860478547,
+      "energy_atom_eV": -1514.9688630603985,
+      "max_force_eVA": 0.007352841373267828,
+      "dE_meV_atom": 1.4916431462097535,
+      "dF_meV_A": 0.7613037032745659,
+      "meets": false
+    },
+    {
+      "unit_id": "MnSi_ec80_k0.2",
+      "ecut_ry": 80.0,
+      "ecut_rho": 960.0,
+      "k_spacing_inv_A": 0.2,
+      "kmesh": [
+        7,
+        7,
+        7
+      ],
+      "converged": true,
+      "cost": 245430.82121037692,
+      "energy_atom_eV": -1514.9700074012235,
+      "max_force_eVA": 0.0079223407662949,
+      "dE_meV_atom": 0.34730232118818094,
+      "dF_meV_A": 0.1918043102474929,
+      "meets": true
+    },
+    {
+      "unit_id": "MnSi_ec90_k0.35",
+      "ecut_ry": 90.0,
+      "ecut_rho": 1080.0,
+      "k_spacing_inv_A": 0.35,
+      "kmesh": [
+        4,
+        4,
+        4
+      ],
+      "converged": true,
+      "cost": 54644.157967709594,
+      "energy_atom_eV": -1514.9714331077798,
+      "max_force_eVA": 0.019362722252585035,
+      "dE_meV_atom": 1.0784042351588141,
+      "dF_meV_A": 13.440185675438928,
+      "meets": false
+    },
+    {
+      "unit_id": "MnSi_ec90_k0.3",
+      "ecut_ry": 90.0,
+      "ecut_rho": 1080.0,
+      "k_spacing_inv_A": 0.3,
+      "kmesh": [
+        5,
+        5,
+        5
+      ],
+      "converged": true,
+      "cost": 106726.8710306828,
+      "energy_atom_eV": -1514.9710351412593,
+      "max_force_eVA": 0.01419274762730811,
+      "dE_meV_atom": 0.6804377146636398,
+      "dF_meV_A": 6.078602550765717,
+      "meets": false
+    },
+    {
+      "unit_id": "MnSi_ec90_k0.25",
+      "ecut_ry": 90.0,
+      "ecut_rho": 1080.0,
+      "k_spacing_inv_A": 0.25,
+      "kmesh": [
+        6,
+        6,
+        6
+      ],
+      "converged": true,
+      "cost": 184424.03314101987,
+      "energy_atom_eV": -1514.9692116042393,
+      "max_force_eVA": 0.007423803825852691,
+      "dE_meV_atom": 1.1430993054091232,
+      "dF_meV_A": 0.6903412506897031,
+      "meets": false
+    },
+    {
+      "unit_id": "MnSi_ec90_k0.2",
+      "ecut_ry": 90.0,
+      "ecut_rho": 1080.0,
+      "k_spacing_inv_A": 0.2,
+      "kmesh": [
+        7,
+        7,
+        7
+      ],
+      "converged": true,
+      "cost": 292858.5341081936,
+      "energy_atom_eV": -1514.9703547035447,
+      "max_force_eVA": 0.008114145076542394,
+      "dE_meV_atom": 0.0,
+      "dF_meV_A": 0.0,
+      "meets": true
+    }
+  ],
+  "units": {
+    "energy": "meV/atom",
+    "force": "meV/A",
+    "ecut": "Ry",
+    "k_spacing": "1/A"
+  },
+  "source_run_id": "20260919T064100-b8af4c-none"
+}
