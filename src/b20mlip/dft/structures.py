@@ -25,7 +25,9 @@ B20_MP_IDS: dict[str, str] = {
     "MnSi": "mp-1431",
     "FeGe": "mp-21255",
 }
-DEFAULT_MPTRJ_RELPATH = Path("raw") / "mptrj" / "b20_mptrj.extxyz"
+DEFAULT_MPTRJ_RELPATH = Path("raw") / "mptrj" / "b20_mptrj.extxyz"  # first (by-mp-id) extract
+# the data tier's spglib-198 extract (65 frames incl. CoGe mp-10692 and MnGe mp-1078464) wins when present
+DATA_TIER_MPTRJ_RELPATH = Path("frames") / "mptrj_b20.extxyz"
 _ELEMENT_RE = re.compile(r"[A-Z][a-z]?")
 
 
@@ -67,6 +69,9 @@ def _matches(frame: Frame, compound: str) -> bool:
 
 
 def default_structure_path(cfg: Settings) -> Path:
+    preferred = Path(cfg.paths.data_dir) / DATA_TIER_MPTRJ_RELPATH
+    if preferred.is_file():
+        return preferred
     return Path(cfg.paths.data_dir) / DEFAULT_MPTRJ_RELPATH
 
 
