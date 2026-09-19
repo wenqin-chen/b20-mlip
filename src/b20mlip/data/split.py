@@ -8,7 +8,7 @@ except through these exclusions, which move the affected frames to **test**:
 * T1 — ``temperature_K > max_train_T`` (frame-level: cooler frames of the same MD group
   may stay in train; the hot frames are the extrapolation test);
 * T2 — ``compound in holdout_compounds`` (never trained on, whole groups);
-* T3 — ``label_source == "omat24"`` (never trained on, whole groups);
+* T3 — ``label_source == "omat24"`` frames not in train (never trained on, whole groups);
 * T4a — ``label_source == "mptrj"`` (foundation-training data; forgetting tier, never in
   train here — B2 replay uses MACE's own replay set);
 * only ``label_source in train_sources`` (default ``("qe",)``) can be trained on: the SPEC
@@ -111,17 +111,14 @@ def group_split(
             tiers["T1"].append(f.frame_id)
         if held_compound:
             tiers["T2"].append(f.frame_id)
-        if f.label_source == "omat24":
-            tiers["T3"].append(f.frame_id)
-        trainable = (
-            b == "train"
-            and f.label_source in sources
-            and not hot
-            and not held_compound
-            and f.label_source not in ("omat24", "mptrj")
-        )
+        trainable = b == "train" and f.label_source in sources and not hot and not held_compound
         if b == "train" and not trainable:
             b = "test"
+        # OMat24 / MPtrj frames are tiers only when NOT trained on (the default train_sources =
+        # ("qe",) keeps all of them out of train; the bootstrap variant B4 opts OMat24 in, and its
+        # held-out groups remain the never-trained VASP tier T3)
+        if f.label_source == "omat24" and b != "train":
+            tiers["T3"].append(f.frame_id)
         if f.label_source == "mptrj" and b != "train":
             tiers["T4a"].append(f.frame_id)
         if b == "train":

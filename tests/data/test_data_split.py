@@ -118,9 +118,14 @@ def test_exclusions_and_tiers() -> None:
     # raising the temperature ceiling puts the hot frame back into train
     s2 = sp.group_split(frames, seed=seed, max_train_T=1000.0)
     assert hot.frame_id in s2.train and s2.tiers["T1"] == [] and s2.split_id != s.split_id
-    # allowing omat24 as a train source still keeps it out (never-trained tier by policy)
+    # the bootstrap variant (B4, rule R4) opts OMat24 in: train-bucket OMat24 groups become
+    # trainable and T3 shrinks to the never-trained remainder (T3 and train stay disjoint)
     s3 = sp.group_split(frames, seed=seed, train_sources=("qe", "omat24"))
+    omat_ids = {f.frame_id for f in omat}
+    assert set(s3.tiers["T3"]) == omat_ids - set(s3.train)
     assert not (set(s3.tiers["T3"]) & set(s3.train))
+    assert set(s3.train) & omat_ids or set(s3.tiers["T3"]) == omat_ids  # depends on the group hash
+    assert s3.split_id != s.split_id
 
 
 def test_invalid_inputs() -> None:
