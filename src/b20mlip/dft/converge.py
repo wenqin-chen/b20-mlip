@@ -21,7 +21,7 @@ import numpy as np
 
 from b20mlip.config import Settings
 from b20mlip.dft import qe
-from b20mlip.dft.stages import stage_result, submit_units, write_counts
+from b20mlip.dft.stages import pull_units, stage_result, submit_units, write_counts
 from b20mlip.dft.structures import reference_frame
 from b20mlip.models import Frame, StageResult, Status
 from b20mlip.provenance import RunContext
@@ -225,6 +225,8 @@ def run(
     if ctx.dry_run:
         ctx.log(n_units=len(points), dry_run=True, units_root=str(root))
         return stage_result(ctx, "partial", summary)
+    if collect_only and ctx.executor is not None:
+        pull_units(ctx.executor, root, cfg)  # SLURM: bring pw.out + markers back first
     pending = qe.pending_units(root, [p["unit_id"] for p in points])
     if pending and not collect_only:
         submit_units(cfg, ctx, root, pending, template=template, resources=resources, wait=wait)

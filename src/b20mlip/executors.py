@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import json
 import os
+import posixpath
 import re
 import shlex
 import shutil
@@ -480,6 +481,42 @@ class SlurmExecutor:
         dest.mkdir(parents=True, exist_ok=True)
         self._rsync(f"{self.cluster.alias}:{handle.workdir}/", f"{dest}/")
         return artifacts_under(dest)
+
+    # -- directory mirroring (unit roots live outside the job dir) ---------------------------
+
+    def push_dir(self, local_dir: str | Path, remote_dir: str) -> None:
+        """Mirror ``local_dir`` to ``alias:remote_dir`` (parents created; extra remote files
+        kept, so markers/outputs already on the cluster survive a re-push)."""
+        parent = posixpath.dirname(remote_dir.rstrip("/"))
+        self._ssh(f"mkdir -p {shlex.quote(remote_dir)} {shlex.quote(parent)}")
+        self._rsync(
+            f"{Path(local_dir).resolve()}/", f"{self.cluster.alias}:{remote_dir.rstrip('/')}/"
+        )
+
+    def pull_dir(self, remote_dir: str, local_dir: str | Path) -> None:
+        """Mirror ``alias:remote_dir`` back into ``local_dir`` (QE scratch ``tmp/`` excluded)."""
+        dest = Path(local_dir)
+        dest.mkdir(parents=True, exist_ok=True)
+        res = self.runner(
+            [
+                "rsync",
+                "-az",
+                "--exclude",
+                "tmp/",
+                "--exclude",
+                "*.wfc*",
+                "--exclude",
+                "*.save/",
+                "-e",
+                self.ssh_transport,
+                f"{self.cluster.alias}:{remote_dir.rstrip('/')}/",
+                f"{dest}/",
+            ]
+        )
+        if res.returncode == 255:
+            raise ClusterUnreachable(f"rsync transport to {self.cluster.alias!r} failed")
+        if not res.ok:
+            raise JobSubmitError(f"rsync {remote_dir} -> {dest} failed: {res.stderr.strip()}")
 
 
 def get_executor(cfg: Settings, kind: str = "local") -> Executor:

@@ -120,6 +120,7 @@ def submit_units(
         units_root=units_root_for(ctx.executor, root, cfg),
     )
     (ctx.out_dir / "spec.json").write_text(spec.model_dump_json(indent=2) + "\n", encoding="utf-8")
+    push_units(ctx.executor, root, cfg)  # the unit dirs must exist where the job runs
     handle = ctx.executor.submit(spec)
     (ctx.out_dir / HANDLE_JSON).write_text(
         handle.model_dump_json(indent=2) + "\n", encoding="utf-8"
@@ -128,8 +129,25 @@ def submit_units(
     info = ctx.executor.wait(handle) if wait else None
     if info is not None:
         ctx.slurm = info
+        pull_units(ctx.executor, root, cfg)  # outputs + markers back into the local unit dirs
     ctx.log(job_ids=list(handle.job_ids), job_workdir=handle.workdir)
     return handle, info
+
+
+def push_units(executor: object, root: str | Path, cfg: Settings) -> bool:
+    """Mirror the local units root to the cluster before a SLURM submission (no-op locally)."""
+    if isinstance(executor, SlurmExecutor):
+        executor.push_dir(root, units_root_for(executor, root, cfg))
+        return True
+    return False
+
+
+def pull_units(executor: object, root: str | Path, cfg: Settings) -> bool:
+    """Mirror the cluster's unit dirs (pw.out, markers) back locally (no-op locally)."""
+    if isinstance(executor, SlurmExecutor):
+        executor.pull_dir(units_root_for(executor, root, cfg), root)
+        return True
+    return False
 
 
 def write_counts(ctx: RunContext, counts: Mapping[str, Any]) -> Path:
@@ -250,6 +268,8 @@ def run(
 def collect(cfg: Settings, ctx: RunContext, *, units: str | Path, out: str | Path) -> StageResult:
     """Parse every unit under ``units``; write the converged frames (QE labels) to ``out``."""
     root = Path(units)
+    if ctx.executor is not None and pull_units(ctx.executor, root, cfg):
+        ctx.log(pulled_from_cluster=True)
     frames, counts = qe.collect(root)
     if counts["planned"] == 0:
         raise FileNotFoundError(f"no planned units under {root}")
@@ -283,6 +303,8 @@ def collect(cfg: Settings, ctx: RunContext, *, units: str | Path, out: str | Pat
 
 __all__ = [
     "collect",
+    "pull_units",
+    "push_units",
     "prep",
     "pseudo_md5s_for",
     "pw_version_of",

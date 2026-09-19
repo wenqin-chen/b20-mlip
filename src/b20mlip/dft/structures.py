@@ -26,7 +26,7 @@ B20_MP_IDS: dict[str, str] = {
     "FeGe": "mp-21255",
 }
 DEFAULT_MPTRJ_RELPATH = Path("raw") / "mptrj" / "b20_mptrj.extxyz"  # first (by-mp-id) extract
-# the data tier's spglib-198 extract (65 frames incl. CoGe mp-10692 and MnGe mp-1078464) wins when present
+# the data tier's spglib-198 extract (65 frames, incl. CoGe and MnGe) wins when present
 DATA_TIER_MPTRJ_RELPATH = Path("frames") / "mptrj_b20.extxyz"
 _ELEMENT_RE = re.compile(r"[A-Z][a-z]?")
 

@@ -352,3 +352,41 @@ def test_parse_sacct() -> None:
     assert [r.terminal for r in rows] == [True, True, False, False]
     assert rows[0].nnodes == 2 and rows[3].nnodes == 0
     assert parse_sacct("") == []
+
+
+def test_slurm_push_and_pull_dir_go_through_the_runner(tmp_path: Path) -> None:
+    """push_dir makes the remote parent and rsyncs local -> alias:remote; pull_dir excludes QE
+    scratch (tmp/, *.wfc*, *.save/) and mirrors alias:remote -> local."""
+    from b20mlip.config import Settings
+    from b20mlip.executors import SlurmExecutor
+
+    calls: list[list[str]] = []
+
+    def runner(argv):  # type: ignore[no-untyped-def]
+        calls.append(list(argv))
+        from b20mlip.executors import CommandResult
+
+        return CommandResult(tuple(argv), 0, "", "")
+
+    cfg = Settings().model_copy(
+        update={
+            "cluster": Settings().cluster.model_copy(
+                update={"scratch": "/scratch/u", "control_path": str(tmp_path / "cm.sock")}
+            )
+        }
+    )
+    ex = SlurmExecutor(cfg, runner=runner)
+    local = tmp_path / "units"
+    local.mkdir()
+    ex.push_dir(local, "/scratch/u/b20-mlip/dft/r0")
+    ex.pull_dir("/scratch/u/b20-mlip/dft/r0", local)
+    ssh_calls = [c for c in calls if c[0] == "ssh"]
+    rsync_calls = [c for c in calls if c[0] == "rsync"]
+    assert (
+        ssh_calls
+        and "mkdir -p /scratch/u/b20-mlip/dft/r0 /scratch/u/b20-mlip/dft" in ssh_calls[0][-1]
+    )
+    assert rsync_calls[0][-2:] == [f"{local.resolve()}/", "tillicum:/scratch/u/b20-mlip/dft/r0/"]
+    pull = rsync_calls[1]
+    assert pull[-2:] == ["tillicum:/scratch/u/b20-mlip/dft/r0/", f"{local}/"]
+    assert "tmp/" in pull and "*.wfc*" in pull and "*.save/" in pull
