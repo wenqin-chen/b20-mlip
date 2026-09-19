@@ -4,16 +4,15 @@
 # ControlMaster socket with `ssh -fN tillicum` (MFA). Until then every discovered field is null
 # and SlurmExecutor refuses to submit (cluster.scratch unset). Bootstrap rewrites only the values
 # below (comments survive); an ambiguous discovery stays null with the candidates in its comment.
-# last discovered: 2026-09-19T06:12:42Z by `b20mlip cluster bootstrap` run 20260919T061210-339b58-none
 cluster:
   alias: tillicum
   control_path: ~/.ssh/tillicum-cm
-  account: stf             # discovered: hyakalloc / sacctmgr show assoc user=$USER
-  partition_cpu: gpu-h200-mig # discovered: sinfo (unique partition without GPU GRES; Tillicum has none)
-  partition_gpu: gpu-h200  # discovered: sinfo (unique partition with gpu/h200 GRES; else null)
-  qos: normal              # discovered: the association's DefaultQOS (sacctmgr)
-  scratch: /gpfs/projects/stf/wenqin98 # discovered: $SCRATCH, /gpfs/projects/<acct>/$USER, /gpfs/scrubbed/$USER, /gscratch/...
+  account: null            # discovered: hyakalloc / sacctmgr show assoc user=$USER
+  partition_cpu: null      # discovered: sinfo (unique partition without GPU GRES; Tillicum has none)
+  partition_gpu: null      # discovered: sinfo (unique partition with gpu/h200 GRES; else null)
+  qos: null                # discovered: the association's DefaultQOS (sacctmgr)
+  scratch: null            # discovered: $SCRATCH, /gpfs/projects/<acct>/$USER, /gpfs/scrubbed/$USER, /gscratch/...
   modules: []              # discovered: gcc, cuda, cmake, openmpi (+ quantum-espresso when a module exists)
-  qe_cmd: null             # needs micromamba
-  lammps_cmd: null         # submitted (job 303029)
+  qe_cmd: null             # discovered: `module load ... && which pw.x`, else <scratch>/qe/bin/pw.x (micromamba)
+  lammps_cmd: null         # <scratch>/b20-mlip/bin/lmp once build_lammps.sbatch.j2 has run (--build-lammps)
   micromamba_env: null     # <scratch>/qe when the micromamba QE fallback was installed

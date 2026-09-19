@@ -92,9 +92,9 @@ def test_global_options_build_state(tmp_path: Path, repo: Path) -> None:
         executor=ExecutorKind.slurm,
     )
     cfg = state.settings()
-    assert (
-        cfg.compute.threads == 2 and cfg.cluster.alias == "tillicum" and cfg.cluster.scratch is None
-    )
+    # the overlay may or may not have been filled by a real `cluster bootstrap`; only the alias
+    # and the override are invariant
+    assert cfg.compute.threads == 2 and cfg.cluster.alias == "tillicum"
     assert isinstance(state.make_executor(cfg), SlurmExecutor)
     assert isinstance(CLIState().make_executor(cfg), LocalExecutor)
 

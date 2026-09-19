@@ -207,6 +207,8 @@ class Scenario:
     module_grep: str = MODULE_GREP_SIMPLE
     module_spider: str = SPIDER_QE + SPIDER_COMMON
     qe_module_ok: bool = True
+    # Lmod hierarchy: module sets that fail `module load` -> the suggestion Lmod prints
+    module_load_fail: dict[str, str] = field(default_factory=dict)
     qe_installed: bool = False
     uv_present: bool = True
     lmp_built: bool = False
@@ -347,6 +349,13 @@ class FakeRunner:
             return ok(s.module_grep) if s.module_grep else fail(1)
         if cmd.startswith("for m in"):
             return ok(s.module_spider)
+        if cmd.startswith("module purge") and "B20_MODULES_OK" in cmd:
+            m = re.search(r"module load (.+?) 2>&1", cmd)
+            assert m, cmd
+            mods = m.group(1).strip()
+            if mods in s.module_load_fail:
+                return ok(s.module_load_fail[mods])  # Lmod prints the error on stdout (2>&1)
+            return ok("B20_MODULES_OK\n")
         if cmd.startswith("module load") and "which pw.x" in cmd:
             return ok(QE_PATH + "\n") if s.qe_module_ok else fail(1, "pw.x not found")
         if cmd.startswith("test -x") and "/qe/bin/pw.x" in cmd:
@@ -384,6 +393,10 @@ class FakeRunner:
         raise AssertionError(f"unscripted remote command: {cmd}")
 
 
+PLACEHOLDER_YAML = (Path(__file__).parent / "fixtures" / "tillicum_placeholder.yaml").read_text(
+    encoding="utf-8"
+)
+
 # --- fixtures -----------------------------------------------------------------------------------
 
 
@@ -419,11 +432,15 @@ def discovered_cfg(cluster_cfg: Settings) -> Settings:
 
 
 @pytest.fixture
-def yaml_path(tmp_path: Path, repo: Path) -> Path:
-    """A copy of the repo's placeholder overlay to write into."""
+def yaml_path(tmp_path: Path) -> Path:
+    """The pristine placeholder overlay (as shipped before any bootstrap) to write into.
+
+    Not a copy of the repo's ``configs/cluster/tillicum.yaml``: once a real bootstrap has run,
+    that file carries the discovered values, and these tests must stay independent of it.
+    """
     dst = tmp_path / "configs" / "cluster" / "tillicum.yaml"
     dst.parent.mkdir(parents=True)
-    shutil.copyfile(repo / "configs" / "cluster" / "tillicum.yaml", dst)
+    dst.write_text(PLACEHOLDER_YAML, encoding="utf-8")
     return dst
 
 

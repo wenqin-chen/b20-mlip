@@ -108,6 +108,9 @@ COMMANDS: dict[str, str] = {
     "module_grep": 'module avail 2>&1 | grep -i -E "quantum|espresso|qe|lammps|cuda"',
     "module_spider": 'for m in {names}; do echo "### $m"; module spider "$m" 2>&1; done',
     "qe_which": "module load {modules} && which pw.x",
+    "module_load_check": (
+        "module purge >/dev/null 2>&1; module load {modules} 2>&1 && echo B20_MODULES_OK"
+    ),
     "qe_probe": "test -x {scratch}/qe/bin/pw.x && echo {scratch}/qe/bin/pw.x",
     # -- bootstrap: repo, uv, QE fallback, LAMMPS --
     "remote_layout": "bash {repo}/scripts/tillicum/remote_bootstrap.sh {scratch}",

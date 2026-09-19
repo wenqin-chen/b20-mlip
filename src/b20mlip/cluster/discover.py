@@ -128,6 +128,16 @@ def cuda_major(libtorch_url: str) -> str | None:
     return m.group(1) if m else None
 
 
+MODULES_OK = "B20_MODULES_OK"
+_LMOD_SUGGESTION_RE = re.compile(r"^\s*module load ((?:[\w.+-]+/[\w.+-]+\s*)+)$", re.MULTILINE)
+
+
+def lmod_suggestions(text: str) -> list[list[str]]:
+    """Module combinations Lmod prints after a hierarchy error
+    (``Or load any one of these options: module load gcc/13.4.0 cuda/12.8.2 openmpi/5.0.10``)."""
+    return [line.split() for line in _LMOD_SUGGESTION_RE.findall(text)]
+
+
 @dataclass
 class Discovered:
     """Everything bootstrap found; ``config_values`` is what the YAML overlay receives."""
@@ -563,12 +573,47 @@ class Bootstrap:
                 "module spider: gcc, cuda (major of libtorch_cuda_url), cmake, openmpi, QE; "
                 "(D) default if shown, else newest"
             )
+        load_check = self._verify_module_set(f.modules)
         self.steps["modules"] = {
-            "status": "ok",
+            "status": "ok" if load_check["ok"] else "failed",
             "modules": list(f.modules),
             "qe_module": f.qe_module,
             "lammps_module": f.lammps_module,
             "versions": dict(f.module_versions),
+            "load_check": load_check,
+        }
+
+    def _verify_module_set(self, modules: list[str]) -> dict[str, Any]:
+        """``module load`` the chosen set on the login node; on an Lmod hierarchy error adopt the
+        first combination Lmod suggests that still contains every family we asked for."""
+        f = self.found
+        if not modules:
+            return {"ok": True, "checked": [], "note": "no modules configured"}
+        res = self.t.run("module_load_check", modules=" ".join(modules))
+        out = res.stdout + res.stderr
+        f.raw["module_load_check"] = out
+        if MODULES_OK in out:
+            return {"ok": True, "checked": list(modules)}
+        families = [m.split("/", 1)[0] for m in modules]
+        for suggestion in lmod_suggestions(out):
+            merged = list(suggestion)
+            for m in modules:  # keep the families Lmod's line does not mention (e.g. cmake)
+                if m.split("/", 1)[0] not in {x.split("/", 1)[0] for x in merged}:
+                    merged.append(m)
+            merged = [m for m in merged if m.split("/", 1)[0] in families]
+            res2 = self.t.run("module_load_check", modules=" ".join(merged))
+            out2 = res2.stdout + res2.stderr
+            f.raw["module_load_check_retry"] = out2
+            if MODULES_OK in out2:
+                f.modules = merged
+                f.modules_source += (
+                    f"; hierarchy fixed via Lmod suggestion ({' '.join(suggestion)})"
+                )
+                return {"ok": True, "checked": merged, "replaced": list(modules)}
+        return {
+            "ok": False,
+            "checked": list(modules),
+            "error": "module set does not load together; see raw.module_load_check",
         }
 
     def step_config(self) -> None:

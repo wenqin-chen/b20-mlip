@@ -444,3 +444,52 @@ def test_write_cluster_yaml_from_scratch_and_validation(tmp_path: Path) -> None:
     with pytest.raises(ValidationError):
         write_cluster_yaml(path, {"bogus_key": 1})
     assert "bogus_key" not in path.read_text() and not path.with_suffix(".yaml.tmp").exists()
+
+
+LMOD_HIERARCHY_ERROR = """Lmod has detected the following error: These module(s) or extension(s)
+exist but cannot be loaded as requested: "openmpi/5.0.10"
+   Try: "module spider openmpi/5.0.10" to see how to load the module(s).
+   Or load any one of these options:
+      module load gcc/13.4.0 cuda/12.8.2 openmpi/5.0.10
+"""
+
+
+def test_module_set_is_verified_and_lmod_suggestion_adopted(
+    cluster_cfg: Settings, yaml_path: Path
+) -> None:
+    """Tillicum 2026-09-18: the newest cuda (12.9.1) does not sit under openmpi/5.0.10 in the
+    Lmod hierarchy; the load check must catch it and adopt Lmod's suggested combination."""
+    from b20mlip.cluster.discover import lmod_suggestions
+
+    assert lmod_suggestions(LMOD_HIERARCHY_ERROR) == [
+        ["gcc/13.4.0", "cuda/12.8.2", "openmpi/5.0.10"]
+    ]
+    configured = ["gcc/13.4.0", "cuda/12.9.1", "cmake/3.31.8", "openmpi/5.0.10"]
+    cfg = cluster_cfg.model_copy(
+        update={"cluster": cluster_cfg.cluster.model_copy(update={"modules": configured})}
+    )
+    fake = FakeRunner(
+        tillicum_scenario(module_load_fail={" ".join(configured): LMOD_HIERARCHY_ERROR})
+    )
+    result = run_bootstrap(cfg, fake, yaml_path)
+    assert result.status == "ok", result.summary
+    step = read_manifest(result.manifest_path).extras["steps"]["modules"]
+    assert step["status"] == "ok" and step["load_check"]["ok"] is True
+    assert step["load_check"]["replaced"] == configured
+    assert read_yaml(yaml_path)["cluster"]["modules"] == [
+        "gcc/13.4.0",
+        "cuda/12.8.2",
+        "openmpi/5.0.10",
+        "cmake/3.31.8",
+    ]
+
+
+def test_module_set_that_never_loads_fails_the_step(cluster_cfg: Settings, yaml_path: Path) -> None:
+    configured = ["gcc/13.4.0", "cuda/12.9.1"]
+    cfg = cluster_cfg.model_copy(
+        update={"cluster": cluster_cfg.cluster.model_copy(update={"modules": configured})}
+    )
+    fake = FakeRunner(tillicum_scenario(module_load_fail={" ".join(configured): "Lmod error\n"}))
+    result = run_bootstrap(cfg, fake, yaml_path)
+    step = read_manifest(result.manifest_path).extras["steps"]["modules"]
+    assert step["status"] == "failed" and step["load_check"]["ok"] is False
