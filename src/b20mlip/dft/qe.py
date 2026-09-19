@@ -124,6 +124,20 @@ if ! grep -q "convergence has been achieved" pw.out && grep -q "$davidson" pw.ou
   echo "unit $B20_UNIT: Davidson failure, retried with diagonalization='cg' (exit $rc)" >&2
 fi
 wall=$(( $(date +%s) - start ))
+# Sanity gate (Tillicum 2026-09-19: CoSi SCFs "converged" to +2230 Ry with thousands of electrons
+# of negative density): a converged run whose largest "negative rho (up, down)" entry exceeds
+# B20_MAX_NEGATIVE_RHO (default 0.1 e) is a diverged SCF, marked failed, never done.
+cap="${B20_MAX_NEGATIVE_RHO:-0.1}"
+maxneg=$( (grep "negative rho (up, down):" pw.out || true) \
+  | awk '{for (i=5;i<=NF;i++) print $i}' | sort -g | tail -1)
+if grep -q "convergence has been achieved" pw.out && [ -n "$maxneg" ] && \
+   awk -v m="$maxneg" -v c="$cap" 'BEGIN{exit !(m+0 > c+0)}'; then
+  echo "unit $B20_UNIT: converged but negative rho reached $maxneg e (> $cap): diverged" >&2
+  printf '{"unit": "%s", "state": "failed", "returncode": %d, "wall_seconds": %d, ' \
+    "$B20_UNIT" "$rc" "$wall" > .failed
+  printf '"reason": "negative_rho", "max_negative_rho": %s}\n' "$maxneg" >> .failed
+  exit 1
+fi
 if grep -q "convergence has been achieved" pw.out; then
   [ "${B20_KEEP_TMP:-0}" = "1" ] || rm -rf tmp
   printf '{"unit": "%s", "state": "done", "returncode": %d, "wall_seconds": %d}\n' \
@@ -517,6 +531,8 @@ def job_spec(
 _RE_VERSION = re.compile(r"Program PWSCF v\.(\S+)")
 _RE_FINAL_ENERGY = re.compile(r"^!\s+total energy\s+=\s+(-?\d+\.\d+)\s+Ry", re.M)
 _RE_FERMI = re.compile(r"the Fermi energy is\s+(-?\d+\.\d+)\s+ev")
+_RE_NEG_RHO = re.compile(r"negative rho \(up, down\):\s+([0-9.Ee+-]+)\s+([0-9.Ee+-]+)")
+MAX_NEGATIVE_RHO = 0.1  # electrons; larger = a diverged SCF (Tillicum CoSi 2026-09-19: ~3e3 e)
 _RE_TOTAL_MAG = re.compile(r"total magnetization\s+=\s+(-?\d+\.\d+)\s+Bohr mag/cell")
 _RE_ABS_MAG = re.compile(r"absolute magnetization\s+=\s+(-?\d+\.\d+)\s+Bohr mag/cell")
 _RE_CONVERGED = re.compile(r"convergence has been achieved in\s+(\d+)\s+iterations")
@@ -643,8 +659,13 @@ def parse_pw_text(text: str) -> dict[str, Any]:
     if wall_m:
         wall = parse_duration(wall_m[-1][1])
     version_m = _RE_VERSION.search(text)
+    neg = [max(float(a), float(b)) for a, b in _RE_NEG_RHO.findall(text)]
+    max_negative_rho = max(neg) if neg else 0.0
+    diverged = max_negative_rho > MAX_NEGATIVE_RHO
     return {
-        "converged": bool(converged_m),
+        "converged": bool(converged_m) and not diverged,  # a diverged SCF is never "converged"
+        "diverged": diverged,
+        "max_negative_rho": max_negative_rho,
         "scf_steps": scf_steps,
         "energy_ry": energy_ry,
         "energy_eV": None if energy_ry is None else energy_ry * RY_TO_EV,
@@ -753,6 +774,9 @@ def parse_pw_output(
     if warnings:
         info["parse_warnings"] = "; ".join(warnings)
     info = {k: v for k, v in info.items() if v is not None}
+    info["max_negative_rho"] = parsed["max_negative_rho"]
+    if parsed["diverged"]:
+        info["diverged"] = True
     base.update(
         energy=parsed["energy_eV"],
         forces=forces,

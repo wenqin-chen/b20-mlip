@@ -23,9 +23,15 @@
 #SBATCH --array=1-{{ n_units }}%{{ resources.max_parallel | default(4) }}
 #SBATCH --output={{ workdir }}/logs/slurm-%A_%a.out
 set -euo pipefail
+{#- the micromamba QE is self-contained (own mpirun/libmpi via RPATH): loading the site's
+    gcc/cuda/openmpi modules on top of it only adds a foreign mpirun to PATH and MPI env
+    (Tillicum 2026-09-19: CoSi SCFs diverged in array jobs that loaded the modules); load
+    them only when pw.x comes from a module (cluster.micromamba_env unset). -#}
+{% if not cluster.micromamba_env %}
 {% for m in cluster.modules %}
 module load {{ m }}
 {% endfor %}
+{% endif %}
 # pinned BLAS/OpenMP threads: one per MPI rank unless cpus_per_task says otherwise
 export OMP_NUM_THREADS={{ resources.cpus_per_task | default(1) }}
 export MKL_NUM_THREADS=$OMP_NUM_THREADS OPENBLAS_NUM_THREADS=$OMP_NUM_THREADS

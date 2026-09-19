@@ -335,3 +335,27 @@ def test_davidson_failure_is_retried_with_cg(
     assert "convergence has been achieved" in (unit / "pw.out").read_text()
     for uid in (ids[0], ids[2]):
         assert not (root / uid / "pw_retry.in").exists()
+
+
+def test_diverged_scf_with_huge_negative_rho_is_marked_failed(
+    dft_settings: Settings,
+    three_frames: list[Frame],
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Tillicum 2026-09-19: CoSi units 'converged' to +2230 Ry with ~3e3 e of negative density;
+    the unit script's negative-rho gate must mark such a unit failed, not done."""
+    cfg = dft_settings
+    frames_path = tmp_path / "frames.extxyz"
+    write_frames(three_frames, frames_path)
+    root = cfg.paths.dft_dir / "r0"
+    _run(cfg, "dft.prep", stages.prep, frames=frames_path, out=root)
+    ids = qe.list_units(root)
+    monkeypatch.setenv("FAKE_PW_DIVERGED_UNITS", ids[0])
+    run = _run(cfg, "dft.run", stages.run, units=root)
+    assert run.status == "partial" and run.summary["n_failed"] == 1 and run.summary["done"] == 2
+    marker = json.loads((root / ids[0] / ".failed").read_text())
+    assert marker["reason"] == "negative_rho" and marker["max_negative_rho"] > 100
+    assert not (root / ids[0] / ".done").exists()
+    coll = _run(cfg, "dft.collect", stages.collect, units=root, out=tmp_path / "l.extxyz")
+    assert coll.summary["n_frames"] == 2  # the diverged unit is not collected

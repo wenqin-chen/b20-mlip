@@ -408,3 +408,22 @@ def test_job_spec_merges_cluster_resource_defaults(golden_cfg: Settings, tmp_pat
     }
     other = qe.job_spec(tmp_path, ["u1"], cfg, template="qe_phonons")
     assert other.resources == {"template": "qe_phonons"}
+
+
+def test_parser_flags_a_diverged_scf(
+    golden_frame: Frame, golden_cfg: Settings, tmp_path: Path
+) -> None:
+    """A run that 'converged' after thousands of electrons of negative density is not converged."""
+    text = (Path("tests/fixtures/golden/pw.out")).read_text(encoding="utf-8")
+    bad = text.replace(
+        "     iteration #  2",
+        "     negative rho (up, down):  1.330E+03 0.000E+00\n     iteration #  2",
+        1,
+    )
+    path = tmp_path / "pw.out"
+    path.write_text(bad, encoding="utf-8")
+    frame = qe.parse_pw_output(path, golden_frame, dft=golden_cfg.dft, unit_id="d")
+    assert frame.converged is False and frame.info["diverged"] is True
+    assert frame.info["max_negative_rho"] == pytest.approx(1330.0)
+    ok = qe.parse_pw_output(Path("tests/fixtures/golden/pw.out"), golden_frame, dft=golden_cfg.dft)
+    assert ok.converged and ok.info["max_negative_rho"] < qe.MAX_NEGATIVE_RHO

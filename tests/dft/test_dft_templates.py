@@ -134,3 +134,22 @@ def test_null_account_partition_and_qos(
         "#SBATCH --nodes=1\n"
     ) in text
     assert "#SBATCH --gpus=1\n" in text and "#SBATCH --cpus-per-task=1\n" in text
+
+
+@pytest.mark.parametrize("template", ["qe_array", "qe_phonons"])
+def test_templates_skip_site_modules_for_micromamba_qe(
+    slurm_settings: Settings, tmp_path: Path, template: str
+) -> None:
+    """Tillicum 2026-09-19: the self-contained micromamba QE must not get the site's gcc/cuda/
+    openmpi modules loaded on top of it (foreign mpirun on PATH, MPI env) — CoSi SCFs diverged."""
+    cfg = slurm_settings.model_copy(
+        update={
+            "cluster": slurm_settings.cluster.model_copy(
+                update={"micromamba_env": "/gscratch/b20/qe", "qe_cmd": "/gscratch/b20/qe/bin/pw.x"}
+            )
+        }
+    )
+    executor = SlurmExecutor(cfg, runner=lambda argv: None)  # type: ignore[arg-type]
+    text = executor.render(_spec(cfg, tmp_path, template))
+    assert "module load" not in text
+    assert 'export QE_CMD="/gscratch/b20/qe/bin/pw.x"\n' in text

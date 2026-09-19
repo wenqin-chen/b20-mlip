@@ -9,6 +9,8 @@ Modes (environment variables, read by the ``dft run`` unit script's child proces
   and k-mesh, and print a QE 7.x-formatted output for that geometry (converge, phonons and E0s
   tests). Energy per atom: ``E_LJ/N + 0.050 exp(-(ecut-40)/10) + 0.200/n_k`` eV.
 * ``FAKE_PW_FAIL_UNITS=a,b``: units (cwd basename) that print ``pw_unconverged.out`` instead.
+* ``FAKE_PW_DIVERGED_UNITS=a,b``: units that print the golden output with a huge
+  ``negative rho (up, down):  1.330E+03`` line (a diverged-but-"converged" SCF).
 * ``FAKE_PW_DAVIDSON_UNITS=a,b``: units whose FIRST attempt dies like QE's ``c_bands`` error
   ("too many bands are not converged"); a second call with ``-in pw_retry.in`` (the unit
   script's conjugate-gradient retry) succeeds normally.
@@ -229,6 +231,15 @@ def main(argv: list[str]) -> int:
             "     stopping ...\n"
         )
         return 1
+    diverged_units = {u for u in os.environ.get("FAKE_PW_DIVERGED_UNITS", "").split(",") if u}
+    if unit in diverged_units:  # "converged" garbage: the negative-rho gate must catch it
+        text = (GOLDEN / "pw.out").read_text(encoding="utf-8")
+        marker = "     iteration #  2"
+        text = text.replace(
+            marker, "     negative rho (up, down):  1.330E+03 0.000E+00\n" + marker, 1
+        )
+        sys.stdout.write(text)
+        return 0
     if unit in fail_units:
         sys.stdout.write((GOLDEN / "pw_unconverged.out").read_text(encoding="utf-8"))
         return 0

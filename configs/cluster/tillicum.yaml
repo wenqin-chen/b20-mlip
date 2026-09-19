@@ -14,7 +14,7 @@ cluster:
   qos: normal              # discovered: the association's DefaultQOS (sacctmgr)
   scratch: /gpfs/projects/stf/wenqin98 # discovered: $SCRATCH, /gpfs/projects/<acct>/$USER, /gpfs/scrubbed/$USER, /gscratch/...
   modules: [gcc/13.4.0, cuda/12.8.2, cmake/3.31.8, openmpi/5.0.10] # discovered: gcc, cuda, cmake, openmpi (+ quantum-espresso when a module exists)
-  qe_cmd: /gpfs/projects/stf/wenqin98/qe/bin/mpirun -np 2 --bind-to none /gpfs/projects/stf/wenqin98/qe/bin/pw.x -nk 2 # micromamba qe=7.5; -np = resources.qe_array.ntasks
+  qe_cmd: /gpfs/projects/stf/wenqin98/qe/bin/mpirun -np 2 --bind-to none --mca pml ob1 --mca btl self,sm /gpfs/projects/stf/wenqin98/qe/bin/pw.x -nk 2 # micromamba qe=7.5; ob1/sm: the default UCX transport silently corrupted CoSi SCFs (2026-09-19); -np = resources.qe_array.ntasks
   lammps_cmd: /gpfs/projects/stf/wenqin98/b20-mlip/bin/lmp # submitted (job 303455)
   micromamba_env: /gpfs/projects/stf/wenqin98/qe # micromamba QE fallback installed 2026-09-18
   resources:  # SLURM defaults per template; Tillicum allows <= 2 CPUs and <= 34 GB per GPU, 1 MIG slice = cheapest unit
