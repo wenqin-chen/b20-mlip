@@ -620,7 +620,7 @@ def run(
         stale_keys=sorted({s["key"] for s in result.stale}),
     )
     if not ctx.dry_run:
-        numbers_path = write_numbers(result, cfg.report.numbers_path)
+        numbers_path = write_numbers(result, cfg.report.numbers_path, runs_dir=cfg.paths.runs_dir)
         ctx.add_output(numbers_path, "json")
         if readme:
             data = result.as_json()

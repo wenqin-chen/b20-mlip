@@ -146,7 +146,7 @@ uv run b20mlip sampling neb --model M --images 7
 uv run b20mlip sampling umbrella --model M --windows 12 --ps 15
 uv run b20mlip active select --models M1,M2,M3 --frames F --n 100 --out data/frames/candidates_r1.extxyz
 uv run b20mlip agent eval --tasks evals/agent_tasks.jsonl --backend mock
-uv run b20mlip report build --readme          # runs/ -> reports/numbers.json -> README.md
+uv run b20mlip report build --readme          # runs/ -> reports/{numbers.json,manifests/} -> README.md
 uv run b20mlip report audit --strict          # honesty gates; exit 1 with a JSON list of violations
 ```
 
@@ -176,6 +176,13 @@ explicitly with `uv run pytest -m network`.
   claims; the timing-run validation swing of six frames is noise, not a result.
 - The second MD engine is named only after the parity gate passes; until then only ASE results
   exist.
+- Provenance ships with the repository: `report build` copies the manifest and the small
+  `numbers.json` of every run that backs a published number into `reports/manifests/`, and the
+  audit resolves each cited run from `runs/` or, when that is absent (as in CI), from that
+  snapshot. The manifest must be complete and unchanged, and every output that is present
+  locally must still match its recorded checksum; heavy outputs (models, trajectories, frame
+  files) are never copied, so an output that is absent locally is noted as not local rather
+  than counted as a violation.
 - Protocol constants (from `configs/default.yaml` and SPEC.md), generated here so they cannot
   drift from the code:
 

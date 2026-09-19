@@ -44,16 +44,30 @@ File format::
 Output format (``reports/numbers.json``, sorted keys)::
 
     {"@stale": [{"key", "run_id", "stage", "path", "expected_sha256", "actual_sha256"}],
+     "@snapshots": {"<stage>/<run_id>": "reports/manifests/<stage>/<run_id>"},
      "<key>": {"value": float, "run_id": str, "manifest_sha256": str, "stage": str, "meta": {}}}
 
-``load(path)`` returns the ``NumberRef`` view (key, value, run_id, manifest_sha256) and
-``load_entries(path)`` the raw entries plus the stale list.
+``stage`` is part of every entry because ``run_id`` is unique per stage directory only; the
+``NumberRef`` model (CONTRACTS section 2) stays unchanged and ``load(path)`` returns that view
+(key, value, run_id, manifest_sha256); ``load_entries(path)`` returns the raw entries plus the
+stale list.
+
+Provenance snapshots (shipped with the repository)
+==================================================
+``runs/`` is gitignored, so the manifests that back the README could not be checked in CI.
+``write_numbers`` therefore copies, for every run cited by a published number, that run's
+``manifest.json`` and its (small) ``numbers.json`` into
+``reports/manifests/<stage>/<run_id>/``; nothing else is copied (models, trajectories and frame
+files are never snapshotted). The snapshot directory is tracked (``.gitignore`` un-ignores it),
+snapshots of runs that are no longer cited are removed on the next write, and the audit falls
+back to it when ``runs/`` is absent (:mod:`b20mlip.report.audit`, gate A2).
 """
 
 from __future__ import annotations
 
 import json
 import math
+import shutil
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -65,7 +79,9 @@ from b20mlip.report.markers import KEY_RE
 
 NUMBERS_FILE = "numbers.json"
 DEFAULT_OUT = Path("reports") / NUMBERS_FILE
+SNAPSHOT_DIRNAME = "manifests"
 STALE_KEY = "@stale"
+SNAPSHOTS_KEY = "@snapshots"
 FILE_META_KEY = "@meta"
 META_SUFFIX = "@meta"
 SKIPPED_STAGES: frozenset[str] = frozenset({"report"})  # never harvest our own output
@@ -106,11 +122,20 @@ class Harvest:
     n_manifests: int = 0
     n_ok: int = 0
 
-    def as_json(self) -> dict[str, Any]:
+    def as_json(self, snapshots: dict[str, str] | None = None) -> dict[str, Any]:
         out: dict[str, Any] = {STALE_KEY: sorted(self.stale, key=lambda s: (s["key"], s["run_id"]))}
+        if snapshots is not None:
+            out[SNAPSHOTS_KEY] = dict(sorted(snapshots.items()))
         for key in sorted(self.entries):
             out[key] = self.entries[key].as_json()
         return out
+
+    def cited_runs(self) -> dict[tuple[str, str], list[str]]:
+        """``{(stage, run_id): [keys]}`` of every run that backs a published number."""
+        runs: dict[tuple[str, str], list[str]] = {}
+        for key, entry in self.entries.items():
+            runs.setdefault((entry.stage, entry.run_id), []).append(key)
+        return runs
 
     def refs(self) -> dict[str, NumberRef]:
         return {key: entry.as_ref() for key, entry in sorted(self.entries.items())}
@@ -222,11 +247,52 @@ def harvest(runs_dir: str | Path) -> Harvest:
 # --- reports/numbers.json I/O --------------------------------------------------------------------
 
 
-def write_numbers(result: Harvest, out: str | Path) -> Path:
+def snapshot_dir(numbers_path: str | Path) -> Path:
+    """``reports/manifests/`` next to ``reports/numbers.json``."""
+    return Path(numbers_path).parent / SNAPSHOT_DIRNAME
+
+
+def write_snapshots(result: Harvest, runs_dir: str | Path, out: str | Path) -> dict[str, str]:
+    """Copy ``manifest.json`` + ``numbers.json`` of every cited run into the snapshot dir.
+
+    Returns ``{"<stage>/<run_id>": "<snapshot dir>"}`` (paths relative to the numbers file's
+    parent's parent when possible, i.e. ``reports/manifests/...`` for the default layout).
+    Snapshots of runs that are no longer cited are deleted so the tracked directory never
+    grows stale. Heavy outputs are never copied.
+    """
+    root = snapshot_dir(out)
+    base = Path(out).parent.parent
+    wanted: dict[str, str] = {}
+    for stage, run_id in sorted(result.cited_runs()):
+        src = Path(runs_dir) / stage / run_id
+        dst = root / stage / run_id
+        dst.mkdir(parents=True, exist_ok=True)
+        for name in (MANIFEST_NAME, NUMBERS_FILE):
+            shutil.copyfile(src / name, dst / name)
+        try:
+            rel = dst.relative_to(base)
+        except ValueError:
+            rel = dst
+        wanted[f"{stage}/{run_id}"] = str(rel)
+    if root.is_dir():
+        for stage_dir in root.iterdir():
+            if not stage_dir.is_dir():
+                continue
+            for run_dir in stage_dir.iterdir():
+                if run_dir.is_dir() and f"{stage_dir.name}/{run_dir.name}" not in wanted:
+                    shutil.rmtree(run_dir)
+            if not any(stage_dir.iterdir()):
+                stage_dir.rmdir()
+    return wanted
+
+
+def write_numbers(result: Harvest, out: str | Path, runs_dir: str | Path | None = None) -> Path:
+    """Write ``numbers.json``; with ``runs_dir`` also refresh the provenance snapshots."""
     path = Path(out)
     path.parent.mkdir(parents=True, exist_ok=True)
+    snapshots = write_snapshots(result, runs_dir, path) if runs_dir is not None else None
     path.write_text(
-        json.dumps(result.as_json(), indent=2, sort_keys=False) + "\n", encoding="utf-8"
+        json.dumps(result.as_json(snapshots), indent=2, sort_keys=False) + "\n", encoding="utf-8"
     )
     return path
 
@@ -235,7 +301,7 @@ def collect(runs_dir: str | Path, out: str | Path | None = DEFAULT_OUT) -> dict[
     """Harvest ``runs_dir`` and write ``reports/numbers.json`` (``out=None`` skips the write)."""
     result = harvest(runs_dir)
     if out is not None:
-        write_numbers(result, out)
+        write_numbers(result, out, runs_dir=runs_dir)
     return result.refs()
 
 
@@ -273,6 +339,8 @@ __all__ = [
     "META_SUFFIX",
     "NUMBERS_FILE",
     "SKIPPED_STAGES",
+    "SNAPSHOTS_KEY",
+    "SNAPSHOT_DIRNAME",
     "STALE_KEY",
     "Entry",
     "Harvest",
@@ -281,5 +349,7 @@ __all__ = [
     "load",
     "load_entries",
     "parse_numbers_file",
+    "snapshot_dir",
     "write_numbers",
+    "write_snapshots",
 ]

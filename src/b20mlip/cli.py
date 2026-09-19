@@ -325,12 +325,24 @@ def report_audit(
     state = _state(ctx)
     audit = _import_or_exit("b20mlip.report.audit", "report audit")
     cfg = state.settings()
-    violations: list[str] = audit.run(
-        readme=readme,
-        numbers=Path(cfg.report.numbers_path),
-        runs_dir=Path(cfg.paths.runs_dir),
-        strict=strict,
-    )
+    violations: list[str]
+    notes: list[str] = []
+    if hasattr(audit, "run_report"):
+        violations, notes = audit.run_report(
+            readme=readme,
+            numbers=Path(cfg.report.numbers_path),
+            runs_dir=Path(cfg.paths.runs_dir),
+            strict=strict,
+        )
+    else:  # a test double exposing only the CONTRACTS signature
+        violations = audit.run(
+            readme=readme,
+            numbers=Path(cfg.report.numbers_path),
+            runs_dir=Path(cfg.paths.runs_dir),
+            strict=strict,
+        )
+    for note in notes:  # informational (provenance sources, artifacts not local): stderr
+        typer.echo(f"note: {note}", err=True)
     if violations:
         typer.echo(json.dumps(violations, indent=2))
         raise typer.Exit(1)

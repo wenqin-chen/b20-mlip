@@ -23,6 +23,17 @@ exits 1. Definitions used by the gates (all binding):
   brackets in one paragraph of claim prose (outside gen blocks) or in the bullet.
 * **Cards** (A11): ``MODEL_CARD.md`` and ``NOTICE`` at the README's directory, ``DATA_CARD.md``
   there or under ``docs/``; the violation text names which location was checked.
+* **Provenance resolution (A2).** A cited ``(stage, run_id)`` is resolved from
+  ``runs/<stage>/<run_id>/manifest.json`` first and, when that is absent (CI checks out the
+  repository without ``runs/``), from the tracked snapshot
+  ``reports/manifests/<stage>/<run_id>/`` that ``report build`` writes next to
+  ``numbers.json`` (manifest plus the run's own ``numbers.json``, nothing heavy). The manifest
+  must be ``ok`` (``partial`` only fails under ``--strict``) and its sha256 must equal the one
+  recorded in ``numbers.json``. The sha check is mandatory for the ``numbers.json`` artifact,
+  which is always present in the snapshot, and for every other output that exists locally;
+  outputs that are absent locally (models, trajectories, frame files that were never copied)
+  are recorded as ``artifact not local`` in the informational notes (:func:`run_report`) and
+  are **not** a violation. When both ``runs/`` and a snapshot exist they must agree.
 """
 
 from __future__ import annotations
@@ -59,7 +70,7 @@ from b20mlip.report.markers import (
     sections,
     value_matches,
 )
-from b20mlip.report.numbers import STALE_KEY, load_entries
+from b20mlip.report.numbers import NUMBERS_FILE, STALE_KEY, load_entries, snapshot_dir
 
 log = logging.getLogger(__name__)
 
@@ -125,10 +136,12 @@ class Audit:
     numbers_text: str
     runs_dir: Path
     strict: bool
+    snapshots_dir: Path | None = None
     blocks: list[GenBlock] = field(default_factory=list)
     block_error: str | None = None
     markers: list[NumMarker] = field(default_factory=list)
     manifests: dict[tuple[str, str], Manifest | None] = field(default_factory=dict)
+    notes: list[str] = field(default_factory=list)  # informational, never violations
 
     def __post_init__(self) -> None:
         try:
@@ -213,19 +226,32 @@ def load_numbers(
     return entries, stale, path.read_text(encoding="utf-8")
 
 
-def find_manifest_paths(runs_dir: Path, run_id: str, stage: str | None = None) -> list[Path]:
-    """Manifests of ``run_id``: exactly ``runs/<stage>/<run_id>/manifest.json`` when the stage is
-    known, else every stage directory holding that id (run ids are unique per stage only)."""
-    if not runs_dir.is_dir():
+def find_manifest_paths(root: Path, run_id: str, stage: str | None = None) -> list[Path]:
+    """Manifests of ``run_id`` under ``root`` (``runs/`` or ``reports/manifests/``): exactly
+    ``<root>/<stage>/<run_id>/manifest.json`` when the stage is known, else every stage
+    directory holding that id (run ids are unique per stage only)."""
+    if not root.is_dir():
         return []
     if stage:
-        candidate = runs_dir / stage / run_id / MANIFEST_NAME
+        candidate = root / stage / run_id / MANIFEST_NAME
         return [candidate] if candidate.is_file() else []
     return [
         stage_dir / run_id / MANIFEST_NAME
-        for stage_dir in sorted(runs_dir.iterdir())
+        for stage_dir in sorted(root.iterdir())
         if (stage_dir / run_id / MANIFEST_NAME).is_file()
     ]
+
+
+def resolve_run(a: Audit, stage: str, run_id: str) -> tuple[list[Path], list[Path], str]:
+    """``(live paths, snapshot paths, source)`` where source is ``runs``, ``snapshot`` or ``""``."""
+    live = find_manifest_paths(a.runs_dir, run_id, stage or None)
+    snap = (
+        find_manifest_paths(a.snapshots_dir, run_id, stage or None)
+        if a.snapshots_dir is not None
+        else []
+    )
+    source = "runs" if live else ("snapshot" if snap else "")
+    return live, snap, source
 
 
 def resolve_artifact(path: str) -> Path:
@@ -294,7 +320,8 @@ def gate_a1(a: Audit) -> list[str]:
 
 
 def gate_a2(a: Audit) -> list[str]:
-    """Every cited run_id resolves to an ok manifest whose outputs still match the disk."""
+    """Every cited (stage, run_id) resolves, from runs/ or the tracked snapshot, to an ok
+    manifest whose sha256 matches numbers.json and whose local outputs still match their sha."""
     v: list[str] = []
     by_run: dict[tuple[str, str], list[str]] = {}
     for key, entry in a.entries.items():
@@ -304,10 +331,13 @@ def gate_a2(a: Audit) -> list[str]:
             by_run.setdefault((stage if isinstance(stage, str) else "", run_id), []).append(key)
     for (stage, run_id), keys in sorted(by_run.items()):
         label = f"run {run_id} (keys {', '.join(sorted(keys)[:3])}{'…' if len(keys) > 3 else ''})"
-        paths = find_manifest_paths(a.runs_dir, run_id, stage or None)
+        live, snap, source = resolve_run(a, stage, run_id)
+        paths = live or snap
         if not paths:
             a.manifests[(stage, run_id)] = None
-            where = f"{a.runs_dir / stage}" if stage else str(a.runs_dir)
+            where = str(a.runs_dir / stage) if stage else str(a.runs_dir)
+            if a.snapshots_dir is not None:
+                where += f" or {a.snapshots_dir / stage if stage else a.snapshots_dir}"
             v.append(f"A2: {label} has no manifest under {where}")
             continue
         if len(paths) > 1:
@@ -323,26 +353,60 @@ def gate_a2(a: Audit) -> list[str]:
             v.append(f"A2: {label}: unreadable manifest {path}: {exc}")
             continue
         a.manifests[(stage, run_id)] = manifest
+        a.notes.append(f"A2: {label} resolved from {source} ({path})")
         actual = sha256_file(path)
         expected = {a.entries[k].get("manifest_sha256") for k in keys}
         if expected != {actual}:
-            v.append(f"A2: {label}: manifest sha256 changed since numbers.json was built")
+            v.append(
+                f"A2: {label}: manifest sha256 ({source}) differs from numbers.json; "
+                "rerun `b20mlip report build`"
+            )
+        if live and len(snap) == 1 and sha256_file(snap[0]) != actual:
+            v.append(
+                f"A2: {label}: snapshot {snap[0]} disagrees with runs/; "
+                "rerun `b20mlip report build`"
+            )
         if manifest.status == "failed":
             v.append(f"A2: {label} has status=failed")
         elif manifest.status == "partial" and a.strict:
             v.append(f"A2: {label} has status=partial (--strict)")
-        for art in manifest.outputs:
-            p = resolve_artifact(art.path)
-            if not p.is_file():
-                v.append(f"A2: {label}: output {art.path} is missing on disk")
-            elif sha256_file(p) != art.sha256:
-                v.append(f"A2: {label}: output {art.path} no longer matches its sha256")
+        v.extend(_check_outputs(a, label, manifest, path.parent, source, snap))
     cited = a.cited_keys()
     for s in a.stale:
         key, run_id = str(s.get("key")), str(s.get("run_id"))
         same_run = (str(s.get("stage", "")), run_id) in by_run
         if key in a.entries or key in cited or same_run:
             v.append(f"A2: key {key} of run {run_id} is stale (numbers.json changed on disk)")
+    return v
+
+
+def _check_outputs(
+    a: Audit, label: str, manifest: Manifest, run_dir: Path, source: str, snap: list[Path]
+) -> list[str]:
+    """Sha-check every output that can be found; ``numbers.json`` must always be found.
+
+    ``numbers.json`` is looked up at its recorded path, in the resolved run directory and in the
+    snapshot (a checksum-verified copy anywhere proves the artifact intact); any other output is
+    checked only where the manifest recorded it and is otherwise noted as not local.
+    """
+    v: list[str] = []
+    snapshot_dirs = [p.parent for p in snap]
+    for art in manifest.outputs:
+        name = Path(art.path).name
+        candidates = [resolve_artifact(art.path)]
+        if name == NUMBERS_FILE:
+            candidates += [d / NUMBERS_FILE for d in (run_dir, *snapshot_dirs)]
+        local = next((p for p in candidates if p.is_file()), None)
+        if local is None:
+            if name == NUMBERS_FILE:
+                where = source if source == "snapshot" else "runs or snapshot"
+                v.append(f"A2: {label}: {NUMBERS_FILE} artifact is missing (not in {where})")
+            else:
+                a.notes.append(f"A2: {label}: artifact not local, sha unchecked: {art.path}")
+            continue
+        if sha256_file(local) != art.sha256:
+            what = "tampered snapshot" if local.parent in snapshot_dirs else "output"
+            v.append(f"A2: {label}: {what} {local} no longer matches its sha256")
     return v
 
 
@@ -686,17 +750,28 @@ GATES = (
 )
 
 
-def run(
+def run_report(
     readme: str | Path,
     numbers: str | Path | Mapping[str, Any],
     runs_dir: str | Path,
     strict: bool = False,
-) -> list[str]:
-    """Run gates A1–A11; return violations (``[]`` = pass); ``numbers`` is a path or mapping."""
+    *,
+    snapshots: str | Path | None = None,
+) -> tuple[list[str], list[str]]:
+    """Gates A1–A11: ``(violations, notes)``. Notes are informational (provenance sources,
+    artifacts that are not local); only violations fail the audit. ``snapshots`` defaults to
+    ``reports/manifests/`` next to the numbers file when ``numbers`` is a path."""
     readme_path = Path(readme)
     if not readme_path.is_file():
-        return [f"A1: README not found: {readme_path}"]
+        return [f"A1: README not found: {readme_path}"], []
     entries, stale, numbers_text = load_numbers(numbers)
+    snapshots_dir: Path | None
+    if snapshots is not None:
+        snapshots_dir = Path(snapshots)
+    elif not isinstance(numbers, Mapping):
+        snapshots_dir = snapshot_dir(numbers)
+    else:
+        snapshots_dir = None
     audit = Audit(
         readme_path=readme_path,
         text=readme_path.read_text(encoding="utf-8"),
@@ -705,11 +780,24 @@ def run(
         numbers_text=numbers_text,
         runs_dir=Path(runs_dir),
         strict=strict,
+        snapshots_dir=snapshots_dir,
     )
     violations: list[str] = []
     for gate in GATES:
         violations.extend(gate(audit))
-    return violations
+    return violations, list(audit.notes)
+
+
+def run(
+    readme: str | Path,
+    numbers: str | Path | Mapping[str, Any],
+    runs_dir: str | Path,
+    strict: bool = False,
+    *,
+    snapshots: str | Path | None = None,
+) -> list[str]:
+    """Run gates A1–A11; return violations (``[]`` = pass); ``numbers`` is a path or mapping."""
+    return run_report(readme, numbers, runs_dir, strict, snapshots=snapshots)[0]
 
 
 __all__ = [
@@ -742,5 +830,7 @@ __all__ = [
     "gate_a11",
     "load_numbers",
     "resolve_artifact",
+    "resolve_run",
     "run",
+    "run_report",
 ]

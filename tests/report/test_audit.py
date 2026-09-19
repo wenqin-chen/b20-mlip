@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 from pathlib import Path
 from typing import Any
 
@@ -173,14 +174,18 @@ def test_a2_fails(cfg: Settings, fixture_runs: FixtureRuns, check) -> None:  # t
 
     bogus = with_run("parity.passed", "eval.errors", "20200101T000000-000000-0")
     assert any("has no manifest" in v for v in a2(bogus))
-    # run ids are unique per stage only: without a stage the ok run's id is ambiguous
+    # run ids are unique per stage only: without a stage an id found under two stages is
+    # ambiguous (built explicitly here; two stages share an id only within one second)
+    twin = runs / "bench" / fixture_runs.ok.run_id
+    shutil.copytree(runs / "eval.errors" / fixture_runs.ok.run_id, twin)
     ambiguous = with_run("parity.passed", "", fixture_runs.ok.run_id)
     assert any("is ambiguous without a stage" in v for v in a2(ambiguous))
+    shutil.rmtree(twin)
     unique = with_run("parity.passed", "", fixture_runs.newer.run_id)
     assert not any("ambiguous" in v for v in a2(unique))
     failed = with_run("parity.passed", "train", fixture_runs.failed.run_id)
     assert any("status=failed" in v for v in a2(failed))
-    assert any("sha256 changed" in v for v in a2(failed))
+    assert any("manifest sha256 (runs) differs from numbers.json" in v for v in a2(failed))
     partial = with_run("parity.passed", "eval.discovery", fixture_runs.partial.run_id)
     assert not any("partial" in v for v in a2(partial))
     assert any("status=partial (--strict)" in v for v in a2(partial, strict=True))
@@ -194,8 +199,8 @@ def test_a2_fails(cfg: Settings, fixture_runs: FixtureRuns, check) -> None:  # t
     original = out.read_text()
     out.write_text(original + " ")
     assert any("no longer matches" in v for v in a2(cfg.report.numbers_path))
-    out.unlink()
-    assert any("missing on disk" in v for v in a2(cfg.report.numbers_path))
+    out.unlink()  # the snapshot copy still backs the number: no violation, verified there
+    assert a2(cfg.report.numbers_path) == []
     out.write_text(original)
     Path(fixture_runs.ok.manifest_path).write_text("{not json")
     assert any("unreadable manifest" in v for v in a2(cfg.report.numbers_path))

@@ -39,9 +39,13 @@ venv/
 *.pt
 *.traj
 
-# reports/ is generated but reports/numbers.json is TRACKED (README numbers come from it)
+# reports/ is generated but reports/numbers.json is TRACKED (README numbers come from it),
+# and so are the provenance snapshots (manifest.json + numbers.json of every cited run) that
+# `b20mlip report build` writes so `report audit --strict` can verify them in CI without runs/.
 reports/*
 !reports/numbers.json
+!reports/manifests/
+!reports/manifests/**
 
 # --- editors / OS ---
 .DS_Store
