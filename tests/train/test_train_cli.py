@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
 import yaml
 from typer.testing import CliRunner
 
@@ -118,3 +119,28 @@ def test_export_cli_dry_run_and_missing_model(tmp_path: Path, tiny_mace: object)
         app, ["--config", str(overlay), "export", "--model", str(tmp_path / "nope.model")]
     )
     assert result.exit_code == 1 and _payload(result.output)["status"] == "failed"
+
+
+def test_train_with_relative_runs_dir(
+    tmp_path: Path, tiny_b20_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Regression (2026-09-19): with the default relative ``paths.runs_dir`` ("runs") the MACE
+    subprocess ran with ``cwd=out_dir`` and could not find ``runs/train/<id>/data/train.extxyz``."""
+    monkeypatch.chdir(tmp_path)
+    data = {
+        "paths": {"data_dir": "data", "runs_dir": "runs", "models_dir": "models"},
+        "train": {**TINY_TRAIN},
+    }
+    overlay = tmp_path / "rel.yaml"
+    overlay.write_text(yaml.safe_dump(data), encoding="utf-8")
+    result = runner.invoke(
+        app,
+        ["--config", str(overlay), "train", "--variant", "scratch", "--frames", str(tiny_b20_path),
+         "--seed", "2"],
+    )  # fmt: skip
+    assert result.exit_code == 0, result.output
+    payload = _payload(result.output)
+    assert payload["status"] == "ok"
+    assert Path(payload["manifest"]).parent.parts[:2] == ("runs", "train") or (
+        Path(payload["manifest"]).is_absolute()
+    )

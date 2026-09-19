@@ -498,9 +498,9 @@ def _run_local(cmd: list[str], cfg: Settings, out_dir: Path) -> tuple[int, float
     with open(log, "a", encoding="utf-8") as fh:
         fh.write("$ " + shlex.join(cmd) + "\n")
         fh.flush()
-        proc = subprocess.run(
-            cmd, cwd=out_dir, env=_env(cfg), stdout=fh, stderr=subprocess.STDOUT, check=False
-        )
+        # no cwd change: every path in the argv is relative to the caller's working directory
+        # (a relative cfg.paths.runs_dir such as "runs/" broke under cwd=out_dir, 2026-09-19)
+        proc = subprocess.run(cmd, env=_env(cfg), stdout=fh, stderr=subprocess.STDOUT, check=False)
     return proc.returncode, time.perf_counter() - t0
 
 
