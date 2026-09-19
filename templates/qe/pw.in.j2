@@ -1,0 +1,50 @@
+{#- pw.x SCF input, rendered by b20mlip.dft.qe.render_pw_input(frame, cfg).
+    Every value arrives pre-formatted from qe.pw_parameters(); conventions (k-mesh rule, units,
+    stress sign) are documented in src/b20mlip/dft/qe.py. -#}
+&CONTROL
+  calculation = 'scf'
+  prefix = '{{ prefix }}'
+  pseudo_dir = '{{ pseudo_dir }}'
+  outdir = '{{ outdir }}'
+  tprnfor = .true.
+  tstress = .true.
+/
+&SYSTEM
+  ibrav = 0
+  nat = {{ nat }}
+  ntyp = {{ ntyp }}
+  ecutwfc = {{ ecutwfc }}
+  ecutrho = {{ ecutrho }}
+  occupations = 'smearing'
+  smearing = '{{ smearing }}'
+  degauss = {{ degauss }}
+  nspin = {{ nspin }}
+{% if nspin == 2 %}
+{% for sp in species %}
+  starting_magnetization({{ loop.index }}) = {{ sp.starting_magnetization }}
+{% endfor %}
+{% endif %}
+/
+&ELECTRONS
+  conv_thr = {{ conv_thr }}
+  mixing_beta = {{ mixing_beta }}
+  electron_maxstep = {{ electron_maxstep }}
+/
+ATOMIC_SPECIES
+{% for sp in species %}
+  {{ sp.symbol }} {{ sp.mass }} {{ sp.pseudo }}
+{% endfor %}
+CELL_PARAMETERS angstrom
+{% for row in cell %}
+  {{ row }}
+{% endfor %}
+ATOMIC_POSITIONS angstrom
+{% for atom in atoms %}
+  {{ atom }}
+{% endfor %}
+{% if kpoints == 'gamma' %}
+K_POINTS gamma
+{% else %}
+K_POINTS automatic
+  {{ kmesh[0] }} {{ kmesh[1] }} {{ kmesh[2] }} 0 0 0
+{% endif %}

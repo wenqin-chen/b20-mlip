@@ -8,7 +8,15 @@ Jinja2 sbatch templates rendered by `b20mlip.executors.SlurmExecutor`. Planned f
 - `lammps.sbatch.j2`, `build_lammps.sbatch.j2` — MD and the ACEsuit/lammps `mace` build
 - `generic.sbatch.j2` — the executor's default when `resources["template"]` is unset
 
-None exist yet (this tier ships the executor and its offline tests only).
+`qe_array.sbatch.j2` and `qe_phonons.sbatch.j2` exist (dft tier; rendered in
+`tests/dft/test_dft_templates.py`, the unit script they call is `b20mlip.dft.qe.UNIT_SCRIPT`,
+which needs `QE_CMD` and `B20_UNITS_ROOT` in the job environment). `train_replay.sbatch.j2`
+exists (train tier; GPU partition, one task, a single unit whose command is
+`uv run --no-sync mace_run_train {{ resources.argv }}` run from the work directory, so a
+resubmission resumes through MACE's `--restart_latest`; rendered in
+`tests/train/test_train_template.py`). `build_lammps.sbatch.j2` exists (cluster tier: a one-unit ACEsuit/lammps `mace` build with
+libtorch and Kokkos+CUDA on a GPU partition, submitted by `b20mlip cluster bootstrap --build-lammps`;
+rendered in `tests/cluster/test_remote.py`, see `docs/CLUSTER.md`). The md templates do not exist yet.
 
 ## Rendering context
 

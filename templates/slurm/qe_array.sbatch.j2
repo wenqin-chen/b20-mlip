@@ -1,0 +1,56 @@
+{#- QE SCF array: one pw.x unit (an 8-atom frame, a convergence point or an isolated atom) per
+    array task. Implements the binding per-unit resume protocol of templates/slurm/README.md;
+    rendered by SlurmExecutor.render with spec.resources["template"] = "qe_array".
+    resources: ntasks (MPI ranks per unit, default 8), cpus_per_task (OpenMP threads per rank,
+    default 1), gpus (default 1: Tillicum is GPU-only, every job must request a GPU and gets
+    8 CPUs + 200 GB with it; the MIG partition is the cheap one for QE), mem, time, max_parallel
+    (array throttle). --account / --partition / --qos are emitted only when set (cluster.account,
+    cluster.partition_cpu or a resources override, cluster.qos). The unit script
+    (b20mlip.dft.qe.UNIT_SCRIPT) launches pw.x itself through $QE_CMD (e.g. "mpirun -np 8 pw.x
+    -nk 2"); nothing here calls srun. -#}
+#!/bin/bash
+#SBATCH --job-name={{ job_name }}
+{% if account %}
+#SBATCH --account={{ account }}
+{% endif %}
+{% if partition %}
+#SBATCH --partition={{ partition }}
+{% endif %}
+{% if cluster.qos %}
+#SBATCH --qos={{ cluster.qos }}
+{% endif %}
+#SBATCH --nodes=1
+#SBATCH --ntasks={{ resources.ntasks | default(8) }}
+#SBATCH --cpus-per-task={{ resources.cpus_per_task | default(1) }}
+#SBATCH --gpus={{ resources.gpus | default(1) }}
+#SBATCH --mem={{ resources.mem | default('16G') }}
+#SBATCH --time={{ resources.time | default('00:30:00') }}
+#SBATCH --array=1-{{ n_units }}%{{ resources.max_parallel | default(16) }}
+#SBATCH --output={{ workdir }}/logs/slurm-%A_%a.out
+set -euo pipefail
+{% for m in cluster.modules %}
+module load {{ m }}
+{% endfor %}
+# pinned BLAS/OpenMP threads: one per MPI rank unless cpus_per_task says otherwise
+export OMP_NUM_THREADS={{ resources.cpus_per_task | default(1) }}
+export MKL_NUM_THREADS=$OMP_NUM_THREADS OPENBLAS_NUM_THREADS=$OMP_NUM_THREADS
+{% for k, v in env.items() %}
+export {{ k }}="{{ v }}"
+{% endfor %}
+{% if 'QE_CMD' not in env and cluster.qe_cmd %}
+export QE_CMD="{{ cluster.qe_cmd }}"
+{% endif %}
+export B20_WORKDIR={{ workdir }} B20_JOB_NAME={{ job_name }}
+export B20_UNIT_INDEX=$SLURM_ARRAY_TASK_ID
+export B20_UNIT=$(sed -n "${SLURM_ARRAY_TASK_ID}p" "$B20_WORKDIR/{{ units_name }}")
+slug=$(printf '%s' "$B20_UNIT" | tr -c 'A-Za-z0-9._-' '_')
+mkdir -p "$B20_WORKDIR/units" "$B20_WORKDIR/logs"
+[ -f "$B20_WORKDIR/units/$slug.done" ] && { echo "unit $B20_UNIT already done"; exit 0; }
+rm -f "$B20_WORKDIR/units/$slug.failed"
+if bash "$B20_WORKDIR/{{ script_name }}" > "$B20_WORKDIR/logs/$slug.log" 2>&1; then
+  printf '{"unit": "%s", "state": "done", "returncode": 0}\n' "$B20_UNIT" > "$B20_WORKDIR/units/$slug.done"
+else
+  rc=$?
+  printf '{"unit": "%s", "state": "failed", "returncode": %d}\n' "$B20_UNIT" "$rc" > "$B20_WORKDIR/units/$slug.failed"
+  exit $rc
+fi

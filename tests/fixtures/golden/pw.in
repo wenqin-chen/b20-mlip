@@ -1,0 +1,44 @@
+&CONTROL
+  calculation = 'scf'
+  prefix = 'b6b40aeb12be66f9'
+  pseudo_dir = '/gscratch/b20/pseudos/sssp_efficiency_1.3_pbe'
+  outdir = './tmp'
+  tprnfor = .true.
+  tstress = .true.
+/
+&SYSTEM
+  ibrav = 0
+  nat = 8
+  ntyp = 2
+  ecutwfc = 90.0
+  ecutrho = 1080.0
+  occupations = 'smearing'
+  smearing = 'mv'
+  degauss = 0.01
+  nspin = 2
+  starting_magnetization(1) = 0.50
+  starting_magnetization(2) = 0.00
+/
+&ELECTRONS
+  conv_thr = 1.0e-08
+  mixing_beta = 0.4
+  electron_maxstep = 100
+/
+ATOMIC_SPECIES
+  Mn 54.9380 mn_pbe_v1.5.uspp.F.UPF
+  Si 28.0850 Si.pbe-n-rrkjus_psl.1.0.0.UPF
+CELL_PARAMETERS angstrom
+      4.5600000000     0.0000000000     0.0000000000
+      0.0000000000     4.5600000000     0.0000000000
+      0.0000000000     0.0000000000     4.5600000000
+ATOMIC_POSITIONS angstrom
+  Mn     0.6292800000     0.6292800000     0.6292800000
+  Mn     1.6507200000     3.9307200000     2.9092800000
+  Mn     3.9307200000     2.9092800000     1.6507200000
+  Mn     2.9092800000     1.6507200000     3.9307200000
+  Si     3.8577600000     3.8577600000     3.8577600000
+  Si     2.9822400000     0.7022400000     1.5777600000
+  Si     0.7022400000     1.5777600000     2.9822400000
+  Si     1.5777600000     2.9822400000     0.7022400000
+K_POINTS automatic
+  6 6 6 0 0 0

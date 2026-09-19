@@ -1,0 +1,91 @@
+{
+  "frame_id": "b6b40aeb12be66f9",
+  "group_id": "MnSi/relax/MnSi-p0",
+  "compound": "MnSi",
+  "config_type": "relax",
+  "parent_id": "MnSi-p0",
+  "numbers": [
+    25,
+    25,
+    25,
+    25,
+    14,
+    14,
+    14,
+    14
+  ],
+  "positions": [
+    [
+      0.62928,
+      0.62928,
+      0.62928
+    ],
+    [
+      1.65072,
+      3.93072,
+      2.90928
+    ],
+    [
+      3.93072,
+      2.90928,
+      1.65072
+    ],
+    [
+      2.90928,
+      1.65072,
+      3.93072
+    ],
+    [
+      3.85776,
+      3.85776,
+      3.85776
+    ],
+    [
+      2.98224,
+      0.70224,
+      1.57776
+    ],
+    [
+      0.70224,
+      1.57776,
+      2.98224
+    ],
+    [
+      1.57776,
+      2.98224,
+      0.70224
+    ]
+  ],
+  "cell": [
+    [
+      4.56,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      4.56,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      4.56
+    ]
+  ],
+  "pbc": [
+    true,
+    true,
+    true
+  ],
+  "energy": null,
+  "forces": null,
+  "stress": null,
+  "magmoms": null,
+  "total_magnetization": null,
+  "label_source": "none",
+  "energy_scale": "none",
+  "temperature_K": null,
+  "weights": {},
+  "info": {}
+}
