@@ -28,10 +28,10 @@
 #SBATCH --array=1-{{ n_units }}%{{ resources.max_parallel | default(16) }}
 #SBATCH --output={{ workdir }}/logs/slurm-%A_%a.out
 set -euo pipefail
-{#- the micromamba QE is self-contained (own mpirun/libmpi via RPATH): loading the site's
-    gcc/cuda/openmpi modules on top of it only adds a foreign mpirun to PATH and MPI env
-    (Tillicum 2026-09-19: CoSi SCFs diverged in array jobs that loaded the modules); load
-    them only when pw.x comes from a module (cluster.micromamba_env unset). -#}
+{# the micromamba QE is self-contained (own mpirun/libmpi via RPATH): loading the site's
+   gcc/cuda/openmpi modules on top of it only adds a foreign mpirun to PATH and MPI env
+   (Tillicum 2026-09-19: CoSi SCFs diverged in array jobs that loaded the modules); load
+   them only when pw.x comes from a module (cluster.micromamba_env unset). #}
 {% if not cluster.micromamba_env %}
 {% for m in cluster.modules %}
 module load {{ m }}

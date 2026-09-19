@@ -153,3 +153,26 @@ def test_templates_skip_site_modules_for_micromamba_qe(
     text = executor.render(_spec(cfg, tmp_path, template))
     assert "module load" not in text
     assert 'export QE_CMD="/gscratch/b20/qe/bin/pw.x"\n' in text
+
+
+@pytest.mark.parametrize("template", ["qe_array", "qe_phonons"])
+def test_rendered_qe_job_is_valid_bash(
+    slurm_settings: Settings, tmp_path: Path, template: str
+) -> None:
+    """Regression (Tillicum 2026-09-19): a whitespace-stripping Jinja comment glued a comment onto
+    `set -euo pipefail` and every array task died in 3 s. Rendered jobs must pass `bash -n`."""
+    import shutil
+    import subprocess
+
+    cfg = slurm_settings.model_copy(
+        update={"cluster": slurm_settings.cluster.model_copy(update={"micromamba_env": "/g/qe"})}
+    )
+    for c in (slurm_settings, cfg):
+        text = SlurmExecutor(c, runner=lambda argv: None).render(_spec(c, tmp_path, template))  # type: ignore[arg-type]
+        assert "set -euo pipefail\n" in text
+        path = tmp_path / f"{template}.sh"
+        path.write_text(text, encoding="utf-8")
+        bash = shutil.which("bash")
+        assert bash is not None
+        res = subprocess.run([bash, "-n", str(path)], capture_output=True, text=True, check=False)
+        assert res.returncode == 0, res.stderr
