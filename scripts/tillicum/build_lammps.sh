@@ -76,12 +76,19 @@ configure_and_make() {  # $1 = 1 for Kokkos+CUDA, 0 for CPU/OpenMP
     -D PKG_OPENMP=ON
     -D PKG_ML-MACE=ON
     -D CMAKE_PREFIX_PATH="$libtorch"
+    # libtorch's caffe2::mkl target lists ${MKL_INCLUDE_DIR}; the zip ships no MKL headers and
+    # CMake refuses a NOTFOUND include path, so point it at any existing directory (ML-MACE
+    # community workaround; MKL is not used by the MACE pair style).
+    -D MKL_INCLUDE_DIR="${B20_MKL_INCLUDE_DIR:-/usr/include}"
   )
   if [ "$cuda" = 1 ]; then
     flags+=(
       -D PKG_KOKKOS=ON
       -D Kokkos_ENABLE_CUDA=ON
       -D Kokkos_ENABLE_OPENMP=ON
+      # in-tree Kokkos 4.x does not propagate its tpls/mdspan include dir to the LAMMPS
+      # targets (atom.cpp: "mdspan/mdspan.hpp: No such file"); mdspan is experimental and unused
+      -D Kokkos_ENABLE_IMPL_MDSPAN=OFF
       -D "Kokkos_ARCH_${B20_KOKKOS_ARCH}=ON"
       -D CMAKE_CXX_COMPILER="$src/lib/kokkos/bin/nvcc_wrapper"
       -D BUILD_SHARED_LIBS=ON
