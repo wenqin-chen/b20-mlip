@@ -16,8 +16,8 @@ from b20mlip.executors import JobSpec
 from b20mlip.io import read_frames, write_frames
 from b20mlip.models import DFTFrame, Frame
 
-GOLDEN_ENERGY_RY = -1178.40219853
-GOLDEN_STRESS_RY_BOHR3 = -0.00008388
+GOLDEN_ENERGY_RY = -890.78158231  # real pw.x 7.5 run, Tillicum job 303018, 2026-09-18
+GOLDEN_STRESS_RY_BOHR3 = -0.00038447
 
 
 # --- rendering ---------------------------------------------------------------------------------
@@ -106,27 +106,28 @@ def test_kmesh_rule_and_helpers(golden_frame: Frame, golden_cfg: Settings, tmp_p
 
 
 def test_parse_golden_exact(golden_frame: Frame, golden_cfg: Settings, golden_dir: Path) -> None:
+    """Exact numbers of the REAL 8-atom MnSi pw.x 7.5 output (Tillicum, 2 MPI ranks, 2026-09-18)."""
     frame = qe.parse_pw_output(golden_dir / "pw.out", golden_frame, dft=golden_cfg.dft, unit_id="g")
-    assert isinstance(frame, DFTFrame) and frame.converged and frame.scf_steps == 2
+    assert isinstance(frame, DFTFrame) and frame.converged and frame.scf_steps == 24
     assert frame.energy == pytest.approx(GOLDEN_ENERGY_RY * units.Ry, rel=1e-12)
-    assert frame.energy == pytest.approx(-16032.97856, abs=2e-5)
+    assert frame.energy == pytest.approx(-12119.70075, abs=2e-5)
     f = units.Ry / units.Bohr
     assert frame.forces is not None and len(frame.forces) == 8
-    assert frame.forces[0] == pytest.approx([-0.00123456 * f] * 3, rel=1e-12)
-    assert frame.forces[4] == pytest.approx([0.00234567 * f] * 3, rel=1e-12)
-    assert frame.forces[7] == pytest.approx([-0.00234567 * f, -0.00234567 * f, 0.00234567 * f])
-    assert frame.forces[0][0] == pytest.approx(-0.03174, abs=1e-5)  # eV/Å
-    assert np.allclose(np.sum(frame.forces, axis=0), 0.0)
+    assert frame.forces[0] == pytest.approx([-0.00586276 * f] * 3, rel=1e-12)
+    assert frame.forces[4] == pytest.approx([-0.00221139 * f] * 3, rel=1e-12)
+    assert frame.forces[7] == pytest.approx([-0.00221139 * f, 0.00221139 * f, 0.00221139 * f])
+    assert frame.forces[0][0] == pytest.approx(-0.150738, abs=1e-5)  # eV/Å
+    assert np.allclose(np.sum(frame.forces, axis=0), 0.0, atol=1e-6)
     s = units.Ry / units.Bohr**3
     assert frame.stress == pytest.approx([-GOLDEN_STRESS_RY_BOHR3 * s] * 3 + [0.0] * 3, rel=1e-12)
-    assert frame.stress[0] > 0  # QE P = -12.34 kbar (tensile) -> ASE sigma_xx = +0.0077 eV/Å^3
-    assert frame.stress[0] == pytest.approx(0.0077018, abs=1e-6)
-    assert frame.info["pressure_kbar"] == -12.34
-    assert frame.stress[0] == pytest.approx(12.34 * qe.KBAR_TO_EV_A3, rel=2e-3)
-    assert frame.fermi_eV == 17.4321
-    assert frame.total_magnetization == 4.00 and frame.abs_magnetization == 4.30
-    assert frame.magmoms == [1.0512] * 4 + [-0.0410] * 4
-    assert frame.wall_seconds == 18.34 and frame.info["pw_version"] == "7.3"
+    assert frame.stress[0] > 0  # QE P = -56.56 kbar (tensile) -> ASE sigma_xx = +0.0353 eV/Å^3
+    assert frame.stress[0] == pytest.approx(0.0353, abs=1e-4)
+    assert frame.info["pressure_kbar"] == -56.56
+    assert frame.stress[0] == pytest.approx(56.56 * qe.KBAR_TO_EV_A3, rel=2e-3)
+    assert frame.fermi_eV == 15.5131
+    assert frame.total_magnetization == 4.05 and frame.abs_magnetization == 4.77
+    assert frame.magmoms == [1.0381] * 4 + [-0.0456] * 4
+    assert frame.wall_seconds == pytest.approx(5 * 60 + 34.96) and frame.info["pw_version"] == "7.5"
     assert frame.info["total_energy_ry"] == GOLDEN_ENERGY_RY
     assert frame.code == "qe" and frame.functional == "PBE" and frame.unit_id == "g"
     assert frame.label_source == "qe" and frame.energy_scale == "qe"
@@ -335,9 +336,9 @@ def test_to_plain_frame_round_trip(
     write_frames([plain], path)
     [back] = read_frames(path)
     assert back.energy == pytest.approx(df.energy) and back.label_source == "qe"
-    assert back.energy_scale == "qe" and back.info["dft_scf_steps"] == 2
+    assert back.energy_scale == "qe" and back.info["dft_scf_steps"] == 24
     assert np.allclose(back.stress, df.stress) and back.magmoms == pytest.approx(df.magmoms)
-    assert back.total_magnetization == 4.0 and back.info["dft_fermi_eV"] == 17.4321
+    assert back.total_magnetization == 4.05 and back.info["dft_fermi_eV"] == 15.5131
     assert json.loads(back.info["dft_pseudo_md5s"])["Mn"] == "82ef2b46521d7a7d9e736dc3972e4928"
 
 

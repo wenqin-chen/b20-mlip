@@ -1,0 +1,126 @@
+LAMMPS (22 Jul 2025 - Update 6)
+# b20mlip-md engine=lammps compound=Ar ensemble=npt T=100.0 timestep_fs=2.0 equil_steps=10 steps=20 reps=2 natoms_per_cell=4 natoms=32 head=Default model_label=golden-lj model_sha256=0000000000000000000000000000000000000000000000000000000000000000 seed=12345
+# rendered from templates/lammps/in.mace.j2 (b20mlip.md.lammps.render_input); ML-MACE syntax per
+# https://mace-docs.readthedocs.io/en/latest/guide/lammps.html
+units           metal
+atom_style      atomic
+atom_modify     map yes
+newton          on
+boundary        p p p
+read_data       data.lmp
+Reading data file ...
+  orthogonal box = (0 0 0) to (10.52 10.52 10.52)
+  1 by 1 by 1 MPI processor grid
+  reading atoms ...
+  32 atoms
+  read_data CPU = 0.001 seconds
+
+pair_style      lj/cut 8.5   # GOLDEN FIXTURE: lj/cut stands in for `pair_style mace no_domain_decomposition` (no ML-MACE in the brew bottle)
+pair_coeff      1 1 0.0104 3.40   # GOLDEN FIXTURE: stands in for `pair_coeff * * golden-lammps.pt Ar`
+
+timestep        0.002
+velocity        all create 100.0 12345 mom yes dist gaussian
+fix             1 all npt temp 100.0 100.0 $(100*dt) iso 0 0 $(1000*dt)
+fix             1 all npt temp 100.0 100.0 0.2000000000000000111 iso 0 0 $(1000*dt)
+fix             1 all npt temp 100.0 100.0 0.2000000000000000111 iso 0 0 2
+
+thermo_style    custom step temp pe ke etotal press vol lx
+thermo_modify   format float %.10g
+thermo          2
+# equilibration (10 steps = cfg.md.equil_ps); excluded from every average by parse_thermo
+run             10
+Generated 0 of 0 mixed pair_coeff terms from geometric mixing rule
+Neighbor list info ...
+  update: every = 1 steps, delay = 0 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 10.5
+  ghost atom cutoff = 10.5
+  binsize = 5.25, bins = 3 3 3
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 3.085 | 3.085 | 3.085 Mbytes
+   Step          Temp          PotEng         KinEng         TotEng         Press          Volume           Lx      
+         0  100 -2.695289103 0.4007064495 -2.294582654 516.1114343 1164.252608 10.52
+         2  99.86040508 -2.694732646 0.4001470837 -2.294585562 519.4998239 1164.262033 10.52002839
+         4  99.44326314 -2.693069866 0.398475569 -2.294594297 529.6186591 1164.290431 10.52011392
+         6  98.7519501 -2.69031345 0.395705433 -2.294608017 546.3708164 1164.338161 10.52025768
+         8  97.79092098 -2.686479909 0.3918545274 -2.294625382 569.6215491 1164.405824 10.52046146
+        10  96.5657457 -2.681589804 0.386945171 -2.294644633 599.197611 1164.49425 10.52072776
+Loop time of 0.000134834 on 1 procs for 10 steps with 32 atoms
+
+Performance: 12815.759 ns/day, 0.002 hours/ns, 74165.270 timesteps/s, 2.373 Matom-step/s
+99.4% CPU use with 1 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 9.625e-05  | 9.625e-05  | 9.625e-05  |   0.0 | 71.38
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 1.3584e-05 | 1.3584e-05 | 1.3584e-05 |   0.0 | 10.07
+Output  | 8.083e-06  | 8.083e-06  | 8.083e-06  |   0.0 |  5.99
+Modify  | 1.3165e-05 | 1.3165e-05 | 1.3165e-05 |   0.0 |  9.76
+Other   |            | 3.752e-06  |            |       |  2.78
+
+Nlocal:             32 ave          32 max          32 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:            633 ave         633 max         633 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:           2144 ave        2144 max        2144 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 2144
+Ave neighs/atom = 67
+Neighbor list builds = 0
+Dangerous builds = 0
+dump            1 all custom 10 dump.lammpstrj id type x y z vx vy vz
+dump_modify     1 sort id
+# production
+run             20
+Generated 0 of 0 mixed pair_coeff terms from geometric mixing rule
+Per MPI rank memory allocation (min/avg/max) = 3.086 | 3.086 | 3.086 Mbytes
+   Step          Temp          PotEng         KinEng         TotEng         Press          Volume           Lx      
+        10  96.5657457 -2.681589804 0.386945171 -2.294644633 599.197611 1164.49425 10.52072776
+        12  95.08316957 -2.675668103 0.3810043929 -2.294663711 634.8857677 1164.604496 10.52105976
+        14  93.3511954 -2.668744655 0.3740642606 -2.294680394 676.4307926 1164.737841 10.52146129
+        16  91.37918319 -2.660854743 0.3661622805 -2.294692463 723.533067 1164.895774 10.52193682
+        18  89.17825579 -2.65170082 0.3573430225 -2.294357798 776.7752739 1165.079983 10.52249142
+        20  86.76165047 -2.641675399 0.3476595291 -2.29401587 834.8198734 1165.292372 10.52313078
+        22  84.14392926 -2.630664705 0.3371701514 -2.293494553 897.6824707 1165.535038 10.52386119
+        24  81.34022401 -2.619238609 0.3259355236 -2.293303085 963.4697111 1165.810245 10.52468943
+        26  78.36861012 -2.605772805 0.3140280751 -2.29174473 1036.265947 1166.120374 10.5256226
+        28  75.25067098 -2.592733376 0.3015342919 -2.291199084 1108.931499 1166.468029 10.5266685
+        30  72.00572029 -2.579180272 0.2885315652 -2.290648707 1183.604183 1166.85587 10.52783505
+Loop time of 0.000411375 on 1 procs for 20 steps with 32 atoms
+
+Performance: 8401.094 ns/day, 0.003 hours/ns, 48617.442 timesteps/s, 1.556 Matom-step/s
+96.5% CPU use with 1 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.00026863 | 0.00026863 | 0.00026863 |   0.0 | 65.30
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 2.8955e-05 | 2.8955e-05 | 2.8955e-05 |   0.0 |  7.04
+Output  | 8.6125e-05 | 8.6125e-05 | 8.6125e-05 |   0.0 | 20.94
+Modify  | 2.0839e-05 | 2.0839e-05 | 2.0839e-05 |   0.0 |  5.07
+Other   |            | 6.831e-06  |            |       |  1.66
+
+Nlocal:             32 ave          32 max          32 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:            718 ave         718 max         718 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:           2144 ave        2144 max        2144 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 2144
+Ave neighs/atom = 67
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data      final.data
+System init for write_data ...
+Generated 0 of 0 mixed pair_coeff terms from geometric mixing rule
+Total wall time: 0:00:00

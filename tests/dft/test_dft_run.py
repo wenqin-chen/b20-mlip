@@ -17,7 +17,7 @@ from b20mlip.io import read_frames, write_frames
 from b20mlip.models import Frame, SlurmInfo
 from b20mlip.provenance import read_manifest, run_stage
 
-GOLDEN_E = -1178.40219853 * units.Ry
+GOLDEN_E = -890.78158231 * units.Ry
 
 
 @pytest.fixture
@@ -71,7 +71,7 @@ def test_prep_run_collect_end_to_end(
         assert marker["unit"] == uid and marker["state"] == "done" and marker["returncode"] == 0
         assert not (unit / "tmp").exists()
     manifest = read_manifest(run.manifest_path)
-    assert manifest.status == "ok" and manifest.extras["pw_version"] == "7.3"
+    assert manifest.status == "ok" and manifest.extras["pw_version"] == "7.5"
     assert manifest.extras["n_units"] == 3 and manifest.extras["n_failed"] == 0
     assert manifest.extras["n_branch_rejected"] == 0 and manifest.extras["template"] == "qe_array"
     assert manifest.extras["pseudo_md5s"] == {

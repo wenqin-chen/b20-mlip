@@ -1,0 +1,47 @@
+{
+  "@meta": {
+    "what": "Parity-gate fixture for tests/md/test_md_parity.py: the LAMMPS-side JSON that b20mlip.md.parity.check consumes is {frame_id: {\"energy\": eV, \"forces\": [[eV/A, eV/A, eV/A], ... natoms]}} (b20mlip.md.parity.collect_parity writes it; keys starting with '@' are ignored). The passing JSON is built in-test from the tiny MACE model's own ASE forces (identical numbers -> passed); this file stores the perturbation that turns a copy into the failing case and the exact maxima the failing check must report.",
+    "source": "synthetic bookkeeping (no LAMMPS with pair_style mace exists on the development machine); the ASE side is computed live by the test",
+    "tolerances": {
+      "tol_f_eVA": 0.001,
+      "tol_e_eV_atom": 0.0001
+    }
+  },
+  "example": {
+    "0123456789abcdef": {
+      "energy": -61.25,
+      "forces": [
+        [
+          0.01,
+          -0.02,
+          0.0
+        ],
+        [
+          -0.01,
+          0.02,
+          0.0
+        ]
+      ],
+      "natoms": 2
+    }
+  },
+  "perturbation": {
+    "frame_index": 1,
+    "atom": 2,
+    "component": 0,
+    "dF_eVA": 0.0025,
+    "dE_eV": 0.004
+  },
+  "expected_failing": {
+    "natoms": 8,
+    "max_dF_eVA": 0.0025,
+    "max_dE_eV_atom": 0.0005,
+    "passed": 0
+  },
+  "expected_passing": {
+    "max_dF_eVA_below": 1e-09,
+    "max_dE_eV_atom_below": 1e-09,
+    "passed": 1,
+    "note": "two MACECalculator instances of one model agree to ~1e-11 (torch summation order), far below tol_f=1e-3 / tol_e=1e-4"
+  }
+}
