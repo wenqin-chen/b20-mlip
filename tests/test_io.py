@@ -188,3 +188,15 @@ def test_non_scalar_info_is_json_encoded(tiny_frames: list[Frame], tmp_path: Pat
 def test_write_empty(tmp_path: Path) -> None:
     art = write_frames([], tmp_path / "empty.extxyz")
     assert art.bytes == 0 and read_frames(art.path) == []
+
+
+def test_resolve_head_accepts_the_foundation_lowercase_head() -> None:
+    """MACE-MPA-0 / MP-0 name their single head 'default'; fine-tuned models write 'Default'."""
+    from b20mlip.io import resolve_head
+
+    assert resolve_head("Default", ["default"]) == "default"
+    assert resolve_head("Default", ["Default", "pt_head"]) == "Default"
+    assert resolve_head("pt_head", ["pt_head", "Default"]) == "pt_head"
+    assert resolve_head("Default", None) == "Default"
+    with pytest.raises(ValueError, match="not 'pt_head'"):
+        resolve_head("pt_head", ["default"])

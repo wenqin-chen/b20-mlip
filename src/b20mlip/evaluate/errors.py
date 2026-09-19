@@ -42,7 +42,7 @@ import numpy as np
 
 from b20mlip.config import Settings
 from b20mlip.evaluate import bootstrap
-from b20mlip.io import frame_to_atoms, read_frames
+from b20mlip.io import frame_to_atoms, read_frames, resolve_head
 from b20mlip.models import (
     CheckpointInfo,
     EnergyScale,
@@ -98,13 +98,19 @@ def make_calculator(
     silently fall back to its last head otherwise)."""
     from mace.calculators import MACECalculator  # noqa: PLC0415 - heavy import
 
+    probe = MACECalculator(model_paths=[str(model_path)], device=device, default_dtype=dtype)
+    available = list(getattr(probe, "available_heads", []) or [])
+    try:
+        actual = resolve_head(head, available)
+    except ValueError as exc:
+        raise ValueError(f"model {model_path}: {exc}") from exc
+    if actual == getattr(probe, "head", actual):
+        return probe
     calc = MACECalculator(
-        model_paths=[str(model_path)], device=device, default_dtype=dtype, head=head
+        model_paths=[str(model_path)], device=device, default_dtype=dtype, head=actual
     )
-    if getattr(calc, "head", head) != head:
-        raise ValueError(
-            f"model {model_path} has heads {getattr(calc, 'available_heads', ['?'])}, not {head!r}"
-        )
+    if getattr(calc, "head", actual) != actual:
+        raise ValueError(f"model {model_path} has heads {available}, not {head!r}")
     return calc
 
 

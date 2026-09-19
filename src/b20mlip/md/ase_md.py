@@ -49,6 +49,7 @@ from ase.md.verlet import VelocityVerlet
 from numpy.typing import ArrayLike
 
 from b20mlip.config import Settings
+from b20mlip.io import resolve_head
 from b20mlip.md.common import (
     EXPERIMENTAL_A_A,
     block_ci95,
@@ -527,12 +528,19 @@ def make_calculator(model: str | Path, cfg: Settings, head: str) -> Any:
         torch.set_num_threads(int(cfg.compute.threads))
     except Exception:  # pragma: no cover - torch always present with mace
         pass
+    probe = MACECalculator(
+        model_paths=str(model), device=cfg.compute.device, default_dtype=cfg.compute.dtype
+    )
+    available = list(getattr(probe, "available_heads", []) or [])
+    actual = resolve_head(head, available)  # "Default" also matches a foundation "default"
+    if actual == getattr(probe, "head", actual):
+        return probe
     calc = MACECalculator(
         model_paths=str(model), device=cfg.compute.device, default_dtype=cfg.compute.dtype,
-        head=head,
+        head=actual,
     )  # fmt: skip
-    if getattr(calc, "head", head) != head:
-        raise ValueError(f"model {model} has no head {head!r} (available: {calc.available_heads})")
+    if getattr(calc, "head", actual) != actual:
+        raise ValueError(f"model {model} has no head {head!r} (available: {available})")
     return calc
 
 

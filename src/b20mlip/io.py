@@ -262,6 +262,7 @@ def write_frames(frames: Iterable[Frame], path: str | Path) -> Artifact:
 
 
 __all__ = [
+    "resolve_head",
     "META_KEYS",
     "frame_from_atoms",
     "frame_id_for",
@@ -269,3 +270,20 @@ __all__ = [
     "read_frames",
     "write_frames",
 ]
+
+
+def resolve_head(requested: str, available: list[str] | tuple[str, ...] | None) -> str:
+    """The model head to use for ``requested`` (CONTRACTS ``Head`` = "Default" | "pt_head").
+
+    Foundation checkpoints name their single head ``"default"`` (lower case; MACE-MPA-0, MP-0) while
+    fine-tuned models write ``"Default"``: a case-insensitive unique match is accepted, anything
+    else raises (MACE itself would silently fall back to the last head).
+    """
+    if not available:
+        return requested
+    if requested in available:
+        return requested
+    matches = [h for h in available if h.lower() == requested.lower()]
+    if len(matches) == 1:
+        return matches[0]
+    raise ValueError(f"model has heads {list(available)}, not {requested!r}")

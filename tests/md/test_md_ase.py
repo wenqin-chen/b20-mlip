@@ -428,7 +428,7 @@ def test_stage_dry_run_missing_model_and_bad_head(
         "md.ase", md_settings, ase_md.stage, model=tiny_mace.model_path, compound="MnSi",
         ensemble="nvt", T=300.0, ps=0.01, natoms=8, structure=structure_file, head="pt_head",
     )  # fmt: skip
-    assert bad_head.status == "failed" and "no head" in bad_head.summary["error"]
+    assert bad_head.status == "failed" and "not 'pt_head'" in bad_head.summary["error"]
     no_T = run_stage(
         "md.ase", md_settings, ase_md.stage, model=tiny_mace.model_path, compound="MnSi",
         ensemble="nvt", T=[], ps=0.01, structure=structure_file,
