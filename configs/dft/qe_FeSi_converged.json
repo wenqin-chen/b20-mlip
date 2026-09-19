@@ -1,0 +1,460 @@
+{
+  "schema": "b20mlip.qe_converged.v1",
+  "compound": "FeSi",
+  "frame_id": "2274a97e80e98587",
+  "ecut_ry": 90.0,
+  "ecut_rho": 1080.0,
+  "k_spacing_inv_A": 0.35,
+  "kmesh": [
+    5,
+    5,
+    5
+  ],
+  "selected_unit": "FeSi_ec90_k0.35",
+  "reference_unit": "FeSi_ec90_k0.2",
+  "thresholds": {
+    "E_meV_atom": 1.0,
+    "F_meV_A": 5.0
+  },
+  "points": [
+    {
+      "unit_id": "FeSi_ec40_k0.35",
+      "ecut_ry": 40.0,
+      "ecut_rho": 480.0,
+      "k_spacing_inv_A": 0.35,
+      "kmesh": [
+        5,
+        5,
+        5
+      ],
+      "converged": true,
+      "cost": 31622.776601683792,
+      "energy_atom_eV": -2317.5585247330605,
+      "max_force_eVA": 0.09702341329665434,
+      "dE_meV_atom": 620.9247807373686,
+      "dF_meV_A": 98.73936767546368,
+      "meets": false
+    },
+    {
+      "unit_id": "FeSi_ec40_k0.3",
+      "ecut_ry": 40.0,
+      "ecut_rho": 480.0,
+      "k_spacing_inv_A": 0.3,
+      "kmesh": [
+        5,
+        5,
+        5
+      ],
+      "converged": true,
+      "cost": 31622.776601683792,
+      "energy_atom_eV": -2317.5585247330605,
+      "max_force_eVA": 0.0970236704069898,
+      "dE_meV_atom": 620.9247807373686,
+      "dF_meV_A": 98.73962478579914,
+      "meets": false
+    },
+    {
+      "unit_id": "FeSi_ec40_k0.25",
+      "ecut_ry": 40.0,
+      "ecut_rho": 480.0,
+      "k_spacing_inv_A": 0.25,
+      "kmesh": [
+        6,
+        6,
+        6
+      ],
+      "converged": true,
+      "cost": 54644.157967709594,
+      "energy_atom_eV": -2317.559878737615,
+      "max_force_eVA": 0.09633512892864825,
+      "dE_meV_atom": 619.5707761830818,
+      "dF_meV_A": 98.05108330745759,
+      "meets": false
+    },
+    {
+      "unit_id": "FeSi_ec40_k0.2",
+      "ecut_ry": 40.0,
+      "ecut_rho": 480.0,
+      "k_spacing_inv_A": 0.2,
+      "kmesh": [
+        8,
+        8,
+        8
+      ],
+      "converged": true,
+      "cost": 129526.89296049681,
+      "energy_atom_eV": -2317.5602880478823,
+      "max_force_eVA": 0.09801997295686785,
+      "dE_meV_atom": 619.1614659155675,
+      "dF_meV_A": 99.73592733567719,
+      "meets": false
+    },
+    {
+      "unit_id": "FeSi_ec50_k0.35",
+      "ecut_ry": 50.0,
+      "ecut_rho": 600.0,
+      "k_spacing_inv_A": 0.35,
+      "kmesh": [
+        5,
+        5,
+        5
+      ],
+      "converged": true,
+      "cost": 44194.173824159225,
+      "energy_atom_eV": -2318.094653290626,
+      "max_force_eVA": 0.011357334847939007,
+      "dE_meV_atom": 84.7962231719066,
+      "dF_meV_A": 13.073289226748345,
+      "meets": false
+    },
+    {
+      "unit_id": "FeSi_ec50_k0.3",
+      "ecut_ry": 50.0,
+      "ecut_rho": 600.0,
+      "k_spacing_inv_A": 0.3,
+      "kmesh": [
+        5,
+        5,
+        5
+      ],
+      "converged": false,
+      "cost": 44194.173824159225,
+      "energy_atom_eV": null,
+      "max_force_eVA": null,
+      "dE_meV_atom": null,
+      "dF_meV_A": null,
+      "meets": false
+    },
+    {
+      "unit_id": "FeSi_ec50_k0.25",
+      "ecut_ry": 50.0,
+      "ecut_rho": 600.0,
+      "k_spacing_inv_A": 0.25,
+      "kmesh": [
+        6,
+        6,
+        6
+      ],
+      "converged": true,
+      "cost": 76367.53236814713,
+      "energy_atom_eV": -2318.094859995117,
+      "max_force_eVA": 0.01531194891753242,
+      "dE_meV_atom": 84.58951868078657,
+      "dF_meV_A": 17.027903296341762,
+      "meets": false
+    },
+    {
+      "unit_id": "FeSi_ec50_k0.2",
+      "ecut_ry": 50.0,
+      "ecut_rho": 600.0,
+      "k_spacing_inv_A": 0.2,
+      "kmesh": [
+        8,
+        8,
+        8
+      ],
+      "converged": true,
+      "cost": 181019.33598375617,
+      "energy_atom_eV": -2318.0948078683055,
+      "max_force_eVA": 0.01340419022847559,
+      "dE_meV_atom": 84.64164549241104,
+      "dF_meV_A": 15.12014460728493,
+      "meets": false
+    },
+    {
+      "unit_id": "FeSi_ec60_k0.35",
+      "ecut_ry": 60.0,
+      "ecut_rho": 720.0,
+      "k_spacing_inv_A": 0.35,
+      "kmesh": [
+        5,
+        5,
+        5
+      ],
+      "converged": true,
+      "cost": 58094.75019311125,
+      "energy_atom_eV": -2318.1283372449584,
+      "max_force_eVA": 0.003844827956355238,
+      "dE_meV_atom": 51.11226883946074,
+      "dF_meV_A": 1.9396403706529302,
+      "meets": false
+    },
+    {
+      "unit_id": "FeSi_ec60_k0.3",
+      "ecut_ry": 60.0,
+      "ecut_rho": 720.0,
+      "k_spacing_inv_A": 0.3,
+      "kmesh": [
+        5,
+        5,
+        5
+      ],
+      "converged": true,
+      "cost": 58094.75019311125,
+      "energy_atom_eV": -2318.1283372449584,
+      "max_force_eVA": 0.003844827956355238,
+      "dE_meV_atom": 51.11226883946074,
+      "dF_meV_A": 1.9396403706529302,
+      "meets": false
+    },
+    {
+      "unit_id": "FeSi_ec60_k0.25",
+      "ecut_ry": 60.0,
+      "ecut_rho": 720.0,
+      "k_spacing_inv_A": 0.25,
+      "kmesh": [
+        6,
+        6,
+        6
+      ],
+      "converged": true,
+      "cost": 100387.72833369624,
+      "energy_atom_eV": -2318.128439542763,
+      "max_force_eVA": 0.0032984684935188813,
+      "dE_meV_atom": 51.00997103500049,
+      "dF_meV_A": 3.245503764415686,
+      "meets": false
+    },
+    {
+      "unit_id": "FeSi_ec60_k0.2",
+      "ecut_ry": 60.0,
+      "ecut_rho": 720.0,
+      "k_spacing_inv_A": 0.2,
+      "kmesh": [
+        8,
+        8,
+        8
+      ],
+      "converged": true,
+      "cost": 237956.0967909837,
+      "energy_atom_eV": -2318.1285589497256,
+      "max_force_eVA": 0.0034779315076646582,
+      "dE_meV_atom": 50.890564072233246,
+      "dF_meV_A": 3.788263682555709,
+      "meets": false
+    },
+    {
+      "unit_id": "FeSi_ec70_k0.35",
+      "ecut_ry": 70.0,
+      "ecut_rho": 840.0,
+      "k_spacing_inv_A": 0.35,
+      "kmesh": [
+        5,
+        5,
+        5
+      ],
+      "converged": true,
+      "cost": 73207.7523217316,
+      "energy_atom_eV": -2318.152059059846,
+      "max_force_eVA": 0.0033450054642357656,
+      "dE_meV_atom": 27.39045395173889,
+      "dF_meV_A": 1.4398178785334577,
+      "meets": false
+    },
+    {
+      "unit_id": "FeSi_ec70_k0.3",
+      "ecut_ry": 70.0,
+      "ecut_rho": 840.0,
+      "k_spacing_inv_A": 0.3,
+      "kmesh": [
+        5,
+        5,
+        5
+      ],
+      "converged": true,
+      "cost": 73207.7523217316,
+      "energy_atom_eV": -2318.152059059846,
+      "max_force_eVA": 0.0033450054642357656,
+      "dE_meV_atom": 27.39045395173889,
+      "dF_meV_A": 1.4398178785334577,
+      "meets": false
+    },
+    {
+      "unit_id": "FeSi_ec70_k0.25",
+      "ecut_ry": 70.0,
+      "ecut_rho": 840.0,
+      "k_spacing_inv_A": 0.25,
+      "kmesh": [
+        6,
+        6,
+        6
+      ],
+      "converged": true,
+      "cost": 126502.99601195221,
+      "energy_atom_eV": -2318.15221608655,
+      "max_force_eVA": 0.002796074898044885,
+      "dE_meV_atom": 27.23342724766553,
+      "dF_meV_A": 2.1386437702930903,
+      "meets": false
+    },
+    {
+      "unit_id": "FeSi_ec70_k0.2",
+      "ecut_ry": 70.0,
+      "ecut_rho": 840.0,
+      "k_spacing_inv_A": 0.2,
+      "kmesh": [
+        8,
+        8,
+        8
+      ],
+      "converged": true,
+      "cost": 299858.95350981265,
+      "energy_atom_eV": -2318.152318775519,
+      "max_force_eVA": 0.002986079435944211,
+      "dE_meV_atom": 27.130738279083744,
+      "dF_meV_A": 2.5675038098276985,
+      "meets": false
+    },
+    {
+      "unit_id": "FeSi_ec80_k0.35",
+      "ecut_ry": 80.0,
+      "ecut_rho": 960.0,
+      "k_spacing_inv_A": 0.35,
+      "kmesh": [
+        5,
+        5,
+        5
+      ],
+      "converged": true,
+      "cost": 89442.71909999159,
+      "energy_atom_eV": -2318.172705869063,
+      "max_force_eVA": 0.0032421613300548046,
+      "dE_meV_atom": 6.743644734797272,
+      "dF_meV_A": 1.5262069512454655,
+      "meets": false
+    },
+    {
+      "unit_id": "FeSi_ec80_k0.3",
+      "ecut_ry": 80.0,
+      "ecut_rho": 960.0,
+      "k_spacing_inv_A": 0.3,
+      "kmesh": [
+        5,
+        5,
+        5
+      ],
+      "converged": true,
+      "cost": 89442.71909999159,
+      "energy_atom_eV": -2318.172705869063,
+      "max_force_eVA": 0.0032421613300548046,
+      "dE_meV_atom": 6.743644734797272,
+      "dF_meV_A": 1.5262069512454655,
+      "meets": false
+    },
+    {
+      "unit_id": "FeSi_ec80_k0.25",
+      "ecut_ry": 80.0,
+      "ecut_rho": 960.0,
+      "k_spacing_inv_A": 0.25,
+      "kmesh": [
+        6,
+        6,
+        6
+      ],
+      "converged": true,
+      "cost": 154557.01860478547,
+      "energy_atom_eV": -2318.1727804962893,
+      "max_force_eVA": 0.001875877007460734,
+      "dE_meV_atom": 6.669017508556863,
+      "dF_meV_A": 0.0498794050777661,
+      "meets": false
+    },
+    {
+      "unit_id": "FeSi_ec80_k0.2",
+      "ecut_ry": 80.0,
+      "ecut_rho": 960.0,
+      "k_spacing_inv_A": 0.2,
+      "kmesh": [
+        8,
+        8,
+        8
+      ],
+      "converged": true,
+      "cost": 366357.37743356556,
+      "energy_atom_eV": -2318.172908134697,
+      "max_force_eVA": 0.002055854242277416,
+      "dE_meV_atom": 6.5413791007813415,
+      "dF_meV_A": 0.23988394297709223,
+      "meets": false
+    },
+    {
+      "unit_id": "FeSi_ec90_k0.35",
+      "ecut_ry": 90.0,
+      "ecut_rho": 1080.0,
+      "k_spacing_inv_A": 0.35,
+      "kmesh": [
+        5,
+        5,
+        5
+      ],
+      "converged": true,
+      "cost": 106726.8710306828,
+      "energy_atom_eV": -2318.1792508536723,
+      "max_force_eVA": 0.0032658154809164256,
+      "dE_meV_atom": 0.19866012553393375,
+      "dF_meV_A": 1.5498611021070865,
+      "meets": true
+    },
+    {
+      "unit_id": "FeSi_ec90_k0.3",
+      "ecut_ry": 90.0,
+      "ecut_rho": 1080.0,
+      "k_spacing_inv_A": 0.3,
+      "kmesh": [
+        5,
+        5,
+        5
+      ],
+      "converged": true,
+      "cost": 106726.8710306828,
+      "energy_atom_eV": -2318.1792508536723,
+      "max_force_eVA": 0.0032658154809164256,
+      "dE_meV_atom": 0.19866012553393375,
+      "dF_meV_A": 1.5498611021070865,
+      "meets": true
+    },
+    {
+      "unit_id": "FeSi_ec90_k0.25",
+      "ecut_ry": 90.0,
+      "ecut_rho": 1080.0,
+      "k_spacing_inv_A": 0.25,
+      "kmesh": [
+        6,
+        6,
+        6
+      ],
+      "converged": false,
+      "cost": 184424.03314101987,
+      "energy_atom_eV": null,
+      "max_force_eVA": null,
+      "dE_meV_atom": null,
+      "dF_meV_A": null,
+      "meets": false
+    },
+    {
+      "unit_id": "FeSi_ec90_k0.2",
+      "ecut_ry": 90.0,
+      "ecut_rho": 1080.0,
+      "k_spacing_inv_A": 0.2,
+      "kmesh": [
+        8,
+        8,
+        8
+      ],
+      "converged": true,
+      "cost": 437153.26374167675,
+      "energy_atom_eV": -2318.179449513798,
+      "max_force_eVA": 0.0019051875857023079,
+      "dE_meV_atom": 0.0,
+      "dF_meV_A": 0.0,
+      "meets": true
+    }
+  ],
+  "units": {
+    "energy": "meV/atom",
+    "force": "meV/A",
+    "ecut": "Ry",
+    "k_spacing": "1/A"
+  },
+  "source_run_id": "20260919T070539-d01f59-none"
+}
