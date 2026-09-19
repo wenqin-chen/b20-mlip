@@ -1,0 +1,514 @@
+{
+  "schema": "b20mlip.offsets.v1",
+  "model": "E_mp \u2248 E_qe + \u03a3_e n_e\u00b7c_e (least squares on energies per atom)",
+  "coefficients": {
+    "Si": 1817.5026843403116,
+    "Mn": 1196.9231767501715,
+    "Fe": 2803.943442142419,
+    "Co": 2386.440399244799,
+    "Ge": 4569.80433379708
+  },
+  "residual_meV_atom": 10.618245800052703,
+  "max_abs_residual_meV_atom": 65.38428259909779,
+  "n": 61,
+  "rank": 4,
+  "n_elements": 5,
+  "unique": false,
+  "pairs": [
+    {
+      "frame_id": "262baad60ec3ae4c",
+      "compound": "FeSi",
+      "n_atoms": 8,
+      "e_qe_eV": -18545.43574060284,
+      "e_mp_eV": -59.62843303,
+      "residual_meV_atom": 2.850205239610659
+    },
+    {
+      "frame_id": "8c9236a5a422d5ef",
+      "compound": "FeSi",
+      "n_atoms": 8,
+      "e_qe_eV": -18545.435498829676,
+      "e_mp_eV": -59.62993082,
+      "residual_meV_atom": 2.6327598443458555
+    },
+    {
+      "frame_id": "0fdf6901d20b657e",
+      "compound": "FeSi",
+      "n_atoms": 8,
+      "e_qe_eV": -18545.43506480807,
+      "e_mp_eV": -59.62952847,
+      "residual_meV_atom": 2.6288008934898244
+    },
+    {
+      "frame_id": "a2f69f07db675d32",
+      "compound": "FeSi",
+      "n_atoms": 8,
+      "e_qe_eV": -18545.432362717434,
+      "e_mp_eV": -59.6271091,
+      "residual_meV_atom": 2.593460813841375
+    },
+    {
+      "frame_id": "7a6c3baabd59f86f",
+      "compound": "FeSi",
+      "n_atoms": 8,
+      "e_qe_eV": -18545.431312902165,
+      "e_mp_eV": -59.62533126,
+      "residual_meV_atom": 2.6844639055525477
+    },
+    {
+      "frame_id": "00d4a6532a9c5d9c",
+      "compound": "FeSi",
+      "n_atoms": 8,
+      "e_qe_eV": -18545.41885865895,
+      "e_mp_eV": -59.61297839,
+      "residual_meV_atom": 2.671792253750027
+    },
+    {
+      "frame_id": "1ca7ae45092addb6",
+      "compound": "FeSi",
+      "n_atoms": 8,
+      "e_qe_eV": -18545.41687236383,
+      "e_mp_eV": -59.61070902,
+      "residual_meV_atom": 2.7071766135122743
+    },
+    {
+      "frame_id": "74d03b79c6ccf0d8",
+      "compound": "FeSi",
+      "n_atoms": 8,
+      "e_qe_eV": -18545.405964407626,
+      "e_mp_eV": -59.59943687,
+      "residual_meV_atom": 2.752700837845623
+    },
+    {
+      "frame_id": "e7390e2ab8d553bf",
+      "compound": "FeSi",
+      "n_atoms": 8,
+      "e_qe_eV": -18545.29026785287,
+      "e_mp_eV": -59.46034577,
+      "residual_meV_atom": 5.677018993537786
+    },
+    {
+      "frame_id": "76975e72edf440e8",
+      "compound": "FeSi",
+      "n_atoms": 8,
+      "e_qe_eV": -18545.43429540613,
+      "e_mp_eV": -59.62745957,
+      "residual_meV_atom": 2.7912381506212114
+    },
+    {
+      "frame_id": "676ae278e765e67d",
+      "compound": "FeSi",
+      "n_atoms": 8,
+      "e_qe_eV": -18545.430856839335,
+      "e_mp_eV": -59.62390979,
+      "residual_meV_atom": 2.8051398016941675
+    },
+    {
+      "frame_id": "82667f5d95c7d175",
+      "compound": "FeSi",
+      "n_atoms": 8,
+      "e_qe_eV": -18544.754912268738,
+      "e_mp_eV": -58.95463309,
+      "residual_meV_atom": 1.9716559768312436
+    },
+    {
+      "frame_id": "e95fe65174e00b12",
+      "compound": "FeSi",
+      "n_atoms": 8,
+      "e_qe_eV": -18541.48985738013,
+      "e_mp_eV": -56.22842571,
+      "residual_meV_atom": -65.38428259909779
+    },
+    {
+      "frame_id": "2274a97e80e98587",
+      "compound": "FeSi",
+      "n_atoms": 8,
+      "e_qe_eV": -18545.435596110383,
+      "e_mp_eV": -59.67319189,
+      "residual_meV_atom": -2.762713817446638
+    },
+    {
+      "frame_id": "cbd62c8005c2564b",
+      "compound": "MnSi",
+      "n_atoms": 8,
+      "e_qe_eV": -12119.762633406906,
+      "e_mp_eV": -61.83704084,
+      "residual_meV_atom": 27.768525621695517
+    },
+    {
+      "frame_id": "8e7ac7c4bb0b518e",
+      "compound": "MnSi",
+      "n_atoms": 8,
+      "e_qe_eV": -12119.76263367902,
+      "e_mp_eV": -62.06179487,
+      "residual_meV_atom": -0.32569411405347637
+    },
+    {
+      "frame_id": "d4b62bd64e9e6536",
+      "compound": "MnSi",
+      "n_atoms": 8,
+      "e_qe_eV": -12119.76090031373,
+      "e_mp_eV": -62.06081113,
+      "residual_meV_atom": -0.41939727543649497
+    },
+    {
+      "frame_id": "c8767d8837ac1bdf",
+      "compound": "MnSi",
+      "n_atoms": 8,
+      "e_qe_eV": -12119.708328732271,
+      "e_mp_eV": -61.99842166,
+      "residual_meV_atom": 0.8078387922978436
+    },
+    {
+      "frame_id": "60e0a8f2ced9e942",
+      "compound": "MnSi",
+      "n_atoms": 8,
+      "e_qe_eV": -12119.716003567642,
+      "e_mp_eV": -62.02097882,
+      "residual_meV_atom": -1.0524517863359506
+    },
+    {
+      "frame_id": "433fba64f3b29a68",
+      "compound": "MnSi",
+      "n_atoms": 8,
+      "e_qe_eV": -12119.762589596574,
+      "e_mp_eV": -62.06262242,
+      "residual_meV_atom": -0.4346481698576099
+    },
+    {
+      "frame_id": "0a5c21db88baa6c0",
+      "compound": "MnSi",
+      "n_atoms": 8,
+      "e_qe_eV": -12119.753606845934,
+      "e_mp_eV": -62.05307101,
+      "residual_meV_atom": -0.36356574969431676
+    },
+    {
+      "frame_id": "55ae4567bbdb43e3",
+      "compound": "MnSi",
+      "n_atoms": 8,
+      "e_qe_eV": -12119.753523443036,
+      "e_mp_eV": -62.0584163,
+      "residual_meV_atom": -1.0421523620607331
+    },
+    {
+      "frame_id": "33909c17c45d870f",
+      "compound": "MnSi",
+      "n_atoms": 8,
+      "e_qe_eV": -12119.546003970936,
+      "e_mp_eV": -61.83788483,
+      "residual_meV_atom": 0.5843473754794104
+    },
+    {
+      "frame_id": "2421a4a9886ba4ae",
+      "compound": "MnSi",
+      "n_atoms": 8,
+      "e_qe_eV": -12118.441915860805,
+      "e_mp_eV": -60.75572449,
+      "residual_meV_atom": -2.156623890869014
+    },
+    {
+      "frame_id": "3c5a4688a6318dbd",
+      "compound": "MnSi",
+      "n_atoms": 8,
+      "e_qe_eV": -12119.759809953492,
+      "e_mp_eV": -62.05862855,
+      "residual_meV_atom": -0.28286980500524805
+    },
+    {
+      "frame_id": "b1bedf3b172907d9",
+      "compound": "MnSi",
+      "n_atoms": 8,
+      "e_qe_eV": -12119.762837764414,
+      "e_mp_eV": -62.09898697,
+      "residual_meV_atom": -4.949195939843776
+    },
+    {
+      "frame_id": "5e51bc4d01e18fbd",
+      "compound": "CoSi",
+      "n_atoms": 8,
+      "e_qe_eV": -16870.842586349794,
+      "e_mp_eV": -55.05849997,
+      "residual_meV_atom": 1.469004918817518
+    },
+    {
+      "frame_id": "03395ff98428d28c",
+      "compound": "CoSi",
+      "n_atoms": 8,
+      "e_qe_eV": -16870.8421526003,
+      "e_mp_eV": -55.05796571,
+      "residual_meV_atom": 1.4815687322879967
+    },
+    {
+      "frame_id": "c0c102195dc0b395",
+      "compound": "CoSi",
+      "n_atoms": 8,
+      "e_qe_eV": -16870.841431362514,
+      "e_mp_eV": -55.05606122,
+      "residual_meV_atom": 1.6294752590511052
+    },
+    {
+      "frame_id": "7bad3cbf86956ba1",
+      "compound": "CoSi",
+      "n_atoms": 8,
+      "e_qe_eV": -16870.83804517764,
+      "e_mp_eV": -55.05518509,
+      "residual_meV_atom": 1.3157183993826038
+    },
+    {
+      "frame_id": "bcb7cd90967fb677",
+      "compound": "CoSi",
+      "n_atoms": 8,
+      "e_qe_eV": -16870.83174846291,
+      "e_mp_eV": -55.04862746,
+      "residual_meV_atom": 1.3483328084475943
+    },
+    {
+      "frame_id": "914fec796cdb6a50",
+      "compound": "CoSi",
+      "n_atoms": 8,
+      "e_qe_eV": -16870.820074506195,
+      "e_mp_eV": -55.03668083,
+      "residual_meV_atom": 1.3824169691361021
+    },
+    {
+      "frame_id": "8dbde8fd8d1dc7ef",
+      "compound": "CoSi",
+      "n_atoms": 8,
+      "e_qe_eV": -16870.83475681769,
+      "e_mp_eV": -55.05281212,
+      "residual_meV_atom": 1.2012946558570547
+    },
+    {
+      "frame_id": "a8b1d50a1ab17318",
+      "compound": "CoSi",
+      "n_atoms": 8,
+      "e_qe_eV": -16870.835947179778,
+      "e_mp_eV": -55.05354534,
+      "residual_meV_atom": 1.2584374167090573
+    },
+    {
+      "frame_id": "754d425c0b0c5efb",
+      "compound": "CoSi",
+      "n_atoms": 8,
+      "e_qe_eV": -16870.834834642257,
+      "e_mp_eV": -55.05108169,
+      "residual_meV_atom": 1.427326476914459
+    },
+    {
+      "frame_id": "131f20347b2d37f1",
+      "compound": "CoSi",
+      "n_atoms": 8,
+      "e_qe_eV": -16870.83092912808,
+      "e_mp_eV": -55.05139982,
+      "residual_meV_atom": 0.8993709543574369
+    },
+    {
+      "frame_id": "a286ecea82205ffb",
+      "compound": "CoSi",
+      "n_atoms": 8,
+      "e_qe_eV": -16869.141350087746,
+      "e_mp_eV": -53.32938986,
+      "residual_meV_atom": 4.953235913035314
+    },
+    {
+      "frame_id": "67b89c184157cc86",
+      "compound": "CoSi",
+      "n_atoms": 8,
+      "e_qe_eV": -16869.11977227497,
+      "e_mp_eV": -53.38095884,
+      "residual_meV_atom": -4.190113183994981
+    },
+    {
+      "frame_id": "ea366b8f088b9cfc",
+      "compound": "CoSi",
+      "n_atoms": 8,
+      "e_qe_eV": -16870.842586349794,
+      "e_mp_eV": -55.0616888,
+      "residual_meV_atom": 1.0704011688176251
+    },
+    {
+      "frame_id": "f3662f88793b48c8",
+      "compound": "CoGe",
+      "n_atoms": 8,
+      "e_qe_eV": -27873.551637803594,
+      "e_mp_eV": -48.61355473,
+      "residual_meV_atom": -5.106136740778311
+    },
+    {
+      "frame_id": "eee879def3111e6d",
+      "compound": "CoGe",
+      "n_atoms": 8,
+      "e_qe_eV": -27873.55209631545,
+      "e_mp_eV": -48.61332678,
+      "residual_meV_atom": -5.020329008857516
+    },
+    {
+      "frame_id": "754a73397e5045ae",
+      "compound": "CoGe",
+      "n_atoms": 8,
+      "e_qe_eV": -27873.55074009997,
+      "e_mp_eV": -48.61276797,
+      "residual_meV_atom": -5.120004693708324
+    },
+    {
+      "frame_id": "c6cf7e632c3df555",
+      "compound": "FeGe",
+      "n_atoms": 8,
+      "e_qe_eV": -29548.09920754278,
+      "e_mp_eV": -52.85218304,
+      "residual_meV_atom": 31.99009309810208
+    },
+    {
+      "frame_id": "31adebbd19b55ce4",
+      "compound": "FeGe",
+      "n_atoms": 8,
+      "e_qe_eV": -29548.09920781489,
+      "e_mp_eV": -53.11003554,
+      "residual_meV_atom": -0.24143538848875323
+    },
+    {
+      "frame_id": "1d8c06e0bca36d28",
+      "compound": "FeGe",
+      "n_atoms": 8,
+      "e_qe_eV": -29548.098489978525,
+      "e_mp_eV": -53.10478453,
+      "residual_meV_atom": 0.3252113160669978
+    },
+    {
+      "frame_id": "b50f2b5eaa3a52e3",
+      "compound": "FeGe",
+      "n_atoms": 8,
+      "e_qe_eV": -29548.09494555944,
+      "e_mp_eV": -53.09895847,
+      "residual_meV_atom": 0.6104164303906146
+    },
+    {
+      "frame_id": "64dea24b7bc2fde9",
+      "compound": "FeGe",
+      "n_atoms": 8,
+      "e_qe_eV": -29547.954188134496,
+      "e_mp_eV": -52.97310662,
+      "residual_meV_atom": -1.2527804374258267
+    },
+    {
+      "frame_id": "111f1c7d3691ca3b",
+      "compound": "FeGe",
+      "n_atoms": 8,
+      "e_qe_eV": -29547.979192132883,
+      "e_mp_eV": -52.97249575,
+      "residual_meV_atom": 1.9490781110107491
+    },
+    {
+      "frame_id": "4c86c340a05fd30d",
+      "compound": "MnGe",
+      "n_atoms": 8,
+      "e_qe_eV": -23123.00845992679,
+      "e_mp_eV": -56.12157261,
+      "residual_meV_atom": -2.8943590273229347
+    },
+    {
+      "frame_id": "ddd7b887239f2f2f",
+      "compound": "MnGe",
+      "n_atoms": 8,
+      "e_qe_eV": -23123.00309044004,
+      "e_mp_eV": -56.11391721,
+      "residual_meV_atom": -2.60861987089811
+    },
+    {
+      "frame_id": "15930ebd888d9263",
+      "compound": "MnGe",
+      "n_atoms": 8,
+      "e_qe_eV": -23123.003154522856,
+      "e_mp_eV": -56.12166935,
+      "residual_meV_atom": -3.569627018805477
+    },
+    {
+      "frame_id": "9802f9c68d5a2b8e",
+      "compound": "MnGe",
+      "n_atoms": 8,
+      "e_qe_eV": -23118.96568553003,
+      "e_mp_eV": -51.8980093,
+      "residual_meV_atom": 19.704255128090153
+    },
+    {
+      "frame_id": "2b4aff529e332686",
+      "compound": "MnGe",
+      "n_atoms": 8,
+      "e_qe_eV": -23121.94764676414,
+      "e_mp_eV": -55.06389221,
+      "residual_meV_atom": -3.285954358489107
+    },
+    {
+      "frame_id": "831dc05f3b31c06a",
+      "compound": "MnGe",
+      "n_atoms": 8,
+      "e_qe_eV": -23123.008520608182,
+      "e_mp_eV": -56.12089253,
+      "residual_meV_atom": -2.8017638533128775
+    },
+    {
+      "frame_id": "397ddee1f8324651",
+      "compound": "MnGe",
+      "n_atoms": 8,
+      "e_qe_eV": -23123.005700828304,
+      "e_mp_eV": -56.11771072,
+      "residual_meV_atom": -2.7565100876927318
+    },
+    {
+      "frame_id": "2832b14bd63c8a70",
+      "compound": "MnGe",
+      "n_atoms": 8,
+      "e_qe_eV": -23121.498807741016,
+      "e_mp_eV": -54.61553199,
+      "residual_meV_atom": -3.3458047487329168
+    },
+    {
+      "frame_id": "c2d251a7a0e9acdb",
+      "compound": "MnGe",
+      "n_atoms": 8,
+      "e_qe_eV": -23122.996560795855,
+      "e_mp_eV": -56.11237181,
+      "residual_meV_atom": -3.231650393900054
+    },
+    {
+      "frame_id": "b8342c7a5bc1a1eb",
+      "compound": "MnGe",
+      "n_atoms": 8,
+      "e_qe_eV": -23122.98814240936,
+      "e_mp_eV": -56.10539512,
+      "residual_meV_atom": -3.411862456232484
+    },
+    {
+      "frame_id": "36554d0206aa7f19",
+      "compound": "MnGe",
+      "n_atoms": 8,
+      "e_qe_eV": -23122.94937870151,
+      "e_mp_eV": -56.07085583,
+      "residual_meV_atom": -3.939914687180135
+    },
+    {
+      "frame_id": "a77c315d3c56e9ab",
+      "compound": "MnGe",
+      "n_atoms": 8,
+      "e_qe_eV": -23122.851987246133,
+      "e_mp_eV": -55.95534807,
+      "residual_meV_atom": -1.6753766094552702
+    },
+    {
+      "frame_id": "b860b9da74e6b117",
+      "compound": "MnGe",
+      "n_atoms": 8,
+      "e_qe_eV": -23122.419611111556,
+      "e_mp_eV": -55.54410432,
+      "residual_meV_atom": -4.316924681461387
+    }
+  ],
+  "units": {
+    "coefficients": "eV per atom of the element",
+    "residual": "meV/atom"
+  },
+  "gate_meV_atom": 20.0,
+  "passed": true,
+  "source_run_id": "20260919T185147-fb89d0-none"
+}

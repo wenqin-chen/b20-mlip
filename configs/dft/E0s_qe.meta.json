@@ -1,0 +1,60 @@
+{
+  "units": "eV",
+  "keys": "atomic numbers (MACE --E0s format)",
+  "elements": {
+    "Fe": {
+      "status": "done",
+      "energy_eV": -4474.719422298521,
+      "total_magnetization_muB": 4.0,
+      "scf_steps": 395,
+      "wall_seconds": 10020.0
+    },
+    "Si": {
+      "status": "done",
+      "energy_eV": -150.81454287427758,
+      "total_magnetization_muB": 2.0,
+      "scf_steps": 7,
+      "wall_seconds": 245.64
+    },
+    "Co": {
+      "status": "done",
+      "energy_eV": -4056.01947033381,
+      "total_magnetization_muB": 3.0,
+      "scf_steps": 65,
+      "wall_seconds": 1737.83
+    },
+    "Mn": {
+      "status": "done",
+      "energy_eV": -2869.8362066911673,
+      "total_magnetization_muB": 5.0,
+      "scf_steps": 27,
+      "wall_seconds": 759.44
+    },
+    "Ge": {
+      "status": "done",
+      "energy_eV": -2903.155826143592,
+      "total_magnetization_muB": 2.0,
+      "scf_steps": 15,
+      "wall_seconds": 441.32
+    }
+  },
+  "settings": {
+    "box_A": 12.0,
+    "nspin": 2,
+    "starting_magnetization": 1.0,
+    "kpoints": "gamma",
+    "ecut_ry": 90.0,
+    "ecut_rho": 1080.0,
+    "smearing": "mv",
+    "degauss_ry": 0.01,
+    "pseudo_family": "SSSP-efficiency-1.3",
+    "pseudo_md5s": {
+      "Fe": "e86618425769142926afa95317d90200",
+      "Si": "0b0bb1205258b0d07b9f9672cf965d36",
+      "Co": "5f91765df6ddd3222702df6e7b74a16d",
+      "Mn": "82ef2b46521d7a7d9e736dc3972e4928",
+      "Ge": "9c9eaa91e581c3f09632fb3098b2c6b2"
+    }
+  },
+  "source_run_id": null
+}
