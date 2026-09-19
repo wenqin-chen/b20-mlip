@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import sys
 import types
 from pathlib import Path
@@ -14,6 +15,7 @@ from b20mlip.cli import REGISTERED, CLIState, ExecutorKind, app
 from b20mlip.cli import _toplevel_registered as TOPLEVEL_REGISTERED
 from b20mlip.executors import LocalExecutor, SlurmExecutor
 from b20mlip.models import StageResult
+from b20mlip.provenance import read_manifest
 
 runner = CliRunner()
 
@@ -77,10 +79,31 @@ def test_stubs_exit_2_with_message(argv: list[str]) -> None:
     assert "not implemented in this tier" in result.output
 
 
-def test_bench_exits_2_until_its_module_exists() -> None:
-    assert "b20mlip.bench" not in sys.modules
-    result = runner.invoke(app, ["bench", "--out", "runs/bench"])
-    assert result.exit_code == 2 and "b20mlip.bench" in result.output
+def test_bench_dry_run(tmp_path: Path) -> None:
+    """`bench --dry-run` plans only: a partial manifest with plan.json, no bench.json."""
+    dummy_model = tmp_path / "dummy.model"
+    dummy_model.write_bytes(b"not a real model; a dry run only hashes it")
+    result = runner.invoke(
+        app,
+        [
+            "--set", f"paths.runs_dir={tmp_path / 'runs'}",
+            "--set", f"bench.model={dummy_model}",
+            "--set", "bench.tiers=b,e",
+            "--dry-run", "bench", "--out", str(tmp_path / "out"),
+        ],
+    )  # fmt: skip
+    assert result.exit_code == 1, result.output  # status partial -> exit 1 (CONTRACTS section 3)
+    payload = json.JSONDecoder().raw_decode(result.output[result.output.index("{") :])[0]
+    assert payload["status"] == "partial" and payload["outputs"] == []
+    assert payload["summary"] == {"planned": 2, "tiers": "b,e"}
+    manifest = read_manifest(payload["manifest"])
+    assert manifest.status == "partial" and manifest.stage == "bench"
+    assert manifest.extras["tiers"] == ["b", "e"] and manifest.extras["bench_json"].endswith(
+        "bench.json"
+    )
+    plan = json.loads((Path(payload["manifest"]).parent / "plan.json").read_text())
+    assert plan["dry_run"] is True and plan["measurements"] == ["md", "fwbw"]
+    assert not (tmp_path / "out" / "bench.json").exists()
     # `report build` / `report audit` are wired to the report tier (tests/report/).
 
 
