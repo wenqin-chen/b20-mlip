@@ -30,7 +30,7 @@ def test_default_yaml_equals_model_defaults() -> None:
     data = read_yaml(default_config_path())
     expected_sections = {
         "paths", "compute", "cluster", "data", "dft", "train", "eval", "md",
-        "sampling", "agent", "report",
+        "sampling", "agent", "report", "bench",
     }  # fmt: skip
     assert set(data) == expected_sections
     from_yaml = Settings.model_validate(data)

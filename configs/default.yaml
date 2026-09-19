@@ -142,7 +142,33 @@ agent:              # CI never constructs an anthropic client: backend=mock unle
     max_atoms: 512
     max_md_ps: 20
     approve_cluster: false
-  trace_dir: runs/agent/traces
+  trace_dir: runs/agent/traces            # recorded traces <task_id>.jsonl (`agent run --record`; replayed by --backend mock)
+  tasks_path: evals/agent_tasks.jsonl     # the 12-task eval (gold recomputed by `b20mlip screen`)
+  refs_dir: evals/refs                    # phonons_<compound>_<label>.json references for compare_phonons
+  phonon_supercell: [2, 2, 2]             # `phonons` tool default when the caller passes []
+  phonon_distance: 0.03                   # A; `phonons` tool default when the caller passes 0
+  max_tokens: 16000                       # per-turn output cap of the anthropic backend
 
 report:
   numbers_path: reports/numbers.json
+
+bench:              # Day-1 timing task (SPEC section 15); the CLI takes only --out, so set knobs with --set bench.<key>=<value>
+  model: null                     # MACE .model to time; null = the foundation named by train.foundation
+  tiers: a,b,c,d,e                # a fine-tune epoch, b MD, c WBM relaxations, d phonons, e forward+backward RSS
+  quick: false                    # scale every size down (tiny CI model): 8+5 frames, 20 MD steps, 2 relaxations, 1x1x1 phonons
+  force: false                    # re-measure sub-tasks already cached in <out>/bench.json
+  compound: FeSi                  # reference cell for MD, phonons and the forward+backward batch
+  n_frames_8atom: 80              # (a) 8-atom frames: MPtrj B20 frames, cycled/rattled and zero-shot labelled beyond the source
+  n_frames_64atom: 20             # (a) 2x2x2 supercells with MACE zero-shot labels (label_source mace_zero_shot)
+  finetune_epochs: 2              # the last epoch is the measurement (epoch 0 carries warm-up)
+  finetune_timeout_s: 3600
+  md_natoms: [64, 512]            # (b) NVT Langevin at md.timestep_fs
+  md_steps: 200
+  md_warmup_steps: 10             # excluded from s/step
+  md_T: 300.0
+  n_relax: 20                     # (c) first ids of data/wbm/sample_1000_s0.json, eval.fmax / eval.max_steps
+  phonon_supercell: 2             # (d) phonopy supercell (2 -> 2x2x2)
+  phonon_distance: 0.03
+  fwbw_batch: 4                   # (e) training-style forward + backward in a fresh process; peak RSS
+  fwbw_natoms: 64
+  fwbw_repeats: 3

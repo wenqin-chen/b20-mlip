@@ -220,14 +220,59 @@ class SamplingConfig(B20Model):
 
 
 class AgentConfig(B20Model):
+    """Agent tier (SPEC.md section 7). ``trace_dir`` holds recorded traces (``<task_id>.jsonl``,
+    what ``agent run --record`` writes and the mock backend replays); ``tasks_path`` the 12-task
+    eval; ``refs_dir`` the reference ``phonons_<compound>_<label>.json`` files ``compare_phonons``
+    reads; ``phonon_supercell``/``phonon_distance`` the defaults the ``phonons`` tool uses when
+    the caller passes ``[]``/``0``; ``max_tokens`` the per-turn output cap of the live backend."""
+
     backend: Literal["anthropic", "mock", "scripted"] = "mock"
     model_id: str = "claude-opus-5"
     budget: Budget = Budget()
     trace_dir: Path = Path("runs/agent/traces")
+    tasks_path: Path = Path("evals/agent_tasks.jsonl")
+    refs_dir: Path = Path("evals/refs")
+    phonon_supercell: list[int] = [2, 2, 2]
+    phonon_distance: float = 0.03
+    max_tokens: int = 16000
 
 
 class ReportConfig(B20Model):
     numbers_path: Path = Path("reports/numbers.json")
+
+
+class BenchConfig(B20Model):
+    """Day-1 timing task (SPEC.md section 15; ``b20mlip bench``). The root CLI takes only
+    ``--out``, so every knob here is set with ``--set bench.<key>=<value>``: ``model`` is the MACE
+    file to time (``null`` = the foundation of ``train.foundation``), ``tiers`` the comma list of
+    measurements ``a`` fine-tune epoch, ``b`` MD, ``c`` WBM relaxations, ``d`` phonons, ``e``
+    forward+backward RSS (letters or names), ``quick`` scales every size down for the tiny CI
+    model, ``force`` re-measures sub-tasks already cached in ``<out>/bench.json``."""
+
+    model: str | None = None
+    tiers: str = "a,b,c,d,e"
+    quick: bool = False
+    force: bool = False
+    compound: str = "FeSi"
+    # (a) one naive fine-tuning epoch per size class, batch train.batch_size
+    n_frames_8atom: int = 80
+    n_frames_64atom: int = 20
+    finetune_epochs: int = 2  # the last epoch is the measurement (epoch 0 carries warm-up)
+    finetune_timeout_s: int = 3600
+    # (b) NVT Langevin steps at md.timestep_fs; the warm-up steps are excluded
+    md_natoms: list[int] = [64, 512]
+    md_steps: int = 200
+    md_warmup_steps: int = 10
+    md_T: float = 300.0
+    # (c) FIRE + FrechetCellFilter on the first n WBM-sample structures (eval.fmax / max_steps)
+    n_relax: int = 20
+    # (d) phonopy finite displacements
+    phonon_supercell: int = 2
+    phonon_distance: float = 0.03
+    # (e) forward + backward (forces) on one training batch, in a fresh process
+    fwbw_batch: int = 4
+    fwbw_natoms: int = 64
+    fwbw_repeats: int = 3
 
 
 class Settings(BaseSettings):
@@ -256,6 +301,7 @@ class Settings(BaseSettings):
     sampling: SamplingConfig = SamplingConfig()
     agent: AgentConfig = AgentConfig()
     report: ReportConfig = ReportConfig()
+    bench: BenchConfig = BenchConfig()
 
     def sha256(self) -> str:
         """Hash of the resolved configuration (canonical JSON, sorted keys)."""
@@ -350,6 +396,7 @@ def load_config(
 
 __all__ = [
     "AgentConfig",
+    "BenchConfig",
     "ClusterConfig",
     "ComputeConfig",
     "DFTConfig",
