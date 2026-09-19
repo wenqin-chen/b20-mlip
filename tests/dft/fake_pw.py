@@ -9,6 +9,9 @@ Modes (environment variables, read by the ``dft run`` unit script's child proces
   and k-mesh, and print a QE 7.x-formatted output for that geometry (converge, phonons and E0s
   tests). Energy per atom: ``E_LJ/N + 0.050 exp(-(ecut-40)/10) + 0.200/n_k`` eV.
 * ``FAKE_PW_FAIL_UNITS=a,b``: units (cwd basename) that print ``pw_unconverged.out`` instead.
+* ``FAKE_PW_DAVIDSON_UNITS=a,b``: units whose FIRST attempt dies like QE's ``c_bands`` error
+  ("too many bands are not converged"); a second call with ``-in pw_retry.in`` (the unit
+  script's conjugate-gradient retry) succeeds normally.
 * ``FAKE_PW_CALLS=<path>``: append the unit id to this file on every call (resume tests).
 
 Importable too: ``format_pw_out`` builds the synthetic output used in ``model`` mode.
@@ -212,6 +215,20 @@ def main(argv: list[str]) -> int:
         with open(calls, "a", encoding="utf-8") as fh:
             fh.write(unit + "\n")
     fail_units = {u for u in os.environ.get("FAKE_PW_FAIL_UNITS", "").split(",") if u}
+    davidson_units = {u for u in os.environ.get("FAKE_PW_DAVIDSON_UNITS", "").split(",") if u}
+    in_name = argv[argv.index("-in") + 1] if "-in" in argv else "pw.in"
+    if unit in davidson_units and in_name != "pw_retry.in":
+        sys.stdout.write(
+            "     Program PWSCF v.7.5 starts on 19Sep2026 at  0:00:00 \n\n"
+            "     iteration #  3     ecut=    80.00 Ry     beta= 0.40\n"
+            "     Davidson diagonalization with overlap\n\n"
+            " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n"
+            "     Error in routine c_bands (1):\n"
+            "     too many bands are not converged\n"
+            " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n\n"
+            "     stopping ...\n"
+        )
+        return 1
     if unit in fail_units:
         sys.stdout.write((GOLDEN / "pw_unconverged.out").read_text(encoding="utf-8"))
         return 0
@@ -219,8 +236,7 @@ def main(argv: list[str]) -> int:
     if mode == "golden":
         sys.stdout.write((GOLDEN / "pw.out").read_text(encoding="utf-8"))
         return 0
-    in_path = Path(argv[argv.index("-in") + 1]) if "-in" in argv else Path("pw.in")
-    spec = parse_pw_in(in_path.read_text(encoding="utf-8"))
+    spec = parse_pw_in(Path(in_name).read_text(encoding="utf-8"))
     sys.stdout.write(format_pw_out(spec, model_labels(spec)))
     return 0
 

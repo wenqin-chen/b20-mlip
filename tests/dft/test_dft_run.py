@@ -305,3 +305,33 @@ def test_cli_prep_run_collect(
     )
     assert res.exit_code == 1 and '"status": "failed"' in res.output
     assert runner.invoke(app, ["dft", "run"]).exit_code == 2  # missing --units: usage error
+
+
+def test_davidson_failure_is_retried_with_cg(
+    dft_settings: Settings,
+    three_frames: list[Frame],
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Tillicum 2026-09-19 (FeSi_ec50_k0.3): QE died with 'too many bands are not converged';
+    the unit script retries once with diagonalization='cg' and the unit still ends .done."""
+    cfg = dft_settings
+    frames_path = tmp_path / "frames.extxyz"
+    write_frames(three_frames, frames_path)
+    root = cfg.paths.dft_dir / "r0"
+    calls = tmp_path / "calls.txt"
+    monkeypatch.setenv("FAKE_PW_CALLS", str(calls))
+    _run(cfg, "dft.prep", stages.prep, frames=frames_path, out=root)
+    ids = qe.list_units(root)
+    monkeypatch.setenv("FAKE_PW_DAVIDSON_UNITS", ids[1])
+    run = _run(cfg, "dft.run", stages.run, units=root)
+    assert run.status == "ok", run.summary
+    assert calls.read_text().split() == [ids[0], ids[1], ids[1], ids[2]]  # one retry, in place
+    unit = root / ids[1]
+    assert (unit / ".done").is_file() and (unit / "pw_attempt1.out").is_file()
+    retry = (unit / "pw_retry.in").read_text()
+    assert "diagonalization = 'cg'" in retry and "mixing_beta = 0.3" in retry
+    assert "too many bands" in (unit / "pw_attempt1.out").read_text()
+    assert "convergence has been achieved" in (unit / "pw.out").read_text()
+    for uid in (ids[0], ids[2]):
+        assert not (root / uid / "pw_retry.in").exists()

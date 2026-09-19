@@ -108,6 +108,21 @@ set +e
 $QE_CMD -in pw.in > pw.out 2> pw.err
 rc=$?
 set -e
+# Davidson occasionally dies with "too many bands are not converged" (c_bands) on rattled or
+# hot frames: retry ONCE with the conjugate-gradient diagonaliser and a softer mixing before
+# giving up (retry input kept as pw_retry.in; the failed attempt's output as pw_attempt1.out).
+davidson='too many bands are not converged\|Error in routine c_bands'
+if ! grep -q "convergence has been achieved" pw.out && grep -q "$davidson" pw.out; then
+  cp pw.out pw_attempt1.out
+  sed -e "s/^&ELECTRONS/\&ELECTRONS\n  diagonalization = 'cg'\n  diago_full_acc = .true./" \
+      -e "s/mixing_beta = [0-9.]*/mixing_beta = 0.3/" pw.in > pw_retry.in
+  rm -rf tmp
+  set +e
+  $QE_CMD -in pw_retry.in > pw.out 2>> pw.err
+  rc=$?
+  set -e
+  echo "unit $B20_UNIT: Davidson failure, retried with diagonalization='cg' (exit $rc)" >&2
+fi
 wall=$(( $(date +%s) - start ))
 if grep -q "convergence has been achieved" pw.out; then
   [ "${B20_KEEP_TMP:-0}" = "1" ] || rm -rf tmp
