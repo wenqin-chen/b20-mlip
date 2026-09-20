@@ -1,0 +1,102 @@
+{
+  "sampling.neb.FeSi.B0.E_a_eV": 0.6923492359619559,
+  "sampling.neb.FeSi.B0.E_a_eV@meta": {
+    "reference": {
+      "code": "mace",
+      "functional": "PBE",
+      "pseudos": null,
+      "e0_source": "foundation",
+      "cross_functional": false
+    },
+    "e0_source": "foundation",
+    "head": "Default",
+    "n": 7,
+    "seed": 0,
+    "ci95": null,
+    "model_label": "B0",
+    "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+    "energy_scale": "mp",
+    "T": 0.0,
+    "method": "neb-ci-idpp-fire",
+    "ci95_reason": "deterministic NEB barrier (no sampling)",
+    "unit": "eV",
+    "compound": "FeSi",
+    "n_atoms": 63,
+    "converged": true
+  },
+  "sampling.neb.FeSi.B0.E_a_reverse_eV": 0.6923492359618422,
+  "sampling.neb.FeSi.B0.E_a_reverse_eV@meta": {
+    "reference": {
+      "code": "mace",
+      "functional": "PBE",
+      "pseudos": null,
+      "e0_source": "foundation",
+      "cross_functional": false
+    },
+    "e0_source": "foundation",
+    "head": "Default",
+    "n": 7,
+    "seed": 0,
+    "ci95": null,
+    "model_label": "B0",
+    "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+    "energy_scale": "mp",
+    "T": 0.0,
+    "method": "neb-ci-idpp-fire",
+    "ci95_reason": "deterministic NEB barrier (no sampling)",
+    "unit": "eV",
+    "compound": "FeSi",
+    "n_atoms": 63,
+    "converged": true
+  },
+  "sampling.neb.FeSi.B0.dE_eV": 1.1368683772161603e-13,
+  "sampling.neb.FeSi.B0.dE_eV@meta": {
+    "reference": {
+      "code": "mace",
+      "functional": "PBE",
+      "pseudos": null,
+      "e0_source": "foundation",
+      "cross_functional": false
+    },
+    "e0_source": "foundation",
+    "head": "Default",
+    "n": 7,
+    "seed": 0,
+    "ci95": null,
+    "model_label": "B0",
+    "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+    "energy_scale": "mp",
+    "T": 0.0,
+    "method": "neb-ci-idpp-fire",
+    "ci95_reason": "deterministic NEB barrier (no sampling)",
+    "unit": "eV",
+    "compound": "FeSi",
+    "n_atoms": 63,
+    "converged": true
+  },
+  "sampling.neb.FeSi.Ea_eV": 0.6923492359619559,
+  "sampling.neb.FeSi.Ea_eV@meta": {
+    "reference": {
+      "code": "mace",
+      "functional": "PBE",
+      "pseudos": null,
+      "e0_source": "foundation",
+      "cross_functional": false
+    },
+    "e0_source": "foundation",
+    "head": "Default",
+    "n": 7,
+    "seed": 0,
+    "ci95": null,
+    "model_label": "B0",
+    "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+    "energy_scale": "mp",
+    "T": 0.0,
+    "method": "neb-ci-idpp-fire",
+    "ci95_reason": "deterministic NEB barrier (no sampling)",
+    "unit": "eV",
+    "compound": "FeSi",
+    "n_atoms": 63,
+    "converged": true
+  }
+}

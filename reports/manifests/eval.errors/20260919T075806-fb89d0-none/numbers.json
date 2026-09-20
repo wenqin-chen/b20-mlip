@@ -1,0 +1,114 @@
+{
+  "eval.errors.T4a.B0p.mae_e": 24.77615012472374,
+  "eval.errors.T4a.B0p.mae_e@meta": {
+    "reference": {
+      "code": "vasp",
+      "functional": "PBE",
+      "pseudos": "PAW (Materials Project)",
+      "e0_source": "foundation",
+      "cross_functional": false
+    },
+    "head": "Default",
+    "n": 65,
+    "seed": 0,
+    "ci95": [
+      16.95981641982193,
+      36.40220920897192
+    ],
+    "e0_source": "foundation",
+    "energy_scale": "mp",
+    "model_label": "B0p",
+    "bracket": "B0p",
+    "tier": "T4a",
+    "unit": "meV/atom",
+    "model_sha256": "01bfe22100139f424713cf921144e5509cbe353d67aa9fa1be9c6e1e0ed35845",
+    "split_id": "",
+    "bootstrap_n": 2000,
+    "n_frames": 65,
+    "n_atoms": 520
+  },
+  "eval.errors.T4a.B0p.rmse_e": 32.21513460351291,
+  "eval.errors.T4a.B0p.rmse_e@meta": {
+    "reference": {
+      "code": "vasp",
+      "functional": "PBE",
+      "pseudos": "PAW (Materials Project)",
+      "e0_source": "foundation",
+      "cross_functional": false
+    },
+    "head": "Default",
+    "n": 65,
+    "seed": 0,
+    "ci95": [
+      22.46010768049381,
+      42.53147441095943
+    ],
+    "e0_source": "foundation",
+    "energy_scale": "mp",
+    "model_label": "B0p",
+    "bracket": "B0p",
+    "tier": "T4a",
+    "unit": "meV/atom",
+    "model_sha256": "01bfe22100139f424713cf921144e5509cbe353d67aa9fa1be9c6e1e0ed35845",
+    "split_id": "",
+    "bootstrap_n": 2000,
+    "n_frames": 65,
+    "n_atoms": 520
+  },
+  "eval.errors.T4a.B0p.mae_f": 63.72200459779491,
+  "eval.errors.T4a.B0p.mae_f@meta": {
+    "reference": {
+      "code": "vasp",
+      "functional": "PBE",
+      "pseudos": "PAW (Materials Project)",
+      "e0_source": "foundation",
+      "cross_functional": false
+    },
+    "head": "Default",
+    "n": 65,
+    "seed": 0,
+    "ci95": [
+      45.59694902741536,
+      83.65032116936167
+    ],
+    "e0_source": "foundation",
+    "energy_scale": "mp",
+    "model_label": "B0p",
+    "bracket": "B0p",
+    "tier": "T4a",
+    "unit": "meV/\u00c5",
+    "model_sha256": "01bfe22100139f424713cf921144e5509cbe353d67aa9fa1be9c6e1e0ed35845",
+    "split_id": "",
+    "bootstrap_n": 2000,
+    "n_frames": 65,
+    "n_atoms": 520
+  },
+  "eval.errors.T4a.B0p.rmse_f": 81.81763564475175,
+  "eval.errors.T4a.B0p.rmse_f@meta": {
+    "reference": {
+      "code": "vasp",
+      "functional": "PBE",
+      "pseudos": "PAW (Materials Project)",
+      "e0_source": "foundation",
+      "cross_functional": false
+    },
+    "head": "Default",
+    "n": 65,
+    "seed": 0,
+    "ci95": [
+      63.96138507637353,
+      99.88292910273309
+    ],
+    "e0_source": "foundation",
+    "energy_scale": "mp",
+    "model_label": "B0p",
+    "bracket": "B0p",
+    "tier": "T4a",
+    "unit": "meV/\u00c5",
+    "model_sha256": "01bfe22100139f424713cf921144e5509cbe353d67aa9fa1be9c6e1e0ed35845",
+    "split_id": "",
+    "bootstrap_n": 2000,
+    "n_frames": 65,
+    "n_atoms": 520
+  }
+}

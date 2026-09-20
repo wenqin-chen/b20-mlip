@@ -1,0 +1,166 @@
+{
+  "eval.elastic.FeGe.B0.C11": 225.99525568895157,
+  "eval.elastic.FeGe.B0.C11@meta": {
+    "reference": {
+      "code": "mace",
+      "functional": "PBE",
+      "pseudos": null,
+      "e0_source": "foundation",
+      "cross_functional": false
+    },
+    "head": "Default",
+    "seed": 0,
+    "ci95": null,
+    "ci95_reason": "deterministic finite-difference quantity; no resampling",
+    "e0_source": "foundation",
+    "energy_scale": null,
+    "model_label": "B0",
+    "bracket": "B0",
+    "compound": "FeGe",
+    "cell_source": "dft",
+    "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+    "tier": "elastic",
+    "n": 8,
+    "unit": "GPa",
+    "strains": [
+      0.005,
+      0.01
+    ]
+  },
+  "eval.elastic.FeGe.B0.C12": 81.70885419821599,
+  "eval.elastic.FeGe.B0.C12@meta": {
+    "reference": {
+      "code": "mace",
+      "functional": "PBE",
+      "pseudos": null,
+      "e0_source": "foundation",
+      "cross_functional": false
+    },
+    "head": "Default",
+    "seed": 0,
+    "ci95": null,
+    "ci95_reason": "deterministic finite-difference quantity; no resampling",
+    "e0_source": "foundation",
+    "energy_scale": null,
+    "model_label": "B0",
+    "bracket": "B0",
+    "compound": "FeGe",
+    "cell_source": "dft",
+    "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+    "tier": "elastic",
+    "n": 8,
+    "unit": "GPa",
+    "strains": [
+      0.005,
+      0.01
+    ]
+  },
+  "eval.elastic.FeGe.B0.C44": 81.70183183421604,
+  "eval.elastic.FeGe.B0.C44@meta": {
+    "reference": {
+      "code": "mace",
+      "functional": "PBE",
+      "pseudos": null,
+      "e0_source": "foundation",
+      "cross_functional": false
+    },
+    "head": "Default",
+    "seed": 0,
+    "ci95": null,
+    "ci95_reason": "deterministic finite-difference quantity; no resampling",
+    "e0_source": "foundation",
+    "energy_scale": null,
+    "model_label": "B0",
+    "bracket": "B0",
+    "compound": "FeGe",
+    "cell_source": "dft",
+    "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+    "tier": "elastic",
+    "n": 8,
+    "unit": "GPa",
+    "strains": [
+      0.005,
+      0.01
+    ]
+  },
+  "eval.elastic.FeGe.B0.B": 129.80432136179454,
+  "eval.elastic.FeGe.B0.B@meta": {
+    "reference": {
+      "code": "mace",
+      "functional": "PBE",
+      "pseudos": null,
+      "e0_source": "foundation",
+      "cross_functional": false
+    },
+    "head": "Default",
+    "seed": 0,
+    "ci95": null,
+    "ci95_reason": "deterministic finite-difference quantity; no resampling",
+    "e0_source": "foundation",
+    "energy_scale": null,
+    "model_label": "B0",
+    "bracket": "B0",
+    "compound": "FeGe",
+    "cell_source": "dft",
+    "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+    "tier": "elastic",
+    "n": 8,
+    "unit": "GPa",
+    "strains": [
+      0.005,
+      0.01
+    ]
+  },
+  "eval.elastic.FeGe.B0.a0": 4.672599085023618,
+  "eval.elastic.FeGe.B0.a0@meta": {
+    "reference": {
+      "code": "mace",
+      "functional": "PBE",
+      "pseudos": null,
+      "e0_source": "foundation",
+      "cross_functional": false
+    },
+    "head": "Default",
+    "seed": 0,
+    "ci95": null,
+    "ci95_reason": "deterministic finite-difference quantity; no resampling",
+    "e0_source": "foundation",
+    "energy_scale": null,
+    "model_label": "B0",
+    "bracket": "B0",
+    "compound": "FeGe",
+    "cell_source": "dft",
+    "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+    "tier": "elastic",
+    "n": 9,
+    "unit": "\u00c5",
+    "eos": "birchmurnaghan",
+    "pct": 8.0
+  },
+  "eval.elastic.FeGe.B0.B0": 130.7490367827146,
+  "eval.elastic.FeGe.B0.B0@meta": {
+    "reference": {
+      "code": "mace",
+      "functional": "PBE",
+      "pseudos": null,
+      "e0_source": "foundation",
+      "cross_functional": false
+    },
+    "head": "Default",
+    "seed": 0,
+    "ci95": null,
+    "ci95_reason": "deterministic finite-difference quantity; no resampling",
+    "e0_source": "foundation",
+    "energy_scale": null,
+    "model_label": "B0",
+    "bracket": "B0",
+    "compound": "FeGe",
+    "cell_source": "dft",
+    "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+    "tier": "elastic",
+    "n": 9,
+    "unit": "GPa",
+    "eos": "birchmurnaghan",
+    "pct": 8.0
+  }
+}

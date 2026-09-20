@@ -1,0 +1,445 @@
+{
+  "schema_version": 1,
+  "stage": "sampling.wham",
+  "run_id": "20260920T225238-fb89d0-none",
+  "created_at": "2026-09-20T22:52:38.566487Z",
+  "host": "Wenqins-MacBook-Pro-10.local",
+  "user": "wenqinchen",
+  "git_sha": "42b5ddc0b856b07fc232b20f2cfe04e7d4ae817e",
+  "git_dirty": true,
+  "uv_lock_sha256": "a039dbcfb95b46c12c7a0b465b82a5728c5b69285be0a7ce472041a0c289bcaf",
+  "python": "3.11.15",
+  "packages": {
+    "b20-mlip": "0.1.0",
+    "mace-torch": "0.3.16",
+    "torch": "2.14.0",
+    "e3nn": "0.4.4",
+    "ase": "3.29.0",
+    "phonopy": "4.5.0",
+    "pymatgen": "2026.5.4",
+    "spglib": "2.7.0",
+    "seekpath": "2.2.1",
+    "pymbar": "4.0.3",
+    "numpy": "2.4.6",
+    "pydantic": "2.13.5",
+    "pydantic-settings": "2.15.0",
+    "anthropic": "1.6.0"
+  },
+  "config_sha256": "fb89d009e83d5720bf258f31408545d4c5192d2f617ce8cc06bb358770e19633",
+  "config": {
+    "paths": {
+      "data_dir": "data",
+      "runs_dir": "runs",
+      "models_dir": "models",
+      "dft_dir": "dft",
+      "reports_dir": "reports"
+    },
+    "compute": {
+      "threads": 6,
+      "dtype": "float64",
+      "device": "cpu"
+    },
+    "cluster": {
+      "alias": "tillicum",
+      "control_path": "~/.ssh/tillicum-cm",
+      "account": null,
+      "partition_cpu": null,
+      "partition_gpu": null,
+      "scratch": null,
+      "modules": [],
+      "qe_cmd": null,
+      "lammps_cmd": null,
+      "micromamba_env": null,
+      "qos": null,
+      "install_qe": false,
+      "lammps_sha": "4d222cb3ee2a6b14083c778968497bf9e0efc4b4",
+      "libtorch_cpu_url": "https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-2.14.0%2Bcpu.zip",
+      "libtorch_cuda_url": "https://download.pytorch.org/libtorch/cu126/libtorch-shared-with-deps-2.14.0%2Bcu126.zip",
+      "resources": {}
+    },
+    "data": {
+      "compounds": [
+        "FeSi",
+        "CoSi",
+        "MnSi",
+        "FeGe"
+      ],
+      "strains": [
+        -0.06,
+        -0.04,
+        -0.02,
+        0.02,
+        0.04,
+        0.06
+      ],
+      "shears": [
+        -0.04,
+        -0.02,
+        0.02,
+        0.04
+      ],
+      "rattle_A": 0.15,
+      "eos_pct": 8.0,
+      "temperatures_K": [
+        300.0,
+        600.0,
+        900.0
+      ],
+      "force_cap_eVA": 15.0,
+      "omat24_url": "https://dl.fbaipublicfiles.com/opencatalystproject/data/omat/251210/omat24_1M_251210.tar.gz",
+      "omat24_sha256": null,
+      "wbm_sample_n": 1000,
+      "wbm_seed": 0
+    },
+    "dft": {
+      "ecut_ry": 90.0,
+      "ecut_rho": 1080.0,
+      "k_spacing_inv_A": 0.25,
+      "smearing": "mv",
+      "degauss_ry": 0.01,
+      "nspin": {
+        "FeSi": 1,
+        "CoSi": 1,
+        "MnSi": 2,
+        "FeGe": 2,
+        "MnGe": 2
+      },
+      "starting_magnetization": {
+        "Mn": 0.5,
+        "Fe": 0.5,
+        "Co": 0.0
+      },
+      "pseudo_dir": "pseudos/sssp_efficiency",
+      "pseudo_family": "SSSP-efficiency-1.3",
+      "pseudos": {
+        "Fe": "Fe.pbe-spn-kjpaw_psl.0.2.1.UPF",
+        "Mn": "mn_pbe_v1.5.uspp.F.UPF",
+        "Co": "Co_pbe_v1.2.uspp.F.UPF",
+        "Si": "Si.pbe-n-rrkjus_psl.1.0.0.UPF",
+        "Ge": "ge_pbe_v1.4.uspp.F.UPF"
+      },
+      "pseudo_md5s": {
+        "Fe": "e86618425769142926afa95317d90200",
+        "Mn": "82ef2b46521d7a7d9e736dc3972e4928",
+        "Co": "5f91765df6ddd3222702df6e7b74a16d",
+        "Si": "0b0bb1205258b0d07b9f9672cf965d36",
+        "Ge": "9c9eaa91e581c3f09632fb3098b2c6b2"
+      },
+      "sssp_json": "configs/dft/sssp_efficiency_1.3_pbe.json",
+      "conv_thr": 1e-8,
+      "mixing_beta": 0.4,
+      "electron_maxstep": 100,
+      "branch_tol_muB": 0.3,
+      "m_ref_muB": {},
+      "noise_floor_n": 20,
+      "isolated_atom_box_A": 12.0,
+      "converge_ecuts_ry": [
+        40.0,
+        50.0,
+        60.0,
+        70.0,
+        80.0,
+        90.0
+      ],
+      "converge_k_spacings": [
+        0.35,
+        0.3,
+        0.25,
+        0.2
+      ],
+      "thresholds": {
+        "E_meV_atom": 1.0,
+        "F_meV_A": 5.0
+      }
+    },
+    "train": {
+      "foundation": "medium-mpa-0",
+      "lr": 0.0001,
+      "epochs": 30,
+      "batch_size": 4,
+      "energy_weight": 1.0,
+      "forces_weight": 100.0,
+      "stress_weight": 1.0,
+      "ema_decay": 0.99,
+      "replay": {
+        "pt_train_file": "mp",
+        "num_samples_pt": 10000,
+        "subselect_pt": "fps"
+      },
+      "e0s_file": "configs/dft/E0s_qe.json",
+      "scratch": {
+        "hidden_irreps": "64x0e+64x1o",
+        "r_max": 5.0
+      },
+      "loss": "universal",
+      "extra_args": []
+    },
+    "eval": {
+      "bootstrap_n": 2000,
+      "bootstrap_seed": 0,
+      "fmax": 0.05,
+      "max_steps": 500,
+      "offset_residual_gate_meV": 20.0
+    },
+    "md": {
+      "timestep_fs": 2.0,
+      "friction": 0.01,
+      "taut": 100.0,
+      "taup": 1000.0,
+      "equil_ps": 10.0,
+      "natoms": 64,
+      "bulk_modulus_GPa": 150.0,
+      "thermo_every_steps": 10,
+      "dump_every_steps": 100,
+      "vdos_every_steps": 5,
+      "rdf_rmax_A": 6.0,
+      "rdf_nbins": 200
+    },
+    "sampling": {
+      "k_eVA2": 5.0,
+      "windows": 12,
+      "ps_per_window": 15.0,
+      "T": 300.0
+    },
+    "agent": {
+      "backend": "mock",
+      "model_id": "claude-opus-5",
+      "budget": {
+        "max_calls": 25,
+        "max_wall_s": 1800,
+        "max_dft_frames": 200,
+        "max_node_hours": 10.0,
+        "max_atoms": 512,
+        "max_md_ps": 20.0,
+        "approve_cluster": false
+      },
+      "trace_dir": "runs/agent/traces",
+      "tasks_path": "evals/agent_tasks.jsonl",
+      "refs_dir": "evals/refs",
+      "phonon_supercell": [
+        2,
+        2,
+        2
+      ],
+      "phonon_distance": 0.03,
+      "max_tokens": 16000
+    },
+    "report": {
+      "numbers_path": "reports/numbers.json"
+    },
+    "bench": {
+      "model": null,
+      "tiers": "a,b,c,d,e",
+      "quick": false,
+      "force": false,
+      "compound": "FeSi",
+      "n_frames_8atom": 80,
+      "n_frames_64atom": 20,
+      "finetune_epochs": 2,
+      "finetune_timeout_s": 3600,
+      "md_natoms": [
+        64,
+        512
+      ],
+      "md_steps": 200,
+      "md_warmup_steps": 10,
+      "md_T": 300.0,
+      "n_relax": 20,
+      "phonon_supercell": 2,
+      "phonon_distance": 0.03,
+      "fwbw_batch": 4,
+      "fwbw_natoms": 64,
+      "fwbw_repeats": 3
+    }
+  },
+  "seed": null,
+  "inputs": [
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/windows.json",
+      "sha256": "26dffa43d70e1a1fd64ef7a577f948ccdfaaa5d83eac6fe1861fa98c3680f261",
+      "bytes": 3826,
+      "kind": "json"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_00.npz",
+      "sha256": "8bfe0317fa3b5ada6deb474b20ecffcd27dfb54891e624ad999ac29508a50d44",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_01.npz",
+      "sha256": "2c3dad3a1b5cc65298a94d5012771df3022259b972e79af23901801b61fccb30",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_02.npz",
+      "sha256": "220cd1c34a557773ccbaefa43ce1c041b750e38a179c69c813e45b7329aef62c",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_03.npz",
+      "sha256": "a4043db71a6dc617d93bc7e9621ec9ba2282d618f82eee68c936c99f5e6e44f2",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_04.npz",
+      "sha256": "eb3284b52ab4c921a32648a7e5d472d2c29b7d5e79b9ae0e4593f3f7e699ba51",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_05.npz",
+      "sha256": "abbeb1d3868bfc19f32219cc0d664a4a037f520b11992f87bcd543ca334d1131",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_06.npz",
+      "sha256": "4a0fb658bf4265130f4330fe08e9df1bcf6f0e00fcc593f989d3e763c4563ee0",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_07.npz",
+      "sha256": "d65c49abc45c6040f56776b78c0d366ad8bcd0ef68369449fcd5f230d07085d9",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_08.npz",
+      "sha256": "d20ffc847670c795da98021b87f30826f71f32576bc3e207a9303b163971162b",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_09.npz",
+      "sha256": "eecb23a784623e0e57112499076b89c6b1bb3c563020b9ba8f51c666e821d501",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_10.npz",
+      "sha256": "d34b40fd00849c59956329d526558299ea1ae5d34d34d7a23844fdd724848e6f",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_11.npz",
+      "sha256": "791ded0f77b44ac8f3ccfc011736feed9bf19ea0673fc887815595d284972794",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_12.npz",
+      "sha256": "d82945125bed2d4073f78bb58265dab7db803a3dc4a873f0ffdc1fee74390db9",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_13.npz",
+      "sha256": "2eef0f28f8e3e7d6160b499d9ce65bbc76cca8e2c8d60d37970911d03c012132",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_14.npz",
+      "sha256": "92124d083cebab0d3a3a637daee7cfb492dc3c65ca3afc03376c6855a720ef8a",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_15.npz",
+      "sha256": "e3d7fcc030eebf2acd6ff1c10571ee192386a690e2db332219766a5d6f11a0e1",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_16.npz",
+      "sha256": "66b227cc3cca7894b5a0ca0155be93225b9dae021535d8ae505debc9a44eed8f",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_17.npz",
+      "sha256": "f154065fd05f2f48c08955cc77d8ddb773b8f2055206b907011f8742925bbf3b",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_18.npz",
+      "sha256": "7f7bab7fb9ba40285ea1c9078c01ee652001a835837082a74dacb86c4d5e2820",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_19.npz",
+      "sha256": "96d3f184bd4f0cd0ef1b0e10051683499d14186b06f0871d8a6439f9c2fc1097",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_20.npz",
+      "sha256": "424a36b05e12c4c85dd7da5aa3e35a06eb0e1f787d741eae5db53648c63ee617",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_21.npz",
+      "sha256": "2efe7a988a4b7240adad3ea909ebbf0049638f512b0f9fc8afe6027c8e571165",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_22.npz",
+      "sha256": "926f04f6ea2de4e5fee314c496e898711415179aaa3f6b73718c5c757a78667b",
+      "bytes": 247163,
+      "kind": "other"
+    },
+    {
+      "path": "runs/sampling.umbrella/20260920T212744-fd5fe0-0/window_23.npz",
+      "sha256": "72dd427688757aeaaa5deb3740679f4ec678009aca383f1ac71401788c7d8636",
+      "bytes": 247163,
+      "kind": "other"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "runs/sampling.wham/20260920T225238-fb89d0-none/pmf.json",
+      "sha256": "cc94c329ec67f0cd9cc34618f50db2f709e01685fb59cd7ab19faaaf1cf2a876",
+      "bytes": 20920,
+      "kind": "json"
+    },
+    {
+      "path": "runs/sampling.wham/20260920T225238-fb89d0-none/numbers.json",
+      "sha256": "f0541a9ec7ca197fe259102ab628e6fd895ee83a2d1ab4d317dfc0392fa11fb5",
+      "bytes": 5248,
+      "kind": "json"
+    }
+  ],
+  "wall_seconds": 4.690010749996873,
+  "status": "ok",
+  "slurm": null,
+  "extras": {
+    "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+    "model_label": "B0",
+    "head": "Default",
+    "compound": "FeSi",
+    "method": "mbar",
+    "crosscheck_method": "wham",
+    "umbrella_run": "runs/sampling.umbrella/20260920T212744-fd5fe0-0",
+    "umbrella_run_id": "20260920T212744-fd5fe0-0",
+    "T": 300.0,
+    "n_windows": 24,
+    "n_blocks": 5,
+    "dF_eV": -0.0012275770244260797,
+    "dF_block_err_eV": 0.006723757162299101,
+    "dF_barrier_eV": 0.7417079014822214,
+    "n_samples": 144024,
+    "overlap_ok": true,
+    "overlap_min": 0.37227128811864685,
+    "crosscheck_dF_eV": -0.001005858252268385
+  }
+}

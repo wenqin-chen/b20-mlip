@@ -1,4 +1,2669 @@
 {
   "@stale": [],
-  "@snapshots": {}
+  "@snapshots": {
+    "bench/20260919T074006-4a6dc7-0": "reports/manifests/bench/20260919T074006-4a6dc7-0",
+    "eval.elastic/20260919T075912-fb89d0-none": "reports/manifests/eval.elastic/20260919T075912-fb89d0-none",
+    "eval.elastic/20260919T075936-fb89d0-none": "reports/manifests/eval.elastic/20260919T075936-fb89d0-none",
+    "eval.elastic/20260919T075957-fb89d0-none": "reports/manifests/eval.elastic/20260919T075957-fb89d0-none",
+    "eval.elastic/20260919T080020-fb89d0-none": "reports/manifests/eval.elastic/20260919T080020-fb89d0-none",
+    "eval.errors/20260919T075717-fb89d0-none": "reports/manifests/eval.errors/20260919T075717-fb89d0-none",
+    "eval.errors/20260919T075806-fb89d0-none": "reports/manifests/eval.errors/20260919T075806-fb89d0-none",
+    "eval.errors/20260919T085532-fb89d0-none": "reports/manifests/eval.errors/20260919T085532-fb89d0-none",
+    "eval.errors/20260920T225306-fb89d0-none": "reports/manifests/eval.errors/20260920T225306-fb89d0-none",
+    "eval.errors/20260920T225328-fb89d0-none": "reports/manifests/eval.errors/20260920T225328-fb89d0-none",
+    "eval.errors/20260920T225339-fb89d0-none": "reports/manifests/eval.errors/20260920T225339-fb89d0-none",
+    "md.ase/20260919T085733-fb89d0-0": "reports/manifests/md.ase/20260919T085733-fb89d0-0",
+    "sampling.neb/20260919T085607-fb89d0-none": "reports/manifests/sampling.neb/20260919T085607-fb89d0-none",
+    "sampling.wham/20260920T225238-fb89d0-none": "reports/manifests/sampling.wham/20260920T225238-fb89d0-none"
+  },
+  "bench.finetune.s_per_epoch_64atom": {
+    "value": 39.45900011062622,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "ci95": null,
+      "ci95_reason": "single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 16,
+      "n_valid": 4,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6,
+      "unit": "s"
+    }
+  },
+  "bench.finetune.s_per_epoch_8atom": {
+    "value": 10.042999982833862,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "ci95": null,
+      "ci95_reason": "single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 72,
+      "n_valid": 8,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6,
+      "unit": "s"
+    }
+  },
+  "bench.finetune.s_per_frame_64atom": {
+    "value": 2.466187506914139,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "batch_size": 4,
+      "ci95": null,
+      "ci95_reason": "single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 16,
+      "natoms": 64,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6,
+      "unit": "s/frame/epoch"
+    }
+  },
+  "bench.finetune.s_per_frame_8atom": {
+    "value": 0.13948611087269253,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "batch_size": 4,
+      "ci95": null,
+      "ci95_reason": "single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 72,
+      "natoms": 8,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6,
+      "unit": "s/frame/epoch"
+    }
+  },
+  "bench.finetune.startup_s": {
+    "value": 5.510703921318054,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "ci95": null,
+      "ci95_reason": "single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 2,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6,
+      "unit": "s"
+    }
+  },
+  "bench.fwbw.peak_rss_gb": {
+    "value": 4.5845794677734375,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "batch_size": 4,
+      "ci95": null,
+      "ci95_reason": "single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 3,
+      "n_atoms": 256,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6,
+      "unit": "GiB"
+    }
+  },
+  "bench.fwbw.s_per_batch": {
+    "value": 14.144015722335704,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "ci95": null,
+      "ci95_reason": "single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 3,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6,
+      "unit": "s"
+    }
+  },
+  "bench.md.s_per_step_512": {
+    "value": 9.685184965568508,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "T": 300.0,
+      "ci95": null,
+      "ci95_reason": "single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "ensemble": "nvt",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 190,
+      "natoms": 512,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6,
+      "unit": "s/step"
+    }
+  },
+  "bench.md.s_per_step_64": {
+    "value": 0.26518429626839385,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "T": 300.0,
+      "ci95": null,
+      "ci95_reason": "single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "ensemble": "nvt",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 190,
+      "natoms": 64,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6,
+      "unit": "s/step"
+    }
+  },
+  "bench.phonons_fesi_222.s": {
+    "value": 2.6593912499956787,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "ci95": null,
+      "ci95_reason": "single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 4,
+      "n_displacements": 4,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6,
+      "unit": "s"
+    }
+  },
+  "bench.relax.s_per_relax_step": {
+    "value": 0.05566791861130478,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "ci95": null,
+      "ci95_reason": "single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 20,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6,
+      "unit": "s"
+    }
+  },
+  "bench.relax.s_per_structure": {
+    "value": 1.1384089356011828,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "ci95": null,
+      "ci95_reason": "single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 20,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6,
+      "unit": "s"
+    }
+  },
+  "bench.relax.steps_per_structure": {
+    "value": 20.45,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "ci95": null,
+      "ci95_reason": "single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 20,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6,
+      "unit": "steps"
+    }
+  },
+  "bench.schedule.finetune_round0_3seeds_h": {
+    "value": 5.796165176729361,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "ci95": null,
+      "ci95_reason": "derived from a single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "formula": "3 seeds * finetune_round0_per_seed_min / 60",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 1,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6
+    }
+  },
+  "bench.schedule.finetune_round0_epoch_s": {
+    "value": 231.66291693846384,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "ci95": null,
+      "ci95_reason": "derived from a single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "formula": "600 * s_per_frame_8atom + 60 * s_per_frame_64atom",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 1,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6
+    }
+  },
+  "bench.schedule.finetune_round0_per_seed_min": {
+    "value": 115.92330353458722,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "ci95": null,
+      "ci95_reason": "derived from a single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "formula": "(30 epochs * finetune_round0_epoch_s + startup_s) / 60",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 1,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6
+    }
+  },
+  "bench.schedule.fwbw_ram_headroom_gib": {
+    "value": 11.415420532226562,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "ci95": null,
+      "ci95_reason": "derived from a single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "formula": "host RAM (GiB) - fwbw peak_rss_gb",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 1,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6
+    }
+  },
+  "bench.schedule.md_512_100ps_ase_h": {
+    "value": 134.51645785511818,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "ci95": null,
+      "ci95_reason": "derived from a single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "formula": "(100.0 ps / 2.0 fs) steps * s_per_step_512 / 3600",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 1,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6
+    }
+  },
+  "bench.schedule.md_nvt_64_40ps_3T_h": {
+    "value": 4.419738271139897,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "ci95": null,
+      "ci95_reason": "derived from a single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "formula": "3 temperatures * md_nvt_64_40ps_per_T_h",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 1,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6
+    }
+  },
+  "bench.schedule.md_nvt_64_40ps_per_T_h": {
+    "value": 1.4732460903799658,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "ci95": null,
+      "ci95_reason": "derived from a single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "formula": "(40.0 ps / 2.0 fs) steps * s_per_step_64 / 3600",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 1,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6
+    }
+  },
+  "bench.schedule.phonondb103_h": {
+    "value": 0.07608813854154303,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "ci95": null,
+      "ci95_reason": "derived from a single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "formula": "103 compounds * phonons_s / 3600",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 1,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6
+    }
+  },
+  "bench.schedule.umbrella_windows_64_h": {
+    "value": 6.629607406709846,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "ci95": null,
+      "ci95_reason": "derived from a single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "formula": "12 windows * (15.0 ps / 2.0 fs) steps * s_per_step_64 / 3600",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 1,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6
+    }
+  },
+  "bench.schedule.wbm_relax_cap_h": {
+    "value": 7.73165536268122,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "ci95": null,
+      "ci95_reason": "derived from a single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "formula": "1000 structures * 500 steps * s_per_relax_step / 3600",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 1,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6
+    }
+  },
+  "bench.schedule.wbm_relax_h": {
+    "value": 0.3162247043336619,
+    "run_id": "20260919T074006-4a6dc7-0",
+    "manifest_sha256": "1a9f3247e7b8e3270f7ab9862a6624420c95a7b875216005778f0d2c68dfd382",
+    "stage": "bench",
+    "meta": {
+      "ci95": null,
+      "ci95_reason": "derived from a single timing run",
+      "dtype": "float64",
+      "e0_source": "foundation",
+      "formula": "1000 structures * s_per_structure / 3600",
+      "head": "Default",
+      "host": "Wenqins-MacBook-Pro-10.local",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 1,
+      "quick": false,
+      "reference": {
+        "code": "mace",
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "threads": 6
+    }
+  },
+  "eval.elastic.CoSi.B0.B": {
+    "value": 231.2135245748972,
+    "run_id": "20260919T075936-fb89d0-none",
+    "manifest_sha256": "f4bd4cf59dc7355a78d79a638dcd24e72cd17bfc933eb588ee76176b1b960fe2",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "CoSi",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 8,
+      "unit": "GPa",
+      "strains": [
+        0.005,
+        0.01
+      ]
+    }
+  },
+  "eval.elastic.CoSi.B0.B0": {
+    "value": 251.30853705165455,
+    "run_id": "20260919T075936-fb89d0-none",
+    "manifest_sha256": "f4bd4cf59dc7355a78d79a638dcd24e72cd17bfc933eb588ee76176b1b960fe2",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "CoSi",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 9,
+      "unit": "GPa",
+      "eos": "birchmurnaghan",
+      "pct": 8.0
+    }
+  },
+  "eval.elastic.CoSi.B0.C11": {
+    "value": 387.6165197055621,
+    "run_id": "20260919T075936-fb89d0-none",
+    "manifest_sha256": "f4bd4cf59dc7355a78d79a638dcd24e72cd17bfc933eb588ee76176b1b960fe2",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "CoSi",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 8,
+      "unit": "GPa",
+      "strains": [
+        0.005,
+        0.01
+      ]
+    }
+  },
+  "eval.elastic.CoSi.B0.C12": {
+    "value": 153.0120270095648,
+    "run_id": "20260919T075936-fb89d0-none",
+    "manifest_sha256": "f4bd4cf59dc7355a78d79a638dcd24e72cd17bfc933eb588ee76176b1b960fe2",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "CoSi",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 8,
+      "unit": "GPa",
+      "strains": [
+        0.005,
+        0.01
+      ]
+    }
+  },
+  "eval.elastic.CoSi.B0.C44": {
+    "value": 130.9791813889537,
+    "run_id": "20260919T075936-fb89d0-none",
+    "manifest_sha256": "f4bd4cf59dc7355a78d79a638dcd24e72cd17bfc933eb588ee76176b1b960fe2",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "CoSi",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 8,
+      "unit": "GPa",
+      "strains": [
+        0.005,
+        0.01
+      ]
+    }
+  },
+  "eval.elastic.CoSi.B0.a0": {
+    "value": 4.412343856074525,
+    "run_id": "20260919T075936-fb89d0-none",
+    "manifest_sha256": "f4bd4cf59dc7355a78d79a638dcd24e72cd17bfc933eb588ee76176b1b960fe2",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "CoSi",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 9,
+      "unit": "\u00c5",
+      "eos": "birchmurnaghan",
+      "pct": 8.0
+    }
+  },
+  "eval.elastic.FeGe.B0.B": {
+    "value": 129.80432136179454,
+    "run_id": "20260919T080020-fb89d0-none",
+    "manifest_sha256": "1acba799346156cb4de01c83056c2651a789c0a67fc43663d68688807c51bb15",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "FeGe",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 8,
+      "unit": "GPa",
+      "strains": [
+        0.005,
+        0.01
+      ]
+    }
+  },
+  "eval.elastic.FeGe.B0.B0": {
+    "value": 130.7490367827146,
+    "run_id": "20260919T080020-fb89d0-none",
+    "manifest_sha256": "1acba799346156cb4de01c83056c2651a789c0a67fc43663d68688807c51bb15",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "FeGe",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 9,
+      "unit": "GPa",
+      "eos": "birchmurnaghan",
+      "pct": 8.0
+    }
+  },
+  "eval.elastic.FeGe.B0.C11": {
+    "value": 225.99525568895157,
+    "run_id": "20260919T080020-fb89d0-none",
+    "manifest_sha256": "1acba799346156cb4de01c83056c2651a789c0a67fc43663d68688807c51bb15",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "FeGe",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 8,
+      "unit": "GPa",
+      "strains": [
+        0.005,
+        0.01
+      ]
+    }
+  },
+  "eval.elastic.FeGe.B0.C12": {
+    "value": 81.70885419821599,
+    "run_id": "20260919T080020-fb89d0-none",
+    "manifest_sha256": "1acba799346156cb4de01c83056c2651a789c0a67fc43663d68688807c51bb15",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "FeGe",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 8,
+      "unit": "GPa",
+      "strains": [
+        0.005,
+        0.01
+      ]
+    }
+  },
+  "eval.elastic.FeGe.B0.C44": {
+    "value": 81.70183183421604,
+    "run_id": "20260919T080020-fb89d0-none",
+    "manifest_sha256": "1acba799346156cb4de01c83056c2651a789c0a67fc43663d68688807c51bb15",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "FeGe",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 8,
+      "unit": "GPa",
+      "strains": [
+        0.005,
+        0.01
+      ]
+    }
+  },
+  "eval.elastic.FeGe.B0.a0": {
+    "value": 4.672599085023618,
+    "run_id": "20260919T080020-fb89d0-none",
+    "manifest_sha256": "1acba799346156cb4de01c83056c2651a789c0a67fc43663d68688807c51bb15",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "FeGe",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 9,
+      "unit": "\u00c5",
+      "eos": "birchmurnaghan",
+      "pct": 8.0
+    }
+  },
+  "eval.elastic.FeSi.B0.B": {
+    "value": 159.66123361921788,
+    "run_id": "20260919T075912-fb89d0-none",
+    "manifest_sha256": "9ad9f5a8a93f9175c795e5cbc74c48f8b7eb69f72c92684f3c33a2290fc179e3",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "FeSi",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 8,
+      "unit": "GPa",
+      "strains": [
+        0.005,
+        0.01
+      ]
+    }
+  },
+  "eval.elastic.FeSi.B0.B0": {
+    "value": 186.71336850409253,
+    "run_id": "20260919T075912-fb89d0-none",
+    "manifest_sha256": "9ad9f5a8a93f9175c795e5cbc74c48f8b7eb69f72c92684f3c33a2290fc179e3",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "FeSi",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 9,
+      "unit": "GPa",
+      "eos": "birchmurnaghan",
+      "pct": 8.0
+    }
+  },
+  "eval.elastic.FeSi.B0.C11": {
+    "value": 323.30627553830016,
+    "run_id": "20260919T075912-fb89d0-none",
+    "manifest_sha256": "9ad9f5a8a93f9175c795e5cbc74c48f8b7eb69f72c92684f3c33a2290fc179e3",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "FeSi",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 8,
+      "unit": "GPa",
+      "strains": [
+        0.005,
+        0.01
+      ]
+    }
+  },
+  "eval.elastic.FeSi.B0.C12": {
+    "value": 77.83871265967676,
+    "run_id": "20260919T075912-fb89d0-none",
+    "manifest_sha256": "9ad9f5a8a93f9175c795e5cbc74c48f8b7eb69f72c92684f3c33a2290fc179e3",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "FeSi",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 8,
+      "unit": "GPa",
+      "strains": [
+        0.005,
+        0.01
+      ]
+    }
+  },
+  "eval.elastic.FeSi.B0.C44": {
+    "value": 118.58366753469373,
+    "run_id": "20260919T075912-fb89d0-none",
+    "manifest_sha256": "9ad9f5a8a93f9175c795e5cbc74c48f8b7eb69f72c92684f3c33a2290fc179e3",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "FeSi",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 8,
+      "unit": "GPa",
+      "strains": [
+        0.005,
+        0.01
+      ]
+    }
+  },
+  "eval.elastic.FeSi.B0.a0": {
+    "value": 4.413476424293376,
+    "run_id": "20260919T075912-fb89d0-none",
+    "manifest_sha256": "9ad9f5a8a93f9175c795e5cbc74c48f8b7eb69f72c92684f3c33a2290fc179e3",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "FeSi",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 9,
+      "unit": "\u00c5",
+      "eos": "birchmurnaghan",
+      "pct": 8.0
+    }
+  },
+  "eval.elastic.MnSi.B0.B": {
+    "value": 176.101429676703,
+    "run_id": "20260919T075957-fb89d0-none",
+    "manifest_sha256": "70f3e566516f99160afda72fd177e291e23f6c03c2555efbd3a71eb66801fba9",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "MnSi",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 8,
+      "unit": "GPa",
+      "strains": [
+        0.005,
+        0.01
+      ]
+    }
+  },
+  "eval.elastic.MnSi.B0.B0": {
+    "value": 166.79923871324485,
+    "run_id": "20260919T075957-fb89d0-none",
+    "manifest_sha256": "70f3e566516f99160afda72fd177e291e23f6c03c2555efbd3a71eb66801fba9",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "MnSi",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 9,
+      "unit": "GPa",
+      "eos": "birchmurnaghan",
+      "pct": 8.0
+    }
+  },
+  "eval.elastic.MnSi.B0.C11": {
+    "value": 350.22800773010596,
+    "run_id": "20260919T075957-fb89d0-none",
+    "manifest_sha256": "70f3e566516f99160afda72fd177e291e23f6c03c2555efbd3a71eb66801fba9",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "MnSi",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 8,
+      "unit": "GPa",
+      "strains": [
+        0.005,
+        0.01
+      ]
+    }
+  },
+  "eval.elastic.MnSi.B0.C12": {
+    "value": 89.0381406500015,
+    "run_id": "20260919T075957-fb89d0-none",
+    "manifest_sha256": "70f3e566516f99160afda72fd177e291e23f6c03c2555efbd3a71eb66801fba9",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "MnSi",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 8,
+      "unit": "GPa",
+      "strains": [
+        0.005,
+        0.01
+      ]
+    }
+  },
+  "eval.elastic.MnSi.B0.C44": {
+    "value": 120.94027398939063,
+    "run_id": "20260919T075957-fb89d0-none",
+    "manifest_sha256": "70f3e566516f99160afda72fd177e291e23f6c03c2555efbd3a71eb66801fba9",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "MnSi",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 8,
+      "unit": "GPa",
+      "strains": [
+        0.005,
+        0.01
+      ]
+    }
+  },
+  "eval.elastic.MnSi.B0.a0": {
+    "value": 4.54957187292014,
+    "run_id": "20260919T075957-fb89d0-none",
+    "manifest_sha256": "70f3e566516f99160afda72fd177e291e23f6c03c2555efbd3a71eb66801fba9",
+    "stage": "eval.elastic",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic finite-difference quantity; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "compound": "MnSi",
+      "cell_source": "dft",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "tier": "elastic",
+      "n": 9,
+      "unit": "\u00c5",
+      "eos": "birchmurnaghan",
+      "pct": 8.0
+    }
+  },
+  "eval.errors.T3.B0.mae_f": {
+    "value": 156.8969527727833,
+    "run_id": "20260920T225306-fb89d0-none",
+    "manifest_sha256": "9c8bfb282ff8f3bc466cbe18b40c273ad0513830ee2b2a32165a1bcea2ec6a5e",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (OMat24)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 91,
+      "seed": 0,
+      "ci95": [
+        136.50128814054523,
+        183.476561012719
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0",
+      "bracket": "B0",
+      "tier": "T3",
+      "unit": "meV/\u00c5",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "split_id": "72c0af30f146",
+      "bootstrap_n": 2000,
+      "n_frames": 91,
+      "n_atoms": 1359,
+      "noise_floor_f": 21.528450929284976
+    }
+  },
+  "eval.errors.T3.B0.mae_s": {
+    "value": 9.724546916017273,
+    "run_id": "20260920T225306-fb89d0-none",
+    "manifest_sha256": "9c8bfb282ff8f3bc466cbe18b40c273ad0513830ee2b2a32165a1bcea2ec6a5e",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (OMat24)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 91,
+      "seed": 0,
+      "ci95": [
+        7.902333726180376,
+        11.919516176113788
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0",
+      "bracket": "B0",
+      "tier": "T3",
+      "unit": "meV/\u00c5^3",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "split_id": "72c0af30f146",
+      "bootstrap_n": 2000,
+      "n_frames": 91,
+      "n_atoms": 1359,
+      "noise_floor_f": 21.528450929284976
+    }
+  },
+  "eval.errors.T3.B0.rmse_f": {
+    "value": 245.8273948178293,
+    "run_id": "20260920T225306-fb89d0-none",
+    "manifest_sha256": "9c8bfb282ff8f3bc466cbe18b40c273ad0513830ee2b2a32165a1bcea2ec6a5e",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (OMat24)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 91,
+      "seed": 0,
+      "ci95": [
+        197.9103137124942,
+        305.61699572729657
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0",
+      "bracket": "B0",
+      "tier": "T3",
+      "unit": "meV/\u00c5",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "split_id": "72c0af30f146",
+      "bootstrap_n": 2000,
+      "n_frames": 91,
+      "n_atoms": 1359,
+      "noise_floor_f": 21.528450929284976
+    }
+  },
+  "eval.errors.T3.B0p.mae_f": {
+    "value": 273.4005107770321,
+    "run_id": "20260920T225328-fb89d0-none",
+    "manifest_sha256": "ebbe4eef4d4e488f1d63a8cf843ff62e8bb8cd865a235cf3a3b639a333a058dc",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (OMat24)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 91,
+      "seed": 0,
+      "ci95": [
+        238.2713058900759,
+        311.8221281578549
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0p",
+      "bracket": "B0p",
+      "tier": "T3",
+      "unit": "meV/\u00c5",
+      "model_sha256": "01bfe22100139f424713cf921144e5509cbe353d67aa9fa1be9c6e1e0ed35845",
+      "split_id": "72c0af30f146",
+      "bootstrap_n": 2000,
+      "n_frames": 91,
+      "n_atoms": 1359,
+      "noise_floor_f": 21.528450929284976
+    }
+  },
+  "eval.errors.T3.B0p.mae_s": {
+    "value": 12.29061114772372,
+    "run_id": "20260920T225328-fb89d0-none",
+    "manifest_sha256": "ebbe4eef4d4e488f1d63a8cf843ff62e8bb8cd865a235cf3a3b639a333a058dc",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (OMat24)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 91,
+      "seed": 0,
+      "ci95": [
+        10.214114580794538,
+        14.67435880206435
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0p",
+      "bracket": "B0p",
+      "tier": "T3",
+      "unit": "meV/\u00c5^3",
+      "model_sha256": "01bfe22100139f424713cf921144e5509cbe353d67aa9fa1be9c6e1e0ed35845",
+      "split_id": "72c0af30f146",
+      "bootstrap_n": 2000,
+      "n_frames": 91,
+      "n_atoms": 1359,
+      "noise_floor_f": 21.528450929284976
+    }
+  },
+  "eval.errors.T3.B0p.rmse_f": {
+    "value": 417.2618871739194,
+    "run_id": "20260920T225328-fb89d0-none",
+    "manifest_sha256": "ebbe4eef4d4e488f1d63a8cf843ff62e8bb8cd865a235cf3a3b639a333a058dc",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (OMat24)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 91,
+      "seed": 0,
+      "ci95": [
+        351.3797846846907,
+        494.83897545594306
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0p",
+      "bracket": "B0p",
+      "tier": "T3",
+      "unit": "meV/\u00c5",
+      "model_sha256": "01bfe22100139f424713cf921144e5509cbe353d67aa9fa1be9c6e1e0ed35845",
+      "split_id": "72c0af30f146",
+      "bootstrap_n": 2000,
+      "n_frames": 91,
+      "n_atoms": 1359,
+      "noise_floor_f": 21.528450929284976
+    }
+  },
+  "eval.errors.T3.B4.mae_f": {
+    "value": 138.39798788002528,
+    "run_id": "20260920T225339-fb89d0-none",
+    "manifest_sha256": "7f8865cbbfcbae9f74ef5f6d6977a51d17c20f8a5a08e2eb325cc6c88db5a812",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (OMat24)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 91,
+      "seed": 0,
+      "ci95": [
+        120.04900675653313,
+        162.40367255220994
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B4",
+      "bracket": "B4",
+      "tier": "T3",
+      "unit": "meV/\u00c5",
+      "model_sha256": "0cabbabaf91fae42820c8bd1718fe8bf3c11403640dbe0ebc0e868bd52c19c3a",
+      "split_id": "72c0af30f146",
+      "bootstrap_n": 2000,
+      "n_frames": 91,
+      "n_atoms": 1359,
+      "noise_floor_f": 21.528450929284976
+    }
+  },
+  "eval.errors.T3.B4.mae_s": {
+    "value": 10.036861760798866,
+    "run_id": "20260920T225339-fb89d0-none",
+    "manifest_sha256": "7f8865cbbfcbae9f74ef5f6d6977a51d17c20f8a5a08e2eb325cc6c88db5a812",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (OMat24)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 91,
+      "seed": 0,
+      "ci95": [
+        7.8522904255017725,
+        12.885376993915594
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B4",
+      "bracket": "B4",
+      "tier": "T3",
+      "unit": "meV/\u00c5^3",
+      "model_sha256": "0cabbabaf91fae42820c8bd1718fe8bf3c11403640dbe0ebc0e868bd52c19c3a",
+      "split_id": "72c0af30f146",
+      "bootstrap_n": 2000,
+      "n_frames": 91,
+      "n_atoms": 1359,
+      "noise_floor_f": 21.528450929284976
+    }
+  },
+  "eval.errors.T3.B4.rmse_f": {
+    "value": 220.985007386806,
+    "run_id": "20260920T225339-fb89d0-none",
+    "manifest_sha256": "7f8865cbbfcbae9f74ef5f6d6977a51d17c20f8a5a08e2eb325cc6c88db5a812",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (OMat24)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 91,
+      "seed": 0,
+      "ci95": [
+        175.34412991648242,
+        276.289660917667
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B4",
+      "bracket": "B4",
+      "tier": "T3",
+      "unit": "meV/\u00c5",
+      "model_sha256": "0cabbabaf91fae42820c8bd1718fe8bf3c11403640dbe0ebc0e868bd52c19c3a",
+      "split_id": "72c0af30f146",
+      "bootstrap_n": 2000,
+      "n_frames": 91,
+      "n_atoms": 1359,
+      "noise_floor_f": 21.528450929284976
+    }
+  },
+  "eval.errors.T4a.B0.mae_e": {
+    "value": 10.76244318285545,
+    "run_id": "20260919T075717-fb89d0-none",
+    "manifest_sha256": "f13320b4346afa9526e9132777cbbafab39b2e41c1e986315d5b6c6851da152c",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (Materials Project)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 65,
+      "seed": 0,
+      "ci95": [
+        8.736784120139273,
+        12.74554667399006
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0",
+      "bracket": "B0",
+      "tier": "T4a",
+      "unit": "meV/atom",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "split_id": "",
+      "bootstrap_n": 2000,
+      "n_frames": 65,
+      "n_atoms": 520
+    }
+  },
+  "eval.errors.T4a.B0.mae_f": {
+    "value": 36.46558666079687,
+    "run_id": "20260919T075717-fb89d0-none",
+    "manifest_sha256": "f13320b4346afa9526e9132777cbbafab39b2e41c1e986315d5b6c6851da152c",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (Materials Project)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 65,
+      "seed": 0,
+      "ci95": [
+        23.368492960649863,
+        49.527020124995595
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0",
+      "bracket": "B0",
+      "tier": "T4a",
+      "unit": "meV/\u00c5",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "split_id": "",
+      "bootstrap_n": 2000,
+      "n_frames": 65,
+      "n_atoms": 520
+    }
+  },
+  "eval.errors.T4a.B0.rmse_e": {
+    "value": 17.412858525287604,
+    "run_id": "20260919T075717-fb89d0-none",
+    "manifest_sha256": "f13320b4346afa9526e9132777cbbafab39b2e41c1e986315d5b6c6851da152c",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (Materials Project)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 65,
+      "seed": 0,
+      "ci95": [
+        12.144267797732041,
+        22.926950035445582
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0",
+      "bracket": "B0",
+      "tier": "T4a",
+      "unit": "meV/atom",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "split_id": "",
+      "bootstrap_n": 2000,
+      "n_frames": 65,
+      "n_atoms": 520
+    }
+  },
+  "eval.errors.T4a.B0.rmse_f": {
+    "value": 54.83125389798296,
+    "run_id": "20260919T075717-fb89d0-none",
+    "manifest_sha256": "f13320b4346afa9526e9132777cbbafab39b2e41c1e986315d5b6c6851da152c",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (Materials Project)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 65,
+      "seed": 0,
+      "ci95": [
+        36.530118041415676,
+        69.05285170389593
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0",
+      "bracket": "B0",
+      "tier": "T4a",
+      "unit": "meV/\u00c5",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "split_id": "",
+      "bootstrap_n": 2000,
+      "n_frames": 65,
+      "n_atoms": 520
+    }
+  },
+  "eval.errors.T4a.B0p.mae_e": {
+    "value": 24.77615012472374,
+    "run_id": "20260919T075806-fb89d0-none",
+    "manifest_sha256": "c2d378efa6f20b9d9270c24887d7507a947f76396db304176637bda402a3df03",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (Materials Project)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 65,
+      "seed": 0,
+      "ci95": [
+        16.95981641982193,
+        36.40220920897192
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0p",
+      "bracket": "B0p",
+      "tier": "T4a",
+      "unit": "meV/atom",
+      "model_sha256": "01bfe22100139f424713cf921144e5509cbe353d67aa9fa1be9c6e1e0ed35845",
+      "split_id": "",
+      "bootstrap_n": 2000,
+      "n_frames": 65,
+      "n_atoms": 520
+    }
+  },
+  "eval.errors.T4a.B0p.mae_f": {
+    "value": 63.72200459779491,
+    "run_id": "20260919T075806-fb89d0-none",
+    "manifest_sha256": "c2d378efa6f20b9d9270c24887d7507a947f76396db304176637bda402a3df03",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (Materials Project)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 65,
+      "seed": 0,
+      "ci95": [
+        45.59694902741536,
+        83.65032116936167
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0p",
+      "bracket": "B0p",
+      "tier": "T4a",
+      "unit": "meV/\u00c5",
+      "model_sha256": "01bfe22100139f424713cf921144e5509cbe353d67aa9fa1be9c6e1e0ed35845",
+      "split_id": "",
+      "bootstrap_n": 2000,
+      "n_frames": 65,
+      "n_atoms": 520
+    }
+  },
+  "eval.errors.T4a.B0p.rmse_e": {
+    "value": 32.21513460351291,
+    "run_id": "20260919T075806-fb89d0-none",
+    "manifest_sha256": "c2d378efa6f20b9d9270c24887d7507a947f76396db304176637bda402a3df03",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (Materials Project)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 65,
+      "seed": 0,
+      "ci95": [
+        22.46010768049381,
+        42.53147441095943
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0p",
+      "bracket": "B0p",
+      "tier": "T4a",
+      "unit": "meV/atom",
+      "model_sha256": "01bfe22100139f424713cf921144e5509cbe353d67aa9fa1be9c6e1e0ed35845",
+      "split_id": "",
+      "bootstrap_n": 2000,
+      "n_frames": 65,
+      "n_atoms": 520
+    }
+  },
+  "eval.errors.T4a.B0p.rmse_f": {
+    "value": 81.81763564475175,
+    "run_id": "20260919T075806-fb89d0-none",
+    "manifest_sha256": "c2d378efa6f20b9d9270c24887d7507a947f76396db304176637bda402a3df03",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (Materials Project)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 65,
+      "seed": 0,
+      "ci95": [
+        63.96138507637353,
+        99.88292910273309
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0p",
+      "bracket": "B0p",
+      "tier": "T4a",
+      "unit": "meV/\u00c5",
+      "model_sha256": "01bfe22100139f424713cf921144e5509cbe353d67aa9fa1be9c6e1e0ed35845",
+      "split_id": "",
+      "bootstrap_n": 2000,
+      "n_frames": 65,
+      "n_atoms": 520
+    }
+  },
+  "eval.errors.T4a.B4.mae_e": {
+    "value": 96.27990499715784,
+    "run_id": "20260919T085532-fb89d0-none",
+    "manifest_sha256": "3e4367962b6f8f5aee2a7b798791d8785b45674e3199b12d67a9b4ca5a526847",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (Materials Project)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 65,
+      "seed": 0,
+      "ci95": [
+        83.05592678322739,
+        111.5037658073277
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B4",
+      "bracket": "B4",
+      "tier": "T4a",
+      "unit": "meV/atom",
+      "model_sha256": "0cabbabaf91fae42820c8bd1718fe8bf3c11403640dbe0ebc0e868bd52c19c3a",
+      "split_id": "",
+      "bootstrap_n": 2000,
+      "n_frames": 65,
+      "n_atoms": 520
+    }
+  },
+  "eval.errors.T4a.B4.mae_f": {
+    "value": 50.15600846296917,
+    "run_id": "20260919T085532-fb89d0-none",
+    "manifest_sha256": "3e4367962b6f8f5aee2a7b798791d8785b45674e3199b12d67a9b4ca5a526847",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (Materials Project)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 65,
+      "seed": 0,
+      "ci95": [
+        33.819389052418884,
+        67.17147228626504
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B4",
+      "bracket": "B4",
+      "tier": "T4a",
+      "unit": "meV/\u00c5",
+      "model_sha256": "0cabbabaf91fae42820c8bd1718fe8bf3c11403640dbe0ebc0e868bd52c19c3a",
+      "split_id": "",
+      "bootstrap_n": 2000,
+      "n_frames": 65,
+      "n_atoms": 520
+    }
+  },
+  "eval.errors.T4a.B4.rmse_e": {
+    "value": 99.0426417492583,
+    "run_id": "20260919T085532-fb89d0-none",
+    "manifest_sha256": "3e4367962b6f8f5aee2a7b798791d8785b45674e3199b12d67a9b4ca5a526847",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (Materials Project)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 65,
+      "seed": 0,
+      "ci95": [
+        84.76895028593093,
+        113.75590454454648
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B4",
+      "bracket": "B4",
+      "tier": "T4a",
+      "unit": "meV/atom",
+      "model_sha256": "0cabbabaf91fae42820c8bd1718fe8bf3c11403640dbe0ebc0e868bd52c19c3a",
+      "split_id": "",
+      "bootstrap_n": 2000,
+      "n_frames": 65,
+      "n_atoms": 520
+    }
+  },
+  "eval.errors.T4a.B4.rmse_f": {
+    "value": 62.46235072007556,
+    "run_id": "20260919T085532-fb89d0-none",
+    "manifest_sha256": "3e4367962b6f8f5aee2a7b798791d8785b45674e3199b12d67a9b4ca5a526847",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (Materials Project)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 65,
+      "seed": 0,
+      "ci95": [
+        45.42661025825433,
+        76.47952085466508
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B4",
+      "bracket": "B4",
+      "tier": "T4a",
+      "unit": "meV/\u00c5",
+      "model_sha256": "0cabbabaf91fae42820c8bd1718fe8bf3c11403640dbe0ebc0e868bd52c19c3a",
+      "split_id": "",
+      "bootstrap_n": 2000,
+      "n_frames": 65,
+      "n_atoms": 520
+    }
+  },
+  "md.ase.MnSi.B0.npt.300.a_mean_A": {
+    "value": 4.557768333277923,
+    "run_id": "20260919T085733-fb89d0-0",
+    "manifest_sha256": "ac8eb5abc3b0989e5479533d1161db86c1a3edb5558e9e0a2ccf74e5f1513feb",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "ci95": [
+        4.54408836649936,
+        4.571448300056486
+      ],
+      "compound": "MnSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 501,
+      "natoms": 64,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 10000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "md.ase.MnSi.B0.npt.300.a_std_A": {
+    "value": 0.026359124099145984,
+    "run_id": "20260919T085733-fb89d0-0",
+    "manifest_sha256": "ac8eb5abc3b0989e5479533d1161db86c1a3edb5558e9e0a2ccf74e5f1513feb",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "ci95": null,
+      "ci95_reason": "a spread",
+      "compound": "MnSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 501,
+      "natoms": 64,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 10000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "md.ase.MnSi.a_300K_A": {
+    "value": 4.557768333277923,
+    "run_id": "20260919T085733-fb89d0-0",
+    "manifest_sha256": "ac8eb5abc3b0989e5479533d1161db86c1a3edb5558e9e0a2ccf74e5f1513feb",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "a_exp_source": "room-temperature literature lattice parameters; MnSi 4.558 A per SPEC.md section 6",
+      "ci95": [
+        4.54408836649936,
+        4.571448300056486
+      ],
+      "compound": "MnSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 501,
+      "natoms": 64,
+      "reference": {
+        "code": "experiment",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": null,
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 10000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "md.ase.MnSi.a_dev_pct": {
+    "value": -0.005082639799845833,
+    "run_id": "20260919T085733-fb89d0-0",
+    "manifest_sha256": "ac8eb5abc3b0989e5479533d1161db86c1a3edb5558e9e0a2ccf74e5f1513feb",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "a_exp_source": "room-temperature literature lattice parameters; MnSi 4.558 A per SPEC.md section 6",
+      "ci95": null,
+      "ci95_reason": "derived from a_300K_A and a_exp_A",
+      "compound": "MnSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 501,
+      "natoms": 64,
+      "reference": {
+        "code": "experiment",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": null,
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 10000,
+      "timestep_fs": 2.0,
+      "unit": "%"
+    }
+  },
+  "md.ase.MnSi.a_exp_A": {
+    "value": 4.558,
+    "run_id": "20260919T085733-fb89d0-0",
+    "manifest_sha256": "ac8eb5abc3b0989e5479533d1161db86c1a3edb5558e9e0a2ccf74e5f1513feb",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "a_exp_source": "room-temperature literature lattice parameters; MnSi 4.558 A per SPEC.md section 6",
+      "ci95": null,
+      "ci95_reason": "tabulated experimental value",
+      "compound": "MnSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 501,
+      "natoms": 64,
+      "reference": {
+        "code": "experiment",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": null,
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 10000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "sampling.neb.FeSi.B0.E_a_eV": {
+    "value": 0.6923492359619559,
+    "run_id": "20260919T085607-fb89d0-none",
+    "manifest_sha256": "0e50d82f5192c98e4ecdd6c7d6ebcfc83fbf6db278886417e3e9cfa58ee47336",
+    "stage": "sampling.neb",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "e0_source": "foundation",
+      "head": "Default",
+      "n": 7,
+      "seed": 0,
+      "ci95": null,
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "energy_scale": "mp",
+      "T": 0.0,
+      "method": "neb-ci-idpp-fire",
+      "ci95_reason": "deterministic NEB barrier (no sampling)",
+      "unit": "eV",
+      "compound": "FeSi",
+      "n_atoms": 63,
+      "converged": true
+    }
+  },
+  "sampling.neb.FeSi.B0.E_a_reverse_eV": {
+    "value": 0.6923492359618422,
+    "run_id": "20260919T085607-fb89d0-none",
+    "manifest_sha256": "0e50d82f5192c98e4ecdd6c7d6ebcfc83fbf6db278886417e3e9cfa58ee47336",
+    "stage": "sampling.neb",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "e0_source": "foundation",
+      "head": "Default",
+      "n": 7,
+      "seed": 0,
+      "ci95": null,
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "energy_scale": "mp",
+      "T": 0.0,
+      "method": "neb-ci-idpp-fire",
+      "ci95_reason": "deterministic NEB barrier (no sampling)",
+      "unit": "eV",
+      "compound": "FeSi",
+      "n_atoms": 63,
+      "converged": true
+    }
+  },
+  "sampling.neb.FeSi.B0.dE_eV": {
+    "value": 1.1368683772161603e-13,
+    "run_id": "20260919T085607-fb89d0-none",
+    "manifest_sha256": "0e50d82f5192c98e4ecdd6c7d6ebcfc83fbf6db278886417e3e9cfa58ee47336",
+    "stage": "sampling.neb",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "e0_source": "foundation",
+      "head": "Default",
+      "n": 7,
+      "seed": 0,
+      "ci95": null,
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "energy_scale": "mp",
+      "T": 0.0,
+      "method": "neb-ci-idpp-fire",
+      "ci95_reason": "deterministic NEB barrier (no sampling)",
+      "unit": "eV",
+      "compound": "FeSi",
+      "n_atoms": 63,
+      "converged": true
+    }
+  },
+  "sampling.neb.FeSi.Ea_eV": {
+    "value": 0.6923492359619559,
+    "run_id": "20260919T085607-fb89d0-none",
+    "manifest_sha256": "0e50d82f5192c98e4ecdd6c7d6ebcfc83fbf6db278886417e3e9cfa58ee47336",
+    "stage": "sampling.neb",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "e0_source": "foundation",
+      "head": "Default",
+      "n": 7,
+      "seed": 0,
+      "ci95": null,
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "energy_scale": "mp",
+      "T": 0.0,
+      "method": "neb-ci-idpp-fire",
+      "ci95_reason": "deterministic NEB barrier (no sampling)",
+      "unit": "eV",
+      "compound": "FeSi",
+      "n_atoms": 63,
+      "converged": true
+    }
+  },
+  "sampling.umbrella.FeSi.dF_eV": {
+    "value": -0.0012275770244260797,
+    "run_id": "20260920T225238-fb89d0-none",
+    "manifest_sha256": "f9d34653db73eaeb6c2116c311ef30719643ff3b82acdce3241c2d3cea5ec065",
+    "stage": "sampling.wham",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "e0_source": "foundation",
+      "head": "Default",
+      "n": 144024,
+      "seed": 0,
+      "ci95": [
+        -0.019895719686230023,
+        0.017440565637377864
+      ],
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "energy_scale": "mp",
+      "T": 300.0,
+      "method": "mbar",
+      "unit": "eV",
+      "compound": "FeSi",
+      "n_windows": 24,
+      "n_blocks": 5,
+      "overlap_ok": true,
+      "overlap_min": 0.37227128811864685,
+      "crosscheck_method": "wham",
+      "crosscheck_dF_eV": -0.001005858252268385,
+      "k_eVA2": 2.0,
+      "ps_per_window": 15.0
+    }
+  },
+  "sampling.umbrella.FeSi.dF_err_eV": {
+    "value": 0.006723757162299101,
+    "run_id": "20260920T225238-fb89d0-none",
+    "manifest_sha256": "f9d34653db73eaeb6c2116c311ef30719643ff3b82acdce3241c2d3cea5ec065",
+    "stage": "sampling.wham",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "e0_source": "foundation",
+      "head": "Default",
+      "n": 144024,
+      "seed": 0,
+      "ci95": null,
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "energy_scale": "mp",
+      "T": 300.0,
+      "method": "mbar",
+      "ci95_reason": "is itself the block standard error",
+      "unit": "eV",
+      "compound": "FeSi",
+      "n_windows": 24,
+      "n_blocks": 5,
+      "overlap_ok": true,
+      "overlap_min": 0.37227128811864685,
+      "crosscheck_method": "wham",
+      "crosscheck_dF_eV": -0.001005858252268385,
+      "k_eVA2": 2.0,
+      "ps_per_window": 15.0
+    }
+  },
+  "sampling.wham.FeSi.B0.dF_barrier_eV": {
+    "value": 0.7417079014822214,
+    "run_id": "20260920T225238-fb89d0-none",
+    "manifest_sha256": "f9d34653db73eaeb6c2116c311ef30719643ff3b82acdce3241c2d3cea5ec065",
+    "stage": "sampling.wham",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "e0_source": "foundation",
+      "head": "Default",
+      "n": 144024,
+      "seed": 0,
+      "ci95": [
+        0.7180175997902064,
+        0.7653982031742365
+      ],
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "energy_scale": "mp",
+      "T": 300.0,
+      "method": "mbar",
+      "unit": "eV",
+      "compound": "FeSi",
+      "n_windows": 24,
+      "n_blocks": 5,
+      "overlap_ok": true,
+      "overlap_min": 0.37227128811864685,
+      "crosscheck_method": "wham",
+      "crosscheck_dF_eV": -0.001005858252268385,
+      "k_eVA2": 2.0,
+      "ps_per_window": 15.0
+    }
+  },
+  "sampling.wham.FeSi.B0.dF_block_err_eV": {
+    "value": 0.006723757162299101,
+    "run_id": "20260920T225238-fb89d0-none",
+    "manifest_sha256": "f9d34653db73eaeb6c2116c311ef30719643ff3b82acdce3241c2d3cea5ec065",
+    "stage": "sampling.wham",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "e0_source": "foundation",
+      "head": "Default",
+      "n": 144024,
+      "seed": 0,
+      "ci95": null,
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "energy_scale": "mp",
+      "T": 300.0,
+      "method": "mbar",
+      "ci95_reason": "is itself the block standard error",
+      "unit": "eV",
+      "compound": "FeSi",
+      "n_windows": 24,
+      "n_blocks": 5,
+      "overlap_ok": true,
+      "overlap_min": 0.37227128811864685,
+      "crosscheck_method": "wham",
+      "crosscheck_dF_eV": -0.001005858252268385,
+      "k_eVA2": 2.0,
+      "ps_per_window": 15.0
+    }
+  },
+  "sampling.wham.FeSi.B0.dF_eV": {
+    "value": -0.0012275770244260797,
+    "run_id": "20260920T225238-fb89d0-none",
+    "manifest_sha256": "f9d34653db73eaeb6c2116c311ef30719643ff3b82acdce3241c2d3cea5ec065",
+    "stage": "sampling.wham",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "e0_source": "foundation",
+      "head": "Default",
+      "n": 144024,
+      "seed": 0,
+      "ci95": [
+        -0.019895719686230023,
+        0.017440565637377864
+      ],
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "energy_scale": "mp",
+      "T": 300.0,
+      "method": "mbar",
+      "unit": "eV",
+      "compound": "FeSi",
+      "n_windows": 24,
+      "n_blocks": 5,
+      "overlap_ok": true,
+      "overlap_min": 0.37227128811864685,
+      "crosscheck_method": "wham",
+      "crosscheck_dF_eV": -0.001005858252268385,
+      "k_eVA2": 2.0,
+      "ps_per_window": 15.0
+    }
+  },
+  "sampling.wham.FeSi.B0.n_windows": {
+    "value": 24.0,
+    "run_id": "20260920T225238-fb89d0-none",
+    "manifest_sha256": "f9d34653db73eaeb6c2116c311ef30719643ff3b82acdce3241c2d3cea5ec065",
+    "stage": "sampling.wham",
+    "meta": {
+      "reference": {
+        "code": "mace",
+        "functional": "PBE",
+        "pseudos": null,
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "e0_source": "foundation",
+      "head": "Default",
+      "n": 144024,
+      "seed": 0,
+      "ci95": null,
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "energy_scale": "mp",
+      "T": 300.0,
+      "method": "mbar",
+      "ci95_reason": "count",
+      "unit": "1",
+      "compound": "FeSi",
+      "n_windows": 24,
+      "n_blocks": 5,
+      "overlap_ok": true,
+      "overlap_min": 0.37227128811864685,
+      "crosscheck_method": "wham",
+      "crosscheck_dF_eV": -0.001005858252268385,
+      "k_eVA2": 2.0,
+      "ps_per_window": 15.0
+    }
+  }
 }

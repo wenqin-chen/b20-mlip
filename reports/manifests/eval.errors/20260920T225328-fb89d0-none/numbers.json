@@ -1,0 +1,89 @@
+{
+  "eval.errors.T3.B0p.mae_f": 273.4005107770321,
+  "eval.errors.T3.B0p.mae_f@meta": {
+    "reference": {
+      "code": "vasp",
+      "functional": "PBE",
+      "pseudos": "PAW (OMat24)",
+      "e0_source": "foundation",
+      "cross_functional": false
+    },
+    "head": "Default",
+    "n": 91,
+    "seed": 0,
+    "ci95": [
+      238.2713058900759,
+      311.8221281578549
+    ],
+    "e0_source": "foundation",
+    "energy_scale": "mp",
+    "model_label": "B0p",
+    "bracket": "B0p",
+    "tier": "T3",
+    "unit": "meV/\u00c5",
+    "model_sha256": "01bfe22100139f424713cf921144e5509cbe353d67aa9fa1be9c6e1e0ed35845",
+    "split_id": "72c0af30f146",
+    "bootstrap_n": 2000,
+    "n_frames": 91,
+    "n_atoms": 1359,
+    "noise_floor_f": 21.528450929284976
+  },
+  "eval.errors.T3.B0p.rmse_f": 417.2618871739194,
+  "eval.errors.T3.B0p.rmse_f@meta": {
+    "reference": {
+      "code": "vasp",
+      "functional": "PBE",
+      "pseudos": "PAW (OMat24)",
+      "e0_source": "foundation",
+      "cross_functional": false
+    },
+    "head": "Default",
+    "n": 91,
+    "seed": 0,
+    "ci95": [
+      351.3797846846907,
+      494.83897545594306
+    ],
+    "e0_source": "foundation",
+    "energy_scale": "mp",
+    "model_label": "B0p",
+    "bracket": "B0p",
+    "tier": "T3",
+    "unit": "meV/\u00c5",
+    "model_sha256": "01bfe22100139f424713cf921144e5509cbe353d67aa9fa1be9c6e1e0ed35845",
+    "split_id": "72c0af30f146",
+    "bootstrap_n": 2000,
+    "n_frames": 91,
+    "n_atoms": 1359,
+    "noise_floor_f": 21.528450929284976
+  },
+  "eval.errors.T3.B0p.mae_s": 12.29061114772372,
+  "eval.errors.T3.B0p.mae_s@meta": {
+    "reference": {
+      "code": "vasp",
+      "functional": "PBE",
+      "pseudos": "PAW (OMat24)",
+      "e0_source": "foundation",
+      "cross_functional": false
+    },
+    "head": "Default",
+    "n": 91,
+    "seed": 0,
+    "ci95": [
+      10.214114580794538,
+      14.67435880206435
+    ],
+    "e0_source": "foundation",
+    "energy_scale": "mp",
+    "model_label": "B0p",
+    "bracket": "B0p",
+    "tier": "T3",
+    "unit": "meV/\u00c5^3",
+    "model_sha256": "01bfe22100139f424713cf921144e5509cbe353d67aa9fa1be9c6e1e0ed35845",
+    "split_id": "72c0af30f146",
+    "bootstrap_n": 2000,
+    "n_frames": 91,
+    "n_atoms": 1359,
+    "noise_floor_f": 21.528450929284976
+  }
+}
