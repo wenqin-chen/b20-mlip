@@ -390,3 +390,29 @@ def test_slurm_push_and_pull_dir_go_through_the_runner(tmp_path: Path) -> None:
     pull = rsync_calls[1]
     assert pull[-2:] == ["tillicum:/scratch/u/b20-mlip/dft/r0/", f"{local}/"]
     assert "tmp/" in pull and "*.wfc*" in pull and "*.save/" in pull
+
+
+def test_render_context_applies_cluster_resource_defaults(tmp_path: Path) -> None:
+    """cluster.resources[<template>] (the site overlay) fills in what a JobSpec leaves unset."""
+    from b20mlip.config import Settings
+    from b20mlip.executors import JobSpec, SlurmExecutor
+
+    cfg = Settings().model_copy(
+        update={
+            "cluster": Settings().cluster.model_copy(
+                update={
+                    "scratch": "/scratch/u",
+                    "control_path": str(tmp_path / "cm.sock"),
+                    "resources": {"train_replay": {"time": "01:30:00", "mem": "48G", "gpus": 1}},
+                }
+            )
+        }
+    )
+    ex = SlurmExecutor(cfg, runner=lambda argv: None)  # type: ignore[arg-type]
+    spec = JobSpec(
+        name="j", script="x", units=["u"], resources={"template": "train_replay", "mem": "96G"}
+    )
+    res = ex.render_context(spec)["resources"]
+    assert res["time"] == "01:30:00" and res["gpus"] == 1 and res["mem"] == "96G"
+    plain = JobSpec(name="j", script="x", units=["u"], resources={"template": "qe_array"})
+    assert "time" not in ex.render_context(plain)["resources"]

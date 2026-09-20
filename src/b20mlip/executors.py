@@ -389,17 +389,24 @@ class SlurmExecutor:
     def template_name(self, spec: JobSpec) -> str:
         return f"{spec.resources.get('template', DEFAULT_TEMPLATE)}.sbatch.j2"
 
+    def effective_resources(self, spec: JobSpec) -> dict[str, Any]:
+        """``cluster.resources[<template>]`` site defaults (the overlay) under the spec's own."""
+        template = str(spec.resources.get("template", DEFAULT_TEMPLATE))
+        site = dict(self.cluster.resources.get(template, {}))
+        return {**site, **dict(spec.resources)}
+
     def render_context(self, spec: JobSpec) -> dict[str, Any]:
+        resources = self.effective_resources(spec)
         return {
             "job_name": spec.name,
             "script": spec.script,
             "units": list(spec.units),
             "n_units": len(spec.units),
-            "resources": dict(spec.resources),
+            "resources": resources,
             "env": dict(spec.env),
             "cluster": self.cluster.model_dump(mode="json"),
-            "account": spec.resources.get("account", self.cluster.account),
-            "partition": spec.resources.get("partition", self.cluster.partition_cpu),
+            "account": resources.get("account", self.cluster.account),
+            "partition": resources.get("partition", self.cluster.partition_cpu),
             "threads": self.cfg.compute.threads,
             "workdir": self.remote_workdir(spec.name),
             "script_name": SCRIPT_NAME,
