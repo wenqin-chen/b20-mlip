@@ -105,7 +105,9 @@ def compound_of(atoms: Atoms) -> str:
 
 
 def _default_structure_path(cfg: Settings) -> Path:
-    return Path(cfg.paths.data_dir) / "raw" / "mptrj" / "b20_mptrj.extxyz"
+    data = Path(cfg.paths.data_dir)
+    preferred = data / "frames" / "mptrj_b20.extxyz"  # the data tier's spglib-198 extract
+    return preferred if preferred.is_file() else data / "raw" / "mptrj" / "b20_mptrj.extxyz"
 
 
 def load_structure(cfg: Settings, compound: str, structure: str | Path | None = None) -> Atoms:

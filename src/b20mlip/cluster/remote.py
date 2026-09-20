@@ -58,14 +58,16 @@ MODULE_QUERIES: tuple[str, ...] = (
 )
 # rsync excludes for the repo push (SPEC: .venv, data/raw, runs, models, .git) plus caches and
 # the large local-only trees; and for pulling results back (QE wavefunctions, build trees).
+# Anchored to the transfer root ("/dft" = <repo>/dft only): an unanchored "dft" also matched
+# src/b20mlip/dft and the package was missing on the cluster (2026-09-20).
 REPO_EXCLUDES: tuple[str, ...] = (
-    ".venv",
-    "data/raw",
-    "data/omat24",
-    "runs",
-    "models",
-    "dft",
-    ".git",
+    "/.venv",
+    "/data/raw",
+    "/data/omat24",
+    "/runs",
+    "/models",
+    "/dft",
+    "/.git",
     "__pycache__",
     ".mypy_cache",
     ".ruff_cache",

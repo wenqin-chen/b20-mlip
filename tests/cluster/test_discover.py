@@ -86,7 +86,9 @@ def test_bootstrap_writes_the_expected_yaml(cluster_cfg: Settings, yaml_path: Pa
     assert names == {"tillicum.yaml", "discovery.json"}
     assert any(a.path == str(yaml_path) for a in manifest.outputs)
     push = next(c for c in fake.calls if c[0] == "rsync")
-    assert "--exclude=.venv" in push and "--exclude=data/raw" in push and "--exclude=.git" in push
+    assert "--exclude=/.venv" in push and "--exclude=/data/raw" in push
+    assert "--exclude=/.git" in push and "--exclude=/dft" in push
+    assert "--exclude=dft" not in push  # anchored: src/b20mlip/dft must reach the cluster
     assert push[-1] == f"tillicum:{SCRATCH}/b20-mlip/"
     assert result.summary["qe"] == "module" and result.summary["account"] == "b20"
     assert (Path(result.manifest_path).parent / "bootstrap_state.json").is_file()
