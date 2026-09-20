@@ -31,6 +31,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 import shlex
 import shutil
 import subprocess
@@ -388,16 +389,33 @@ _METRIC_KEYS: dict[str, tuple[str, float]] = {
 }
 
 
-def parse_val_metrics(results_txt: str | Path, head: str = "Default") -> dict[str, float]:
-    """Final validation metrics from MACE's ``results/<tag>_train.txt`` (JSON lines).
+_RE_LOADED_CKPT = re.compile(r"Loading checkpoint: .*_epoch-(\d+)\.pt")
 
-    The last ``mode == "eval"`` record of ``head`` wins (the last epoch). Energies and forces
-    are converted to meV / meV/Å; ``epoch`` is included when MACE reports one.
+
+def exported_epoch(log_path: str | Path | None) -> int | None:
+    """The epoch of the checkpoint MACE reloaded before exporting the model (its best validation
+    loss), from the training log's last ``Loading checkpoint: ..._epoch-N.pt`` line."""
+    if log_path is None or not Path(log_path).is_file():
+        return None
+    found = _RE_LOADED_CKPT.findall(Path(log_path).read_text(encoding="utf-8", errors="replace"))
+    return int(found[-1]) if found else None
+
+
+def parse_val_metrics(
+    results_txt: str | Path, head: str = "Default", *, epoch: int | None = None
+) -> dict[str, float]:
+    """Validation metrics from MACE's ``results/<tag>_train.txt`` (JSON lines).
+
+    With ``epoch`` given, the ``mode == "eval"`` record of that epoch is used (the checkpoint
+    MACE exported: its best validation loss, see :func:`exported_epoch`); otherwise the last
+    record wins. Energies and forces are converted to meV / meV/Å; ``epoch`` is included when
+    MACE reports one.
     """
     path = Path(results_txt)
     if not path.is_file():
         return {}
     last: dict[str, Any] | None = None
+    chosen: dict[str, Any] | None = None
     for line in path.read_text(encoding="utf-8").splitlines():
         line = line.strip()
         if not line:
@@ -411,6 +429,9 @@ def parse_val_metrics(results_txt: str | Path, head: str = "Default") -> dict[st
         if rec.get("head") not in (None, head):
             continue
         last = rec
+        if epoch is not None and rec.get("epoch") == epoch:
+            chosen = rec
+    last = chosen if chosen is not None else last
     if last is None:
         return {}
     out: dict[str, float] = {}
@@ -703,7 +724,11 @@ def run(
     for log in sorted((model_root / LOG_DIR).glob("*.log")):
         ctx.add_output(log, "log")
     results = sorted((model_root / RESULTS_DIR).glob(f"{name}_run-{seed}_train.txt"))
-    val_metrics = parse_val_metrics(results[-1]) if results else {}
+    logs = sorted((model_root / LOG_DIR).glob("*.log"))
+    best_epoch = exported_epoch(logs[-1]) if logs else None
+    val_metrics = parse_val_metrics(results[-1], epoch=best_epoch) if results else {}
+    if best_epoch is not None:
+        val_metrics["exported_epoch"] = float(best_epoch)
     for res in results:
         ctx.add_output(res, "log")
     details = inspect_model(model_path)

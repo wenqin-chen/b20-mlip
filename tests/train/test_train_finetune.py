@@ -477,3 +477,29 @@ def test_naive_finetune_with_real_foundation(
     assert info.foundation_sha256 == ft.FOUNDATION_SHA256["medium-mpa-0"]
     assert info.e0_source == "foundation" and info.energy_scale == "mp"
     assert info.heads == ["Default"] and info.epochs == 1
+
+
+def test_val_metrics_follow_the_exported_checkpoint(tmp_path: Path) -> None:
+    """MACE exports the best-validation-loss checkpoint, not the last epoch: the recorded
+    validation metrics must be that epoch's (2026-09-20: lr 3e-4 run exported epoch 5 while the
+    last epoch's force RMSE was 30 % worse)."""
+    from b20mlip.train.finetune import exported_epoch, parse_val_metrics
+
+    res = tmp_path / "x_run-0_train.txt"
+    lines = [
+        {"mode": "eval", "epoch": None, "head": "Default", "rmse_f": 0.158},
+        {"mode": "opt", "loss": 0.1},
+        {"mode": "eval", "epoch": 5, "head": "Default", "rmse_f": 0.1037},
+        {"mode": "eval", "epoch": 29, "head": "Default", "rmse_f": 0.1359},
+    ]
+    res.write_text("\n".join(json.dumps(x) for x in lines) + "\n", encoding="utf-8")
+    log = tmp_path / "run.log"
+    log.write_text(
+        "DEBUG: Saving checkpoint: checkpoints/x_run-0_epoch-5.pt\n"
+        "INFO: Loading checkpoint: checkpoints/x_run-0_epoch-5.pt\n",
+        encoding="utf-8",
+    )
+    assert exported_epoch(log) == 5 and exported_epoch(tmp_path / "missing.log") is None
+    assert parse_val_metrics(res)["rmse_f_meV_A"] == pytest.approx(135.9)
+    best = parse_val_metrics(res, epoch=5)
+    assert best["rmse_f_meV_A"] == pytest.approx(103.7) and best["epoch"] == 5
