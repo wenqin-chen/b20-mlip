@@ -1,0 +1,8 @@
+{
+  "m_ref_muB_per_TM": {
+    "MnSi": 1.002,
+    "FeGe": 1.054,
+    "MnGe": 2.04
+  },
+  "source": "median over QE-relabelled MPtrj relaxed frames (offsets set), 2026-09-20"
+}
