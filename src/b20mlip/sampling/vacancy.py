@@ -151,6 +151,10 @@ def vacancy_hop_endpoints(
         "vacancy_site": [float(x) for x in site + hop_vector],
         "hop_vector": [float(x) for x in hop_vector],
         "hop_distance": distance,
+        # reference frame of the CV: the centre of the other atoms in the initial state
+        "others_centre": [
+            float(x) for x in np.delete(initial.positions, hop_index, axis=0).mean(axis=0)
+        ],
     }
     return initial, final, info
 
@@ -180,6 +184,9 @@ def hop_info_from_endpoints(
             "hop_vector": [float(x) for x in disp[hop]],
             "hop_distance": distance,
             "max_other_displacement_A": float(others.max()) if len(others) else 0.0,
+            "others_centre": [
+                float(x) for x in np.delete(initial.positions, hop, axis=0).mean(axis=0)
+            ],
         }
     )
     info.setdefault("compound", compound_of(initial))
@@ -198,9 +205,18 @@ def interpolate_endpoints(initial: Atoms, final: Atoms, fraction: float) -> Atom
 class HopCV:
     """Callable ``cv(atoms) -> (value, gradient)`` for the hop CV described by ``info``.
 
+    The CV is the projection, onto the hop vector, of the hopping atom's displacement from its
+    initial site **measured in the frame of the rest of the crystal**: the displacement of the
+    centre of mass of all other atoms (from their initial centre of mass) is subtracted first.
+    Without that, a Langevin thermostat lets the whole crystal translate under the bias force
+    at zero energy cost and the "hop" never crosses the saddle (2026-09-19: 24 windows gave a flat
+    potential-energy profile and a 0.11 eV "barrier" against a 0.69 eV NEB barrier).
+
     The displacement of the hopping atom is taken as the minimum image relative to the hop
-    midpoint, so the CV is unambiguous as long as the hop is shorter than the cell (the atom
-    is never more than half a hop from the midpoint at either end state).
+    midpoint, so the CV is unambiguous as long as the hop is shorter than the cell (the atom is
+    never more than half a hop from the midpoint at either end state). The gradient has a row
+    ``h/|h|^2`` on the hopping atom and ``-h/|h|^2/(N-1)`` on every other atom (mass-unweighted
+    centre of the other atoms), so the bias force sums to zero over the cell.
     """
 
     def __init__(self, info: dict[str, Any]) -> None:
@@ -213,16 +229,41 @@ class HopCV:
             raise ValueError("hop vector must be non-zero")
         self.midpoint = self.site + 0.5 * self.vector
         self._grad_row = self.vector / self.scale_A**2
+        # reference centre of the other atoms (set on first use from the structure's own frame)
+        self._others_ref: np.ndarray | None = (
+            np.asarray(info["others_centre"], dtype=float) if "others_centre" in info else None
+        )
+
+    def _others_mask(self, atoms: Atoms) -> np.ndarray:
+        mask = np.ones(len(atoms), dtype=bool)
+        mask[self.index] = False
+        return mask
+
+    def _others_shift(self, atoms: Atoms) -> np.ndarray:
+        """Displacement of the centre of the other atoms from its reference (minimum image)."""
+        mask = self._others_mask(atoms)
+        centre = atoms.positions[mask].mean(axis=0)
+        if self._others_ref is None:
+            self._others_ref = centre.copy()
+            self.info["others_centre"] = centre.tolist()
+            return np.zeros(3)
+        shift, _ = mic_vectors(centre - self._others_ref, atoms)
+        return shift[0]
 
     def value(self, atoms: Atoms) -> float:
         if self.index >= len(atoms):
             raise IndexError(f"hop atom {self.index} not in a {len(atoms)}-atom structure")
-        from_mid, _ = mic_vectors(atoms.positions[self.index] - self.midpoint, atoms)
+        shift = self._others_shift(atoms)
+        from_mid, _ = mic_vectors(atoms.positions[self.index] - shift - self.midpoint, atoms)
         return float((from_mid[0] + 0.5 * self.vector) @ self._grad_row)
 
     def gradient(self, atoms: Atoms) -> np.ndarray:
         grad = np.zeros((len(atoms), 3))
+        mask = self._others_mask(atoms)
+        n_others = int(mask.sum())
         grad[self.index] = self._grad_row
+        if n_others:
+            grad[mask] = -self._grad_row / n_others
         return grad
 
     def __call__(self, atoms: Atoms) -> tuple[float, np.ndarray]:

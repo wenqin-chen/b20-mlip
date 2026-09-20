@@ -53,7 +53,12 @@ def test_harmonic_bias_matches_numerical_derivatives() -> None:
     expected = unbiased.get_forces() - 2.5 * (value - 0.3) * cv.gradient(atoms)
     assert np.allclose(forces, expected, atol=1e-10)
     assert np.abs(forces - numerical_forces(atoms)).max() < 1e-6
-    assert np.allclose(forces[[0, 2]], unbiased.get_forces()[[0, 2]])  # only atom 1 is biased
+    # the bias acts on atom 1 and, through the crystal-frame reference, oppositely on 0 and 2
+    bias_forces = forces - unbiased.get_forces()
+    assert np.abs(bias_forces.sum(axis=0)).max() < 1e-10
+    assert np.allclose(bias_forces[0], bias_forces[2]) and np.allclose(
+        bias_forces[1], -2.0 * bias_forces[0]
+    )
     assert atoms.get_potential_energy() == pytest.approx(energy)  # positions restored
     assert bias.results["free_energy"] == pytest.approx(energy)
     value2, bias_energy, bias_forces = bias.bias(atoms)

@@ -28,7 +28,9 @@ def test_endpoints_are_deterministic_and_span_the_cv(fesi_atoms: Atoms) -> None:
     assert cv(v.interpolate_endpoints(initial, final, 0.5))[0] == pytest.approx(0.5)
     assert cv.scale_A == pytest.approx(info["hop_distance"])
     grad = cv.gradient(initial)
-    assert grad.shape == (63, 3) and np.count_nonzero(grad.any(axis=1)) == 1
+    assert grad.shape == (63, 3) and np.count_nonzero(grad.any(axis=1)) == 63
+    assert np.abs(grad.sum(axis=0)).max() < 1e-12  # measured in the frame of the other atoms
+    assert np.allclose(grad[info["hop_index"]], np.asarray(info["hop_vector"]) / cv.scale_A**2)
     assert np.allclose(grad[info["hop_index"]] @ np.asarray(info["hop_vector"]), 1.0)
 
 
@@ -76,3 +78,31 @@ def test_hop_info_from_endpoints(fesi_atoms: Atoms) -> None:
         v.hop_info_from_endpoints(initial, initial)
     with pytest.raises(ValueError, match="same atoms"):
         v.hop_info_from_endpoints(initial, fesi_atoms)
+
+
+def test_hop_cv_is_invariant_to_rigid_translation_of_the_crystal() -> None:
+    """Regression (2026-09-19): under a Langevin thermostat the bias force translated the whole
+    crystal instead of moving the atom over the saddle; the CV must not change when every atom
+    (hopping atom included) is shifted rigidly, and its gradient must sum to zero."""
+    from ase.spacegroup import crystal
+
+    from b20mlip.sampling.vacancy import HopCV, vacancy_hop_endpoints
+
+    prim = crystal(
+        ["Fe", "Si"],
+        basis=[(0.137, 0.137, 0.137), (0.842, 0.842, 0.842)],
+        spacegroup=198,
+        cellpar=[4.48, 4.48, 4.48, 90, 90, 90],
+    )
+    initial, final, info = vacancy_hop_endpoints(prim, supercell=(2, 2, 2), species="Si")
+    cv = HopCV(info)
+    v0, g0 = cv(initial)
+    assert abs(v0) < 1e-9 and abs(cv.value(final) - 1.0) < 1e-9
+    assert np.abs(g0.sum(axis=0)).max() < 1e-12  # no net force from the bias
+    shifted = initial.copy()
+    shifted.positions += np.array([0.7, -0.3, 1.1])  # rigid translation of everything
+    assert abs(cv.value(shifted) - v0) < 1e-9
+    # moving only the hopping atom half-way along the hop gives 0.5 (up to the tiny centre shift)
+    half = initial.copy()
+    half.positions[info["hop_index"]] += 0.5 * np.asarray(info["hop_vector"])
+    assert abs(cv.value(half) - 0.5) < 0.02
