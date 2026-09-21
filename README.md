@@ -7,7 +7,7 @@ what it fixes (force/phonon softening) and costs (forgetting); deploy in ASE MD;
 umbrella-sample a vacancy hop; drive it with a provenance-checked tool-calling agent.
 <!-- gen:end -->
 
-**Status: under construction.** <!-- gen:start:status -->167 numbers from 28 runs are published in `reports/numbers.json` (0 stale).<!-- gen:end -->
+**Status: under construction.** <!-- gen:start:status -->186 numbers from 30 runs are published in `reports/numbers.json` (0 stale).<!-- gen:end -->
 Every number on this page is regenerated from `reports/numbers.json`, which is itself built from
 run manifests and gated by `b20mlip report audit --strict` (honesty gates A1–A11 in
 `CONTRACTS.md`). A value that reads `pending` has not been produced by any run; nothing here is
@@ -106,9 +106,24 @@ _Energy MAE in meV/atom on the reference's own energy scale; B1 energies are on 
 ### Forgetting on the WBM sample
 
 <!-- gen:start:discovery -->
-_Not yet run: no `eval.discovery` numbers are published in `reports/numbers.json`._
+| Model | paired ΔF1 vs B0 | e_above_hull MAE (meV/atom) | RMSD (Å) |
+| --- | --- | --- | --- |
+| B0 MPA-0 zero-shot | <!-- num:eval.discovery.B0.delta_f1 -->pending<!-- /num --> | <!-- num:eval.discovery.B0.mae_e_above_hull -->25.49<!-- /num --> [22.3, 29.41] | <!-- num:eval.discovery.B0.rmsd -->0.08885<!-- /num --> [0.08161, 0.09678] |
+| B1 naive fine-tune | <!-- num:eval.discovery.B1.delta_f1 -->pending<!-- /num --> | <!-- num:eval.discovery.B1.mae_e_above_hull -->pending<!-- /num --> | <!-- num:eval.discovery.B1.rmsd -->pending<!-- /num --> |
+| B2 multihead replay | <!-- num:eval.discovery.B2.delta_f1 -->-0.08736<!-- /num --> [-0.1397, -0.03739] | <!-- num:eval.discovery.B2.mae_e_above_hull -->34.27<!-- /num --> [30.94, 38.33] | <!-- num:eval.discovery.B2.rmsd -->0.08877<!-- /num --> [0.08113, 0.09682] |
+| B3 scratch | <!-- num:eval.discovery.B3.delta_f1 -->pending<!-- /num --> | <!-- num:eval.discovery.B3.mae_e_above_hull -->pending<!-- /num --> | <!-- num:eval.discovery.B3.rmsd -->pending<!-- /num --> |
 
 _Labelled, seeded 1,000-structure WBM sample at natural prevalence (16.7 % stable), vendored Matbench-Discovery metrics; F1 only as a paired difference vs B0 on the identical sample with a bootstrap CI. No public ranking is claimed or comparable._
+
+<details><summary>Provenance (one line per cell)</summary>
+
+- **B0 MPA-0 zero-shot / e_above_hull MAE (meV/atom)** — reference vasp/PBE (PAW (Materials Project settings, MP2020-corrected)); E0 foundation; head Default; n = 1000; seed 0; CI95 [22.3, 29.41]; run `20260921T025457-fd5fe0-0`
+- **B0 MPA-0 zero-shot / RMSD (Å)** — reference vasp/PBE (PAW (Materials Project settings, MP2020-corrected)); E0 foundation; head Default; n = 1000; seed 0; CI95 [0.08161, 0.09678]; run `20260921T025457-fd5fe0-0`
+- **B2 multihead replay / paired ΔF1 vs B0** — reference vasp/PBE (PAW (Materials Project settings, MP2020-corrected)); E0 foundation; head pt_head; n = 1000; seed 0; CI95 [-0.1397, -0.03739]; run `20260921T030647-fd5fe0-0`
+- **B2 multihead replay / e_above_hull MAE (meV/atom)** — reference vasp/PBE (PAW (Materials Project settings, MP2020-corrected)); E0 foundation; head pt_head; n = 1000; seed 0; CI95 [30.94, 38.33]; run `20260921T030647-fd5fe0-0`
+- **B2 multihead replay / RMSD (Å)** — reference vasp/PBE (PAW (Materials Project settings, MP2020-corrected)); E0 foundation; head pt_head; n = 1000; seed 0; CI95 [0.08113, 0.09682]; run `20260921T030647-fd5fe0-0`
+
+</details>
 <!-- gen:end -->
 
 
@@ -208,7 +223,7 @@ _Twelve-task eval (`evals/agent_tasks.jsonl`, gold from `b20mlip screen`); backe
 ### One-line summary
 
 <!-- gen:start:bullet -->
-> Fine-tuned MACE-MPA-0 (equivariant GNN) on <!-- num:data.n_qe_frames -->pending<!-- /num --> in-house spin-polarised Quantum ESPRESSO frames of B20 skyrmion hosts (FeSi/MnSi/CoSi): held-out force MAE <!-- num:eval.errors.T0.B0.mae_f -->65.59<!-- /num -->→<!-- num:eval.errors.T0.B2.mae_f -->57<!-- /num --> meV/Å, phonon ω-MAE vs same-code DFT <!-- num:eval.phonons.FeSi.B0.omega_mae_meV -->pending<!-- /num -->→<!-- num:eval.phonons.FeSi.B2.omega_mae_meV -->pending<!-- /num --> meV (FeSi), never-trained FeGe <!-- num:eval.errors.T2.B2.mae_f -->70.29<!-- /num --> meV/Å; forgetting quantified as paired ΔF1 = <!-- num:eval.discovery.B2.delta_f1 -->pending<!-- /num --> [CI pending] on a labelled 1,000-structure WBM sample (Matbench-Discovery protocol, no public ranking claimed); deployed in ASE MD (thermal expansion within <!-- num:md.ase.MnSi.a_dev_pct -->-0.01557<!-- /num --> % of experiment), umbrella-sampled a vacancy-hop free energy (ΔF = <!-- num:sampling.umbrella.FeSi.dF_eV -->-0.001228<!-- /num --> eV vs NEB <!-- num:sampling.neb.FeSi.Ea_eV -->0.6923<!-- /num --> eV), an active-learning round (pending); open-sourced (MIT) with a provenance-checked tool-calling agent.
+> Fine-tuned MACE-MPA-0 (equivariant GNN) on <!-- num:data.n_qe_frames -->pending<!-- /num --> in-house spin-polarised Quantum ESPRESSO frames of B20 skyrmion hosts (FeSi/MnSi/CoSi): held-out force MAE <!-- num:eval.errors.T0.B0.mae_f -->65.59<!-- /num -->→<!-- num:eval.errors.T0.B2.mae_f -->57<!-- /num --> meV/Å, phonon ω-MAE vs same-code DFT <!-- num:eval.phonons.FeSi.B0.omega_mae_meV -->pending<!-- /num -->→<!-- num:eval.phonons.FeSi.B2.omega_mae_meV -->pending<!-- /num --> meV (FeSi), never-trained FeGe <!-- num:eval.errors.T2.B2.mae_f -->70.29<!-- /num --> meV/Å; forgetting quantified as paired ΔF1 = <!-- num:eval.discovery.B2.delta_f1 -->-0.08736<!-- /num --> [-0.1397, -0.03739] on a labelled 1,000-structure WBM sample (Matbench-Discovery protocol, no public ranking claimed); deployed in ASE MD (thermal expansion within <!-- num:md.ase.MnSi.a_dev_pct -->-0.01557<!-- /num --> % of experiment), umbrella-sampled a vacancy-hop free energy (ΔF = <!-- num:sampling.umbrella.FeSi.dF_eV -->-0.001228<!-- /num --> eV vs NEB <!-- num:sampling.neb.FeSi.Ea_eV -->0.6923<!-- /num --> eV), an active-learning round (pending); open-sourced (MIT) with a provenance-checked tool-calling agent.
 <!-- gen:end -->
 
 ## How to reproduce
