@@ -66,6 +66,10 @@ def clean_b20_env(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("TERM", "dumb")
     monkeypatch.setenv("COLUMNS", "200")
     monkeypatch.delenv("FORCE_COLOR", raising=False)
+    # the executors let an inherited OMP_NUM_THREADS win over compute.threads (setdefault);
+    # CI exports OMP_NUM_THREADS=2, so tests must start from a clean thread environment
+    for key in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS"):
+        monkeypatch.delenv(key, raising=False)
 
 
 def b20_atoms(compound: str, config_type: str, rng: np.random.Generator) -> Atoms:
