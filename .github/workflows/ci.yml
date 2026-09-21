@@ -42,7 +42,23 @@ jobs:
         run: uv run --no-sync mypy
 
       - name: Offline tests
-        run: uv run --no-sync pytest -q
+        run: uv run --no-sync pytest -q -rfE --junitxml=pytest-junit.xml
+
+      - name: Annotate failed tests (readable without a token)
+        if: failure()
+        run: |
+          uv run --no-sync python - <<'PY'
+          import xml.etree.ElementTree as ET
+          root = ET.parse("pytest-junit.xml").getroot()
+          for case in root.iter("testcase"):
+              for kind in ("failure", "error"):
+                  node = case.find(kind)
+                  if node is not None:
+                      msg = (node.get("message") or (node.text or "").strip().splitlines()[-1:] or [""])
+                      msg = msg if isinstance(msg, str) else " ".join(msg)
+                      name = f'{case.get("classname")}::{case.get("name")}'
+                      print(f"::error title={kind}: {name}::{msg[:400]}")
+          PY
 
       - name: Import guard (matbench_discovery must not be installed)
         run: |
