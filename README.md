@@ -7,7 +7,7 @@ what it fixes (force/phonon softening) and costs (forgetting); deploy in ASE MD;
 umbrella-sample a vacancy hop; drive it with a provenance-checked tool-calling agent.
 <!-- gen:end -->
 
-**Status: under construction.** <!-- gen:start:status -->186 numbers from 30 runs are published in `reports/numbers.json` (0 stale).<!-- gen:end -->
+**Status: under construction.** <!-- gen:start:status -->201 numbers from 33 runs are published in `reports/numbers.json` (0 stale).<!-- gen:end -->
 Every number on this page is regenerated from `reports/numbers.json`, which is itself built from
 run manifests and gated by `b20mlip report audit --strict` (honesty gates A1–A11 in
 `CONTRACTS.md`). A value that reads `pending` has not been produced by any run; nothing here is
@@ -45,11 +45,11 @@ run; a table without any number says so explicitly.
 <!-- gen:start:forces -->
 | Tier | B0 MPA-0 zero-shot | B0′ MP-0 zero-shot | B1 naive fine-tune | B2 multihead replay | B3 scratch |
 | --- | --- | --- | --- | --- | --- |
-| T0 held-out groups | <!-- num:eval.errors.T0.B0.mae_f -->65.59<!-- /num --> [27.72, 91.66] | <!-- num:eval.errors.T0.B0p.mae_f -->165.8<!-- /num --> [50.97, 248.4] | <!-- num:eval.errors.T0.B1.mae_f -->65.51<!-- /num --> [63.06, 66.92] | <!-- num:eval.errors.T0.B2.mae_f -->57<!-- /num --> [55.94, 58.05] | <!-- num:eval.errors.T0.B3.mae_f -->pending<!-- /num --> |
+| T0 held-out groups | <!-- num:eval.errors.T0.B0.mae_f -->65.59<!-- /num --> [27.72, 91.66] | <!-- num:eval.errors.T0.B0p.mae_f -->165.8<!-- /num --> [50.97, 248.4] | <!-- num:eval.errors.T0.B1.mae_f -->65.51<!-- /num --> [63.06, 66.92] | <!-- num:eval.errors.T0.B2.mae_f -->57<!-- /num --> [55.94, 58.05] | <!-- num:eval.errors.T0.B3.mae_f -->354.4<!-- /num --> [46.71, 580.2] |
 | T1 hot snapshots | <!-- num:eval.errors.T1.B0.mae_f -->pending<!-- /num --> | <!-- num:eval.errors.T1.B0p.mae_f -->pending<!-- /num --> | <!-- num:eval.errors.T1.B1.mae_f -->pending<!-- /num --> | <!-- num:eval.errors.T1.B2.mae_f -->pending<!-- /num --> | <!-- num:eval.errors.T1.B3.mae_f -->pending<!-- /num --> |
-| T2 FeGe (never trained) | <!-- num:eval.errors.T2.B0.mae_f -->77.09<!-- /num --> [31.03, 101.7] | <!-- num:eval.errors.T2.B0p.mae_f -->190.8<!-- /num --> [39.4, 275.8] | <!-- num:eval.errors.T2.B1.mae_f -->81.64<!-- /num --> [78.23, 83.66] | <!-- num:eval.errors.T2.B2.mae_f -->70.29<!-- /num --> [69.18, 71.17] | <!-- num:eval.errors.T2.B3.mae_f -->pending<!-- /num --> |
-| T3 OMat24 VASP | <!-- num:eval.errors.T3.B0.mae_f -->156.9<!-- /num --> [136.5, 183.5] | <!-- num:eval.errors.T3.B0p.mae_f -->273.4<!-- /num --> [238.3, 311.8] | <!-- num:eval.errors.T3.B1.mae_f -->157.2<!-- /num --> [156.7, 157.8] | <!-- num:eval.errors.T3.B2.mae_f -->153.1<!-- /num --> [152, 154.4] | <!-- num:eval.errors.T3.B3.mae_f -->pending<!-- /num --> |
-| T4a MPtrj forgetting | <!-- num:eval.errors.T4a.B0.mae_f -->36.47<!-- /num --> [23.37, 49.53] | <!-- num:eval.errors.T4a.B0p.mae_f -->63.72<!-- /num --> [45.6, 83.65] | <!-- num:eval.errors.T4a.B1.mae_f -->32.9<!-- /num --> [31.83, 33.44] | <!-- num:eval.errors.T4a.B2.mae_f -->25.13<!-- /num --> [24.92, 25.27] | <!-- num:eval.errors.T4a.B3.mae_f -->pending<!-- /num --> |
+| T2 FeGe (never trained) | <!-- num:eval.errors.T2.B0.mae_f -->77.09<!-- /num --> [31.03, 101.7] | <!-- num:eval.errors.T2.B0p.mae_f -->190.8<!-- /num --> [39.4, 275.8] | <!-- num:eval.errors.T2.B1.mae_f -->81.64<!-- /num --> [78.23, 83.66] | <!-- num:eval.errors.T2.B2.mae_f -->70.29<!-- /num --> [69.18, 71.17] | <!-- num:eval.errors.T2.B3.mae_f -->450.4<!-- /num --> [73.54, 666.4] |
+| T3 OMat24 VASP | <!-- num:eval.errors.T3.B0.mae_f -->156.9<!-- /num --> [136.5, 183.5] | <!-- num:eval.errors.T3.B0p.mae_f -->273.4<!-- /num --> [238.3, 311.8] | <!-- num:eval.errors.T3.B1.mae_f -->157.2<!-- /num --> [156.7, 157.8] | <!-- num:eval.errors.T3.B2.mae_f -->153.1<!-- /num --> [152, 154.4] | <!-- num:eval.errors.T3.B3.mae_f -->637.8<!-- /num --> [535, 761.3] |
+| T4a MPtrj forgetting | <!-- num:eval.errors.T4a.B0.mae_f -->36.47<!-- /num --> [23.37, 49.53] | <!-- num:eval.errors.T4a.B0p.mae_f -->63.72<!-- /num --> [45.6, 83.65] | <!-- num:eval.errors.T4a.B1.mae_f -->32.9<!-- /num --> [31.83, 33.44] | <!-- num:eval.errors.T4a.B2.mae_f -->25.13<!-- /num --> [24.92, 25.27] | <!-- num:eval.errors.T4a.B3.mae_f -->44.63<!-- /num --> [14.99, 83.7] |
 
 _Force MAE in meV/Å over all force components with 95 % bootstrap CIs (2,000 resamples over groups). Each tier row cites one reference code + functional (T0–T2 the project's QE PBE, T3 OMat24 VASP PBE, T4a MPtrj VASP PBE; the provenance list says which). T3 cells carry the cross-code noise floor._
 
@@ -59,18 +59,22 @@ _Force MAE in meV/Å over all force components with 95 % bootstrap CIs (2,000 re
 - **T0 held-out groups / B0′ MP-0 zero-shot** — reference qe/PBE (SSSP-efficiency-1.3); E0 foundation; head Default; n = 147; seed 0; CI95 [50.97, 248.4]; run `20260920T230302-fb89d0-none`
 - **T0 held-out groups / B1 naive fine-tune** — reference qe/PBE (SSSP-efficiency-1.3); E0 E0s_qe.json; head Default; n = 147; seed 0; CI95 [63.06, 66.92]; run `20260921T012141-fb89d0-none`
 - **T0 held-out groups / B2 multihead replay** — reference qe/PBE (SSSP-efficiency-1.3); E0 E0s_qe.json; head Default; n = 147; seed 0; CI95 [55.94, 58.05]; run `20260921T031951-fb89d0-none`
+- **T0 held-out groups / B3 scratch** — reference qe/PBE (SSSP-efficiency-1.3); E0 estimated; head Default; n = 147; seed 0; CI95 [46.71, 580.2]; run `20260921T210124-fb89d0-none`
 - **T2 FeGe (never trained) / B0 MPA-0 zero-shot** — reference qe/PBE (SSSP-efficiency-1.3); E0 foundation; head Default; n = 115; seed 0; CI95 [31.03, 101.7]; run `20260920T230245-fb89d0-none`
 - **T2 FeGe (never trained) / B0′ MP-0 zero-shot** — reference qe/PBE (SSSP-efficiency-1.3); E0 foundation; head Default; n = 115; seed 0; CI95 [39.4, 275.8]; run `20260920T230302-fb89d0-none`
 - **T2 FeGe (never trained) / B1 naive fine-tune** — reference qe/PBE (SSSP-efficiency-1.3); E0 E0s_qe.json; head Default; n = 115; seed 0; CI95 [78.23, 83.66]; run `20260921T012141-fb89d0-none`
 - **T2 FeGe (never trained) / B2 multihead replay** — reference qe/PBE (SSSP-efficiency-1.3); E0 E0s_qe.json; head Default; n = 115; seed 0; CI95 [69.18, 71.17]; run `20260921T031951-fb89d0-none`
+- **T2 FeGe (never trained) / B3 scratch** — reference qe/PBE (SSSP-efficiency-1.3); E0 estimated; head Default; n = 115; seed 0; CI95 [73.54, 666.4]; run `20260921T210124-fb89d0-none`
 - **T3 OMat24 VASP / B0 MPA-0 zero-shot** — reference vasp/PBE (PAW (OMat24)); E0 foundation; head Default; n = 91; seed 0; CI95 [136.5, 183.5]; noise floor 21.53 meV/Å; run `20260920T225306-fb89d0-none`
 - **T3 OMat24 VASP / B0′ MP-0 zero-shot** — reference vasp/PBE (PAW (OMat24)); E0 foundation; head Default; n = 91; seed 0; CI95 [238.3, 311.8]; noise floor 21.53 meV/Å; run `20260920T225328-fb89d0-none`
 - **T3 OMat24 VASP / B1 naive fine-tune** — reference vasp/PBE (PAW (OMat24)); E0 E0s_qe.json; head Default; n = 91; seed 0; CI95 [156.7, 157.8]; noise floor 21.53 meV/Å; run `20260921T024249-fb89d0-none`
 - **T3 OMat24 VASP / B2 multihead replay** — reference vasp/PBE (PAW (OMat24)); E0 E0s_qe.json; head Default; n = 91; seed 0; CI95 [152, 154.4]; noise floor 21.53 meV/Å; run `20260921T031953-fb89d0-none`
+- **T3 OMat24 VASP / B3 scratch** — reference vasp/PBE (PAW (OMat24)); E0 estimated; head Default; n = 91; seed 0; CI95 [535, 761.3]; noise floor 21.53 meV/Å; run `20260921T210145-fb89d0-none`
 - **T4a MPtrj forgetting / B0 MPA-0 zero-shot** — reference vasp/PBE (PAW (Materials Project)); E0 foundation; head Default; n = 65; seed 0; CI95 [23.37, 49.53]; run `20260919T075717-fb89d0-none`
 - **T4a MPtrj forgetting / B0′ MP-0 zero-shot** — reference vasp/PBE (PAW (Materials Project)); E0 foundation; head Default; n = 65; seed 0; CI95 [45.6, 83.65]; run `20260919T075806-fb89d0-none`
 - **T4a MPtrj forgetting / B1 naive fine-tune** — reference vasp/PBE (PAW (Materials Project)); E0 E0s_qe.json; head Default; n = 65; seed 0; CI95 [31.83, 33.44]; run `20260921T012142-fb89d0-none`
 - **T4a MPtrj forgetting / B2 multihead replay** — reference vasp/PBE (PAW (Materials Project)); E0 foundation; head pt_head; n = 65; seed 0; CI95 [24.92, 25.27]; run `20260921T031952-fb89d0-none`
+- **T4a MPtrj forgetting / B3 scratch** — reference vasp/PBE (PAW (Materials Project)); E0 estimated; head Default; n = 65; seed 0; CI95 [14.99, 83.7]; run `20260921T210140-fb89d0-none`
 
 </details>
 <!-- gen:end -->
@@ -81,9 +85,9 @@ _Force MAE in meV/Å over all force components with 95 % bootstrap CIs (2,000 re
 <!-- gen:start:energies -->
 | Tier | B0 MPA-0 zero-shot | B0′ MP-0 zero-shot | B1 naive fine-tune | B2 multihead replay | B3 scratch |
 | --- | --- | --- | --- | --- | --- |
-| T0 held-out groups | <!-- num:eval.errors.T0.B0.mae_e -->pending<!-- /num --> | <!-- num:eval.errors.T0.B0p.mae_e -->pending<!-- /num --> | <!-- num:eval.errors.T0.B1.mae_e -->51.39<!-- /num --> [47.4, 53.76] | <!-- num:eval.errors.T0.B2.mae_e -->27.24<!-- /num --> [25.66, 29.78] | <!-- num:eval.errors.T0.B3.mae_e -->pending<!-- /num --> |
+| T0 held-out groups | <!-- num:eval.errors.T0.B0.mae_e -->pending<!-- /num --> | <!-- num:eval.errors.T0.B0p.mae_e -->pending<!-- /num --> | <!-- num:eval.errors.T0.B1.mae_e -->51.39<!-- /num --> [47.4, 53.76] | <!-- num:eval.errors.T0.B2.mae_e -->27.24<!-- /num --> [25.66, 29.78] | <!-- num:eval.errors.T0.B3.mae_e -->99.49<!-- /num --> [45.27, 156.2] |
 | T1 hot snapshots | <!-- num:eval.errors.T1.B0.mae_e -->pending<!-- /num --> | <!-- num:eval.errors.T1.B0p.mae_e -->pending<!-- /num --> | <!-- num:eval.errors.T1.B1.mae_e -->pending<!-- /num --> | <!-- num:eval.errors.T1.B2.mae_e -->pending<!-- /num --> | <!-- num:eval.errors.T1.B3.mae_e -->pending<!-- /num --> |
-| T2 FeGe (never trained) | <!-- num:eval.errors.T2.B0.mae_e -->pending<!-- /num --> | <!-- num:eval.errors.T2.B0p.mae_e -->pending<!-- /num --> | <!-- num:eval.errors.T2.B1.mae_e -->61.44<!-- /num --> [57.33, 64.13] | <!-- num:eval.errors.T2.B2.mae_e -->31.73<!-- /num --> [30.48, 33.63] | <!-- num:eval.errors.T2.B3.mae_e -->pending<!-- /num --> |
+| T2 FeGe (never trained) | <!-- num:eval.errors.T2.B0.mae_e -->pending<!-- /num --> | <!-- num:eval.errors.T2.B0p.mae_e -->pending<!-- /num --> | <!-- num:eval.errors.T2.B1.mae_e -->61.44<!-- /num --> [57.33, 64.13] | <!-- num:eval.errors.T2.B2.mae_e -->31.73<!-- /num --> [30.48, 33.63] | <!-- num:eval.errors.T2.B3.mae_e -->125.6<!-- /num --> [73.86, 182.8] |
 | T3 OMat24 VASP | <!-- num:eval.errors.T3.B0.mae_e -->pending<!-- /num --> | <!-- num:eval.errors.T3.B0p.mae_e -->pending<!-- /num --> | <!-- num:eval.errors.T3.B1.mae_e -->pending<!-- /num --> | <!-- num:eval.errors.T3.B2.mae_e -->pending<!-- /num --> | <!-- num:eval.errors.T3.B3.mae_e -->pending<!-- /num --> |
 | T4a MPtrj forgetting | <!-- num:eval.errors.T4a.B0.mae_e -->10.76<!-- /num --> [8.737, 12.75] | <!-- num:eval.errors.T4a.B0p.mae_e -->24.78<!-- /num --> [16.96, 36.4] | <!-- num:eval.errors.T4a.B1.mae_e -->pending<!-- /num --> | <!-- num:eval.errors.T4a.B2.mae_e -->60.46<!-- /num --> [59.14, 62.14] | <!-- num:eval.errors.T4a.B3.mae_e -->pending<!-- /num --> |
 
@@ -93,8 +97,10 @@ _Energy MAE in meV/atom on the reference's own energy scale; B1 energies are on 
 
 - **T0 held-out groups / B1 naive fine-tune** — reference qe/PBE (SSSP-efficiency-1.3); E0 E0s_qe.json; head Default; n = 147; seed 0; CI95 [47.4, 53.76]; run `20260921T012141-fb89d0-none`
 - **T0 held-out groups / B2 multihead replay** — reference qe/PBE (SSSP-efficiency-1.3); E0 E0s_qe.json; head Default; n = 147; seed 0; CI95 [25.66, 29.78]; run `20260921T031951-fb89d0-none`
+- **T0 held-out groups / B3 scratch** — reference qe/PBE (SSSP-efficiency-1.3); E0 estimated; head Default; n = 147; seed 0; CI95 [45.27, 156.2]; run `20260921T210124-fb89d0-none`
 - **T2 FeGe (never trained) / B1 naive fine-tune** — reference qe/PBE (SSSP-efficiency-1.3); E0 E0s_qe.json; head Default; n = 115; seed 0; CI95 [57.33, 64.13]; run `20260921T012141-fb89d0-none`
 - **T2 FeGe (never trained) / B2 multihead replay** — reference qe/PBE (SSSP-efficiency-1.3); E0 E0s_qe.json; head Default; n = 115; seed 0; CI95 [30.48, 33.63]; run `20260921T031951-fb89d0-none`
+- **T2 FeGe (never trained) / B3 scratch** — reference qe/PBE (SSSP-efficiency-1.3); E0 estimated; head Default; n = 115; seed 0; CI95 [73.86, 182.8]; run `20260921T210124-fb89d0-none`
 - **T4a MPtrj forgetting / B0 MPA-0 zero-shot** — reference vasp/PBE (PAW (Materials Project)); E0 foundation; head Default; n = 65; seed 0; CI95 [8.737, 12.75]; run `20260919T075717-fb89d0-none`
 - **T4a MPtrj forgetting / B0′ MP-0 zero-shot** — reference vasp/PBE (PAW (Materials Project)); E0 foundation; head Default; n = 65; seed 0; CI95 [16.96, 36.4]; run `20260919T075806-fb89d0-none`
 - **T4a MPtrj forgetting / B2 multihead replay** — reference vasp/PBE (PAW (Materials Project)); E0 foundation; head pt_head; n = 65; seed 0; CI95 [59.14, 62.14]; run `20260921T031952-fb89d0-none`
