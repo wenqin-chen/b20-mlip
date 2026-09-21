@@ -145,3 +145,13 @@ def test_yaml_round_trip_and_missing_default(tmp_path: Path) -> None:
     bad.write_text("- 1\n- 2\n")
     with pytest.raises(ValueError, match="mapping"):
         read_yaml(bad)
+
+
+def test_set_override_keeps_clock_strings_as_strings() -> None:
+    """Regression (Tillicum 2026-09-21): `--set cluster.resources.qe_phonons.time=12:00:00` must
+    stay the string "12:00:00" (SLURM read a coerced 43200 as minutes = 720 h, a $370 job)."""
+    from b20mlip.config import load_config
+
+    cfg = load_config([], ["cluster.resources.qe_phonons.time=12:00:00", "compute.threads=4"])
+    assert cfg.cluster.resources["qe_phonons"]["time"] == "12:00:00"
+    assert cfg.compute.threads == 4

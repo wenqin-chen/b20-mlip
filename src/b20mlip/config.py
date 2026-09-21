@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from pathlib import Path
 from typing import Any, Literal
 
@@ -340,6 +341,21 @@ def read_yaml(path: Path) -> dict[str, Any]:
     return data
 
 
+_CLOCK_RE = re.compile(r"^\d{1,3}(:\d{2}){1,2}$|^\d+-\d{1,2}(:\d{2}){0,2}$")
+
+
+def _override_value(raw: str) -> Any:
+    """YAML-scalar parse of a ``--set`` value, except that SLURM clock strings (``12:00:00``,
+    ``1-00:00:00``) stay strings: YAML 1.1 reads ``12:00:00`` as the sexagesimal integer 43200,
+    which sbatch takes as minutes (a 720-hour reservation, Tillicum 2026-09-21)."""
+    text = raw.strip()
+    if text == "":
+        return ""
+    if _CLOCK_RE.match(text):
+        return text
+    return yaml.safe_load(raw)
+
+
 def parse_overrides(overrides: list[str]) -> dict[str, Any]:
     """Turn ``["a.b=1", "c=[x,y]"]`` into ``{"a": {"b": 1}, "c": ["x", "y"]}``.
 
@@ -352,7 +368,7 @@ def parse_overrides(overrides: list[str]) -> dict[str, Any]:
         key = key.strip()
         if not sep or not key:
             raise ValueError(f"--set expects key=value (dotted key), got {item!r}")
-        value: Any = yaml.safe_load(raw) if raw.strip() != "" else ""
+        value: Any = _override_value(raw)
         parts = key.split(".")
         node = out
         for part in parts[:-1]:
