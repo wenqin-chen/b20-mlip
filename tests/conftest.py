@@ -55,10 +55,17 @@ def block_network() -> Iterator[None]:
 
 @pytest.fixture(autouse=True)
 def clean_b20_env(monkeypatch: pytest.MonkeyPatch) -> None:
-    """Strip any B20_* variables from the developer's shell so config tests are deterministic."""
+    """Strip any B20_* variables from the developer's shell so config tests are deterministic,
+    and pin the CLI's help rendering: on GitHub Actions Rich emits ANSI colour codes and wraps
+    help text at a narrow width, which broke the ``"--option" in result.output`` assertions
+    (CI run 35630049503). NO_COLOR + a wide COLUMNS make CliRunner output plain everywhere."""
     for key in list(os.environ):
         if key.upper().startswith("B20_"):
             monkeypatch.delenv(key, raising=False)
+    monkeypatch.setenv("NO_COLOR", "1")
+    monkeypatch.setenv("TERM", "dumb")
+    monkeypatch.setenv("COLUMNS", "200")
+    monkeypatch.delenv("FORCE_COLOR", raising=False)
 
 
 def b20_atoms(compound: str, config_type: str, rng: np.random.Generator) -> Atoms:
