@@ -1,0 +1,545 @@
+{
+  "schema_version": 1,
+  "stage": "md.ase",
+  "run_id": "20260920T230308-fd5fe0-0",
+  "created_at": "2026-09-20T23:03:08.095503Z",
+  "host": "g017",
+  "user": "wenqin98",
+  "git_sha": "unknown",
+  "git_dirty": false,
+  "uv_lock_sha256": "a039dbcfb95b46c12c7a0b465b82a5728c5b69285be0a7ce472041a0c289bcaf",
+  "python": "3.11.16",
+  "packages": {
+    "b20-mlip": "0.1.0",
+    "mace-torch": "0.3.16",
+    "torch": "2.14.0",
+    "e3nn": "0.4.4",
+    "ase": "3.29.0",
+    "phonopy": "4.5.0",
+    "pymatgen": "2026.5.4",
+    "spglib": "2.7.0",
+    "seekpath": "2.2.1",
+    "pymbar": "4.0.3",
+    "numpy": "2.4.6",
+    "pydantic": "2.13.5",
+    "pydantic-settings": "2.15.0",
+    "anthropic": "1.6.0"
+  },
+  "config_sha256": "fd5fe0dff42a8670030c91d07aa47f11104b72c855ce3fc057bd4dc7ee100c1d",
+  "config": {
+    "paths": {
+      "data_dir": "data",
+      "runs_dir": "runs",
+      "models_dir": "models",
+      "dft_dir": "dft",
+      "reports_dir": "reports"
+    },
+    "compute": {
+      "threads": 2,
+      "dtype": "float64",
+      "device": "cuda"
+    },
+    "cluster": {
+      "alias": "tillicum",
+      "control_path": "~/.ssh/tillicum-cm",
+      "account": null,
+      "partition_cpu": null,
+      "partition_gpu": null,
+      "scratch": null,
+      "modules": [],
+      "qe_cmd": null,
+      "lammps_cmd": null,
+      "micromamba_env": null,
+      "qos": null,
+      "install_qe": false,
+      "lammps_sha": "4d222cb3ee2a6b14083c778968497bf9e0efc4b4",
+      "libtorch_cpu_url": "https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-2.14.0%2Bcpu.zip",
+      "libtorch_cuda_url": "https://download.pytorch.org/libtorch/cu126/libtorch-shared-with-deps-2.14.0%2Bcu126.zip",
+      "resources": {}
+    },
+    "data": {
+      "compounds": [
+        "FeSi",
+        "CoSi",
+        "MnSi",
+        "FeGe"
+      ],
+      "strains": [
+        -0.06,
+        -0.04,
+        -0.02,
+        0.02,
+        0.04,
+        0.06
+      ],
+      "shears": [
+        -0.04,
+        -0.02,
+        0.02,
+        0.04
+      ],
+      "rattle_A": 0.15,
+      "eos_pct": 8.0,
+      "temperatures_K": [
+        300.0,
+        600.0,
+        900.0
+      ],
+      "force_cap_eVA": 15.0,
+      "omat24_url": "https://dl.fbaipublicfiles.com/opencatalystproject/data/omat/251210/omat24_1M_251210.tar.gz",
+      "omat24_sha256": null,
+      "wbm_sample_n": 1000,
+      "wbm_seed": 0
+    },
+    "dft": {
+      "ecut_ry": 90.0,
+      "ecut_rho": 1080.0,
+      "k_spacing_inv_A": 0.25,
+      "smearing": "mv",
+      "degauss_ry": 0.01,
+      "nspin": {
+        "FeSi": 1,
+        "CoSi": 1,
+        "MnSi": 2,
+        "FeGe": 2,
+        "MnGe": 2
+      },
+      "starting_magnetization": {
+        "Mn": 0.5,
+        "Fe": 0.5,
+        "Co": 0.0
+      },
+      "pseudo_dir": "pseudos/sssp_efficiency",
+      "pseudo_family": "SSSP-efficiency-1.3",
+      "pseudos": {
+        "Fe": "Fe.pbe-spn-kjpaw_psl.0.2.1.UPF",
+        "Mn": "mn_pbe_v1.5.uspp.F.UPF",
+        "Co": "Co_pbe_v1.2.uspp.F.UPF",
+        "Si": "Si.pbe-n-rrkjus_psl.1.0.0.UPF",
+        "Ge": "ge_pbe_v1.4.uspp.F.UPF"
+      },
+      "pseudo_md5s": {
+        "Fe": "e86618425769142926afa95317d90200",
+        "Mn": "82ef2b46521d7a7d9e736dc3972e4928",
+        "Co": "5f91765df6ddd3222702df6e7b74a16d",
+        "Si": "0b0bb1205258b0d07b9f9672cf965d36",
+        "Ge": "9c9eaa91e581c3f09632fb3098b2c6b2"
+      },
+      "sssp_json": "configs/dft/sssp_efficiency_1.3_pbe.json",
+      "conv_thr": 1e-8,
+      "mixing_beta": 0.4,
+      "electron_maxstep": 100,
+      "branch_tol_muB": 0.3,
+      "m_ref_muB": {},
+      "noise_floor_n": 20,
+      "isolated_atom_box_A": 12.0,
+      "converge_ecuts_ry": [
+        40.0,
+        50.0,
+        60.0,
+        70.0,
+        80.0,
+        90.0
+      ],
+      "converge_k_spacings": [
+        0.35,
+        0.3,
+        0.25,
+        0.2
+      ],
+      "thresholds": {
+        "E_meV_atom": 1.0,
+        "F_meV_A": 5.0
+      }
+    },
+    "train": {
+      "foundation": "medium-mpa-0",
+      "lr": 0.0001,
+      "epochs": 30,
+      "batch_size": 4,
+      "energy_weight": 1.0,
+      "forces_weight": 100.0,
+      "stress_weight": 1.0,
+      "ema_decay": 0.99,
+      "replay": {
+        "pt_train_file": "mp",
+        "num_samples_pt": 10000,
+        "subselect_pt": "fps"
+      },
+      "e0s_file": "configs/dft/E0s_qe.json",
+      "scratch": {
+        "hidden_irreps": "64x0e+64x1o",
+        "r_max": 5.0
+      },
+      "loss": "universal",
+      "extra_args": []
+    },
+    "eval": {
+      "bootstrap_n": 2000,
+      "bootstrap_seed": 0,
+      "fmax": 0.05,
+      "max_steps": 500,
+      "offset_residual_gate_meV": 20.0
+    },
+    "md": {
+      "timestep_fs": 2.0,
+      "friction": 0.01,
+      "taut": 100.0,
+      "taup": 1000.0,
+      "equil_ps": 10.0,
+      "natoms": 64,
+      "bulk_modulus_GPa": 150.0,
+      "thermo_every_steps": 10,
+      "dump_every_steps": 100,
+      "vdos_every_steps": 5,
+      "rdf_rmax_A": 6.0,
+      "rdf_nbins": 200
+    },
+    "sampling": {
+      "k_eVA2": 5.0,
+      "windows": 12,
+      "ps_per_window": 15.0,
+      "T": 300.0
+    },
+    "agent": {
+      "backend": "mock",
+      "model_id": "claude-opus-5",
+      "budget": {
+        "max_calls": 25,
+        "max_wall_s": 1800,
+        "max_dft_frames": 200,
+        "max_node_hours": 10.0,
+        "max_atoms": 512,
+        "max_md_ps": 20.0,
+        "approve_cluster": false
+      },
+      "trace_dir": "runs/agent/traces",
+      "tasks_path": "evals/agent_tasks.jsonl",
+      "refs_dir": "evals/refs",
+      "phonon_supercell": [
+        2,
+        2,
+        2
+      ],
+      "phonon_distance": 0.03,
+      "max_tokens": 16000
+    },
+    "report": {
+      "numbers_path": "reports/numbers.json"
+    },
+    "bench": {
+      "model": null,
+      "tiers": "a,b,c,d,e",
+      "quick": false,
+      "force": false,
+      "compound": "FeSi",
+      "n_frames_8atom": 80,
+      "n_frames_64atom": 20,
+      "finetune_epochs": 2,
+      "finetune_timeout_s": 3600,
+      "md_natoms": [
+        64,
+        512
+      ],
+      "md_steps": 200,
+      "md_warmup_steps": 10,
+      "md_T": 300.0,
+      "n_relax": 20,
+      "phonon_supercell": 2,
+      "phonon_distance": 0.03,
+      "fwbw_batch": 4,
+      "fwbw_natoms": 64,
+      "fwbw_repeats": 3
+    }
+  },
+  "seed": 0,
+  "inputs": [
+    {
+      "path": "models/foundation/mace-mpa-0-medium.model",
+      "sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "bytes": 79462305,
+      "kind": "model"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "runs/md.ase/20260920T230308-fd5fe0-0/plan.json",
+      "sha256": "06586baa21f79f410b707010bbb84136d71f2d86ba0c4ccf2684669f3eee56e7",
+      "bytes": 544,
+      "kind": "json"
+    },
+    {
+      "path": "runs/md.ase/20260920T230308-fd5fe0-0/md_npt_100K.traj",
+      "sha256": "27bb0a8d355607a2b4413c02ca93cc56f808b8bb05d96b54a16ae7f03c4ddcd9",
+      "bytes": 1185886,
+      "kind": "traj"
+    },
+    {
+      "path": "runs/md.ase/20260920T230308-fd5fe0-0/thermo_npt_100K.csv",
+      "sha256": "50ebbe7f73053e3e23ddf836c55730db1acd93047b53a04536cd9afeb785e9f9",
+      "bytes": 290044,
+      "kind": "other"
+    },
+    {
+      "path": "runs/md.ase/20260920T230308-fd5fe0-0/vdos_npt_100K.json",
+      "sha256": "b399ff6a4918c3d69a410ce2b0563da9a6d7b2041232e42164204bd7aa8e87d7",
+      "bytes": 70005,
+      "kind": "json"
+    },
+    {
+      "path": "runs/md.ase/20260920T230308-fd5fe0-0/rdf_npt_100K.json",
+      "sha256": "bc4d52a4e1aeb8348a3d2863dc05037fe1c42ac83f1bbebbe841b6271f0ce1fc",
+      "bytes": 7173,
+      "kind": "json"
+    },
+    {
+      "path": "runs/md.ase/20260920T230308-fd5fe0-0/md_npt_300K.traj",
+      "sha256": "074d8a47fa65282d04c62b02d264f88e5769f2e7709fd0acae923f89b3d1d8a6",
+      "bytes": 1185716,
+      "kind": "traj"
+    },
+    {
+      "path": "runs/md.ase/20260920T230308-fd5fe0-0/thermo_npt_300K.csv",
+      "sha256": "abb3069e484a83d5df4531da92f5305b861f8638d996bc9be46a5e544050c239",
+      "bytes": 289513,
+      "kind": "other"
+    },
+    {
+      "path": "runs/md.ase/20260920T230308-fd5fe0-0/vdos_npt_300K.json",
+      "sha256": "5d1642790e4c2ff1a3245711a3419c9fe7430198f6e21729ec52f8c4220fc693",
+      "bytes": 70138,
+      "kind": "json"
+    },
+    {
+      "path": "runs/md.ase/20260920T230308-fd5fe0-0/rdf_npt_300K.json",
+      "sha256": "7daffa4e74c21f5ab16d1383cc16e9b985c923343dfb4fe65df0be89653fe74c",
+      "bytes": 7435,
+      "kind": "json"
+    },
+    {
+      "path": "runs/md.ase/20260920T230308-fd5fe0-0/md_npt_500K.traj",
+      "sha256": "b315ae10d6193076001bc46d5e212d5dc564d167de65de72fb8301276a95438a",
+      "bytes": 1185548,
+      "kind": "traj"
+    },
+    {
+      "path": "runs/md.ase/20260920T230308-fd5fe0-0/thermo_npt_500K.csv",
+      "sha256": "a5fabc980495ac57980341b725f77d5e25bca06cec6ac26e7a5a2d0239039b22",
+      "bytes": 288186,
+      "kind": "other"
+    },
+    {
+      "path": "runs/md.ase/20260920T230308-fd5fe0-0/vdos_npt_500K.json",
+      "sha256": "fa22cc8eb3a84a7997cf3d65d7646f871807f6037f926d29a38108facfa920bf",
+      "bytes": 69960,
+      "kind": "json"
+    },
+    {
+      "path": "runs/md.ase/20260920T230308-fd5fe0-0/rdf_npt_500K.json",
+      "sha256": "e20fd7f3e4686462fbcdb9bb98174324911acdfe76a2651e696f169bfafa2bed",
+      "bytes": 7513,
+      "kind": "json"
+    },
+    {
+      "path": "runs/md.ase/20260920T230308-fd5fe0-0/md_result_npt_100K.json",
+      "sha256": "4ac0f6c76865bb49298d15a4087318af161e62ec2bb7ad684a50d3c91782cda1",
+      "bytes": 684,
+      "kind": "json"
+    },
+    {
+      "path": "runs/md.ase/20260920T230308-fd5fe0-0/md_result_npt_300K.json",
+      "sha256": "1771aa0bd280c41c60a41513f57c06fdc3ab62834398576e9d052faa02790d7b",
+      "bytes": 684,
+      "kind": "json"
+    },
+    {
+      "path": "runs/md.ase/20260920T230308-fd5fe0-0/md_result_npt_500K.json",
+      "sha256": "787198f2ac78b7d13c7f431ad96dc07d63a05ee3749d2625481a1dc9c58576f7",
+      "bytes": 683,
+      "kind": "json"
+    },
+    {
+      "path": "runs/md.ase/20260920T230308-fd5fe0-0/numbers.json",
+      "sha256": "216a504f18fe4a3e68b1962b026b16dfa5af16fe6d467a75be302dc0edd01bd8",
+      "bytes": 9892,
+      "kind": "json"
+    }
+  ],
+  "wall_seconds": 1263.9253282080172,
+  "status": "ok",
+  "slurm": null,
+  "extras": {
+    "engine": "ase",
+    "timestep_fs": 2.0,
+    "thermostat": "Nose-Hoover/Parrinello-Rahman (Melchionna) taut 100.0 fs, taup 1000.0 fs, B 150.0 GPa, isotropic, 0 GPa",
+    "ensemble": "npt",
+    "temperatures_K": [
+      100.0,
+      300.0,
+      500.0
+    ],
+    "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+    "head": "Default",
+    "model_label": "B0",
+    "e0_source": "foundation",
+    "energy_scale": "mp",
+    "natoms": 64,
+    "reps": 2,
+    "steps": 20000,
+    "equil_ps": 10.0,
+    "md_progress": {
+      "step": 20000,
+      "time_ps": 40.0,
+      "T_K": 606.13,
+      "wall_s": 419.64,
+      "s_per_step": 0.021
+    },
+    "results": {
+      "100": {
+        "engine": "ase",
+        "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+        "head": "Default",
+        "compound": "MnSi",
+        "natoms": 64,
+        "ensemble": "npt",
+        "temperature_K": 100.0,
+        "pressure_GPa": 0.0,
+        "timestep_fs": 2.0,
+        "steps": 20000,
+        "drift_meV_atom_ps": null,
+        "a_mean_A": 4.551681120558036,
+        "a_std_A": 0.022689238505500788,
+        "alpha_per_K": 6.563286474928469e-6,
+        "traj_sha256": "27bb0a8d355607a2b4413c02ca93cc56f808b8bb05d96b54a16ae7f03c4ddcd9",
+        "vdos_path": "runs/md.ase/20260920T230308-fd5fe0-0/vdos_npt_100K.json",
+        "rdf_path": "runs/md.ase/20260920T230308-fd5fe0-0/rdf_npt_100K.json",
+        "run_id": "20260920T230308-fd5fe0-0"
+      },
+      "300": {
+        "engine": "ase",
+        "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+        "head": "Default",
+        "compound": "MnSi",
+        "natoms": 64,
+        "ensemble": "npt",
+        "temperature_K": 300.0,
+        "pressure_GPa": 0.0,
+        "timestep_fs": 2.0,
+        "steps": 20000,
+        "drift_meV_atom_ps": null,
+        "a_mean_A": 4.557290211940818,
+        "a_std_A": 0.026121954849701107,
+        "alpha_per_K": 6.563286474928469e-6,
+        "traj_sha256": "074d8a47fa65282d04c62b02d264f88e5769f2e7709fd0acae923f89b3d1d8a6",
+        "vdos_path": "runs/md.ase/20260920T230308-fd5fe0-0/vdos_npt_300K.json",
+        "rdf_path": "runs/md.ase/20260920T230308-fd5fe0-0/rdf_npt_300K.json",
+        "run_id": "20260920T230308-fd5fe0-0"
+      },
+      "500": {
+        "engine": "ase",
+        "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+        "head": "Default",
+        "compound": "MnSi",
+        "natoms": 64,
+        "ensemble": "npt",
+        "temperature_K": 500.0,
+        "pressure_GPa": 0.0,
+        "timestep_fs": 2.0,
+        "steps": 20000,
+        "drift_meV_atom_ps": null,
+        "a_mean_A": 4.563646094562823,
+        "a_std_A": 0.03256350332854713,
+        "alpha_per_K": 6.563286474928469e-6,
+        "traj_sha256": "b315ae10d6193076001bc46d5e212d5dc564d167de65de72fb8301276a95438a",
+        "vdos_path": "runs/md.ase/20260920T230308-fd5fe0-0/vdos_npt_500K.json",
+        "rdf_path": "runs/md.ase/20260920T230308-fd5fe0-0/rdf_npt_500K.json",
+        "run_id": "20260920T230308-fd5fe0-0"
+      }
+    },
+    "stats": {
+      "100": {
+        "n_production": 1501,
+        "n_thermo": 2001,
+        "production_window": "production (equil_ps excluded)",
+        "T_mean_K": 98.41376244344184,
+        "E_pot_mean_eV_atom": -7.744591271394755,
+        "a_ci95": [
+          4.549069042172493,
+          4.554293198943578
+        ],
+        "drift_ci95": null,
+        "wall_s": 419.91509913804475,
+        "s_per_step": 0.020995754956902236,
+        "reps": 2,
+        "seed": 0
+      },
+      "300": {
+        "n_production": 1501,
+        "n_thermo": 2001,
+        "production_window": "production (equil_ps excluded)",
+        "T_mean_K": 294.83010546249125,
+        "E_pot_mean_eV_atom": -7.7192901366955375,
+        "a_ci95": [
+          4.554295838231043,
+          4.560284585650593
+        ],
+        "drift_ci95": null,
+        "wall_s": 417.5634258799255,
+        "s_per_step": 0.020878171293996276,
+        "reps": 2,
+        "seed": 0
+      },
+      "500": {
+        "n_production": 1501,
+        "n_thermo": 2001,
+        "production_window": "production (equil_ps excluded)",
+        "T_mean_K": 492.3160927603055,
+        "E_pot_mean_eV_atom": -7.693454808444336,
+        "a_ci95": [
+          4.559810768938247,
+          4.5674814201873986
+        ],
+        "drift_ci95": null,
+        "wall_s": 419.6419328060001,
+        "s_per_step": 0.020982096640300006,
+        "reps": 2,
+        "seed": 0
+      }
+    },
+    "thermal_expansion": {
+      "alpha_per_K": 6.563286474928469e-6,
+      "slope_A_per_K": 0.00002991243501196838,
+      "intercept_A": 4.5485654118503,
+      "a_ref_A": 4.55753914235389,
+      "T_ref_K": 300.0,
+      "temperatures_K": [
+        100.0,
+        300.0,
+        500.0
+      ],
+      "a_A": [
+        4.551681120558036,
+        4.557290211940818,
+        4.563646094562823
+      ],
+      "n": 3,
+      "slope_se_A_per_K": 1.0779003074832698e-6,
+      "alpha_ci95": null
+    },
+    "numbers_keys": [
+      "md.ase.MnSi.B0.npt.100.a_mean_A",
+      "md.ase.MnSi.B0.npt.100.a_std_A",
+      "md.ase.MnSi.B0.npt.100.alpha_per_K",
+      "md.ase.MnSi.B0.npt.300.a_mean_A",
+      "md.ase.MnSi.B0.npt.300.a_std_A",
+      "md.ase.MnSi.B0.npt.300.alpha_per_K",
+      "md.ase.MnSi.B0.npt.500.a_mean_A",
+      "md.ase.MnSi.B0.npt.500.a_std_A",
+      "md.ase.MnSi.B0.npt.500.alpha_per_K",
+      "md.ase.MnSi.a_300K_A",
+      "md.ase.MnSi.a_dev_pct",
+      "md.ase.MnSi.a_exp_A",
+      "md.ase.MnSi.alpha_per_K"
+    ]
+  }
+}

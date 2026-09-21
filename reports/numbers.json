@@ -12,7 +12,15 @@
     "eval.errors/20260920T225306-fb89d0-none": "reports/manifests/eval.errors/20260920T225306-fb89d0-none",
     "eval.errors/20260920T225328-fb89d0-none": "reports/manifests/eval.errors/20260920T225328-fb89d0-none",
     "eval.errors/20260920T225339-fb89d0-none": "reports/manifests/eval.errors/20260920T225339-fb89d0-none",
-    "md.ase/20260919T085733-fb89d0-0": "reports/manifests/md.ase/20260919T085733-fb89d0-0",
+    "eval.errors/20260920T230245-fb89d0-none": "reports/manifests/eval.errors/20260920T230245-fb89d0-none",
+    "eval.errors/20260920T230302-fb89d0-none": "reports/manifests/eval.errors/20260920T230302-fb89d0-none",
+    "eval.errors/20260921T012141-fb89d0-none": "reports/manifests/eval.errors/20260921T012141-fb89d0-none",
+    "eval.errors/20260921T012142-fb89d0-none": "reports/manifests/eval.errors/20260921T012142-fb89d0-none",
+    "md.ase/20260920T224837-fd5fe0-0": "reports/manifests/md.ase/20260920T224837-fd5fe0-0",
+    "md.ase/20260920T225220-fd5fe0-0": "reports/manifests/md.ase/20260920T225220-fd5fe0-0",
+    "md.ase/20260920T225557-fd5fe0-0": "reports/manifests/md.ase/20260920T225557-fd5fe0-0",
+    "md.ase/20260920T225932-fd5fe0-0": "reports/manifests/md.ase/20260920T225932-fd5fe0-0",
+    "md.ase/20260920T230308-fd5fe0-0": "reports/manifests/md.ase/20260920T230308-fd5fe0-0",
     "sampling.neb/20260919T085607-fb89d0-none": "reports/manifests/sampling.neb/20260919T085607-fb89d0-none",
     "sampling.wham/20260920T225238-fb89d0-none": "reports/manifests/sampling.wham/20260920T225238-fb89d0-none"
   },
@@ -1455,6 +1463,1082 @@
       "pct": 8.0
     }
   },
+  "eval.errors.T0.B0.mae_f": {
+    "value": 65.58704508515015,
+    "run_id": "20260920T230245-fb89d0-none",
+    "manifest_sha256": "f2fb03ae27432df11326bd868823bd76cfc74423f84ee142e73d558882af276a",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 147,
+      "seed": 0,
+      "ci95": [
+        27.718249036913218,
+        91.65733519482903
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0",
+      "bracket": "B0",
+      "tier": "T0",
+      "unit": "meV/\u00c5",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "split_id": "d195dc5f2104",
+      "bootstrap_n": 2000,
+      "n_frames": 147,
+      "n_atoms": 1176
+    }
+  },
+  "eval.errors.T0.B0.mae_s": {
+    "value": 5.296953162026863,
+    "run_id": "20260920T230245-fb89d0-none",
+    "manifest_sha256": "f2fb03ae27432df11326bd868823bd76cfc74423f84ee142e73d558882af276a",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 147,
+      "seed": 0,
+      "ci95": [
+        3.5272696765355884,
+        7.0911360802009025
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0",
+      "bracket": "B0",
+      "tier": "T0",
+      "unit": "meV/\u00c5^3",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "split_id": "d195dc5f2104",
+      "bootstrap_n": 2000,
+      "n_frames": 147,
+      "n_atoms": 1176
+    }
+  },
+  "eval.errors.T0.B0.rmse_f": {
+    "value": 102.50558805246446,
+    "run_id": "20260920T230245-fb89d0-none",
+    "manifest_sha256": "f2fb03ae27432df11326bd868823bd76cfc74423f84ee142e73d558882af276a",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 147,
+      "seed": 0,
+      "ci95": [
+        42.03339366977935,
+        129.82859269987676
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0",
+      "bracket": "B0",
+      "tier": "T0",
+      "unit": "meV/\u00c5",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "split_id": "d195dc5f2104",
+      "bootstrap_n": 2000,
+      "n_frames": 147,
+      "n_atoms": 1176
+    }
+  },
+  "eval.errors.T0.B0p.mae_f": {
+    "value": 165.80628085338066,
+    "run_id": "20260920T230302-fb89d0-none",
+    "manifest_sha256": "5d4639c404138e3059b14c0f116de7f7980dbda9bbfb1e483b504ed6594ee4cb",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 147,
+      "seed": 0,
+      "ci95": [
+        50.96538864623941,
+        248.39822641186933
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0p",
+      "bracket": "B0p",
+      "tier": "T0",
+      "unit": "meV/\u00c5",
+      "model_sha256": "01bfe22100139f424713cf921144e5509cbe353d67aa9fa1be9c6e1e0ed35845",
+      "split_id": "d195dc5f2104",
+      "bootstrap_n": 2000,
+      "n_frames": 147,
+      "n_atoms": 1176
+    }
+  },
+  "eval.errors.T0.B0p.mae_s": {
+    "value": 7.331786725948277,
+    "run_id": "20260920T230302-fb89d0-none",
+    "manifest_sha256": "5d4639c404138e3059b14c0f116de7f7980dbda9bbfb1e483b504ed6594ee4cb",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 147,
+      "seed": 0,
+      "ci95": [
+        6.242901662524552,
+        8.430370900585036
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0p",
+      "bracket": "B0p",
+      "tier": "T0",
+      "unit": "meV/\u00c5^3",
+      "model_sha256": "01bfe22100139f424713cf921144e5509cbe353d67aa9fa1be9c6e1e0ed35845",
+      "split_id": "d195dc5f2104",
+      "bootstrap_n": 2000,
+      "n_frames": 147,
+      "n_atoms": 1176
+    }
+  },
+  "eval.errors.T0.B0p.rmse_f": {
+    "value": 295.03308896530814,
+    "run_id": "20260920T230302-fb89d0-none",
+    "manifest_sha256": "5d4639c404138e3059b14c0f116de7f7980dbda9bbfb1e483b504ed6594ee4cb",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 147,
+      "seed": 0,
+      "ci95": [
+        64.30246283320673,
+        386.4627802239847
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0p",
+      "bracket": "B0p",
+      "tier": "T0",
+      "unit": "meV/\u00c5",
+      "model_sha256": "01bfe22100139f424713cf921144e5509cbe353d67aa9fa1be9c6e1e0ed35845",
+      "split_id": "d195dc5f2104",
+      "bootstrap_n": 2000,
+      "n_frames": 147,
+      "n_atoms": 1176
+    }
+  },
+  "eval.errors.T0.B1.mae_e": {
+    "value": 51.391919645899925,
+    "run_id": "20260921T012141-fb89d0-none",
+    "manifest_sha256": "dea1da3b4fcadab143278465eeb1647f84f5768ab97712475eae2cf43a80f4c6",
+    "stage": "eval.errors",
+    "meta": {
+      "aggregate": "mean_over_seeds",
+      "bootstrap_n": 2000,
+      "bracket": "B1",
+      "ci95": [
+        47.3993260844914,
+        53.763607834996044
+      ],
+      "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "head": "Default",
+      "model_label": "B1",
+      "model_sha256": "31f32a4f55bbd6bff35821a5dc2d3b6ab565e0b17037b6e4d61895d24634dcea",
+      "n": 147,
+      "n_atoms": 1176,
+      "n_frames": 147,
+      "n_models": 3,
+      "n_seeds": 3,
+      "per_seed": [
+        {
+          "ci95": [
+            29.00256071358495,
+            80.01696362488033
+          ],
+          "run_id": "20260920T230219-fb89d0-none",
+          "seed": 0,
+          "value": 53.01282501821234
+        },
+        {
+          "ci95": [
+            32.78002436975074,
+            76.28996622963273
+          ],
+          "run_id": "20260921T011628-fb89d0-none",
+          "seed": 0,
+          "value": 53.763607834996044
+        },
+        {
+          "ci95": [
+            29.7139962182396,
+            65.33120291842278
+          ],
+          "run_id": "20260921T011652-fb89d0-none",
+          "seed": 0,
+          "value": 47.3993260844914
+        }
+      ],
+      "reference": {
+        "code": "qe",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3"
+      },
+      "seed": 0,
+      "split_id": "d195dc5f2104",
+      "tier": "T0",
+      "train_seed": 0,
+      "train_seeds": "0,1,2",
+      "unit": "meV/atom"
+    }
+  },
+  "eval.errors.T0.B1.mae_f": {
+    "value": 65.50936925404834,
+    "run_id": "20260921T012141-fb89d0-none",
+    "manifest_sha256": "dea1da3b4fcadab143278465eeb1647f84f5768ab97712475eae2cf43a80f4c6",
+    "stage": "eval.errors",
+    "meta": {
+      "aggregate": "mean_over_seeds",
+      "bootstrap_n": 2000,
+      "bracket": "B1",
+      "ci95": [
+        63.06093111709614,
+        66.92213929824547
+      ],
+      "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "head": "Default",
+      "model_label": "B1",
+      "model_sha256": "31f32a4f55bbd6bff35821a5dc2d3b6ab565e0b17037b6e4d61895d24634dcea",
+      "n": 147,
+      "n_atoms": 1176,
+      "n_frames": 147,
+      "n_models": 3,
+      "n_seeds": 3,
+      "per_seed": [
+        {
+          "ci95": [
+            36.25879076804095,
+            83.55613437137484
+          ],
+          "run_id": "20260920T230219-fb89d0-none",
+          "seed": 0,
+          "value": 63.06093111709614
+        },
+        {
+          "ci95": [
+            37.83672805063072,
+            88.88127247155201
+          ],
+          "run_id": "20260921T011628-fb89d0-none",
+          "seed": 0,
+          "value": 66.5450373468034
+        },
+        {
+          "ci95": [
+            38.14955003594294,
+            89.4788111176561
+          ],
+          "run_id": "20260921T011652-fb89d0-none",
+          "seed": 0,
+          "value": 66.92213929824547
+        }
+      ],
+      "reference": {
+        "code": "qe",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3"
+      },
+      "seed": 0,
+      "split_id": "d195dc5f2104",
+      "tier": "T0",
+      "train_seed": 0,
+      "train_seeds": "0,1,2",
+      "unit": "meV/\u00c5"
+    }
+  },
+  "eval.errors.T0.B1.mae_s": {
+    "value": 6.436819477442832,
+    "run_id": "20260921T012141-fb89d0-none",
+    "manifest_sha256": "dea1da3b4fcadab143278465eeb1647f84f5768ab97712475eae2cf43a80f4c6",
+    "stage": "eval.errors",
+    "meta": {
+      "aggregate": "mean_over_seeds",
+      "bootstrap_n": 2000,
+      "bracket": "B1",
+      "ci95": [
+        5.898793780227653,
+        7.214081965234569
+      ],
+      "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "head": "Default",
+      "model_label": "B1",
+      "model_sha256": "31f32a4f55bbd6bff35821a5dc2d3b6ab565e0b17037b6e4d61895d24634dcea",
+      "n": 147,
+      "n_atoms": 1176,
+      "n_frames": 147,
+      "n_models": 3,
+      "n_seeds": 3,
+      "per_seed": [
+        {
+          "ci95": [
+            4.249835640461699,
+            8.403985150045012
+          ],
+          "run_id": "20260920T230219-fb89d0-none",
+          "seed": 0,
+          "value": 5.898793780227653
+        },
+        {
+          "ci95": [
+            5.700584495829913,
+            9.65307229287519
+          ],
+          "run_id": "20260921T011628-fb89d0-none",
+          "seed": 0,
+          "value": 7.214081965234569
+        },
+        {
+          "ci95": [
+            4.796296523048529,
+            8.461371153337184
+          ],
+          "run_id": "20260921T011652-fb89d0-none",
+          "seed": 0,
+          "value": 6.197582686866275
+        }
+      ],
+      "reference": {
+        "code": "qe",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3"
+      },
+      "seed": 0,
+      "split_id": "d195dc5f2104",
+      "tier": "T0",
+      "train_seed": 0,
+      "train_seeds": "0,1,2",
+      "unit": "meV/\u00c5^3"
+    }
+  },
+  "eval.errors.T0.B1.rmse_e": {
+    "value": 63.02392746568782,
+    "run_id": "20260921T012141-fb89d0-none",
+    "manifest_sha256": "dea1da3b4fcadab143278465eeb1647f84f5768ab97712475eae2cf43a80f4c6",
+    "stage": "eval.errors",
+    "meta": {
+      "aggregate": "mean_over_seeds",
+      "bootstrap_n": 2000,
+      "bracket": "B1",
+      "ci95": [
+        56.42013648954296,
+        67.72958365084027
+      ],
+      "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "head": "Default",
+      "model_label": "B1",
+      "model_sha256": "31f32a4f55bbd6bff35821a5dc2d3b6ab565e0b17037b6e4d61895d24634dcea",
+      "n": 147,
+      "n_atoms": 1176,
+      "n_frames": 147,
+      "n_models": 3,
+      "n_seeds": 3,
+      "per_seed": [
+        {
+          "ci95": [
+            38.79070210844201,
+            89.6507844305311
+          ],
+          "run_id": "20260920T230219-fb89d0-none",
+          "seed": 0,
+          "value": 67.72958365084027
+        },
+        {
+          "ci95": [
+            41.05150429334127,
+            83.885901496588
+          ],
+          "run_id": "20260921T011628-fb89d0-none",
+          "seed": 0,
+          "value": 64.92206225668025
+        },
+        {
+          "ci95": [
+            37.00476987077403,
+            71.89622925470124
+          ],
+          "run_id": "20260921T011652-fb89d0-none",
+          "seed": 0,
+          "value": 56.42013648954296
+        }
+      ],
+      "reference": {
+        "code": "qe",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3"
+      },
+      "seed": 0,
+      "split_id": "d195dc5f2104",
+      "tier": "T0",
+      "train_seed": 0,
+      "train_seeds": "0,1,2",
+      "unit": "meV/atom"
+    }
+  },
+  "eval.errors.T0.B1.rmse_f": {
+    "value": 92.15817276338642,
+    "run_id": "20260921T012141-fb89d0-none",
+    "manifest_sha256": "dea1da3b4fcadab143278465eeb1647f84f5768ab97712475eae2cf43a80f4c6",
+    "stage": "eval.errors",
+    "meta": {
+      "aggregate": "mean_over_seeds",
+      "bootstrap_n": 2000,
+      "bracket": "B1",
+      "ci95": [
+        89.16602888833512,
+        93.80482717450624
+      ],
+      "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "head": "Default",
+      "model_label": "B1",
+      "model_sha256": "31f32a4f55bbd6bff35821a5dc2d3b6ab565e0b17037b6e4d61895d24634dcea",
+      "n": 147,
+      "n_atoms": 1176,
+      "n_frames": 147,
+      "n_models": 3,
+      "n_seeds": 3,
+      "per_seed": [
+        {
+          "ci95": [
+            53.160541732133815,
+            109.55218732214848
+          ],
+          "run_id": "20260920T230219-fb89d0-none",
+          "seed": 0,
+          "value": 89.16602888833512
+        },
+        {
+          "ci95": [
+            58.08342671952231,
+            115.62755795784891
+          ],
+          "run_id": "20260921T011628-fb89d0-none",
+          "seed": 0,
+          "value": 93.50366222731788
+        },
+        {
+          "ci95": [
+            58.66104429406878,
+            116.2680421138694
+          ],
+          "run_id": "20260921T011652-fb89d0-none",
+          "seed": 0,
+          "value": 93.80482717450624
+        }
+      ],
+      "reference": {
+        "code": "qe",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3"
+      },
+      "seed": 0,
+      "split_id": "d195dc5f2104",
+      "tier": "T0",
+      "train_seed": 0,
+      "train_seeds": "0,1,2",
+      "unit": "meV/\u00c5"
+    }
+  },
+  "eval.errors.T2.B0.mae_f": {
+    "value": 77.09317330001954,
+    "run_id": "20260920T230245-fb89d0-none",
+    "manifest_sha256": "f2fb03ae27432df11326bd868823bd76cfc74423f84ee142e73d558882af276a",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 115,
+      "seed": 0,
+      "ci95": [
+        31.02592205306695,
+        101.70796418950027
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0",
+      "bracket": "B0",
+      "tier": "T2",
+      "unit": "meV/\u00c5",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "split_id": "d195dc5f2104",
+      "bootstrap_n": 2000,
+      "n_frames": 115,
+      "n_atoms": 920
+    }
+  },
+  "eval.errors.T2.B0.mae_s": {
+    "value": 4.317009957790719,
+    "run_id": "20260920T230245-fb89d0-none",
+    "manifest_sha256": "f2fb03ae27432df11326bd868823bd76cfc74423f84ee142e73d558882af276a",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 115,
+      "seed": 0,
+      "ci95": [
+        2.7414814696216427,
+        6.138218397851485
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0",
+      "bracket": "B0",
+      "tier": "T2",
+      "unit": "meV/\u00c5^3",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "split_id": "d195dc5f2104",
+      "bootstrap_n": 2000,
+      "n_frames": 115,
+      "n_atoms": 920
+    }
+  },
+  "eval.errors.T2.B0.rmse_f": {
+    "value": 114.21094198462441,
+    "run_id": "20260920T230245-fb89d0-none",
+    "manifest_sha256": "f2fb03ae27432df11326bd868823bd76cfc74423f84ee142e73d558882af276a",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 115,
+      "seed": 0,
+      "ci95": [
+        44.31561820774935,
+        138.54934631112383
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0",
+      "bracket": "B0",
+      "tier": "T2",
+      "unit": "meV/\u00c5",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "split_id": "d195dc5f2104",
+      "bootstrap_n": 2000,
+      "n_frames": 115,
+      "n_atoms": 920
+    }
+  },
+  "eval.errors.T2.B0p.mae_f": {
+    "value": 190.7909757167004,
+    "run_id": "20260920T230302-fb89d0-none",
+    "manifest_sha256": "5d4639c404138e3059b14c0f116de7f7980dbda9bbfb1e483b504ed6594ee4cb",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 115,
+      "seed": 0,
+      "ci95": [
+        39.39545156723459,
+        275.76647785189743
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0p",
+      "bracket": "B0p",
+      "tier": "T2",
+      "unit": "meV/\u00c5",
+      "model_sha256": "01bfe22100139f424713cf921144e5509cbe353d67aa9fa1be9c6e1e0ed35845",
+      "split_id": "d195dc5f2104",
+      "bootstrap_n": 2000,
+      "n_frames": 115,
+      "n_atoms": 920
+    }
+  },
+  "eval.errors.T2.B0p.mae_s": {
+    "value": 7.618247858733831,
+    "run_id": "20260920T230302-fb89d0-none",
+    "manifest_sha256": "5d4639c404138e3059b14c0f116de7f7980dbda9bbfb1e483b504ed6594ee4cb",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 115,
+      "seed": 0,
+      "ci95": [
+        6.9923849258318125,
+        8.597943638333529
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0p",
+      "bracket": "B0p",
+      "tier": "T2",
+      "unit": "meV/\u00c5^3",
+      "model_sha256": "01bfe22100139f424713cf921144e5509cbe353d67aa9fa1be9c6e1e0ed35845",
+      "split_id": "d195dc5f2104",
+      "bootstrap_n": 2000,
+      "n_frames": 115,
+      "n_atoms": 920
+    }
+  },
+  "eval.errors.T2.B0p.rmse_f": {
+    "value": 330.39478559950237,
+    "run_id": "20260920T230302-fb89d0-none",
+    "manifest_sha256": "5d4639c404138e3059b14c0f116de7f7980dbda9bbfb1e483b504ed6594ee4cb",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 115,
+      "seed": 0,
+      "ci95": [
+        51.879317460516845,
+        413.887287214295
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B0p",
+      "bracket": "B0p",
+      "tier": "T2",
+      "unit": "meV/\u00c5",
+      "model_sha256": "01bfe22100139f424713cf921144e5509cbe353d67aa9fa1be9c6e1e0ed35845",
+      "split_id": "d195dc5f2104",
+      "bootstrap_n": 2000,
+      "n_frames": 115,
+      "n_atoms": 920
+    }
+  },
+  "eval.errors.T2.B1.mae_e": {
+    "value": 61.44087767165663,
+    "run_id": "20260921T012141-fb89d0-none",
+    "manifest_sha256": "dea1da3b4fcadab143278465eeb1647f84f5768ab97712475eae2cf43a80f4c6",
+    "stage": "eval.errors",
+    "meta": {
+      "aggregate": "mean_over_seeds",
+      "bootstrap_n": 2000,
+      "bracket": "B1",
+      "ci95": [
+        57.326452078248856,
+        64.1323843260105
+      ],
+      "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "head": "Default",
+      "model_label": "B1",
+      "model_sha256": "31f32a4f55bbd6bff35821a5dc2d3b6ab565e0b17037b6e4d61895d24634dcea",
+      "n": 115,
+      "n_atoms": 920,
+      "n_frames": 115,
+      "n_models": 3,
+      "n_seeds": 3,
+      "per_seed": [
+        {
+          "ci95": [
+            32.2144421237953,
+            96.15248255420263
+          ],
+          "run_id": "20260920T230219-fb89d0-none",
+          "seed": 0,
+          "value": 62.86379661071054
+        },
+        {
+          "ci95": [
+            40.008725572173475,
+            90.60942746832065
+          ],
+          "run_id": "20260921T011628-fb89d0-none",
+          "seed": 0,
+          "value": 64.1323843260105
+        },
+        {
+          "ci95": [
+            38.50515686416973,
+            77.85023442057629
+          ],
+          "run_id": "20260921T011652-fb89d0-none",
+          "seed": 0,
+          "value": 57.326452078248856
+        }
+      ],
+      "reference": {
+        "code": "qe",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3"
+      },
+      "seed": 0,
+      "split_id": "d195dc5f2104",
+      "tier": "T2",
+      "train_seed": 0,
+      "train_seeds": "0,1,2",
+      "unit": "meV/atom"
+    }
+  },
+  "eval.errors.T2.B1.mae_f": {
+    "value": 81.63847697600632,
+    "run_id": "20260921T012141-fb89d0-none",
+    "manifest_sha256": "dea1da3b4fcadab143278465eeb1647f84f5768ab97712475eae2cf43a80f4c6",
+    "stage": "eval.errors",
+    "meta": {
+      "aggregate": "mean_over_seeds",
+      "bootstrap_n": 2000,
+      "bracket": "B1",
+      "ci95": [
+        78.22943858515735,
+        83.65892062453312
+      ],
+      "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "head": "Default",
+      "model_label": "B1",
+      "model_sha256": "31f32a4f55bbd6bff35821a5dc2d3b6ab565e0b17037b6e4d61895d24634dcea",
+      "n": 115,
+      "n_atoms": 920,
+      "n_frames": 115,
+      "n_models": 3,
+      "n_seeds": 3,
+      "per_seed": [
+        {
+          "ci95": [
+            56.28330286880048,
+            93.89731442736844
+          ],
+          "run_id": "20260920T230219-fb89d0-none",
+          "seed": 0,
+          "value": 78.22943858515735
+        },
+        {
+          "ci95": [
+            59.99145385007226,
+            101.11096694253999
+          ],
+          "run_id": "20260921T011628-fb89d0-none",
+          "seed": 0,
+          "value": 83.02707171832849
+        },
+        {
+          "ci95": [
+            60.99436650672878,
+            101.7290430818997
+          ],
+          "run_id": "20260921T011652-fb89d0-none",
+          "seed": 0,
+          "value": 83.65892062453312
+        }
+      ],
+      "reference": {
+        "code": "qe",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3"
+      },
+      "seed": 0,
+      "split_id": "d195dc5f2104",
+      "tier": "T2",
+      "train_seed": 0,
+      "train_seeds": "0,1,2",
+      "unit": "meV/\u00c5"
+    }
+  },
+  "eval.errors.T2.B1.mae_s": {
+    "value": 4.757113381872659,
+    "run_id": "20260921T012141-fb89d0-none",
+    "manifest_sha256": "dea1da3b4fcadab143278465eeb1647f84f5768ab97712475eae2cf43a80f4c6",
+    "stage": "eval.errors",
+    "meta": {
+      "aggregate": "mean_over_seeds",
+      "bootstrap_n": 2000,
+      "bracket": "B1",
+      "ci95": [
+        4.136330756712943,
+        5.50211703795801
+      ],
+      "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "head": "Default",
+      "model_label": "B1",
+      "model_sha256": "31f32a4f55bbd6bff35821a5dc2d3b6ab565e0b17037b6e4d61895d24634dcea",
+      "n": 115,
+      "n_atoms": 920,
+      "n_frames": 115,
+      "n_models": 3,
+      "n_seeds": 3,
+      "per_seed": [
+        {
+          "ci95": [
+            3.3824111007774804,
+            5.044575133698204
+          ],
+          "run_id": "20260920T230219-fb89d0-none",
+          "seed": 0,
+          "value": 4.136330756712943
+        },
+        {
+          "ci95": [
+            5.0109649700511065,
+            6.220788173792153
+          ],
+          "run_id": "20260921T011628-fb89d0-none",
+          "seed": 0,
+          "value": 5.50211703795801
+        },
+        {
+          "ci95": [
+            4.081116170590434,
+            5.375294865878279
+          ],
+          "run_id": "20260921T011652-fb89d0-none",
+          "seed": 0,
+          "value": 4.632892350947025
+        }
+      ],
+      "reference": {
+        "code": "qe",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3"
+      },
+      "seed": 0,
+      "split_id": "d195dc5f2104",
+      "tier": "T2",
+      "train_seed": 0,
+      "train_seeds": "0,1,2",
+      "unit": "meV/\u00c5^3"
+    }
+  },
+  "eval.errors.T2.B1.rmse_e": {
+    "value": 70.56590976705756,
+    "run_id": "20260921T012141-fb89d0-none",
+    "manifest_sha256": "dea1da3b4fcadab143278465eeb1647f84f5768ab97712475eae2cf43a80f4c6",
+    "stage": "eval.errors",
+    "meta": {
+      "aggregate": "mean_over_seeds",
+      "bootstrap_n": 2000,
+      "bracket": "B1",
+      "ci95": [
+        63.23265813405765,
+        75.82316155849824
+      ],
+      "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "head": "Default",
+      "model_label": "B1",
+      "model_sha256": "31f32a4f55bbd6bff35821a5dc2d3b6ab565e0b17037b6e4d61895d24634dcea",
+      "n": 115,
+      "n_atoms": 920,
+      "n_frames": 115,
+      "n_models": 3,
+      "n_seeds": 3,
+      "per_seed": [
+        {
+          "ci95": [
+            42.10872910899711,
+            100.42081165965665
+          ],
+          "run_id": "20260920T230219-fb89d0-none",
+          "seed": 0,
+          "value": 75.82316155849824
+        },
+        {
+          "ci95": [
+            45.69297619920426,
+            93.80008996749693
+          ],
+          "run_id": "20260921T011628-fb89d0-none",
+          "seed": 0,
+          "value": 72.64190960861677
+        },
+        {
+          "ci95": [
+            42.30453854864741,
+            80.17124278934665
+          ],
+          "run_id": "20260921T011652-fb89d0-none",
+          "seed": 0,
+          "value": 63.23265813405765
+        }
+      ],
+      "reference": {
+        "code": "qe",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3"
+      },
+      "seed": 0,
+      "split_id": "d195dc5f2104",
+      "tier": "T2",
+      "train_seed": 0,
+      "train_seeds": "0,1,2",
+      "unit": "meV/atom"
+    }
+  },
+  "eval.errors.T2.B1.rmse_f": {
+    "value": 103.99074253509013,
+    "run_id": "20260921T012141-fb89d0-none",
+    "manifest_sha256": "dea1da3b4fcadab143278465eeb1647f84f5768ab97712475eae2cf43a80f4c6",
+    "stage": "eval.errors",
+    "meta": {
+      "aggregate": "mean_over_seeds",
+      "bootstrap_n": 2000,
+      "bracket": "B1",
+      "ci95": [
+        100.5832869601163,
+        105.8738018377818
+      ],
+      "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "head": "Default",
+      "model_label": "B1",
+      "model_sha256": "31f32a4f55bbd6bff35821a5dc2d3b6ab565e0b17037b6e4d61895d24634dcea",
+      "n": 115,
+      "n_atoms": 920,
+      "n_frames": 115,
+      "n_models": 3,
+      "n_seeds": 3,
+      "per_seed": [
+        {
+          "ci95": [
+            68.35856015796439,
+            118.12496896549438
+          ],
+          "run_id": "20260920T230219-fb89d0-none",
+          "seed": 0,
+          "value": 100.5832869601163
+        },
+        {
+          "ci95": [
+            74.93104419297715,
+            125.34753009851462
+          ],
+          "run_id": "20260921T011628-fb89d0-none",
+          "seed": 0,
+          "value": 105.51513880737228
+        },
+        {
+          "ci95": [
+            75.45495745663997,
+            125.74064751270012
+          ],
+          "run_id": "20260921T011652-fb89d0-none",
+          "seed": 0,
+          "value": 105.8738018377818
+        }
+      ],
+      "reference": {
+        "code": "qe",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3"
+      },
+      "seed": 0,
+      "split_id": "d195dc5f2104",
+      "tier": "T2",
+      "train_seed": 0,
+      "train_seeds": "0,1,2",
+      "unit": "meV/\u00c5"
+    }
+  },
   "eval.errors.T3.B0.mae_f": {
     "value": 156.8969527727833,
     "run_id": "20260920T225306-fb89d0-none",
@@ -2025,6 +3109,142 @@
       "n_atoms": 520
     }
   },
+  "eval.errors.T4a.B1.mae_f": {
+    "value": 32.90264974459888,
+    "run_id": "20260921T012142-fb89d0-none",
+    "manifest_sha256": "4632e81e702b5b7d56460f7701890fa8d86cf78cc1a365ace2067c1faf58dc6c",
+    "stage": "eval.errors",
+    "meta": {
+      "aggregate": "mean_over_seeds",
+      "bootstrap_n": 2000,
+      "bracket": "B1",
+      "ci95": [
+        31.826084386490713,
+        33.44341178253504
+      ],
+      "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "head": "Default",
+      "model_label": "B1",
+      "model_sha256": "31f32a4f55bbd6bff35821a5dc2d3b6ab565e0b17037b6e4d61895d24634dcea",
+      "n": 65,
+      "n_atoms": 520,
+      "n_frames": 65,
+      "n_models": 3,
+      "n_seeds": 3,
+      "per_seed": [
+        {
+          "ci95": [
+            14.396750705800073,
+            55.619325475032056
+          ],
+          "run_id": "20260921T011710-fb89d0-none",
+          "seed": 0,
+          "value": 31.826084386490713
+        },
+        {
+          "ci95": [
+            14.297962877082353,
+            60.53698880140792
+          ],
+          "run_id": "20260921T011718-fb89d0-none",
+          "seed": 0,
+          "value": 33.44341178253504
+        },
+        {
+          "ci95": [
+            13.493987476694207,
+            60.95599403309679
+          ],
+          "run_id": "20260921T011724-fb89d0-none",
+          "seed": 0,
+          "value": 33.4384530647709
+        }
+      ],
+      "reference": {
+        "code": "vasp",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": "PAW (Materials Project)"
+      },
+      "seed": 0,
+      "split_id": "",
+      "tier": "T4a",
+      "train_seed": 0,
+      "train_seeds": "0,1,2",
+      "unit": "meV/\u00c5"
+    }
+  },
+  "eval.errors.T4a.B1.rmse_f": {
+    "value": 56.05492741087244,
+    "run_id": "20260921T012142-fb89d0-none",
+    "manifest_sha256": "4632e81e702b5b7d56460f7701890fa8d86cf78cc1a365ace2067c1faf58dc6c",
+    "stage": "eval.errors",
+    "meta": {
+      "aggregate": "mean_over_seeds",
+      "bootstrap_n": 2000,
+      "bracket": "B1",
+      "ci95": [
+        53.604108214782975,
+        57.571470181147006
+      ],
+      "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "head": "Default",
+      "model_label": "B1",
+      "model_sha256": "31f32a4f55bbd6bff35821a5dc2d3b6ab565e0b17037b6e4d61895d24634dcea",
+      "n": 65,
+      "n_atoms": 520,
+      "n_frames": 65,
+      "n_models": 3,
+      "n_seeds": 3,
+      "per_seed": [
+        {
+          "ci95": [
+            26.384856866234287,
+            74.61349485503992
+          ],
+          "run_id": "20260921T011710-fb89d0-none",
+          "seed": 0,
+          "value": 53.604108214782975
+        },
+        {
+          "ci95": [
+            27.929292411093673,
+            80.0369985761538
+          ],
+          "run_id": "20260921T011718-fb89d0-none",
+          "seed": 0,
+          "value": 56.98920383668731
+        },
+        {
+          "ci95": [
+            27.637712525772,
+            81.19814792228094
+          ],
+          "run_id": "20260921T011724-fb89d0-none",
+          "seed": 0,
+          "value": 57.571470181147006
+        }
+      ],
+      "reference": {
+        "code": "vasp",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": "PAW (Materials Project)"
+      },
+      "seed": 0,
+      "split_id": "",
+      "tier": "T4a",
+      "train_seed": 0,
+      "train_seeds": "0,1,2",
+      "unit": "meV/\u00c5"
+    }
+  },
   "eval.errors.T4a.B4.mae_e": {
     "value": 96.27990499715784,
     "run_id": "20260919T085532-fb89d0-none",
@@ -2157,18 +3377,18 @@
       "n_atoms": 520
     }
   },
-  "md.ase.MnSi.B0.npt.300.a_mean_A": {
-    "value": 4.557768333277923,
-    "run_id": "20260919T085733-fb89d0-0",
-    "manifest_sha256": "ac8eb5abc3b0989e5479533d1161db86c1a3edb5558e9e0a2ccf74e5f1513feb",
+  "md.ase.CoSi.B0.npt.300.a_mean_A": {
+    "value": 4.427874634600836,
+    "run_id": "20260920T225220-fd5fe0-0",
+    "manifest_sha256": "0ae0ee8e06c38297dd919f8bc90fca000a23ca5b69e132c820ecc2373b2049b0",
     "stage": "md.ase",
     "meta": {
       "T": 300.0,
       "ci95": [
-        4.54408836649936,
-        4.571448300056486
+        4.426700956117024,
+        4.429048313084648
       ],
-      "compound": "MnSi",
+      "compound": "CoSi",
       "e0_source": "foundation",
       "energy_scale": "mp",
       "engine": "ase",
@@ -2191,16 +3411,16 @@
       "unit": "A"
     }
   },
-  "md.ase.MnSi.B0.npt.300.a_std_A": {
-    "value": 0.026359124099145984,
-    "run_id": "20260919T085733-fb89d0-0",
-    "manifest_sha256": "ac8eb5abc3b0989e5479533d1161db86c1a3edb5558e9e0a2ccf74e5f1513feb",
+  "md.ase.CoSi.B0.npt.300.a_std_A": {
+    "value": 0.0033650249464331266,
+    "run_id": "20260920T225220-fd5fe0-0",
+    "manifest_sha256": "0ae0ee8e06c38297dd919f8bc90fca000a23ca5b69e132c820ecc2373b2049b0",
     "stage": "md.ase",
     "meta": {
       "T": 300.0,
       "ci95": null,
       "ci95_reason": "a spread",
-      "compound": "MnSi",
+      "compound": "CoSi",
       "e0_source": "foundation",
       "energy_scale": "mp",
       "engine": "ase",
@@ -2223,19 +3443,19 @@
       "unit": "A"
     }
   },
-  "md.ase.MnSi.a_300K_A": {
-    "value": 4.557768333277923,
-    "run_id": "20260919T085733-fb89d0-0",
-    "manifest_sha256": "ac8eb5abc3b0989e5479533d1161db86c1a3edb5558e9e0a2ccf74e5f1513feb",
+  "md.ase.CoSi.a_300K_A": {
+    "value": 4.427874634600836,
+    "run_id": "20260920T225220-fd5fe0-0",
+    "manifest_sha256": "0ae0ee8e06c38297dd919f8bc90fca000a23ca5b69e132c820ecc2373b2049b0",
     "stage": "md.ase",
     "meta": {
       "T": 300.0,
       "a_exp_source": "room-temperature literature lattice parameters; MnSi 4.558 A per SPEC.md section 6",
       "ci95": [
-        4.54408836649936,
-        4.571448300056486
+        4.426700956117024,
+        4.429048313084648
       ],
-      "compound": "MnSi",
+      "compound": "CoSi",
       "e0_source": "foundation",
       "energy_scale": "mp",
       "engine": "ase",
@@ -2258,17 +3478,17 @@
       "unit": "A"
     }
   },
-  "md.ase.MnSi.a_dev_pct": {
-    "value": -0.005082639799845833,
-    "run_id": "20260919T085733-fb89d0-0",
-    "manifest_sha256": "ac8eb5abc3b0989e5479533d1161db86c1a3edb5558e9e0a2ccf74e5f1513feb",
+  "md.ase.CoSi.a_dev_pct": {
+    "value": -0.3628570071819078,
+    "run_id": "20260920T225220-fd5fe0-0",
+    "manifest_sha256": "0ae0ee8e06c38297dd919f8bc90fca000a23ca5b69e132c820ecc2373b2049b0",
     "stage": "md.ase",
     "meta": {
       "T": 300.0,
       "a_exp_source": "room-temperature literature lattice parameters; MnSi 4.558 A per SPEC.md section 6",
       "ci95": null,
       "ci95_reason": "derived from a_300K_A and a_exp_A",
-      "compound": "MnSi",
+      "compound": "CoSi",
       "e0_source": "foundation",
       "energy_scale": "mp",
       "engine": "ase",
@@ -2291,17 +3511,17 @@
       "unit": "%"
     }
   },
-  "md.ase.MnSi.a_exp_A": {
-    "value": 4.558,
-    "run_id": "20260919T085733-fb89d0-0",
-    "manifest_sha256": "ac8eb5abc3b0989e5479533d1161db86c1a3edb5558e9e0a2ccf74e5f1513feb",
+  "md.ase.CoSi.a_exp_A": {
+    "value": 4.444,
+    "run_id": "20260920T225220-fd5fe0-0",
+    "manifest_sha256": "0ae0ee8e06c38297dd919f8bc90fca000a23ca5b69e132c820ecc2373b2049b0",
     "stage": "md.ase",
     "meta": {
       "T": 300.0,
       "a_exp_source": "room-temperature literature lattice parameters; MnSi 4.558 A per SPEC.md section 6",
       "ci95": null,
       "ci95_reason": "tabulated experimental value",
-      "compound": "MnSi",
+      "compound": "CoSi",
       "e0_source": "foundation",
       "energy_scale": "mp",
       "engine": "ase",
@@ -2322,6 +3542,848 @@
       "steps": 10000,
       "timestep_fs": 2.0,
       "unit": "A"
+    }
+  },
+  "md.ase.FeGe.B0.npt.300.a_mean_A": {
+    "value": 4.70088098352016,
+    "run_id": "20260920T225557-fd5fe0-0",
+    "manifest_sha256": "0ec7beb6703bb7d98a350dd09a24d20986d16640cffe65504de684e838b04f64",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "ci95": [
+        4.6955809277240075,
+        4.706181039316313
+      ],
+      "compound": "FeGe",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 501,
+      "natoms": 64,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 10000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "md.ase.FeGe.B0.npt.300.a_std_A": {
+    "value": 0.02168981081539585,
+    "run_id": "20260920T225557-fd5fe0-0",
+    "manifest_sha256": "0ec7beb6703bb7d98a350dd09a24d20986d16640cffe65504de684e838b04f64",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "ci95": null,
+      "ci95_reason": "a spread",
+      "compound": "FeGe",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 501,
+      "natoms": 64,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 10000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "md.ase.FeGe.a_300K_A": {
+    "value": 4.70088098352016,
+    "run_id": "20260920T225557-fd5fe0-0",
+    "manifest_sha256": "0ec7beb6703bb7d98a350dd09a24d20986d16640cffe65504de684e838b04f64",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "a_exp_source": "room-temperature literature lattice parameters; MnSi 4.558 A per SPEC.md section 6",
+      "ci95": [
+        4.6955809277240075,
+        4.706181039316313
+      ],
+      "compound": "FeGe",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 501,
+      "natoms": 64,
+      "reference": {
+        "code": "experiment",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": null,
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 10000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "md.ase.FeGe.a_dev_pct": {
+    "value": 0.018744330216169627,
+    "run_id": "20260920T225557-fd5fe0-0",
+    "manifest_sha256": "0ec7beb6703bb7d98a350dd09a24d20986d16640cffe65504de684e838b04f64",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "a_exp_source": "room-temperature literature lattice parameters; MnSi 4.558 A per SPEC.md section 6",
+      "ci95": null,
+      "ci95_reason": "derived from a_300K_A and a_exp_A",
+      "compound": "FeGe",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 501,
+      "natoms": 64,
+      "reference": {
+        "code": "experiment",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": null,
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 10000,
+      "timestep_fs": 2.0,
+      "unit": "%"
+    }
+  },
+  "md.ase.FeGe.a_exp_A": {
+    "value": 4.7,
+    "run_id": "20260920T225557-fd5fe0-0",
+    "manifest_sha256": "0ec7beb6703bb7d98a350dd09a24d20986d16640cffe65504de684e838b04f64",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "a_exp_source": "room-temperature literature lattice parameters; MnSi 4.558 A per SPEC.md section 6",
+      "ci95": null,
+      "ci95_reason": "tabulated experimental value",
+      "compound": "FeGe",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 501,
+      "natoms": 64,
+      "reference": {
+        "code": "experiment",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": null,
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 10000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "md.ase.FeSi.B0.npt.300.a_mean_A": {
+    "value": 4.4345702585315845,
+    "run_id": "20260920T224837-fd5fe0-0",
+    "manifest_sha256": "1258588758a9eb9dc67373ad0149f163c5f84559bbe4d1b4ecb1ef316f074d87",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "ci95": [
+        4.430395875939795,
+        4.438744641123374
+      ],
+      "compound": "FeSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 501,
+      "natoms": 64,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 10000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "md.ase.FeSi.B0.npt.300.a_std_A": {
+    "value": 0.009168201217365054,
+    "run_id": "20260920T224837-fd5fe0-0",
+    "manifest_sha256": "1258588758a9eb9dc67373ad0149f163c5f84559bbe4d1b4ecb1ef316f074d87",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "ci95": null,
+      "ci95_reason": "a spread",
+      "compound": "FeSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 501,
+      "natoms": 64,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 10000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "md.ase.FeSi.a_300K_A": {
+    "value": 4.4345702585315845,
+    "run_id": "20260920T224837-fd5fe0-0",
+    "manifest_sha256": "1258588758a9eb9dc67373ad0149f163c5f84559bbe4d1b4ecb1ef316f074d87",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "a_exp_source": "room-temperature literature lattice parameters; MnSi 4.558 A per SPEC.md section 6",
+      "ci95": [
+        4.430395875939795,
+        4.438744641123374
+      ],
+      "compound": "FeSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 501,
+      "natoms": 64,
+      "reference": {
+        "code": "experiment",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": null,
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 10000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "md.ase.FeSi.a_dev_pct": {
+    "value": -1.2125137328673512,
+    "run_id": "20260920T224837-fd5fe0-0",
+    "manifest_sha256": "1258588758a9eb9dc67373ad0149f163c5f84559bbe4d1b4ecb1ef316f074d87",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "a_exp_source": "room-temperature literature lattice parameters; MnSi 4.558 A per SPEC.md section 6",
+      "ci95": null,
+      "ci95_reason": "derived from a_300K_A and a_exp_A",
+      "compound": "FeSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 501,
+      "natoms": 64,
+      "reference": {
+        "code": "experiment",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": null,
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 10000,
+      "timestep_fs": 2.0,
+      "unit": "%"
+    }
+  },
+  "md.ase.FeSi.a_exp_A": {
+    "value": 4.489,
+    "run_id": "20260920T224837-fd5fe0-0",
+    "manifest_sha256": "1258588758a9eb9dc67373ad0149f163c5f84559bbe4d1b4ecb1ef316f074d87",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "a_exp_source": "room-temperature literature lattice parameters; MnSi 4.558 A per SPEC.md section 6",
+      "ci95": null,
+      "ci95_reason": "tabulated experimental value",
+      "compound": "FeSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 501,
+      "natoms": 64,
+      "reference": {
+        "code": "experiment",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": null,
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 10000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "md.ase.MnSi.B0.npt.100.a_mean_A": {
+    "value": 4.551681120558036,
+    "run_id": "20260920T230308-fd5fe0-0",
+    "manifest_sha256": "b8335205d3ebc82fa2a26868503809a0bdb3236e23a51f9e742e23df8a5bd2c8",
+    "stage": "md.ase",
+    "meta": {
+      "T": 100.0,
+      "ci95": [
+        4.549069042172493,
+        4.554293198943578
+      ],
+      "compound": "MnSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 1501,
+      "natoms": 64,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 20000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "md.ase.MnSi.B0.npt.100.a_std_A": {
+    "value": 0.022689238505500788,
+    "run_id": "20260920T230308-fd5fe0-0",
+    "manifest_sha256": "b8335205d3ebc82fa2a26868503809a0bdb3236e23a51f9e742e23df8a5bd2c8",
+    "stage": "md.ase",
+    "meta": {
+      "T": 100.0,
+      "ci95": null,
+      "ci95_reason": "a spread",
+      "compound": "MnSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 1501,
+      "natoms": 64,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 20000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "md.ase.MnSi.B0.npt.100.alpha_per_K": {
+    "value": 6.563286474928469e-06,
+    "run_id": "20260920T230308-fd5fe0-0",
+    "manifest_sha256": "b8335205d3ebc82fa2a26868503809a0bdb3236e23a51f9e742e23df8a5bd2c8",
+    "stage": "md.ase",
+    "meta": {
+      "T": 100.0,
+      "T_ref_K": 300.0,
+      "ci95": null,
+      "ci95_reason": "fewer than 4 temperatures: no slope error",
+      "compound": "MnSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 3,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "temperatures_K": [
+        100.0,
+        300.0,
+        500.0
+      ],
+      "unit": "1/K"
+    }
+  },
+  "md.ase.MnSi.B0.npt.300.a_mean_A": {
+    "value": 4.557290211940818,
+    "run_id": "20260920T230308-fd5fe0-0",
+    "manifest_sha256": "b8335205d3ebc82fa2a26868503809a0bdb3236e23a51f9e742e23df8a5bd2c8",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "ci95": [
+        4.554295838231043,
+        4.560284585650593
+      ],
+      "compound": "MnSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 1501,
+      "natoms": 64,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 20000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "md.ase.MnSi.B0.npt.300.a_std_A": {
+    "value": 0.026121954849701107,
+    "run_id": "20260920T230308-fd5fe0-0",
+    "manifest_sha256": "b8335205d3ebc82fa2a26868503809a0bdb3236e23a51f9e742e23df8a5bd2c8",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "ci95": null,
+      "ci95_reason": "a spread",
+      "compound": "MnSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 1501,
+      "natoms": 64,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 20000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "md.ase.MnSi.B0.npt.300.alpha_per_K": {
+    "value": 6.563286474928469e-06,
+    "run_id": "20260920T230308-fd5fe0-0",
+    "manifest_sha256": "b8335205d3ebc82fa2a26868503809a0bdb3236e23a51f9e742e23df8a5bd2c8",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "T_ref_K": 300.0,
+      "ci95": null,
+      "ci95_reason": "fewer than 4 temperatures: no slope error",
+      "compound": "MnSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 3,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "temperatures_K": [
+        100.0,
+        300.0,
+        500.0
+      ],
+      "unit": "1/K"
+    }
+  },
+  "md.ase.MnSi.B0.npt.500.a_mean_A": {
+    "value": 4.563646094562823,
+    "run_id": "20260920T230308-fd5fe0-0",
+    "manifest_sha256": "b8335205d3ebc82fa2a26868503809a0bdb3236e23a51f9e742e23df8a5bd2c8",
+    "stage": "md.ase",
+    "meta": {
+      "T": 500.0,
+      "ci95": [
+        4.559810768938247,
+        4.5674814201873986
+      ],
+      "compound": "MnSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 1501,
+      "natoms": 64,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 20000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "md.ase.MnSi.B0.npt.500.a_std_A": {
+    "value": 0.03256350332854713,
+    "run_id": "20260920T230308-fd5fe0-0",
+    "manifest_sha256": "b8335205d3ebc82fa2a26868503809a0bdb3236e23a51f9e742e23df8a5bd2c8",
+    "stage": "md.ase",
+    "meta": {
+      "T": 500.0,
+      "ci95": null,
+      "ci95_reason": "a spread",
+      "compound": "MnSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 1501,
+      "natoms": 64,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 20000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "md.ase.MnSi.B0.npt.500.alpha_per_K": {
+    "value": 6.563286474928469e-06,
+    "run_id": "20260920T230308-fd5fe0-0",
+    "manifest_sha256": "b8335205d3ebc82fa2a26868503809a0bdb3236e23a51f9e742e23df8a5bd2c8",
+    "stage": "md.ase",
+    "meta": {
+      "T": 500.0,
+      "T_ref_K": 300.0,
+      "ci95": null,
+      "ci95_reason": "fewer than 4 temperatures: no slope error",
+      "compound": "MnSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 3,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "temperatures_K": [
+        100.0,
+        300.0,
+        500.0
+      ],
+      "unit": "1/K"
+    }
+  },
+  "md.ase.MnSi.B0.nve.300.drift_meV_atom_ps": {
+    "value": 0.00016570628846142838,
+    "run_id": "20260920T225932-fd5fe0-0",
+    "manifest_sha256": "21efe950d1acde5ac28da77640f769a314a1676b379a2dd7f085c1984178f7d9",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "ci95": [
+        2.303310824159537e-05,
+        0.0003083794686812614
+      ],
+      "compound": "MnSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "nve",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 501,
+      "natoms": 64,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 10000,
+      "timestep_fs": 2.0,
+      "unit": "meV/atom/ps"
+    }
+  },
+  "md.ase.MnSi.a_300K_A": {
+    "value": 4.557290211940818,
+    "run_id": "20260920T230308-fd5fe0-0",
+    "manifest_sha256": "b8335205d3ebc82fa2a26868503809a0bdb3236e23a51f9e742e23df8a5bd2c8",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "a_exp_source": "room-temperature literature lattice parameters; MnSi 4.558 A per SPEC.md section 6",
+      "ci95": [
+        4.554295838231043,
+        4.560284585650593
+      ],
+      "compound": "MnSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 1501,
+      "natoms": 64,
+      "reference": {
+        "code": "experiment",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": null,
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 20000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "md.ase.MnSi.a_dev_pct": {
+    "value": -0.015572357595041282,
+    "run_id": "20260920T230308-fd5fe0-0",
+    "manifest_sha256": "b8335205d3ebc82fa2a26868503809a0bdb3236e23a51f9e742e23df8a5bd2c8",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "a_exp_source": "room-temperature literature lattice parameters; MnSi 4.558 A per SPEC.md section 6",
+      "ci95": null,
+      "ci95_reason": "derived from a_300K_A and a_exp_A",
+      "compound": "MnSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 1501,
+      "natoms": 64,
+      "reference": {
+        "code": "experiment",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": null,
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 20000,
+      "timestep_fs": 2.0,
+      "unit": "%"
+    }
+  },
+  "md.ase.MnSi.a_exp_A": {
+    "value": 4.558,
+    "run_id": "20260920T230308-fd5fe0-0",
+    "manifest_sha256": "b8335205d3ebc82fa2a26868503809a0bdb3236e23a51f9e742e23df8a5bd2c8",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "a_exp_source": "room-temperature literature lattice parameters; MnSi 4.558 A per SPEC.md section 6",
+      "ci95": null,
+      "ci95_reason": "tabulated experimental value",
+      "compound": "MnSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 1501,
+      "natoms": 64,
+      "reference": {
+        "code": "experiment",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": null,
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 20000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "md.ase.MnSi.alpha_per_K": {
+    "value": 6.563286474928469e-06,
+    "run_id": "20260920T230308-fd5fe0-0",
+    "manifest_sha256": "b8335205d3ebc82fa2a26868503809a0bdb3236e23a51f9e742e23df8a5bd2c8",
+    "stage": "md.ase",
+    "meta": {
+      "T": null,
+      "T_ref_K": 300.0,
+      "a_exp_source": "room-temperature literature lattice parameters; MnSi 4.558 A per SPEC.md section 6",
+      "ci95": null,
+      "ci95_reason": "fewer than 4 temperatures: no slope error",
+      "compound": "MnSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 3,
+      "reference": {
+        "code": "experiment",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": null,
+        "pseudos": null
+      },
+      "seed": 0,
+      "temperatures_K": [
+        100.0,
+        300.0,
+        500.0
+      ],
+      "unit": "1/K"
+    }
+  },
+  "md.ase.MnSi.drift_meV_atom_ps": {
+    "value": 0.00016570628846142838,
+    "run_id": "20260920T225932-fd5fe0-0",
+    "manifest_sha256": "21efe950d1acde5ac28da77640f769a314a1676b379a2dd7f085c1984178f7d9",
+    "stage": "md.ase",
+    "meta": {
+      "T": 300.0,
+      "ci95": [
+        2.303310824159537e-05,
+        0.0003083794686812614
+      ],
+      "compound": "MnSi",
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "engine": "ase",
+      "ensemble": "nve",
+      "head": "Default",
+      "model_label": "B0",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "n": 501,
+      "natoms": 64,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "foundation",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 10000,
+      "timestep_fs": 2.0,
+      "unit": "meV/atom/ps"
     }
   },
   "sampling.neb.FeSi.B0.E_a_eV": {

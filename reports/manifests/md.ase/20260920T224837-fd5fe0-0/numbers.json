@@ -1,12 +1,12 @@
 {
-  "md.ase.MnSi.B0.npt.300.a_mean_A": 4.557768333277923,
-  "md.ase.MnSi.B0.npt.300.a_mean_A@meta": {
+  "md.ase.FeSi.B0.npt.300.a_mean_A": 4.4345702585315845,
+  "md.ase.FeSi.B0.npt.300.a_mean_A@meta": {
     "T": 300.0,
     "ci95": [
-      4.54408836649936,
-      4.571448300056486
+      4.430395875939795,
+      4.438744641123374
     ],
-    "compound": "MnSi",
+    "compound": "FeSi",
     "e0_source": "foundation",
     "energy_scale": "mp",
     "engine": "ase",
@@ -28,12 +28,12 @@
     "timestep_fs": 2.0,
     "unit": "A"
   },
-  "md.ase.MnSi.B0.npt.300.a_std_A": 0.026359124099145984,
-  "md.ase.MnSi.B0.npt.300.a_std_A@meta": {
+  "md.ase.FeSi.B0.npt.300.a_std_A": 0.009168201217365054,
+  "md.ase.FeSi.B0.npt.300.a_std_A@meta": {
     "T": 300.0,
     "ci95": null,
     "ci95_reason": "a spread",
-    "compound": "MnSi",
+    "compound": "FeSi",
     "e0_source": "foundation",
     "energy_scale": "mp",
     "engine": "ase",
@@ -55,15 +55,15 @@
     "timestep_fs": 2.0,
     "unit": "A"
   },
-  "md.ase.MnSi.a_300K_A": 4.557768333277923,
-  "md.ase.MnSi.a_300K_A@meta": {
+  "md.ase.FeSi.a_300K_A": 4.4345702585315845,
+  "md.ase.FeSi.a_300K_A@meta": {
     "T": 300.0,
     "a_exp_source": "room-temperature literature lattice parameters; MnSi 4.558 A per SPEC.md section 6",
     "ci95": [
-      4.54408836649936,
-      4.571448300056486
+      4.430395875939795,
+      4.438744641123374
     ],
-    "compound": "MnSi",
+    "compound": "FeSi",
     "e0_source": "foundation",
     "energy_scale": "mp",
     "engine": "ase",
@@ -85,13 +85,13 @@
     "timestep_fs": 2.0,
     "unit": "A"
   },
-  "md.ase.MnSi.a_dev_pct": -0.005082639799845833,
-  "md.ase.MnSi.a_dev_pct@meta": {
+  "md.ase.FeSi.a_dev_pct": -1.2125137328673512,
+  "md.ase.FeSi.a_dev_pct@meta": {
     "T": 300.0,
     "a_exp_source": "room-temperature literature lattice parameters; MnSi 4.558 A per SPEC.md section 6",
     "ci95": null,
     "ci95_reason": "derived from a_300K_A and a_exp_A",
-    "compound": "MnSi",
+    "compound": "FeSi",
     "e0_source": "foundation",
     "energy_scale": "mp",
     "engine": "ase",
@@ -113,13 +113,13 @@
     "timestep_fs": 2.0,
     "unit": "%"
   },
-  "md.ase.MnSi.a_exp_A": 4.558,
-  "md.ase.MnSi.a_exp_A@meta": {
+  "md.ase.FeSi.a_exp_A": 4.489,
+  "md.ase.FeSi.a_exp_A@meta": {
     "T": 300.0,
     "a_exp_source": "room-temperature literature lattice parameters; MnSi 4.558 A per SPEC.md section 6",
     "ci95": null,
     "ci95_reason": "tabulated experimental value",
-    "compound": "MnSi",
+    "compound": "FeSi",
     "e0_source": "foundation",
     "energy_scale": "mp",
     "engine": "ase",

@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "stage": "md.ase",
-  "run_id": "20260919T085733-fb89d0-0",
-  "created_at": "2026-09-19T08:57:33.949335Z",
-  "host": "Wenqins-MacBook-Pro-10.local",
-  "user": "wenqinchen",
-  "git_sha": "09604394f14ddd6f07e5cfd163f1ac19cc25575b",
-  "git_dirty": true,
+  "run_id": "20260920T225557-fd5fe0-0",
+  "created_at": "2026-09-20T22:55:57.134339Z",
+  "host": "g017",
+  "user": "wenqin98",
+  "git_sha": "unknown",
+  "git_dirty": false,
   "uv_lock_sha256": "a039dbcfb95b46c12c7a0b465b82a5728c5b69285be0a7ce472041a0c289bcaf",
-  "python": "3.11.15",
+  "python": "3.11.16",
   "packages": {
     "b20-mlip": "0.1.0",
     "mace-torch": "0.3.16",
@@ -25,7 +25,7 @@
     "pydantic-settings": "2.15.0",
     "anthropic": "1.6.0"
   },
-  "config_sha256": "fb89d009e83d5720bf258f31408545d4c5192d2f617ce8cc06bb358770e19633",
+  "config_sha256": "fd5fe0dff42a8670030c91d07aa47f11104b72c855ce3fc057bd4dc7ee100c1d",
   "config": {
     "paths": {
       "data_dir": "data",
@@ -35,9 +35,9 @@
       "reports_dir": "reports"
     },
     "compute": {
-      "threads": 6,
+      "threads": 2,
       "dtype": "float64",
-      "device": "cpu"
+      "device": "cuda"
     },
     "cluster": {
       "alias": "tillicum",
@@ -263,49 +263,49 @@
   ],
   "outputs": [
     {
-      "path": "runs/md.ase/20260919T085733-fb89d0-0/plan.json",
-      "sha256": "998a99d83e5b7f5bcaf6f234ffef7f09470c6e7c7fd2ef099ea16f95abaaa26f",
+      "path": "runs/md.ase/20260920T225557-fd5fe0-0/plan.json",
+      "sha256": "2bdb2c04b96264f2c8e0c821e6659ec689261bdeb05d81ec9763df977a51a55b",
       "bytes": 522,
       "kind": "json"
     },
     {
-      "path": "runs/md.ase/20260919T085733-fb89d0-0/md_npt_300K.traj",
-      "sha256": "96b48183d8f7e2755a6e3244d386f5a17fe78d8132d0e0cd4de0573739749dbb",
-      "bytes": 603204,
+      "path": "runs/md.ase/20260920T225557-fd5fe0-0/md_npt_300K.traj",
+      "sha256": "7701e67d70faef24e0d190faa0fdec65a701ba3c17aae48e7d0b4766c74ac165",
+      "bytes": 603252,
       "kind": "traj"
     },
     {
-      "path": "runs/md.ase/20260919T085733-fb89d0-0/thermo_npt_300K.csv",
-      "sha256": "ec64d2830962762579c240a478a298e0920695f50adf0b39d41db14cf264802c",
-      "bytes": 143979,
+      "path": "runs/md.ase/20260920T225557-fd5fe0-0/thermo_npt_300K.csv",
+      "sha256": "9b25e0ccfc3172713f3d5985a19627c58f3a836474cbc3a932b38e0b3aeea258",
+      "bytes": 144225,
       "kind": "other"
     },
     {
-      "path": "runs/md.ase/20260919T085733-fb89d0-0/vdos_npt_300K.json",
-      "sha256": "04f10c30e6ff71e9293cd66723cc9601d0cf939b76eca53af5cc1b4c477bb90e",
-      "bytes": 23402,
+      "path": "runs/md.ase/20260920T225557-fd5fe0-0/vdos_npt_300K.json",
+      "sha256": "026d86486c65079e9559526b671ac8136cdef7493decf03c49dc4297d1d1ca7c",
+      "bytes": 23420,
       "kind": "json"
     },
     {
-      "path": "runs/md.ase/20260919T085733-fb89d0-0/rdf_npt_300K.json",
-      "sha256": "135ebaeff39e8cae1f941e984436d778a9c2c180faf4b7b80fe9826615e594a0",
-      "bytes": 7414,
+      "path": "runs/md.ase/20260920T225557-fd5fe0-0/rdf_npt_300K.json",
+      "sha256": "dad16b1d6e42cae83ff5715ff44fadae09f3ca5c7f7088b34d95ea06afea7432",
+      "bytes": 7450,
       "kind": "json"
     },
     {
-      "path": "runs/md.ase/20260919T085733-fb89d0-0/md_result_npt_300K.json",
-      "sha256": "aee0a1da06259515b329634fc1f1ae8d8d9e4cc949d31042cd759d8d858a39d4",
-      "bytes": 668,
+      "path": "runs/md.ase/20260920T225557-fd5fe0-0/md_result_npt_300K.json",
+      "sha256": "5fb7d0603de6364ec06aa9d6dadd91b4456a7b471600a6e730f79219114c939d",
+      "bytes": 666,
       "kind": "json"
     },
     {
-      "path": "runs/md.ase/20260919T085733-fb89d0-0/numbers.json",
-      "sha256": "ffcbe1c5e322643ffa5e03a30669e9ab0bae1f0f1f498de29eb777969031d2f3",
-      "bytes": 3853,
+      "path": "runs/md.ase/20260920T225557-fd5fe0-0/numbers.json",
+      "sha256": "ac085f0285b1f27bdd895e86b219c8734f4092d96062c068fe1039188a89a981",
+      "bytes": 3851,
       "kind": "json"
     }
   ],
-  "wall_seconds": 2440.1671095839993,
+  "wall_seconds": 213.64347327093128,
   "status": "ok",
   "slurm": null,
   "extras": {
@@ -328,16 +328,16 @@
     "md_progress": {
       "step": 10000,
       "time_ps": 20.0,
-      "T_K": 213.41,
-      "wall_s": 2437.59,
-      "s_per_step": 0.2438
+      "T_K": 337.74,
+      "wall_s": 209.4,
+      "s_per_step": 0.0209
     },
     "results": {
       "300": {
         "engine": "ase",
         "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
         "head": "Default",
-        "compound": "MnSi",
+        "compound": "FeGe",
         "natoms": 64,
         "ensemble": "npt",
         "temperature_K": 300.0,
@@ -345,13 +345,13 @@
         "timestep_fs": 2.0,
         "steps": 10000,
         "drift_meV_atom_ps": null,
-        "a_mean_A": 4.557768333277923,
-        "a_std_A": 0.026359124099145984,
+        "a_mean_A": 4.70088098352016,
+        "a_std_A": 0.02168981081539585,
         "alpha_per_K": null,
-        "traj_sha256": "96b48183d8f7e2755a6e3244d386f5a17fe78d8132d0e0cd4de0573739749dbb",
-        "vdos_path": "runs/md.ase/20260919T085733-fb89d0-0/vdos_npt_300K.json",
-        "rdf_path": "runs/md.ase/20260919T085733-fb89d0-0/rdf_npt_300K.json",
-        "run_id": "20260919T085733-fb89d0-0"
+        "traj_sha256": "7701e67d70faef24e0d190faa0fdec65a701ba3c17aae48e7d0b4766c74ac165",
+        "vdos_path": "runs/md.ase/20260920T225557-fd5fe0-0/vdos_npt_300K.json",
+        "rdf_path": "runs/md.ase/20260920T225557-fd5fe0-0/rdf_npt_300K.json",
+        "run_id": "20260920T225557-fd5fe0-0"
       }
     },
     "stats": {
@@ -359,26 +359,26 @@
         "n_production": 501,
         "n_thermo": 1001,
         "production_window": "production (equil_ps excluded)",
-        "T_mean_K": 292.68140230984557,
-        "E_pot_mean_eV_atom": -7.719525229719725,
+        "T_mean_K": 292.4412179748489,
+        "E_pot_mean_eV_atom": -6.598671685452495,
         "a_ci95": [
-          4.54408836649936,
-          4.571448300056486
+          4.6955809277240075,
+          4.706181039316313
         ],
         "drift_ci95": null,
-        "wall_s": 2437.5908474169846,
-        "s_per_step": 0.24375908474169847,
+        "wall_s": 209.40291447099298,
+        "s_per_step": 0.0209402914470993,
         "reps": 2,
         "seed": 0
       }
     },
     "thermal_expansion": null,
     "numbers_keys": [
-      "md.ase.MnSi.B0.npt.300.a_mean_A",
-      "md.ase.MnSi.B0.npt.300.a_std_A",
-      "md.ase.MnSi.a_300K_A",
-      "md.ase.MnSi.a_dev_pct",
-      "md.ase.MnSi.a_exp_A"
+      "md.ase.FeGe.B0.npt.300.a_mean_A",
+      "md.ase.FeGe.B0.npt.300.a_std_A",
+      "md.ase.FeGe.a_300K_A",
+      "md.ase.FeGe.a_dev_pct",
+      "md.ase.FeGe.a_exp_A"
     ]
   }
 }
