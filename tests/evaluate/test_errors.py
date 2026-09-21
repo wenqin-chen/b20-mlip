@@ -428,14 +428,16 @@ def test_aggregate_means_over_seeds_and_keeps_provenance() -> None:
     def numbers(seed: int, mae: float) -> dict:
         return {
             "eval.errors.T0.B1.mae_f": mae,
-            "eval.errors.T0.B1.mae_f@meta": {"seed": seed, "n": 147, "ci95": [mae - 5, mae + 5],
-                                             "head": "Default", "tier": "T0"},
+            "eval.errors.T0.B1.mae_f@meta": {"seed": 0, "train_seed": seed, "n": 147,
+                                             "ci95": [mae - 5, mae + 5], "head": "Default",
+                                             "tier": "T0", "model_sha256": f"sha{seed}"},
         }  # fmt: skip
 
     out = aggregate({"r0": numbers(0, 63.0), "r1": numbers(1, 66.0), "r2": numbers(2, 69.0)}, "B1")
     assert out["eval.errors.T0.B1.mae_f"] == pytest.approx(66.0)
     meta = out["eval.errors.T0.B1.mae_f@meta"]
-    assert meta["ci95"] == [63.0, 69.0] and meta["seed"] == "0,1,2" and meta["n_seeds"] == 3
+    assert meta["ci95"] == [63.0, 69.0] and meta["train_seeds"] == "0,1,2"
+    assert meta["n_seeds"] == 3 and meta["n_models"] == 3 and meta["seed"] == 0
     assert [p["run_id"] for p in meta["per_seed"]] == ["r0", "r1", "r2"]
     assert meta["n"] == 147 and meta["aggregate"] == "mean_over_seeds"
     single = aggregate({"r0": numbers(0, 63.0)}, "B1")

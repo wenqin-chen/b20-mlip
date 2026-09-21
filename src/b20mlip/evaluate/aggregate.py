@@ -34,6 +34,18 @@ def _load_numbers(run_dir: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def _train_seed_of(manifest: Any) -> int | None:
+    """The training seed of the evaluated model: from the checkpoint.json listed among the
+    eval run's inputs (``CheckpointInfo.seed``), else None."""
+    for art in manifest.inputs:
+        if art.path.endswith("checkpoint.json") and Path(art.path).is_file():
+            try:
+                return int(json.loads(Path(art.path).read_text(encoding="utf-8"))["seed"])
+            except (KeyError, ValueError, TypeError):
+                return None
+    return None
+
+
 def aggregate(numbers_by_run: dict[str, dict[str, Any]], label: str) -> dict[str, Any]:
     """Mean over runs per metric key; keys are rewritten to ``<...>.<label>.<metric>``."""
     values: dict[str, list[float]] = defaultdict(list)
@@ -55,12 +67,17 @@ def aggregate(numbers_by_run: dict[str, dict[str, Any]], label: str) -> dict[str
     for key, vals in values.items():
         n_runs = len(vals)
         mean = sum(vals) / n_runs
-        seeds = sorted({str(m.get("seed")) for m in metas[key]})
+        # training seeds: from the checkpoints when the caller mapped run -> train seed, else the
+        # distinct models (the number's own ``seed`` is the bootstrap seed, identical for all)
+        seeds = sorted(
+            {str(m.get("train_seed", m.get("model_sha256", "?")[:8])) for m in metas[key]}
+        )
         first = dict(metas[key][0])
         first.pop("source_run_id", None)
         first.update(
-            seed=",".join(seeds),
+            train_seeds=",".join(seeds),
             n_seeds=n_runs,
+            n_models=len({m.get("model_sha256") for m in metas[key]}),
             ci95=[min(vals), max(vals)] if n_runs > 1 else first.get("ci95"),
             ci95_reason=(
                 f"min-max over {n_runs} training seeds; per-seed bootstrap CIs in per_seed"
@@ -97,7 +114,13 @@ def run(cfg: Settings, ctx: RunContext, *, runs: str, label: str, **_: Any) -> d
         if manifest.status != "ok":
             raise ValueError(f"run {rid} has status {manifest.status}")
         ctx.add_input(run_dir / NUMBERS_FILE, "json")
-        numbers_by_run[rid] = _load_numbers(run_dir)
+        numbers = _load_numbers(run_dir)
+        train_seed = _train_seed_of(manifest)
+        if train_seed is not None:
+            for key, meta in numbers.items():
+                if key.endswith("@meta") and isinstance(meta, dict):
+                    meta["train_seed"] = train_seed
+        numbers_by_run[rid] = numbers
         n_frames.add(int(manifest.extras.get("n_frames", -1)))
     if len(n_frames) > 1:
         raise ValueError(f"runs evaluate different frame counts {sorted(n_frames)}; not comparable")
