@@ -20,7 +20,7 @@ cluster:
   resources:  # SLURM defaults per template; Tillicum allows <= 2 CPUs and <= 34 GB per GPU, 1 MIG slice = cheapest unit
     # 8-atom QE units: 2 MPI ranks on one MIG slice (5-6 min each); 64-atom phonon/vacancy units: 4 slices = 8 ranks
     qe_array: {ntasks: 2, cpus_per_task: 1, gpus: 1, mem: 30G, time: "00:45:00", max_parallel: 24}  # 8-atom SCF p50 6 min, p90 9 min, max 12+ min (low-symmetry cells: 172-260 k-points); 12 min timed out 179/265 units on 2026-09-19
-    qe_phonons: {ntasks: 8, cpus_per_task: 1, gpus: 4, mem: 120G, time: "12:00:00", max_parallel: 8}
+    qe_phonons: {ntasks: 8, cpus_per_task: 1, gpus: 4, mem: 120G, time: "04:00:00", max_parallel: 8}   # 63-atom FeSi vacancy: 41 SCF iterations, 73 min on 8 ranks (2026-09-21)
     train_replay: {gpus: 1, cpus_per_task: 2, mem: 48G, time: "02:00:00"}   # H200: round-0 B1 30 epochs ~ 10 min; B2 replay 10k frames x 20 epochs ~ 1 h
     lammps: {gpus: 1, cpus_per_task: 2, mem: 32G, time: "03:00:00"}
 
