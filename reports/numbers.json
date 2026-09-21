@@ -16,6 +16,10 @@
     "eval.errors/20260920T230302-fb89d0-none": "reports/manifests/eval.errors/20260920T230302-fb89d0-none",
     "eval.errors/20260921T012141-fb89d0-none": "reports/manifests/eval.errors/20260921T012141-fb89d0-none",
     "eval.errors/20260921T012142-fb89d0-none": "reports/manifests/eval.errors/20260921T012142-fb89d0-none",
+    "eval.errors/20260921T024110-fb89d0-none": "reports/manifests/eval.errors/20260921T024110-fb89d0-none",
+    "eval.errors/20260921T024132-fb89d0-none": "reports/manifests/eval.errors/20260921T024132-fb89d0-none",
+    "eval.errors/20260921T024155-fb89d0-none": "reports/manifests/eval.errors/20260921T024155-fb89d0-none",
+    "eval.errors/20260921T024249-fb89d0-none": "reports/manifests/eval.errors/20260921T024249-fb89d0-none",
     "md.ase/20260920T224837-fd5fe0-0": "reports/manifests/md.ase/20260920T224837-fd5fe0-0",
     "md.ase/20260920T225220-fd5fe0-0": "reports/manifests/md.ase/20260920T225220-fd5fe0-0",
     "md.ase/20260920T225557-fd5fe0-0": "reports/manifests/md.ase/20260920T225557-fd5fe0-0",
@@ -2001,6 +2005,171 @@
       "unit": "meV/\u00c5"
     }
   },
+  "eval.errors.T0.B2.mae_e": {
+    "value": 39.74686231886061,
+    "run_id": "20260921T024110-fb89d0-none",
+    "manifest_sha256": "92388f73ee2be256b1d7b74404aa0a25eb85bf2255417c85fc800bb6fb5fb714",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": "E0s_qe.json",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 147,
+      "seed": 0,
+      "ci95": [
+        30.799162606653617,
+        48.40986823778966
+      ],
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "T0",
+      "unit": "meV/atom",
+      "model_sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
+      "split_id": "d195dc5f2104",
+      "bootstrap_n": 2000,
+      "n_frames": 147,
+      "n_atoms": 1176
+    }
+  },
+  "eval.errors.T0.B2.mae_f": {
+    "value": 59.07001269170221,
+    "run_id": "20260921T024110-fb89d0-none",
+    "manifest_sha256": "92388f73ee2be256b1d7b74404aa0a25eb85bf2255417c85fc800bb6fb5fb714",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": "E0s_qe.json",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 147,
+      "seed": 0,
+      "ci95": [
+        28.947024602211627,
+        79.75476406610524
+      ],
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "T0",
+      "unit": "meV/\u00c5",
+      "model_sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
+      "split_id": "d195dc5f2104",
+      "bootstrap_n": 2000,
+      "n_frames": 147,
+      "n_atoms": 1176
+    }
+  },
+  "eval.errors.T0.B2.mae_s": {
+    "value": 4.606601549944567,
+    "run_id": "20260921T024110-fb89d0-none",
+    "manifest_sha256": "92388f73ee2be256b1d7b74404aa0a25eb85bf2255417c85fc800bb6fb5fb714",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": "E0s_qe.json",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 147,
+      "seed": 0,
+      "ci95": [
+        3.7819941730402022,
+        5.599368256391867
+      ],
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "T0",
+      "unit": "meV/\u00c5^3",
+      "model_sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
+      "split_id": "d195dc5f2104",
+      "bootstrap_n": 2000,
+      "n_frames": 147,
+      "n_atoms": 1176
+    }
+  },
+  "eval.errors.T0.B2.rmse_e": {
+    "value": 44.092303020426115,
+    "run_id": "20260921T024110-fb89d0-none",
+    "manifest_sha256": "92388f73ee2be256b1d7b74404aa0a25eb85bf2255417c85fc800bb6fb5fb714",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": "E0s_qe.json",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 147,
+      "seed": 0,
+      "ci95": [
+        35.96530021830508,
+        51.46477246978654
+      ],
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "T0",
+      "unit": "meV/atom",
+      "model_sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
+      "split_id": "d195dc5f2104",
+      "bootstrap_n": 2000,
+      "n_frames": 147,
+      "n_atoms": 1176
+    }
+  },
+  "eval.errors.T0.B2.rmse_f": {
+    "value": 86.58608178724367,
+    "run_id": "20260921T024110-fb89d0-none",
+    "manifest_sha256": "92388f73ee2be256b1d7b74404aa0a25eb85bf2255417c85fc800bb6fb5fb714",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": "E0s_qe.json",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 147,
+      "seed": 0,
+      "ci95": [
+        41.55760848475842,
+        107.66001276089655
+      ],
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "T0",
+      "unit": "meV/\u00c5",
+      "model_sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
+      "split_id": "d195dc5f2104",
+      "bootstrap_n": 2000,
+      "n_frames": 147,
+      "n_atoms": 1176
+    }
+  },
   "eval.errors.T2.B0.mae_f": {
     "value": 77.09317330001954,
     "run_id": "20260920T230245-fb89d0-none",
@@ -2539,6 +2708,171 @@
       "unit": "meV/\u00c5"
     }
   },
+  "eval.errors.T2.B2.mae_e": {
+    "value": 40.51151566003603,
+    "run_id": "20260921T024110-fb89d0-none",
+    "manifest_sha256": "92388f73ee2be256b1d7b74404aa0a25eb85bf2255417c85fc800bb6fb5fb714",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": "E0s_qe.json",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 115,
+      "seed": 0,
+      "ci95": [
+        30.6480781607971,
+        51.53609674279202
+      ],
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "T2",
+      "unit": "meV/atom",
+      "model_sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
+      "split_id": "d195dc5f2104",
+      "bootstrap_n": 2000,
+      "n_frames": 115,
+      "n_atoms": 920
+    }
+  },
+  "eval.errors.T2.B2.mae_f": {
+    "value": 72.67367550307331,
+    "run_id": "20260921T024110-fb89d0-none",
+    "manifest_sha256": "92388f73ee2be256b1d7b74404aa0a25eb85bf2255417c85fc800bb6fb5fb714",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": "E0s_qe.json",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 115,
+      "seed": 0,
+      "ci95": [
+        43.59916304556185,
+        88.87076853189856
+      ],
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "T2",
+      "unit": "meV/\u00c5",
+      "model_sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
+      "split_id": "d195dc5f2104",
+      "bootstrap_n": 2000,
+      "n_frames": 115,
+      "n_atoms": 920
+    }
+  },
+  "eval.errors.T2.B2.mae_s": {
+    "value": 4.237917325710753,
+    "run_id": "20260921T024110-fb89d0-none",
+    "manifest_sha256": "92388f73ee2be256b1d7b74404aa0a25eb85bf2255417c85fc800bb6fb5fb714",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": "E0s_qe.json",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 115,
+      "seed": 0,
+      "ci95": [
+        3.3940071056381504,
+        5.355092907203423
+      ],
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "T2",
+      "unit": "meV/\u00c5^3",
+      "model_sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
+      "split_id": "d195dc5f2104",
+      "bootstrap_n": 2000,
+      "n_frames": 115,
+      "n_atoms": 920
+    }
+  },
+  "eval.errors.T2.B2.rmse_e": {
+    "value": 44.52250233521081,
+    "run_id": "20260921T024110-fb89d0-none",
+    "manifest_sha256": "92388f73ee2be256b1d7b74404aa0a25eb85bf2255417c85fc800bb6fb5fb714",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": "E0s_qe.json",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 115,
+      "seed": 0,
+      "ci95": [
+        34.66349319140189,
+        54.08380061947026
+      ],
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "T2",
+      "unit": "meV/atom",
+      "model_sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
+      "split_id": "d195dc5f2104",
+      "bootstrap_n": 2000,
+      "n_frames": 115,
+      "n_atoms": 920
+    }
+  },
+  "eval.errors.T2.B2.rmse_f": {
+    "value": 97.57168592567473,
+    "run_id": "20260921T024110-fb89d0-none",
+    "manifest_sha256": "92388f73ee2be256b1d7b74404aa0a25eb85bf2255417c85fc800bb6fb5fb714",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": "E0s_qe.json",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 115,
+      "seed": 0,
+      "ci95": [
+        53.982532532924616,
+        115.1860095825613
+      ],
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "T2",
+      "unit": "meV/\u00c5",
+      "model_sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
+      "split_id": "d195dc5f2104",
+      "bootstrap_n": 2000,
+      "n_frames": 115,
+      "n_atoms": 920
+    }
+  },
   "eval.errors.T3.B0.mae_f": {
     "value": 156.8969527727833,
     "run_id": "20260920T225306-fb89d0-none",
@@ -2736,6 +3070,315 @@
       "tier": "T3",
       "unit": "meV/\u00c5",
       "model_sha256": "01bfe22100139f424713cf921144e5509cbe353d67aa9fa1be9c6e1e0ed35845",
+      "split_id": "72c0af30f146",
+      "bootstrap_n": 2000,
+      "n_frames": 91,
+      "n_atoms": 1359,
+      "noise_floor_f": 21.528450929284976
+    }
+  },
+  "eval.errors.T3.B1.mae_f": {
+    "value": 157.20048545704753,
+    "run_id": "20260921T024249-fb89d0-none",
+    "manifest_sha256": "03b433f91b51a7746ea92a1adb337638a30ac114ae4378499c9b1bdc27761135",
+    "stage": "eval.errors",
+    "meta": {
+      "aggregate": "mean_over_seeds",
+      "bootstrap_n": 2000,
+      "bracket": "B1",
+      "ci95": [
+        156.66888340718916,
+        157.7938859193443
+      ],
+      "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "head": "Default",
+      "model_label": "B1",
+      "model_sha256": "31f32a4f55bbd6bff35821a5dc2d3b6ab565e0b17037b6e4d61895d24634dcea",
+      "n": 91,
+      "n_atoms": 1359,
+      "n_frames": 91,
+      "n_models": 3,
+      "n_seeds": 3,
+      "noise_floor_f": 21.528450929284976,
+      "per_seed": [
+        {
+          "ci95": [
+            136.9136305355593,
+            181.71412878547096
+          ],
+          "run_id": "20260921T024207-fb89d0-none",
+          "seed": 0,
+          "value": 156.66888340718916
+        },
+        {
+          "ci95": [
+            138.0032432580339,
+            181.5539005572197
+          ],
+          "run_id": "20260921T024219-fb89d0-none",
+          "seed": 0,
+          "value": 157.13868704460916
+        },
+        {
+          "ci95": [
+            138.15998991477142,
+            182.71734806310877
+          ],
+          "run_id": "20260921T024230-fb89d0-none",
+          "seed": 0,
+          "value": 157.7938859193443
+        }
+      ],
+      "reference": {
+        "code": "vasp",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": "PAW (OMat24)"
+      },
+      "seed": 0,
+      "split_id": "72c0af30f146",
+      "tier": "T3",
+      "train_seed": 0,
+      "train_seeds": "0,1,2",
+      "unit": "meV/\u00c5"
+    }
+  },
+  "eval.errors.T3.B1.mae_s": {
+    "value": 9.822363125493332,
+    "run_id": "20260921T024249-fb89d0-none",
+    "manifest_sha256": "03b433f91b51a7746ea92a1adb337638a30ac114ae4378499c9b1bdc27761135",
+    "stage": "eval.errors",
+    "meta": {
+      "aggregate": "mean_over_seeds",
+      "bootstrap_n": 2000,
+      "bracket": "B1",
+      "ci95": [
+        9.730799609602236,
+        9.876214596651451
+      ],
+      "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "head": "Default",
+      "model_label": "B1",
+      "model_sha256": "31f32a4f55bbd6bff35821a5dc2d3b6ab565e0b17037b6e4d61895d24634dcea",
+      "n": 91,
+      "n_atoms": 1359,
+      "n_frames": 91,
+      "n_models": 3,
+      "n_seeds": 3,
+      "noise_floor_f": 21.528450929284976,
+      "per_seed": [
+        {
+          "ci95": [
+            7.854068132410415,
+            11.912118317644435
+          ],
+          "run_id": "20260921T024207-fb89d0-none",
+          "seed": 0,
+          "value": 9.730799609602236
+        },
+        {
+          "ci95": [
+            7.978083327592943,
+            12.0475643566751
+          ],
+          "run_id": "20260921T024219-fb89d0-none",
+          "seed": 0,
+          "value": 9.876214596651451
+        },
+        {
+          "ci95": [
+            7.943893435575053,
+            12.049036187689211
+          ],
+          "run_id": "20260921T024230-fb89d0-none",
+          "seed": 0,
+          "value": 9.860075170226311
+        }
+      ],
+      "reference": {
+        "code": "vasp",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": "PAW (OMat24)"
+      },
+      "seed": 0,
+      "split_id": "72c0af30f146",
+      "tier": "T3",
+      "train_seed": 0,
+      "train_seeds": "0,1,2",
+      "unit": "meV/\u00c5^3"
+    }
+  },
+  "eval.errors.T3.B1.rmse_f": {
+    "value": 245.1919463889611,
+    "run_id": "20260921T024249-fb89d0-none",
+    "manifest_sha256": "03b433f91b51a7746ea92a1adb337638a30ac114ae4378499c9b1bdc27761135",
+    "stage": "eval.errors",
+    "meta": {
+      "aggregate": "mean_over_seeds",
+      "bootstrap_n": 2000,
+      "bracket": "B1",
+      "ci95": [
+        244.66657250317482,
+        246.05877949013336
+      ],
+      "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "head": "Default",
+      "model_label": "B1",
+      "model_sha256": "31f32a4f55bbd6bff35821a5dc2d3b6ab565e0b17037b6e4d61895d24634dcea",
+      "n": 91,
+      "n_atoms": 1359,
+      "n_frames": 91,
+      "n_models": 3,
+      "n_seeds": 3,
+      "noise_floor_f": 21.528450929284976,
+      "per_seed": [
+        {
+          "ci95": [
+            197.8436677385125,
+            303.97053654317915
+          ],
+          "run_id": "20260921T024207-fb89d0-none",
+          "seed": 0,
+          "value": 244.85048717357503
+        },
+        {
+          "ci95": [
+            197.92405675461825,
+            303.5500252002168
+          ],
+          "run_id": "20260921T024219-fb89d0-none",
+          "seed": 0,
+          "value": 244.66657250317482
+        },
+        {
+          "ci95": [
+            199.10128915555234,
+            304.7740753772391
+          ],
+          "run_id": "20260921T024230-fb89d0-none",
+          "seed": 0,
+          "value": 246.05877949013336
+        }
+      ],
+      "reference": {
+        "code": "vasp",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": "PAW (OMat24)"
+      },
+      "seed": 0,
+      "split_id": "72c0af30f146",
+      "tier": "T3",
+      "train_seed": 0,
+      "train_seeds": "0,1,2",
+      "unit": "meV/\u00c5"
+    }
+  },
+  "eval.errors.T3.B2.mae_f": {
+    "value": 157.561645081087,
+    "run_id": "20260921T024155-fb89d0-none",
+    "manifest_sha256": "2bc3894aa4cb04cf53ef246bd9a11914f919e9602e4776fae287d3ea7ee18928",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (OMat24)",
+        "e0_source": "E0s_qe.json",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 91,
+      "seed": 0,
+      "ci95": [
+        139.96064560435434,
+        180.80868103872845
+      ],
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "T3",
+      "unit": "meV/\u00c5",
+      "model_sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
+      "split_id": "72c0af30f146",
+      "bootstrap_n": 2000,
+      "n_frames": 91,
+      "n_atoms": 1359,
+      "noise_floor_f": 21.528450929284976
+    }
+  },
+  "eval.errors.T3.B2.mae_s": {
+    "value": 9.394829956907122,
+    "run_id": "20260921T024155-fb89d0-none",
+    "manifest_sha256": "2bc3894aa4cb04cf53ef246bd9a11914f919e9602e4776fae287d3ea7ee18928",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (OMat24)",
+        "e0_source": "E0s_qe.json",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 91,
+      "seed": 0,
+      "ci95": [
+        7.632359598217213,
+        11.392853024083967
+      ],
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "T3",
+      "unit": "meV/\u00c5^3",
+      "model_sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
+      "split_id": "72c0af30f146",
+      "bootstrap_n": 2000,
+      "n_frames": 91,
+      "n_atoms": 1359,
+      "noise_floor_f": 21.528450929284976
+    }
+  },
+  "eval.errors.T3.B2.rmse_f": {
+    "value": 240.67223601339018,
+    "run_id": "20260921T024155-fb89d0-none",
+    "manifest_sha256": "2bc3894aa4cb04cf53ef246bd9a11914f919e9602e4776fae287d3ea7ee18928",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (OMat24)",
+        "e0_source": "E0s_qe.json",
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 91,
+      "seed": 0,
+      "ci95": [
+        196.8460444080687,
+        295.92596939698007
+      ],
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "T3",
+      "unit": "meV/\u00c5",
+      "model_sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
       "split_id": "72c0af30f146",
       "bootstrap_n": 2000,
       "n_frames": 91,
@@ -3243,6 +3886,138 @@
       "train_seed": 0,
       "train_seeds": "0,1,2",
       "unit": "meV/\u00c5"
+    }
+  },
+  "eval.errors.T4a.B2.mae_e": {
+    "value": 44.0155811688383,
+    "run_id": "20260921T024132-fb89d0-none",
+    "manifest_sha256": "e4092aabe6fb734760600444f9bb1261c4d3d142bf6ca3afd261aeeee39a650d",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (Materials Project)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "pt_head",
+      "n": 65,
+      "seed": 0,
+      "ci95": [
+        34.25983429627998,
+        51.731546862047836
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "T4a",
+      "unit": "meV/atom",
+      "model_sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
+      "split_id": "",
+      "bootstrap_n": 2000,
+      "n_frames": 65,
+      "n_atoms": 520
+    }
+  },
+  "eval.errors.T4a.B2.mae_f": {
+    "value": 25.721106173945802,
+    "run_id": "20260921T024132-fb89d0-none",
+    "manifest_sha256": "e4092aabe6fb734760600444f9bb1261c4d3d142bf6ca3afd261aeeee39a650d",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (Materials Project)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "pt_head",
+      "n": 65,
+      "seed": 0,
+      "ci95": [
+        13.96251280853007,
+        39.03539292869757
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "T4a",
+      "unit": "meV/\u00c5",
+      "model_sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
+      "split_id": "",
+      "bootstrap_n": 2000,
+      "n_frames": 65,
+      "n_atoms": 520
+    }
+  },
+  "eval.errors.T4a.B2.rmse_e": {
+    "value": 47.479450078104115,
+    "run_id": "20260921T024132-fb89d0-none",
+    "manifest_sha256": "e4092aabe6fb734760600444f9bb1261c4d3d142bf6ca3afd261aeeee39a650d",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (Materials Project)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "pt_head",
+      "n": 65,
+      "seed": 0,
+      "ci95": [
+        38.64879049224732,
+        53.5947098970433
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "T4a",
+      "unit": "meV/atom",
+      "model_sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
+      "split_id": "",
+      "bootstrap_n": 2000,
+      "n_frames": 65,
+      "n_atoms": 520
+    }
+  },
+  "eval.errors.T4a.B2.rmse_f": {
+    "value": 43.8170538461842,
+    "run_id": "20260921T024132-fb89d0-none",
+    "manifest_sha256": "e4092aabe6fb734760600444f9bb1261c4d3d142bf6ca3afd261aeeee39a650d",
+    "stage": "eval.errors",
+    "meta": {
+      "reference": {
+        "code": "vasp",
+        "functional": "PBE",
+        "pseudos": "PAW (Materials Project)",
+        "e0_source": "foundation",
+        "cross_functional": false
+      },
+      "head": "pt_head",
+      "n": 65,
+      "seed": 0,
+      "ci95": [
+        26.491169731418147,
+        57.061125402230694
+      ],
+      "e0_source": "foundation",
+      "energy_scale": "mp",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "T4a",
+      "unit": "meV/\u00c5",
+      "model_sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
+      "split_id": "",
+      "bootstrap_n": 2000,
+      "n_frames": 65,
+      "n_atoms": 520
     }
   },
   "eval.errors.T4a.B4.mae_e": {
