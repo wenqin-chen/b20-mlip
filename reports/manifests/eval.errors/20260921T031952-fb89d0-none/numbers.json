@@ -1,0 +1,254 @@
+{
+  "eval.errors.T4a.B2.mae_e": 60.457996092554225,
+  "eval.errors.T4a.B2.mae_e@meta": {
+    "aggregate": "mean_over_seeds",
+    "bootstrap_n": 2000,
+    "bracket": "B2",
+    "ci95": [
+      59.14054262328469,
+      62.14306572399669
+    ],
+    "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+    "e0_source": "foundation",
+    "energy_scale": "mp",
+    "head": "pt_head",
+    "model_label": "B2",
+    "model_sha256": "23702c4f91bf71cf2e2df6422a077b1ac065d5c04b0fc4ac6ea066a45620e844",
+    "n": 65,
+    "n_atoms": 520,
+    "n_frames": 65,
+    "n_models": 3,
+    "n_seeds": 3,
+    "per_seed": [
+      {
+        "ci95": [
+          48.03270138563661,
+          72.3449117299582
+        ],
+        "run_id": "20260921T031813-fb89d0-none",
+        "seed": 0,
+        "value": 60.090379930381296
+      },
+      {
+        "ci95": [
+          42.61296046050733,
+          78.23249134350877
+        ],
+        "run_id": "20260921T031848-fb89d0-none",
+        "seed": 0,
+        "value": 59.14054262328469
+      },
+      {
+        "ci95": [
+          46.56279334458392,
+          78.55925797792843
+        ],
+        "run_id": "20260921T031922-fb89d0-none",
+        "seed": 0,
+        "value": 62.14306572399669
+      }
+    ],
+    "reference": {
+      "code": "vasp",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": "PAW (Materials Project)"
+    },
+    "seed": 0,
+    "split_id": "",
+    "tier": "T4a",
+    "train_seed": 0,
+    "train_seeds": "0,1,2",
+    "unit": "meV/atom"
+  },
+  "eval.errors.T4a.B2.mae_f": 25.132325430470953,
+  "eval.errors.T4a.B2.mae_f@meta": {
+    "aggregate": "mean_over_seeds",
+    "bootstrap_n": 2000,
+    "bracket": "B2",
+    "ci95": [
+      24.92492699362983,
+      25.269444207202636
+    ],
+    "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+    "e0_source": "foundation",
+    "energy_scale": "mp",
+    "head": "pt_head",
+    "model_label": "B2",
+    "model_sha256": "23702c4f91bf71cf2e2df6422a077b1ac065d5c04b0fc4ac6ea066a45620e844",
+    "n": 65,
+    "n_atoms": 520,
+    "n_frames": 65,
+    "n_models": 3,
+    "n_seeds": 3,
+    "per_seed": [
+      {
+        "ci95": [
+          12.187458268547989,
+          39.47728225022884
+        ],
+        "run_id": "20260921T031813-fb89d0-none",
+        "seed": 0,
+        "value": 25.202605090580395
+      },
+      {
+        "ci95": [
+          12.097930627638759,
+          40.269803211988446
+        ],
+        "run_id": "20260921T031848-fb89d0-none",
+        "seed": 0,
+        "value": 24.92492699362983
+      },
+      {
+        "ci95": [
+          12.46730605372279,
+          38.996469457913406
+        ],
+        "run_id": "20260921T031922-fb89d0-none",
+        "seed": 0,
+        "value": 25.269444207202636
+      }
+    ],
+    "reference": {
+      "code": "vasp",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": "PAW (Materials Project)"
+    },
+    "seed": 0,
+    "split_id": "",
+    "tier": "T4a",
+    "train_seed": 0,
+    "train_seeds": "0,1,2",
+    "unit": "meV/\u00c5"
+  },
+  "eval.errors.T4a.B2.rmse_e": 64.42028002699247,
+  "eval.errors.T4a.B2.rmse_e@meta": {
+    "aggregate": "mean_over_seeds",
+    "bootstrap_n": 2000,
+    "bracket": "B2",
+    "ci95": [
+      63.01004942300424,
+      66.17287243412802
+    ],
+    "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+    "e0_source": "foundation",
+    "energy_scale": "mp",
+    "head": "pt_head",
+    "model_label": "B2",
+    "model_sha256": "23702c4f91bf71cf2e2df6422a077b1ac065d5c04b0fc4ac6ea066a45620e844",
+    "n": 65,
+    "n_atoms": 520,
+    "n_frames": 65,
+    "n_models": 3,
+    "n_seeds": 3,
+    "per_seed": [
+      {
+        "ci95": [
+          50.372039214517294,
+          73.70677933080877
+        ],
+        "run_id": "20260921T031813-fb89d0-none",
+        "seed": 0,
+        "value": 63.01004942300424
+      },
+      {
+        "ci95": [
+          45.00432336384126,
+          82.68421421958304
+        ],
+        "run_id": "20260921T031848-fb89d0-none",
+        "seed": 0,
+        "value": 64.07791822384513
+      },
+      {
+        "ci95": [
+          49.5140214151362,
+          80.36529087154335
+        ],
+        "run_id": "20260921T031922-fb89d0-none",
+        "seed": 0,
+        "value": 66.17287243412802
+      }
+    ],
+    "reference": {
+      "code": "vasp",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": "PAW (Materials Project)"
+    },
+    "seed": 0,
+    "split_id": "",
+    "tier": "T4a",
+    "train_seed": 0,
+    "train_seeds": "0,1,2",
+    "unit": "meV/atom"
+  },
+  "eval.errors.T4a.B2.rmse_f": 45.1751957741277,
+  "eval.errors.T4a.B2.rmse_f@meta": {
+    "aggregate": "mean_over_seeds",
+    "bootstrap_n": 2000,
+    "bracket": "B2",
+    "ci95": [
+      44.924930704932436,
+      45.33973742546028
+    ],
+    "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+    "e0_source": "foundation",
+    "energy_scale": "mp",
+    "head": "pt_head",
+    "model_label": "B2",
+    "model_sha256": "23702c4f91bf71cf2e2df6422a077b1ac065d5c04b0fc4ac6ea066a45620e844",
+    "n": 65,
+    "n_atoms": 520,
+    "n_frames": 65,
+    "n_models": 3,
+    "n_seeds": 3,
+    "per_seed": [
+      {
+        "ci95": [
+          23.55579518842952,
+          60.19335628546577
+        ],
+        "run_id": "20260921T031813-fb89d0-none",
+        "seed": 0,
+        "value": 44.924930704932436
+      },
+      {
+        "ci95": [
+          23.41147629850255,
+          60.780009668022075
+        ],
+        "run_id": "20260921T031848-fb89d0-none",
+        "seed": 0,
+        "value": 45.26091919199038
+      },
+      {
+        "ci95": [
+          23.48290106399022,
+          60.87289255719401
+        ],
+        "run_id": "20260921T031922-fb89d0-none",
+        "seed": 0,
+        "value": 45.33973742546028
+      }
+    ],
+    "reference": {
+      "code": "vasp",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": "PAW (Materials Project)"
+    },
+    "seed": 0,
+    "split_id": "",
+    "tier": "T4a",
+    "train_seed": 0,
+    "train_seeds": "0,1,2",
+    "unit": "meV/\u00c5"
+  }
+}

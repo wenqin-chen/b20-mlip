@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "stage": "eval.errors",
-  "run_id": "20260921T024110-fb89d0-none",
-  "created_at": "2026-09-21T02:41:10.589616Z",
+  "run_id": "20260921T025320-fb89d0-none",
+  "created_at": "2026-09-21T02:53:20.548067Z",
   "host": "Wenqins-MacBook-Pro-10.local",
   "user": "wenqinchen",
-  "git_sha": "b97cc3cc1bc1e289e6e202218d28ea0919ac671d",
+  "git_sha": "28aeeabde3e2651b96367b4ae5a23633891fb965",
   "git_dirty": false,
   "uv_lock_sha256": "a039dbcfb95b46c12c7a0b465b82a5728c5b69285be0a7ce472041a0c289bcaf",
   "python": "3.11.15",
@@ -255,91 +255,70 @@
   "seed": null,
   "inputs": [
     {
-      "path": "models/b2_replay/seed0/b20_replay.model",
-      "sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
-      "bytes": 77174965,
+      "path": "models/b2_replay/2k-seed0/b20_replay.model",
+      "sha256": "23702c4f91bf71cf2e2df6422a077b1ac065d5c04b0fc4ac6ea066a45620e844",
+      "bytes": 76401845,
       "kind": "model"
     },
     {
-      "path": "models/b2_replay/seed0/checkpoint.json",
-      "sha256": "d458e8b201da4a7031e201f9154a9ab779e048ad9b1d385244fade0acb138ed4",
+      "path": "models/b2_replay/2k-seed0/checkpoint.json",
+      "sha256": "135048bc2c5099393a43a7ac5b7336d3c188c2b5f6bcf0de5d627e107d746b0b",
       "bytes": 964,
       "kind": "json"
     },
     {
-      "path": "data/splits/d195dc5f2104.json",
-      "sha256": "ec4c73444f2aef7576fe5f9366ad14c4ef9503bf4a363b5fe062eef4654ba69b",
-      "bytes": 39056,
-      "kind": "json"
-    },
-    {
-      "path": "data/frames/labelled_r0.extxyz",
-      "sha256": "c0a305823de071a9980deee4a588d7e4610f2d7eee880afd2654d6a446d1958b",
-      "bytes": 609438,
+      "path": "data/frames/mptrj_b20.extxyz",
+      "sha256": "a0e359128c7e16ec480e55eb0a83c668e9e35e8ed8104925c749dc7b168835fd",
+      "bytes": 91147,
       "kind": "frames"
     }
   ],
   "outputs": [
     {
-      "path": "runs/eval.errors/20260921T024110-fb89d0-none/plan.json",
-      "sha256": "f396bcaab60f94dc402367a0da8020597d9532863aae36ead1d733d65383de75",
-      "bytes": 478,
+      "path": "runs/eval.errors/20260921T025320-fb89d0-none/plan.json",
+      "sha256": "cd13dffd79f0a79318a641d891544954ef5f42147c3072b7a9eb48033232e131",
+      "bytes": 454,
       "kind": "json"
     },
     {
-      "path": "runs/eval.errors/20260921T024110-fb89d0-none/errors_T0.json",
-      "sha256": "961cfa9a621bfa24f42fae9cae703088d0d63c6cd8265c173dba5e03ce713bc2",
-      "bytes": 6323,
+      "path": "runs/eval.errors/20260921T025320-fb89d0-none/errors_T4a.json",
+      "sha256": "a2a863a1f08f3d8863923049a152ae8a7c806a5a7f8318f2bb21782b9263fd73",
+      "bytes": 2025,
       "kind": "json"
     },
     {
-      "path": "runs/eval.errors/20260921T024110-fb89d0-none/errors_T2.json",
-      "sha256": "ce31cbad0e3a99255b6cba7f4245f20c6d351c176e1ed77682830808c75cba71",
-      "bytes": 6319,
-      "kind": "json"
-    },
-    {
-      "path": "runs/eval.errors/20260921T024110-fb89d0-none/numbers.json",
-      "sha256": "6b45b4b7f66cad2d68ab9aee8f22a912c02d82be03cc675433a156aba3b54344",
-      "bytes": 7248,
+      "path": "runs/eval.errors/20260921T025320-fb89d0-none/numbers.json",
+      "sha256": "1166dd862f2062f2a0cc43e2b173fabf3836932323de8f412d6180f2e96e7181",
+      "bytes": 2919,
       "kind": "json"
     }
   ],
-  "wall_seconds": 20.35196241698577,
+  "wall_seconds": 5.9070664170139935,
   "status": "ok",
   "slurm": null,
   "extras": {
-    "model_sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
-    "head": "Default",
+    "model_sha256": "23702c4f91bf71cf2e2df6422a077b1ac065d5c04b0fc4ac6ea066a45620e844",
+    "head": "pt_head",
     "tier": [
-      "T0",
-      "T2"
+      "T4a"
     ],
     "n": {
-      "T0": 147,
-      "T2": 115
+      "T4a": 65
     },
     "bootstrap_seed": 0,
     "bootstrap_n": 2000,
     "reference": {
-      "T0": {
-        "code": "qe",
+      "T4a": {
+        "code": "vasp",
         "functional": "PBE",
-        "pseudos": "SSSP-efficiency-1.3",
-        "e0_source": "E0s_qe.json",
-        "cross_functional": false
-      },
-      "T2": {
-        "code": "qe",
-        "functional": "PBE",
-        "pseudos": "SSSP-efficiency-1.3",
-        "e0_source": "E0s_qe.json",
+        "pseudos": "PAW (Materials Project)",
+        "e0_source": "foundation",
         "cross_functional": false
       }
     },
-    "energy_scale": "qe",
-    "e0_source": "E0s_qe.json",
-    "model_label": "B2",
+    "energy_scale": "mp",
+    "e0_source": "foundation",
+    "model_label": "B2r2k",
     "energy_metrics_skipped": {},
     "noise_floor_f": null,
     "noise_floor_reason": null

@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "stage": "eval.errors",
-  "run_id": "20260921T024132-fb89d0-none",
-  "created_at": "2026-09-21T02:41:32.067520Z",
+  "run_id": "20260921T031951-fb89d0-none",
+  "created_at": "2026-09-21T03:19:51.222486Z",
   "host": "Wenqins-MacBook-Pro-10.local",
   "user": "wenqinchen",
-  "git_sha": "b97cc3cc1bc1e289e6e202218d28ea0919ac671d",
+  "git_sha": "944786c2f78828575303aa669219c46e2865af93",
   "git_dirty": false,
   "uv_lock_sha256": "a039dbcfb95b46c12c7a0b465b82a5728c5b69285be0a7ce472041a0c289bcaf",
   "python": "3.11.15",
@@ -255,72 +255,43 @@
   "seed": null,
   "inputs": [
     {
-      "path": "models/b2_replay/seed0/b20_replay.model",
-      "sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
-      "bytes": 77174965,
-      "kind": "model"
-    },
-    {
-      "path": "models/b2_replay/seed0/checkpoint.json",
-      "sha256": "d458e8b201da4a7031e201f9154a9ab779e048ad9b1d385244fade0acb138ed4",
-      "bytes": 964,
+      "path": "runs/eval.errors/20260921T031752-fb89d0-none/numbers.json",
+      "sha256": "efbe5bd7796966885316ece74de0b21a83082e676fd94075563c0fdec489062c",
+      "bytes": 7250,
       "kind": "json"
     },
     {
-      "path": "data/frames/mptrj_b20.extxyz",
-      "sha256": "a0e359128c7e16ec480e55eb0a83c668e9e35e8ed8104925c749dc7b168835fd",
-      "bytes": 91147,
-      "kind": "frames"
+      "path": "runs/eval.errors/20260921T031831-fb89d0-none/numbers.json",
+      "sha256": "8444939a1ea6dc020da9201ce31bbd477c4921b9b0c060ae1547234b9192002b",
+      "bytes": 7250,
+      "kind": "json"
+    },
+    {
+      "path": "runs/eval.errors/20260921T031906-fb89d0-none/numbers.json",
+      "sha256": "5eae9048cc7341956e244f0a37a6249abef17ae0af78d798bbefffe7375f3e5d",
+      "bytes": 7254,
+      "kind": "json"
     }
   ],
   "outputs": [
     {
-      "path": "runs/eval.errors/20260921T024132-fb89d0-none/plan.json",
-      "sha256": "00aec3c22a0098e1ce8d15016d9003d548732cfe9579df4b868e2e1856506a49",
-      "bytes": 448,
-      "kind": "json"
-    },
-    {
-      "path": "runs/eval.errors/20260921T024132-fb89d0-none/errors_T4a.json",
-      "sha256": "bc1ef10dd0da2325b07f966eaf1f4b75e42a5495a0320e6d2ff30dd6b5fa40de",
-      "bytes": 2018,
-      "kind": "json"
-    },
-    {
-      "path": "runs/eval.errors/20260921T024132-fb89d0-none/numbers.json",
-      "sha256": "6362006c32b9b833f764a2d1c093944a486a860edc037ac69a8834ceafd90a30",
-      "bytes": 2869,
+      "path": "runs/eval.errors/20260921T031951-fb89d0-none/numbers.json",
+      "sha256": "8fd9c01e64dd2db271c81358b589bad14dacbd6ab220034265596db9e352db0d",
+      "bytes": 15795,
       "kind": "json"
     }
   ],
-  "wall_seconds": 6.002900333987782,
+  "wall_seconds": 0.0026432079903315753,
   "status": "ok",
   "slurm": null,
   "extras": {
-    "model_sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
-    "head": "pt_head",
-    "tier": [
-      "T4a"
+    "aggregate": true,
+    "source_runs": [
+      "20260921T031752-fb89d0-none",
+      "20260921T031831-fb89d0-none",
+      "20260921T031906-fb89d0-none"
     ],
-    "n": {
-      "T4a": 65
-    },
-    "bootstrap_seed": 0,
-    "bootstrap_n": 2000,
-    "reference": {
-      "T4a": {
-        "code": "vasp",
-        "functional": "PBE",
-        "pseudos": "PAW (Materials Project)",
-        "e0_source": "foundation",
-        "cross_functional": false
-      }
-    },
-    "energy_scale": "mp",
-    "e0_source": "foundation",
-    "model_label": "B2",
-    "energy_metrics_skipped": {},
-    "noise_floor_f": null,
-    "noise_floor_reason": null
+    "label": "B2",
+    "n_keys": 10
   }
 }

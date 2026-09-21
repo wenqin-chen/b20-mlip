@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "stage": "eval.errors",
-  "run_id": "20260921T024155-fb89d0-none",
-  "created_at": "2026-09-21T02:41:55.636660Z",
+  "run_id": "20260921T031952-fb89d0-none",
+  "created_at": "2026-09-21T03:19:51.705080Z",
   "host": "Wenqins-MacBook-Pro-10.local",
   "user": "wenqinchen",
-  "git_sha": "b97cc3cc1bc1e289e6e202218d28ea0919ac671d",
+  "git_sha": "944786c2f78828575303aa669219c46e2865af93",
   "git_dirty": false,
   "uv_lock_sha256": "a039dbcfb95b46c12c7a0b465b82a5728c5b69285be0a7ce472041a0c289bcaf",
   "python": "3.11.15",
@@ -255,86 +255,43 @@
   "seed": null,
   "inputs": [
     {
-      "path": "models/b2_replay/seed0/b20_replay.model",
-      "sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
-      "bytes": 77174965,
-      "kind": "model"
-    },
-    {
-      "path": "models/b2_replay/seed0/checkpoint.json",
-      "sha256": "d458e8b201da4a7031e201f9154a9ab779e048ad9b1d385244fade0acb138ed4",
-      "bytes": 964,
+      "path": "runs/eval.errors/20260921T031813-fb89d0-none/numbers.json",
+      "sha256": "a08a167f6592d79770a11b01fdeca1d23d84ac26295b8b8ce9d26e0b9b526b87",
+      "bytes": 2871,
       "kind": "json"
     },
     {
-      "path": "data/splits/72c0af30f146.json",
-      "sha256": "aa59f530d9d2cc359db50b36d3b7a590c3838ad1d052d285131439b514b0c665",
-      "bytes": 60909,
+      "path": "runs/eval.errors/20260921T031848-fb89d0-none/numbers.json",
+      "sha256": "656ff8a368dc86c373b32f4a7849c4a89c65b09a11c837ab8c9445816375de3e",
+      "bytes": 2870,
       "kind": "json"
     },
     {
-      "path": "data/frames/omat24_infamily.extxyz",
-      "sha256": "eeeb214155383168126ec49f978a8c03c31e4e712e5944e93977d3a0ce57e8e2",
-      "bytes": 1310958,
-      "kind": "frames"
-    },
-    {
-      "path": "data/frames/noise_floor_qe.extxyz",
-      "sha256": "58cde5aa26e08464a68e6e646f057192774c4ad92008831d018a5b61c11dd939",
-      "bytes": 39749,
-      "kind": "frames"
+      "path": "runs/eval.errors/20260921T031922-fb89d0-none/numbers.json",
+      "sha256": "f9217f6672b8605e6a634d0e8fb0de12061e76614f51521529016e3df8a40ffd",
+      "bytes": 2868,
+      "kind": "json"
     }
   ],
   "outputs": [
     {
-      "path": "runs/eval.errors/20260921T024155-fb89d0-none/plan.json",
-      "sha256": "d678c788fb7940c38d9f2a21cff267872b16d2a4d6288ae6e28ca7e955ee4733",
-      "bytes": 625,
-      "kind": "json"
-    },
-    {
-      "path": "runs/eval.errors/20260921T024155-fb89d0-none/errors_T3.json",
-      "sha256": "c30514bc16305dbe9b67ab5385c1a90cd9fa4b0186b111ff71a7fbb57076e450",
-      "bytes": 1671,
-      "kind": "json"
-    },
-    {
-      "path": "runs/eval.errors/20260921T024155-fb89d0-none/numbers.json",
-      "sha256": "2862c92b90b294640a849513d17231fcaa48dce68aff2a85da8cce992553e805",
-      "bytes": 2285,
+      "path": "runs/eval.errors/20260921T031952-fb89d0-none/numbers.json",
+      "sha256": "63359f7776c7330b0d9c8b5e6cecec3e8c49801462689f45ececcaabf1db2ce3",
+      "bytes": 6286,
       "kind": "json"
     }
   ],
-  "wall_seconds": 11.002573791018222,
+  "wall_seconds": 0.0014842080126982182,
   "status": "ok",
   "slurm": null,
   "extras": {
-    "model_sha256": "4490c70f646ede06b826b3a8ea2e4bbf821894a072c2d4dbd9ad387a7a7e3fa2",
-    "head": "Default",
-    "tier": [
-      "T3"
+    "aggregate": true,
+    "source_runs": [
+      "20260921T031813-fb89d0-none",
+      "20260921T031848-fb89d0-none",
+      "20260921T031922-fb89d0-none"
     ],
-    "n": {
-      "T3": 91
-    },
-    "bootstrap_seed": 0,
-    "bootstrap_n": 2000,
-    "reference": {
-      "T3": {
-        "code": "vasp",
-        "functional": "PBE",
-        "pseudos": "PAW (OMat24)",
-        "e0_source": "E0s_qe.json",
-        "cross_functional": false
-      }
-    },
-    "energy_scale": "qe",
-    "e0_source": "E0s_qe.json",
-    "model_label": "B2",
-    "energy_metrics_skipped": {
-      "T3": "model energy scale 'qe' != frames' 'omat24' (rule R3)"
-    },
-    "noise_floor_f": 21.528450929284976,
-    "noise_floor_reason": null
+    "label": "B2",
+    "n_keys": 4
   }
 }
