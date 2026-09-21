@@ -419,3 +419,24 @@ def test_run_dry_run_and_failures(
     r = failing(frames_path=qe_frames_path, tier="T8")
     assert r.status == "failed" and "unknown tier" in r.summary["error"]
     assert sha256_file(tiny_mace.model_path) == tiny_mace.sha256
+
+
+def test_aggregate_means_over_seeds_and_keeps_provenance() -> None:
+    """Seed aggregation: value = mean, ci95 = min-max over seeds, sources recorded."""
+    from b20mlip.evaluate.aggregate import aggregate
+
+    def numbers(seed: int, mae: float) -> dict:
+        return {
+            "eval.errors.T0.B1.mae_f": mae,
+            "eval.errors.T0.B1.mae_f@meta": {"seed": seed, "n": 147, "ci95": [mae - 5, mae + 5],
+                                             "head": "Default", "tier": "T0"},
+        }  # fmt: skip
+
+    out = aggregate({"r0": numbers(0, 63.0), "r1": numbers(1, 66.0), "r2": numbers(2, 69.0)}, "B1")
+    assert out["eval.errors.T0.B1.mae_f"] == pytest.approx(66.0)
+    meta = out["eval.errors.T0.B1.mae_f@meta"]
+    assert meta["ci95"] == [63.0, 69.0] and meta["seed"] == "0,1,2" and meta["n_seeds"] == 3
+    assert [p["run_id"] for p in meta["per_seed"]] == ["r0", "r1", "r2"]
+    assert meta["n"] == 147 and meta["aggregate"] == "mean_over_seeds"
+    single = aggregate({"r0": numbers(0, 63.0)}, "B1")
+    assert single["eval.errors.T0.B1.mae_f@meta"]["ci95"] == [58.0, 68.0]  # per-seed CI kept

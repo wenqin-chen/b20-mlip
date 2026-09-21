@@ -15,7 +15,7 @@ import typer
 
 from b20mlip.provenance import run_stage
 
-COMMANDS: frozenset[str] = frozenset({"errors", "discovery", "phonons", "elastic"})
+COMMANDS: frozenset[str] = frozenset({"aggregate", "errors", "discovery", "phonons", "elastic"})
 HEAD_HELP = "MACE head: Default (QE scale for fine-tuned models) or pt_head (MP scale, B2 replay)."
 CKPT_HELP = "checkpoint.json of the train stage (energy scale, E0 source, bracket label)."
 SCALE_HELP = "Model energy scale mp|omat24|qe|none when no checkpoint.json is given."
@@ -44,6 +44,21 @@ def _run(ctx: typer.Context, stage: Any, fn: Any, **kw: Any) -> None:
 
 
 def register(group: typer.Typer) -> set[str]:
+    @group.command("aggregate")
+    def aggregate_cmd(
+        ctx: typer.Context,
+        runs: Annotated[
+            str, typer.Option("--runs", help="Comma list of eval.errors run ids (one per seed).")
+        ],
+        label: Annotated[
+            str, typer.Option("--label", help="Bracket label to publish (B1, B2, B3).")
+        ],
+    ) -> None:
+        """Mean over training seeds of one bracket's error tables; ci95 = seed min-max."""
+        from b20mlip.evaluate import aggregate as mod  # noqa: PLC0415
+
+        _run(ctx, "eval.errors", mod.run, runs=runs, label=label)
+
     """Add the eval commands to ``group``; returns the names registered."""
 
     @group.command("errors")

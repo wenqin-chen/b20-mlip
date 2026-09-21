@@ -29,7 +29,11 @@ def _payload(output: str) -> dict[str, Any]:
 
 
 def test_registration_and_help() -> None:
-    assert REGISTERED["eval"] == set(COMMANDS) == {"errors", "discovery", "phonons", "elastic"}
+    assert (
+        REGISTERED["eval"]
+        == set(COMMANDS)
+        == {"aggregate", "errors", "discovery", "phonons", "elastic"}
+    )
     for name, needle in (
         ("errors", "--tiers"),
         ("discovery", "--baseline-run"),
