@@ -427,3 +427,18 @@ def test_parser_flags_a_diverged_scf(
     assert frame.info["max_negative_rho"] == pytest.approx(1330.0)
     ok = qe.parse_pw_output(Path("tests/fixtures/golden/pw.out"), golden_frame, dft=golden_cfg.dft)
     assert ok.converged and ok.info["max_negative_rho"] < qe.MAX_NEGATIVE_RHO
+
+
+def test_parser_rejects_a_run_killed_before_its_forces(
+    golden_frame: Frame, golden_cfg: Settings, tmp_path: Path
+) -> None:
+    """Tillicum 2026-09-21: a 64-atom unit converged its SCF and was killed by the walltime
+    before printing forces; that is not a usable label (converged=False, flagged)."""
+    text = Path("tests/fixtures/golden/pw.out").read_text(encoding="utf-8")
+    cut = text[: text.index("Forces acting on atoms")]
+    path = tmp_path / "pw.out"
+    path.write_text(cut, encoding="utf-8")
+    frame = qe.parse_pw_output(path, golden_frame, dft=golden_cfg.dft)
+    assert frame.converged is False and frame.forces is None
+    assert frame.info["killed_before_forces"] is True
+    assert frame.energy is not None  # the SCF energy is still reported, just not used

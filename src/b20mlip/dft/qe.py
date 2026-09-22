@@ -662,8 +662,13 @@ def parse_pw_text(text: str) -> dict[str, Any]:
     neg = [max(float(a), float(b)) for a, b in _RE_NEG_RHO.findall(text)]
     max_negative_rho = max(neg) if neg else 0.0
     diverged = max_negative_rho > MAX_NEGATIVE_RHO
+    # killed after the SCF converged but before the forces were printed (SLURM walltime hit in
+    # the force step, Tillicum 2026-09-21): the energy exists but the frame is not a usable label
+    killed_before_forces = bool(converged_m) and forces_ry is None and "JOB DONE" not in text
     return {
-        "converged": bool(converged_m) and not diverged,  # a diverged SCF is never "converged"
+        # a diverged SCF, or one killed before its forces, is never "converged"
+        "converged": bool(converged_m) and not diverged and not killed_before_forces,
+        "killed_before_forces": killed_before_forces,
         "diverged": diverged,
         "max_negative_rho": max_negative_rho,
         "scf_steps": scf_steps,
@@ -777,6 +782,8 @@ def parse_pw_output(
     info["max_negative_rho"] = parsed["max_negative_rho"]
     if parsed["diverged"]:
         info["diverged"] = True
+    if parsed["killed_before_forces"]:
+        info["killed_before_forces"] = True
     base.update(
         energy=parsed["energy_eV"],
         forces=forces,

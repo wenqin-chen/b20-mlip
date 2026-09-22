@@ -12,7 +12,7 @@ outputs back before ``dft collect``).
 from __future__ import annotations
 
 import json
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
@@ -198,12 +198,25 @@ def run(
     template: str = "qe_array",
     parallel: int = 1,
     resources: Mapping[str, Any] | None = None,
+    only: str | Sequence[str] | None = None,
 ) -> StageResult:
-    """Run the pending units under ``units`` (per-unit resume: ``.done`` units are skipped)."""
+    """Run the pending units under ``units`` (per-unit resume: ``.done`` units are skipped).
+
+    ``only`` (comma list or sequence of unit ids) restricts the run to those units, e.g. to
+    rerun two timed-out phonon displacements without resubmitting the rest of the root.
+    """
     root = Path(units)
     all_ids = qe.list_units(root)
     if not all_ids:
         raise FileNotFoundError(f"no planned units under {root} (run `dft prep` first)")
+    if only:
+        wanted = [u.strip() for u in only.split(",")] if isinstance(only, str) else list(only)
+        wanted = [u for u in wanted if u]
+        unknown = sorted(set(wanted) - set(all_ids))
+        if unknown:
+            raise ValueError(f"--only names units not planned under {root}: {unknown}")
+        all_ids = [u for u in all_ids if u in set(wanted)]
+        ctx.log(only=list(all_ids))
     pending = qe.pending_units(root, all_ids)
     if limit is not None:
         pending = pending[: max(0, int(limit))]

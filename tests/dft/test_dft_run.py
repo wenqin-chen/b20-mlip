@@ -359,3 +359,26 @@ def test_diverged_scf_with_huge_negative_rho_is_marked_failed(
     assert not (root / ids[0] / ".done").exists()
     coll = _run(cfg, "dft.collect", stages.collect, units=root, out=tmp_path / "l.extxyz")
     assert coll.summary["n_frames"] == 2  # the diverged unit is not collected
+
+
+def test_run_only_selected_units(
+    dft_settings: Settings,
+    three_frames: list[Frame],
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """`dft run --only a,b` runs just those units; unknown ids are an error."""
+    cfg = dft_settings
+    frames_path = tmp_path / "frames.extxyz"
+    write_frames(three_frames, frames_path)
+    root = cfg.paths.dft_dir / "r0"
+    calls = tmp_path / "calls.txt"
+    monkeypatch.setenv("FAKE_PW_CALLS", str(calls))
+    _run(cfg, "dft.prep", stages.prep, frames=frames_path, out=root)
+    ids = qe.list_units(root)
+    run = _run(cfg, "dft.run", stages.run, units=root, only=f"{ids[2]},{ids[0]}")
+    assert run.status == "ok" and run.summary["n_submitted"] == 2
+    assert sorted(calls.read_text().split()) == sorted([ids[0], ids[2]])
+    assert qe.unit_status(root / ids[1]) == "pending"
+    bad = _run(cfg, "dft.run", stages.run, units=root, only="nope")
+    assert bad.status == "failed" and "not planned" in bad.summary["error"]

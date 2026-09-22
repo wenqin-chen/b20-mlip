@@ -101,13 +101,17 @@ def register(group: typer.Typer) -> set[str]:
         parallel: Annotated[
             int, typer.Option("--parallel", help="Concurrent units (local executor).")
         ] = 1,
+        only: Annotated[
+            str | None,
+            typer.Option("--only", help="Comma list of unit ids to run (others skipped)."),
+        ] = None,
     ) -> None:
         """Run pending QE units (per-unit resume; SLURM array or local)."""
         from b20mlip.dft import stages
 
         _run(
             ctx, "dft.run", stages.run, units=units, limit=limit, wait=wait, template=template,
-            parallel=parallel,
+            parallel=parallel, only=only,
         )  # fmt: skip
 
     @group.command("collect")
