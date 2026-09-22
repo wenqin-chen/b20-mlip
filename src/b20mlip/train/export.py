@@ -50,7 +50,9 @@ def choose_head(model_path: str | Path, head: str | None = None) -> str:
 
 def to_lammps(model_path: str | Path, head: str | None = None, *, dtype: str = "float64") -> str:
     """Run ``mace_create_lammps_model`` and return the ``-lammps.pt`` path."""
-    model = Path(model_path)
+    # absolute: the export runs with cwd=model.parent (MACE writes <model>-lammps.pt next to the
+    # model), so a relative path would resolve twice (2026-09-22: every CLI export failed)
+    model = Path(model_path).resolve()
     if not model.is_file():
         raise FileNotFoundError(f"model not found: {model}")
     head = choose_head(model, head)

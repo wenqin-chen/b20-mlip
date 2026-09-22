@@ -89,3 +89,20 @@ def test_mace_loader_sees_our_keys_and_per_config_weights(tiny_b20_path: Path) -
         assert isinstance(c.properties["energy"], float)
         assert np.asarray(c.properties["forces"]).shape == (8, 3)
         assert np.asarray(c.properties["stress"]).size in (6, 9)
+
+
+def test_export_accepts_a_relative_model_path(
+    tiny_mace, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Regression (2026-09-22): `b20mlip export --model models/x.model` failed because the
+    export subprocess runs in the model's directory and the relative path resolved twice."""
+    import shutil
+
+    from b20mlip.train.export import to_lammps
+
+    work = tmp_path / "w"
+    (work / "models").mkdir(parents=True)
+    shutil.copy(tiny_mace.model_path, work / "models" / "tiny.model")
+    monkeypatch.chdir(work)
+    out = Path(to_lammps("models/tiny.model"))
+    assert out.is_file() and out.name == "tiny.model-lammps.pt"
