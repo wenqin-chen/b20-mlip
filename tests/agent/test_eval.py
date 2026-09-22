@@ -234,7 +234,8 @@ def test_screen_then_eval_with_mock_and_scripted(
         summary["n_tasks"] == 3 and summary["accuracy"] == 1.0 and summary["provenance_rate"] == 1.0
     )
     assert summary["dag_valid_rate"] == 1.0 and summary["recovery_rate"] == 1.0
-    assert summary["invalid_call_rate"] == pytest.approx(1 / 9) and summary["tokens_in"] > 0
+    # the tool-error task's failed relax is the injected failure, not an invalid call
+    assert summary["invalid_call_rate"] == 0.0 and summary["tokens_in"] > 0
     run_dir = Path(res.manifest_path).parent
     payload = json.loads((run_dir / eval_mod.EVAL_FILE).read_text())
     assert [s["task_id"] for s in payload["scores"]] == chosen and payload["backend"] == "mock"

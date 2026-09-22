@@ -138,6 +138,11 @@ def test_evaluate_select_dft_and_md(tool_context: ToolContext) -> None:
         e = invoke("evaluate_errors", model="", frames="labelled_r0", split="", tier="T0")
         assert "error" not in e and e["mae_f"] > 0 and e["n_frames"] == 15 and e["run_id"]
         assert "mae_f_ci95_lo" in e and e["tier"] == "T0" and e["model"] == "tiny_b20"
+        # the documented explicit labels ("primary", "none") mean the same as the empty strings
+        explicit = invoke(
+            "evaluate_errors", model="primary", frames="labelled_r0", split="none", tier="T0"
+        )
+        assert explicit["mae_f"] == e["mae_f"] and explicit["n_frames"] == e["n_frames"]
         run_dir = find_run_dir(tool_context.runs_dir, e["run_id"])
         assert run_dir is not None
         names = {Path(a.path).name for a in read_manifest(run_dir).outputs}
@@ -278,7 +283,8 @@ def test_context_helpers(tool_context: ToolContext, tmp_path: Path) -> None:
     ]
     with pytest.raises(KeyError):
         tc.resolve_frames("nope")
-    assert tc.split_files() == {} and tc.reference_path("FeSi", "qe").name == "phonons_FeSi_qe.json"
+    assert set(tc.split_files()) == {"v2"}
+    assert tc.reference_path("FeSi", "qe").name == "phonons_FeSi_qe.json"
     with pytest.raises(KeyError):
         tc.resolve_split("nope")
     assert tc.frame_elements("unknown") is None and tc.frame_natoms("unknown") is None

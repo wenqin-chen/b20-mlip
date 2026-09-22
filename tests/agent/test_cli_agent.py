@@ -115,8 +115,8 @@ def test_run_task_from_file_with_budget_json(overlay: Path, tiny_mace: Any) -> N
     summary = _payload(result.output)["summary"]
     assert summary["task_id"] == "t11-inventory-relax-report-MnSi-budget"
     assert (
-        summary["violations"] == 1 and summary["invalid_calls"] == 1
-    )  # the injected budget still bites
+        summary["violations"] == 1 and summary["invalid_calls"] == 0
+    )  # the injected budget still bites (a violation), but is not the agent's invalid call
     result = runner.invoke(
         app,
         [

@@ -14,7 +14,8 @@ import pytest
 from b20mlip.agent import tasks as tasks_mod
 from b20mlip.agent.tools import ToolContext, write_phonon_reference
 from b20mlip.config import Settings
-from b20mlip.io import write_frames
+from b20mlip.data.split import POLICY_V2, group_split, write_split
+from b20mlip.io import read_frames, write_frames
 from b20mlip.models import Frame
 
 REPO = Path(__file__).resolve().parents[2]
@@ -60,6 +61,21 @@ def populate(root: Path, tiny_frames: list[Frame], model_path: Path) -> None:
     )
     qe = [f.model_copy(update={"energy_scale": "qe", "label_source": "qe"}) for f in tiny_frames]
     write_frames(qe, frames_dir / "labelled_r0.extxyz")
+    # the task file's t04/t05 evaluate tier T0 of split "v2" on labelled_r0plus: every group in
+    # the test bucket so that T0 is never empty on the tiny fixture
+    write_frames(qe, frames_dir / "labelled_r0plus.extxyz")
+    splits_dir = root / "data" / "splits"
+    splits_dir.mkdir(parents=True, exist_ok=True)
+    if not (splits_dir / "v2.json").is_file():
+        split = group_split(
+            read_frames(frames_dir / "labelled_r0plus.extxyz"),
+            0,
+            (0.0, 0.0, 1.0),
+            (),
+            1e9,
+            policy=POLICY_V2,
+        )
+        write_split(split, splits_dir / "v2.json")
     write_frames(tiny_frames, frames_dir / "candidates_r0_filtered.extxyz")
     models_dir = root / "models"
     models_dir.mkdir(parents=True, exist_ok=True)

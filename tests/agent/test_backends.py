@@ -210,7 +210,7 @@ def test_mock_replays_fixture_traces(
     for ref in report.numbers:
         assert ref.run_id in {e["run_id"] for e in fresh if e["kind"] == "result"}
     if task_id.endswith("tool-error"):
-        assert report.invalid_calls == 1 and report.answer["a_A"] == pytest.approx(4.48, abs=0.05)
+        assert report.invalid_calls == 0 and report.answer["a_A"] == pytest.approx(4.48, abs=0.05)
 
 
 def test_mock_with_stored_results_computes_nothing(

@@ -602,7 +602,11 @@ def build_plan(kind: str, params: Mapping[str, Any], tc: Any) -> list[Step]:
             given = p.get("models")
             if given:
                 return [str(m) for m in given]
-            listed = (s.get("models") or {}).get("models") or []
+            inventory = s.get("models") or {}
+            committee = inventory.get("committee") or []
+            if len(committee) >= 2:  # the configured committee, never the primary model
+                return [str(m) for m in committee][:3]
+            listed = inventory.get("models") or []
             return [str(m) for m in listed][:3]
 
         return [

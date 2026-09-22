@@ -6,7 +6,9 @@ ToolContext`, wraps every tool call in the :class:`~b20mlip.agent.guard.Guard` a
 and scores the run's structure:
 
 * ``tool_calls`` — every attempted call (blocked ones included);
-* ``invalid_calls`` — guard violations plus tool errors (``{"error": ...}`` results);
+* ``invalid_calls`` — guard violations plus tool errors (``{"error": ...}`` results), except the
+  call that received the task's injected failure (the agent cannot foresee it; ``recovery``
+  scores the response to it);
 * ``dag_valid`` — the executed calls respect the tool DAG: ``get_structure``/``list_data``
   before ``relax``/``phonons``/``run_md``; ``compare_phonons`` after the ``phonons`` run it
   cites; ``select_frames`` after ``evaluate_errors``; ``write_report`` last;
@@ -102,7 +104,7 @@ class CallRecord:
 
     @property
     def invalid(self) -> bool:
-        return self.blocked or self.error
+        return (self.blocked or self.error) and self.injected is None
 
 
 class Injection:
@@ -222,6 +224,14 @@ class Dispatcher:
             record.blocked = True
             record.violation = str(exc)
             record.result = {"error": str(exc), "rule": exc.rule}
+            if (
+                self.injection.kind == "budget_exhausted"
+                and exc.rule == "max_calls"
+                and not any(c.injected for c in self.calls)
+            ):
+                # the injected cap is not the budget the agent was told: its first hit is the
+                # injection firing, later hits are the agent ignoring the error
+                record.injected = self.injection.kind
             self.trace.violation(call, str(exc))
             record.wall_s = time.perf_counter() - t0
             self.calls.append(record)

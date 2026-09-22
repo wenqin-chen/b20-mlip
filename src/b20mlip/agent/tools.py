@@ -582,6 +582,8 @@ def _list_data(kind: str) -> dict[str, Any]:
         if kind in ("models", "all"):
             info["models"] = sorted(tc.models())
             info["primary_model"] = tc.model_label() if tc.model is not None else ""
+            # the uncertainty committee (``--committee``), by the labels ``models`` lists
+            info["committee"] = [sanitize_key_segment(c.stem) for c in tc.committee if c.is_file()]
         if kind in ("splits", "all"):
             info["splits"] = sorted(tc.split_files())
         if kind in ("references", "all"):
@@ -773,7 +775,9 @@ def _evaluate_errors(model: str, frames: str, split: str, tier: str) -> dict[str
     tc = current()
     model_path = tc.resolve_model(model)
     frames_path = tc.resolve_frames(frames) if frames else None
-    split_path = tc.resolve_split(split) if split else None
+    # "" stays accepted, but the schema documents explicit labels: empty-string arguments made
+    # the live model garble the call (tool-call markup inside the value, eval 2026-09-22)
+    split_path = tc.resolve_split(split) if split and split.lower() != "none" else None
     if frames_path is None and split_path is None:
         raise ValueError("evaluate_errors needs a dataset label (frames) and/or a split label")
     prov = model_provenance(model_path)
@@ -1034,7 +1038,8 @@ def list_data(kind: DataKind) -> str:
     """List what is available: compounds, datasets, models, splits and phonon references.
 
     Call this before evaluate_errors / select_frames / submit_dft to learn the labels those tools
-    take (labels, never paths). Returns the labels and their counts.
+    take (labels, never paths). Returns the labels and their counts; "models" also names the
+    primary model and the uncertainty committee.
 
     Args:
         kind: "compounds" | "datasets" | "models" | "splits" | "references" | "all".
@@ -1125,11 +1130,10 @@ def evaluate_errors(model: str, frames: str, split: str, tier: TierName) -> str:
     when the energy scales match, n_frames and the run_id.
 
     Args:
-        model: model label from list_data("models"); "" = the primary model.
-        frames: dataset label from list_data("datasets") holding labelled frames ("" only with
-            a split).
-        split: split label from list_data("splits") selecting the tier's frames; "" = evaluate
-            the whole dataset as `tier`.
+        model: model label from list_data("models"); "primary" = the primary model.
+        frames: dataset label from list_data("datasets") holding labelled frames.
+        split: split label from list_data("splits") selecting the tier's frames; "none" =
+            evaluate the whole dataset as `tier`.
         tier: evaluation tier T0 | T1 | T2 | T3 | T4a | T4b.
     """
     return _safe(_evaluate_errors, model=model, frames=frames, split=split, tier=tier)

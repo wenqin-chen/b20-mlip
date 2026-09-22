@@ -131,6 +131,31 @@ def test_dispatcher_blocks_unknown_tools_and_feeds_violations_back(
     assert json.loads(events[-1]["text"])["answer"] == report.answer
 
 
+def test_injected_budget_counts_only_calls_after_the_first_block_as_invalid(
+    agent_settings: Settings, tool_kwargs: dict[str, Any]
+) -> None:
+    task = AgentTask(
+        task_id="naive-budget",
+        prompt="x",
+        tools_allowed=["get_structure", "relax"],
+        injected_failure="budget_exhausted",
+    )
+    backend = NaiveBackend(
+        [("get_structure", {"compound": "FeSi"}),
+         ("relax", {"compound": "FeSi", "frame_id": "$frame", "fmax": 0.0, "steps": 0}),
+         ("get_structure", {"compound": "CoSi"}),
+         ("get_structure", {"compound": "MnSi"}),   # 4th call: the injected cap fires
+         ("get_structure", {"compound": "FeGe"})],  # 5th: the agent ignored the budget error
+        answer_key="a_A",
+    )  # fmt: skip
+    ctx = RunContext("agent.run", agent_settings, seed=0, runs_dir=agent_settings.paths.runs_dir)
+    report = runner.run(task, backend, agent_settings, ctx, **tool_kwargs)
+    calls = json.loads((ctx.out_dir / runner.REPORT_FILE).read_text())["diagnostics"]["calls"]
+    assert [c["blocked"] for c in calls] == [False, False, False, True, True]
+    assert calls[3]["injected"] == "budget_exhausted" and calls[4]["injected"] is None
+    assert report.tool_calls == 5 and report.invalid_calls == 1 and len(report.violations) == 2
+
+
 def test_unknown_tools_allowed_is_rejected(
     agent_settings: Settings, tool_kwargs: dict[str, Any]
 ) -> None:
@@ -219,7 +244,8 @@ def test_injected_failures_and_recovery(
     assert s["recovery"] is True and s["correct"] is True and s["accuracy"] == 1.0
     calls = diagnostics["calls"]
     if failure == "tool_error":
-        assert report.invalid_calls == 1 and [c["name"] for c in calls] == [
+        # the injected error is not the agent's invalid call; recovery scores the retry
+        assert report.invalid_calls == 0 and [c["name"] for c in calls] == [
             "get_structure",
             "relax",
             "relax",
@@ -231,7 +257,8 @@ def test_injected_failures_and_recovery(
     elif failure == "budget_exhausted":
         assert diagnostics["effective_budget"]["max_calls"] == 3
         assert [c["name"] for c in calls] == ["list_data", "get_structure", "relax", "write_report"]
-        assert calls[3]["blocked"] and report.invalid_calls == 1 and len(report.violations) == 1
+        assert calls[3]["blocked"] and calls[3]["injected"] == "budget_exhausted"
+        assert report.invalid_calls == 0 and len(report.violations) == 1
         assert "max_calls" in report.violations[0] and "n_models" in report.answer
     elif failure == "sum_rule":
         assert [c["name"] for c in calls] == ["get_structure", "phonons", "phonons"]
