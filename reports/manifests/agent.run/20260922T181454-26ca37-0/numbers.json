@@ -1,0 +1,178 @@
+{
+  "agent.run.t02-relax-a0-MnSi.cost_usd": 0.068655,
+  "agent.run.t02-relax-a0-MnSi.cost_usd@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t02-relax-a0-MnSi",
+    "trace_path": "runs/agent.run/20260922T181454-26ca37-0/trace.jsonl",
+    "unit": "USD"
+  },
+  "agent.run.t02-relax-a0-MnSi.dag_valid": 1,
+  "agent.run.t02-relax-a0-MnSi.dag_valid@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t02-relax-a0-MnSi",
+    "trace_path": "runs/agent.run/20260922T181454-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t02-relax-a0-MnSi.grounded": 1,
+  "agent.run.t02-relax-a0-MnSi.grounded@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t02-relax-a0-MnSi",
+    "trace_path": "runs/agent.run/20260922T181454-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t02-relax-a0-MnSi.invalid_calls": 0,
+  "agent.run.t02-relax-a0-MnSi.invalid_calls@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t02-relax-a0-MnSi",
+    "trace_path": "runs/agent.run/20260922T181454-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t02-relax-a0-MnSi.tokens_in": 10456,
+  "agent.run.t02-relax-a0-MnSi.tokens_in@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t02-relax-a0-MnSi",
+    "trace_path": "runs/agent.run/20260922T181454-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t02-relax-a0-MnSi.tokens_out": 655,
+  "agent.run.t02-relax-a0-MnSi.tokens_out@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t02-relax-a0-MnSi",
+    "trace_path": "runs/agent.run/20260922T181454-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t02-relax-a0-MnSi.tool_calls": 2,
+  "agent.run.t02-relax-a0-MnSi.tool_calls@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t02-relax-a0-MnSi",
+    "trace_path": "runs/agent.run/20260922T181454-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t02-relax-a0-MnSi.wall_s": 10.308718624990433,
+  "agent.run.t02-relax-a0-MnSi.wall_s@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t02-relax-a0-MnSi",
+    "trace_path": "runs/agent.run/20260922T181454-26ca37-0/trace.jsonl",
+    "unit": "s"
+  }
+}

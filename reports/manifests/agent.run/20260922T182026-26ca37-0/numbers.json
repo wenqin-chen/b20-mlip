@@ -1,0 +1,178 @@
+{
+  "agent.run.t10-relax-a0-CoSi-bad-structure.cost_usd": 0.09057499999999999,
+  "agent.run.t10-relax-a0-CoSi-bad-structure.cost_usd@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": "bad_structure",
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t10-relax-a0-CoSi-bad-structure",
+    "trace_path": "runs/agent.run/20260922T182026-26ca37-0/trace.jsonl",
+    "unit": "USD"
+  },
+  "agent.run.t10-relax-a0-CoSi-bad-structure.dag_valid": 1,
+  "agent.run.t10-relax-a0-CoSi-bad-structure.dag_valid@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": "bad_structure",
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t10-relax-a0-CoSi-bad-structure",
+    "trace_path": "runs/agent.run/20260922T182026-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t10-relax-a0-CoSi-bad-structure.grounded": 1,
+  "agent.run.t10-relax-a0-CoSi-bad-structure.grounded@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": "bad_structure",
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t10-relax-a0-CoSi-bad-structure",
+    "trace_path": "runs/agent.run/20260922T182026-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t10-relax-a0-CoSi-bad-structure.invalid_calls": 0,
+  "agent.run.t10-relax-a0-CoSi-bad-structure.invalid_calls@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": "bad_structure",
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t10-relax-a0-CoSi-bad-structure",
+    "trace_path": "runs/agent.run/20260922T182026-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t10-relax-a0-CoSi-bad-structure.tokens_in": 14425,
+  "agent.run.t10-relax-a0-CoSi-bad-structure.tokens_in@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": "bad_structure",
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t10-relax-a0-CoSi-bad-structure",
+    "trace_path": "runs/agent.run/20260922T182026-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t10-relax-a0-CoSi-bad-structure.tokens_out": 738,
+  "agent.run.t10-relax-a0-CoSi-bad-structure.tokens_out@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": "bad_structure",
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t10-relax-a0-CoSi-bad-structure",
+    "trace_path": "runs/agent.run/20260922T182026-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t10-relax-a0-CoSi-bad-structure.tool_calls": 3,
+  "agent.run.t10-relax-a0-CoSi-bad-structure.tool_calls@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": "bad_structure",
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t10-relax-a0-CoSi-bad-structure",
+    "trace_path": "runs/agent.run/20260922T182026-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t10-relax-a0-CoSi-bad-structure.wall_s": 15.141134917037562,
+  "agent.run.t10-relax-a0-CoSi-bad-structure.wall_s@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": "bad_structure",
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t10-relax-a0-CoSi-bad-structure",
+    "trace_path": "runs/agent.run/20260922T182026-26ca37-0/trace.jsonl",
+    "unit": "s"
+  }
+}

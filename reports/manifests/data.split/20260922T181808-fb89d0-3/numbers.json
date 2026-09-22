@@ -1,0 +1,23 @@
+{
+  "data.n_qe_frames": 457,
+  "data.n_qe_frames@meta": {
+    "frames": "data/frames/labelled_r0plus.extxyz",
+    "policy": "group_hash_v2",
+    "split_id": "006f595381e8",
+    "unit": "count"
+  },
+  "data.n_train_frames": 193,
+  "data.n_train_frames@meta": {
+    "frames": "data/frames/labelled_r0plus.extxyz",
+    "policy": "group_hash_v2",
+    "split_id": "006f595381e8",
+    "unit": "count"
+  },
+  "data.n_val_frames": 28,
+  "data.n_val_frames@meta": {
+    "frames": "data/frames/labelled_r0plus.extxyz",
+    "policy": "group_hash_v2",
+    "split_id": "006f595381e8",
+    "unit": "count"
+  }
+}

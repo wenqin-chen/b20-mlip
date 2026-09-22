@@ -1,0 +1,184 @@
+{
+  "agent.eval.accuracy": 1.0,
+  "agent.eval.accuracy@meta": {
+    "backend": "anthropic",
+    "bootstrap_n": 2000,
+    "ci95": [
+      1.0,
+      1.0
+    ],
+    "e0_source": "foundation",
+    "head": "Default",
+    "model_id": "claude-opus-5",
+    "n": 12,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "trace_path": "runs/agent.eval/20260922T181438-26ca37-0/traces.jsonl",
+    "unit": "fraction"
+  },
+  "agent.eval.dag_valid_rate": 1.0,
+  "agent.eval.dag_valid_rate@meta": {
+    "backend": "anthropic",
+    "bootstrap_n": 2000,
+    "ci95": [
+      1.0,
+      1.0
+    ],
+    "e0_source": "foundation",
+    "head": "Default",
+    "model_id": "claude-opus-5",
+    "n": 12,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "trace_path": "runs/agent.eval/20260922T181438-26ca37-0/traces.jsonl",
+    "unit": "fraction"
+  },
+  "agent.eval.invalid_call_rate": 0.027777777777777776,
+  "agent.eval.invalid_call_rate@meta": {
+    "backend": "anthropic",
+    "bootstrap_n": 2000,
+    "ci95": [
+      0.0,
+      0.08333333333333333
+    ],
+    "e0_source": "foundation",
+    "head": "Default",
+    "model_id": "claude-opus-5",
+    "n": 12,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "trace_path": "runs/agent.eval/20260922T181438-26ca37-0/traces.jsonl",
+    "unit": "fraction"
+  },
+  "agent.eval.n_tasks": 12,
+  "agent.eval.n_tasks@meta": {
+    "backend": "anthropic",
+    "bootstrap_n": 2000,
+    "ci95": null,
+    "ci95_reason": "a count",
+    "e0_source": "foundation",
+    "head": "Default",
+    "model_id": "claude-opus-5",
+    "n": 12,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "trace_path": "runs/agent.eval/20260922T181438-26ca37-0/traces.jsonl",
+    "unit": "count"
+  },
+  "agent.eval.provenance_rate": 0.9166666666666666,
+  "agent.eval.provenance_rate@meta": {
+    "backend": "anthropic",
+    "bootstrap_n": 2000,
+    "ci95": [
+      0.75,
+      1.0
+    ],
+    "e0_source": "foundation",
+    "head": "Default",
+    "model_id": "claude-opus-5",
+    "n": 12,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "trace_path": "runs/agent.eval/20260922T181438-26ca37-0/traces.jsonl",
+    "unit": "fraction"
+  },
+  "agent.eval.recovery_rate": 1.0,
+  "agent.eval.recovery_rate@meta": {
+    "backend": "anthropic",
+    "bootstrap_n": 2000,
+    "ci95": [
+      1.0,
+      1.0
+    ],
+    "e0_source": "foundation",
+    "head": "Default",
+    "model_id": "claude-opus-5",
+    "n": 4,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "trace_path": "runs/agent.eval/20260922T181438-26ca37-0/traces.jsonl",
+    "unit": "fraction"
+  },
+  "agent.eval.tokens_per_task": 13769.833333333334,
+  "agent.eval.tokens_per_task@meta": {
+    "backend": "anthropic",
+    "bootstrap_n": 2000,
+    "ci95": [
+      11937.11875,
+      15666.629166666666
+    ],
+    "e0_source": "foundation",
+    "head": "Default",
+    "model_id": "claude-opus-5",
+    "n": 12,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "trace_path": "runs/agent.eval/20260922T181438-26ca37-0/traces.jsonl",
+    "unit": "tokens"
+  },
+  "agent.eval.usd_per_task": 0.08600916666666665,
+  "agent.eval.usd_per_task@meta": {
+    "backend": "anthropic",
+    "bootstrap_n": 2000,
+    "ci95": [
+      0.07410307291666667,
+      0.09874062499999998
+    ],
+    "e0_source": "foundation",
+    "head": "Default",
+    "model_id": "claude-opus-5",
+    "n": 12,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "trace_path": "runs/agent.eval/20260922T181438-26ca37-0/traces.jsonl",
+    "unit": "USD"
+  }
+}

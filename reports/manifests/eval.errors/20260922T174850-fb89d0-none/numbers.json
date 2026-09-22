@@ -1,0 +1,947 @@
+{
+  "eval.errors.T0.B1.mae_e": 6.720929296697875,
+  "eval.errors.T0.B1.mae_e@meta": {
+    "aggregate": "mean_over_seeds",
+    "bootstrap_n": 2000,
+    "bracket": "B1",
+    "ci95": [
+      6.547749431867089,
+      7.002629207690347
+    ],
+    "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+    "e0_source": "E0s_qe.json",
+    "energy_scale": "qe",
+    "head": "Default",
+    "model_label": "B1",
+    "model_sha256": "3378fab21542a9be93d02ebf53be95c74ceccb887901077c588e6eb3d1a9a2af",
+    "n": 32,
+    "n_atoms": 256,
+    "n_frames": 32,
+    "n_models": 3,
+    "n_seeds": 3,
+    "per_seed": [
+      {
+        "ci95": [
+          4.295294392994203,
+          8.60477252161155
+        ],
+        "run_id": "20260922T174047-fb89d0-none",
+        "seed": 0,
+        "value": 7.002629207690347
+      },
+      {
+        "ci95": [
+          3.8156834127469414,
+          8.172044370619341
+        ],
+        "run_id": "20260922T174127-fb89d0-none",
+        "seed": 0,
+        "value": 6.612409250536189
+      },
+      {
+        "ci95": [
+          4.053439657272148,
+          7.854292647131106
+        ],
+        "run_id": "20260922T174203-fb89d0-none",
+        "seed": 0,
+        "value": 6.547749431867089
+      }
+    ],
+    "reference": {
+      "code": "qe",
+      "cross_functional": false,
+      "e0_source": "E0s_qe.json",
+      "functional": "PBE",
+      "pseudos": "SSSP-efficiency-1.3"
+    },
+    "seed": 0,
+    "split_id": "006f595381e8",
+    "tier": "T0",
+    "train_seed": 0,
+    "train_seeds": "0,1,2",
+    "unit": "meV/atom"
+  },
+  "eval.errors.T0.B1.mae_f": 6.105692126925455,
+  "eval.errors.T0.B1.mae_f@meta": {
+    "aggregate": "mean_over_seeds",
+    "bootstrap_n": 2000,
+    "bracket": "B1",
+    "ci95": [
+      6.059057058484164,
+      6.155740027795363
+    ],
+    "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+    "e0_source": "E0s_qe.json",
+    "energy_scale": "qe",
+    "head": "Default",
+    "model_label": "B1",
+    "model_sha256": "3378fab21542a9be93d02ebf53be95c74ceccb887901077c588e6eb3d1a9a2af",
+    "n": 32,
+    "n_atoms": 256,
+    "n_frames": 32,
+    "n_models": 3,
+    "n_seeds": 3,
+    "per_seed": [
+      {
+        "ci95": [
+          2.2065215196339505,
+          13.521899993735893
+        ],
+        "run_id": "20260922T174047-fb89d0-none",
+        "seed": 0,
+        "value": 6.102279294496839
+      },
+      {
+        "ci95": [
+          2.270042723261104,
+          13.573889427360761
+        ],
+        "run_id": "20260922T174127-fb89d0-none",
+        "seed": 0,
+        "value": 6.155740027795363
+      },
+      {
+        "ci95": [
+          2.0779324019218466,
+          12.92332584679731
+        ],
+        "run_id": "20260922T174203-fb89d0-none",
+        "seed": 0,
+        "value": 6.059057058484164
+      }
+    ],
+    "reference": {
+      "code": "qe",
+      "cross_functional": false,
+      "e0_source": "E0s_qe.json",
+      "functional": "PBE",
+      "pseudos": "SSSP-efficiency-1.3"
+    },
+    "seed": 0,
+    "split_id": "006f595381e8",
+    "tier": "T0",
+    "train_seed": 0,
+    "train_seeds": "0,1,2",
+    "unit": "meV/\u00c5"
+  },
+  "eval.errors.T0.B1.mae_s": 8.442647429696018,
+  "eval.errors.T0.B1.mae_s@meta": {
+    "aggregate": "mean_over_seeds",
+    "bootstrap_n": 2000,
+    "bracket": "B1",
+    "ci95": [
+      7.600261125754419,
+      9.300337218120044
+    ],
+    "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+    "e0_source": "E0s_qe.json",
+    "energy_scale": "qe",
+    "head": "Default",
+    "model_label": "B1",
+    "model_sha256": "3378fab21542a9be93d02ebf53be95c74ceccb887901077c588e6eb3d1a9a2af",
+    "n": 32,
+    "n_atoms": 256,
+    "n_frames": 32,
+    "n_models": 3,
+    "n_seeds": 3,
+    "per_seed": [
+      {
+        "ci95": [
+          5.846411585355385,
+          11.193449032712172
+        ],
+        "run_id": "20260922T174047-fb89d0-none",
+        "seed": 0,
+        "value": 9.300337218120044
+      },
+      {
+        "ci95": [
+          4.846213835416509,
+          9.151004441063312
+        ],
+        "run_id": "20260922T174127-fb89d0-none",
+        "seed": 0,
+        "value": 7.600261125754419
+      },
+      {
+        "ci95": [
+          5.525577484597099,
+          10.052126466656828
+        ],
+        "run_id": "20260922T174203-fb89d0-none",
+        "seed": 0,
+        "value": 8.427343945213593
+      }
+    ],
+    "reference": {
+      "code": "qe",
+      "cross_functional": false,
+      "e0_source": "E0s_qe.json",
+      "functional": "PBE",
+      "pseudos": "SSSP-efficiency-1.3"
+    },
+    "seed": 0,
+    "split_id": "006f595381e8",
+    "tier": "T0",
+    "train_seed": 0,
+    "train_seeds": "0,1,2",
+    "unit": "meV/\u00c5^3"
+  },
+  "eval.errors.T0.B1.rmse_e": 11.657358987864212,
+  "eval.errors.T0.B1.rmse_e@meta": {
+    "aggregate": "mean_over_seeds",
+    "bootstrap_n": 2000,
+    "bracket": "B1",
+    "ci95": [
+      10.77457381901923,
+      12.673952076498534
+    ],
+    "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+    "e0_source": "E0s_qe.json",
+    "energy_scale": "qe",
+    "head": "Default",
+    "model_label": "B1",
+    "model_sha256": "3378fab21542a9be93d02ebf53be95c74ceccb887901077c588e6eb3d1a9a2af",
+    "n": 32,
+    "n_atoms": 256,
+    "n_frames": 32,
+    "n_models": 3,
+    "n_seeds": 3,
+    "per_seed": [
+      {
+        "ci95": [
+          5.54183882395845,
+          16.450170929323093
+        ],
+        "run_id": "20260922T174047-fb89d0-none",
+        "seed": 0,
+        "value": 12.673952076498534
+      },
+      {
+        "ci95": [
+          4.847968924201054,
+          14.055806243817425
+        ],
+        "run_id": "20260922T174127-fb89d0-none",
+        "seed": 0,
+        "value": 10.77457381901923
+      },
+      {
+        "ci95": [
+          5.4051113083777445,
+          14.93686899956325
+        ],
+        "run_id": "20260922T174203-fb89d0-none",
+        "seed": 0,
+        "value": 11.523551068074875
+      }
+    ],
+    "reference": {
+      "code": "qe",
+      "cross_functional": false,
+      "e0_source": "E0s_qe.json",
+      "functional": "PBE",
+      "pseudos": "SSSP-efficiency-1.3"
+    },
+    "seed": 0,
+    "split_id": "006f595381e8",
+    "tier": "T0",
+    "train_seed": 0,
+    "train_seeds": "0,1,2",
+    "unit": "meV/atom"
+  },
+  "eval.errors.T0.B1.rmse_f": 11.539889929829469,
+  "eval.errors.T0.B1.rmse_f@meta": {
+    "aggregate": "mean_over_seeds",
+    "bootstrap_n": 2000,
+    "bracket": "B1",
+    "ci95": [
+      11.47144114584953,
+      11.621928217487318
+    ],
+    "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+    "e0_source": "E0s_qe.json",
+    "energy_scale": "qe",
+    "head": "Default",
+    "model_label": "B1",
+    "model_sha256": "3378fab21542a9be93d02ebf53be95c74ceccb887901077c588e6eb3d1a9a2af",
+    "n": 32,
+    "n_atoms": 256,
+    "n_frames": 32,
+    "n_models": 3,
+    "n_seeds": 3,
+    "per_seed": [
+      {
+        "ci95": [
+          3.6662291243866827,
+          18.995485809677685
+        ],
+        "run_id": "20260922T174047-fb89d0-none",
+        "seed": 0,
+        "value": 11.52630042615156
+      },
+      {
+        "ci95": [
+          3.994536161264225,
+          19.038554647540142
+        ],
+        "run_id": "20260922T174127-fb89d0-none",
+        "seed": 0,
+        "value": 11.621928217487318
+      },
+      {
+        "ci95": [
+          4.596805220521698,
+          18.167625092574987
+        ],
+        "run_id": "20260922T174203-fb89d0-none",
+        "seed": 0,
+        "value": 11.47144114584953
+      }
+    ],
+    "reference": {
+      "code": "qe",
+      "cross_functional": false,
+      "e0_source": "E0s_qe.json",
+      "functional": "PBE",
+      "pseudos": "SSSP-efficiency-1.3"
+    },
+    "seed": 0,
+    "split_id": "006f595381e8",
+    "tier": "T0",
+    "train_seed": 0,
+    "train_seeds": "0,1,2",
+    "unit": "meV/\u00c5"
+  },
+  "eval.errors.T1.B1.mae_e": 20.212282969629815,
+  "eval.errors.T1.B1.mae_e@meta": {
+    "aggregate": "mean_over_seeds",
+    "bootstrap_n": 2000,
+    "bracket": "B1",
+    "ci95": [
+      19.877177409676843,
+      20.726010877844637
+    ],
+    "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+    "e0_source": "E0s_qe.json",
+    "energy_scale": "qe",
+    "head": "Default",
+    "model_label": "B1",
+    "model_sha256": "3378fab21542a9be93d02ebf53be95c74ceccb887901077c588e6eb3d1a9a2af",
+    "n": 49,
+    "n_atoms": 392,
+    "n_frames": 49,
+    "n_models": 3,
+    "n_seeds": 3,
+    "per_seed": [
+      {
+        "ci95": [
+          0.8282380243664582,
+          41.652244103415796
+        ],
+        "run_id": "20260922T174047-fb89d0-none",
+        "seed": 0,
+        "value": 20.033660621367964
+      },
+      {
+        "ci95": [
+          1.6422318063954815,
+          42.30857503524021
+        ],
+        "run_id": "20260922T174127-fb89d0-none",
+        "seed": 0,
+        "value": 20.726010877844637
+      },
+      {
+        "ci95": [
+          1.0629165241319223,
+          40.97009898806391
+        ],
+        "run_id": "20260922T174203-fb89d0-none",
+        "seed": 0,
+        "value": 19.877177409676843
+      }
+    ],
+    "reference": {
+      "code": "qe",
+      "cross_functional": false,
+      "e0_source": "E0s_qe.json",
+      "functional": "PBE",
+      "pseudos": "SSSP-efficiency-1.3"
+    },
+    "seed": 0,
+    "split_id": "006f595381e8",
+    "tier": "T1",
+    "train_seed": 0,
+    "train_seeds": "0,1,2",
+    "unit": "meV/atom"
+  },
+  "eval.errors.T1.B1.mae_f": 65.39545252596814,
+  "eval.errors.T1.B1.mae_f@meta": {
+    "aggregate": "mean_over_seeds",
+    "bootstrap_n": 2000,
+    "bracket": "B1",
+    "ci95": [
+      63.5711746683228,
+      66.91999930608536
+    ],
+    "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+    "e0_source": "E0s_qe.json",
+    "energy_scale": "qe",
+    "head": "Default",
+    "model_label": "B1",
+    "model_sha256": "3378fab21542a9be93d02ebf53be95c74ceccb887901077c588e6eb3d1a9a2af",
+    "n": 49,
+    "n_atoms": 392,
+    "n_frames": 49,
+    "n_models": 3,
+    "n_seeds": 3,
+    "per_seed": [
+      {
+        "ci95": [
+          20.95416903408379,
+          113.52578491024029
+        ],
+        "run_id": "20260922T174047-fb89d0-none",
+        "seed": 0,
+        "value": 65.69518360349623
+      },
+      {
+        "ci95": [
+          21.084021600274806,
+          115.96241555122664
+        ],
+        "run_id": "20260922T174127-fb89d0-none",
+        "seed": 0,
+        "value": 66.91999930608536
+      },
+      {
+        "ci95": [
+          20.74003118671746,
+          109.61750268442917
+        ],
+        "run_id": "20260922T174203-fb89d0-none",
+        "seed": 0,
+        "value": 63.5711746683228
+      }
+    ],
+    "reference": {
+      "code": "qe",
+      "cross_functional": false,
+      "e0_source": "E0s_qe.json",
+      "functional": "PBE",
+      "pseudos": "SSSP-efficiency-1.3"
+    },
+    "seed": 0,
+    "split_id": "006f595381e8",
+    "tier": "T1",
+    "train_seed": 0,
+    "train_seeds": "0,1,2",
+    "unit": "meV/\u00c5"
+  },
+  "eval.errors.T1.B1.mae_s": 9.997228084242723,
+  "eval.errors.T1.B1.mae_s@meta": {
+    "aggregate": "mean_over_seeds",
+    "bootstrap_n": 2000,
+    "bracket": "B1",
+    "ci95": [
+      9.616658722080203,
+      10.489024032649473
+    ],
+    "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+    "e0_source": "E0s_qe.json",
+    "energy_scale": "qe",
+    "head": "Default",
+    "model_label": "B1",
+    "model_sha256": "3378fab21542a9be93d02ebf53be95c74ceccb887901077c588e6eb3d1a9a2af",
+    "n": 49,
+    "n_atoms": 392,
+    "n_frames": 49,
+    "n_models": 3,
+    "n_seeds": 3,
+    "per_seed": [
+      {
+        "ci95": [
+          6.01491915121271,
+          13.937266685278319
+        ],
+        "run_id": "20260922T174047-fb89d0-none",
+        "seed": 0,
+        "value": 10.489024032649473
+      },
+      {
+        "ci95": [
+          5.813114995926794,
+          13.389662253075297
+        ],
+        "run_id": "20260922T174127-fb89d0-none",
+        "seed": 0,
+        "value": 9.886001497998494
+      },
+      {
+        "ci95": [
+          5.833626357680038,
+          12.7215108823935
+        ],
+        "run_id": "20260922T174203-fb89d0-none",
+        "seed": 0,
+        "value": 9.616658722080203
+      }
+    ],
+    "reference": {
+      "code": "qe",
+      "cross_functional": false,
+      "e0_source": "E0s_qe.json",
+      "functional": "PBE",
+      "pseudos": "SSSP-efficiency-1.3"
+    },
+    "seed": 0,
+    "split_id": "006f595381e8",
+    "tier": "T1",
+    "train_seed": 0,
+    "train_seeds": "0,1,2",
+    "unit": "meV/\u00c5^3"
+  },
+  "eval.errors.T1.B1.rmse_e": 31.07699349640657,
+  "eval.errors.T1.B1.rmse_e@meta": {
+    "aggregate": "mean_over_seeds",
+    "bootstrap_n": 2000,
+    "bracket": "B1",
+    "ci95": [
+      30.51019870418596,
+      31.361898266293515
+    ],
+    "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+    "e0_source": "E0s_qe.json",
+    "energy_scale": "qe",
+    "head": "Default",
+    "model_label": "B1",
+    "model_sha256": "3378fab21542a9be93d02ebf53be95c74ceccb887901077c588e6eb3d1a9a2af",
+    "n": 49,
+    "n_atoms": 392,
+    "n_frames": 49,
+    "n_models": 3,
+    "n_seeds": 3,
+    "per_seed": [
+      {
+        "ci95": [
+          0.9792730179560599,
+          46.08594925315459
+        ],
+        "run_id": "20260922T174047-fb89d0-none",
+        "seed": 0,
+        "value": 31.358883518740228
+      },
+      {
+        "ci95": [
+          1.883105865527287,
+          44.842194358108955
+        ],
+        "run_id": "20260922T174127-fb89d0-none",
+        "seed": 0,
+        "value": 31.361898266293515
+      },
+      {
+        "ci95": [
+          1.3652014630791138,
+          43.88208393289315
+        ],
+        "run_id": "20260922T174203-fb89d0-none",
+        "seed": 0,
+        "value": 30.51019870418596
+      }
+    ],
+    "reference": {
+      "code": "qe",
+      "cross_functional": false,
+      "e0_source": "E0s_qe.json",
+      "functional": "PBE",
+      "pseudos": "SSSP-efficiency-1.3"
+    },
+    "seed": 0,
+    "split_id": "006f595381e8",
+    "tier": "T1",
+    "train_seed": 0,
+    "train_seeds": "0,1,2",
+    "unit": "meV/atom"
+  },
+  "eval.errors.T1.B1.rmse_f": 106.23345476455393,
+  "eval.errors.T1.B1.rmse_f@meta": {
+    "aggregate": "mean_over_seeds",
+    "bootstrap_n": 2000,
+    "bracket": "B1",
+    "ci95": [
+      102.53000078995264,
+      109.09690349381066
+    ],
+    "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+    "e0_source": "E0s_qe.json",
+    "energy_scale": "qe",
+    "head": "Default",
+    "model_label": "B1",
+    "model_sha256": "3378fab21542a9be93d02ebf53be95c74ceccb887901077c588e6eb3d1a9a2af",
+    "n": 49,
+    "n_atoms": 392,
+    "n_frames": 49,
+    "n_models": 3,
+    "n_seeds": 3,
+    "per_seed": [
+      {
+        "ci95": [
+          28.696880100334972,
+          148.98164016148698
+        ],
+        "run_id": "20260922T174047-fb89d0-none",
+        "seed": 0,
+        "value": 107.07346000989847
+      },
+      {
+        "ci95": [
+          29.025794912669475,
+          151.9253515068624
+        ],
+        "run_id": "20260922T174127-fb89d0-none",
+        "seed": 0,
+        "value": 109.09690349381066
+      },
+      {
+        "ci95": [
+          28.573531581087085,
+          142.90932045638863
+        ],
+        "run_id": "20260922T174203-fb89d0-none",
+        "seed": 0,
+        "value": 102.53000078995264
+      }
+    ],
+    "reference": {
+      "code": "qe",
+      "cross_functional": false,
+      "e0_source": "E0s_qe.json",
+      "functional": "PBE",
+      "pseudos": "SSSP-efficiency-1.3"
+    },
+    "seed": 0,
+    "split_id": "006f595381e8",
+    "tier": "T1",
+    "train_seed": 0,
+    "train_seeds": "0,1,2",
+    "unit": "meV/\u00c5"
+  },
+  "eval.errors.T2.B1.mae_e": 52.050125550524086,
+  "eval.errors.T2.B1.mae_e@meta": {
+    "aggregate": "mean_over_seeds",
+    "bootstrap_n": 2000,
+    "bracket": "B1",
+    "ci95": [
+      50.68335008853475,
+      53.05922217837308
+    ],
+    "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+    "e0_source": "E0s_qe.json",
+    "energy_scale": "qe",
+    "head": "Default",
+    "model_label": "B1",
+    "model_sha256": "3378fab21542a9be93d02ebf53be95c74ceccb887901077c588e6eb3d1a9a2af",
+    "n": 175,
+    "n_atoms": 1400,
+    "n_frames": 175,
+    "n_models": 3,
+    "n_seeds": 3,
+    "per_seed": [
+      {
+        "ci95": [
+          45.87213035379913,
+          60.66237318364078
+        ],
+        "run_id": "20260922T174047-fb89d0-none",
+        "seed": 0,
+        "value": 52.40780438466443
+      },
+      {
+        "ci95": [
+          47.44098872674971,
+          60.57255052220171
+        ],
+        "run_id": "20260922T174127-fb89d0-none",
+        "seed": 0,
+        "value": 53.05922217837308
+      },
+      {
+        "ci95": [
+          45.36645424093237,
+          57.617319067485276
+        ],
+        "run_id": "20260922T174203-fb89d0-none",
+        "seed": 0,
+        "value": 50.68335008853475
+      }
+    ],
+    "reference": {
+      "code": "qe",
+      "cross_functional": false,
+      "e0_source": "E0s_qe.json",
+      "functional": "PBE",
+      "pseudos": "SSSP-efficiency-1.3"
+    },
+    "seed": 0,
+    "split_id": "006f595381e8",
+    "tier": "T2",
+    "train_seed": 0,
+    "train_seeds": "0,1,2",
+    "unit": "meV/atom"
+  },
+  "eval.errors.T2.B1.mae_f": 108.56087309899651,
+  "eval.errors.T2.B1.mae_f@meta": {
+    "aggregate": "mean_over_seeds",
+    "bootstrap_n": 2000,
+    "bracket": "B1",
+    "ci95": [
+      106.52066264390038,
+      110.40215126420765
+    ],
+    "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+    "e0_source": "E0s_qe.json",
+    "energy_scale": "qe",
+    "head": "Default",
+    "model_label": "B1",
+    "model_sha256": "3378fab21542a9be93d02ebf53be95c74ceccb887901077c588e6eb3d1a9a2af",
+    "n": 175,
+    "n_atoms": 1400,
+    "n_frames": 175,
+    "n_models": 3,
+    "n_seeds": 3,
+    "per_seed": [
+      {
+        "ci95": [
+          84.0145261188688,
+          128.1399196416682
+        ],
+        "run_id": "20260922T174047-fb89d0-none",
+        "seed": 0,
+        "value": 108.75980538888149
+      },
+      {
+        "ci95": [
+          85.12207928264664,
+          129.82075667941396
+        ],
+        "run_id": "20260922T174127-fb89d0-none",
+        "seed": 0,
+        "value": 110.40215126420765
+      },
+      {
+        "ci95": [
+          83.94917258217204,
+          125.99201569293852
+        ],
+        "run_id": "20260922T174203-fb89d0-none",
+        "seed": 0,
+        "value": 106.52066264390038
+      }
+    ],
+    "reference": {
+      "code": "qe",
+      "cross_functional": false,
+      "e0_source": "E0s_qe.json",
+      "functional": "PBE",
+      "pseudos": "SSSP-efficiency-1.3"
+    },
+    "seed": 0,
+    "split_id": "006f595381e8",
+    "tier": "T2",
+    "train_seed": 0,
+    "train_seeds": "0,1,2",
+    "unit": "meV/\u00c5"
+  },
+  "eval.errors.T2.B1.mae_s": 13.30873165763609,
+  "eval.errors.T2.B1.mae_s@meta": {
+    "aggregate": "mean_over_seeds",
+    "bootstrap_n": 2000,
+    "bracket": "B1",
+    "ci95": [
+      12.53576200821927,
+      13.730424038204239
+    ],
+    "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+    "e0_source": "E0s_qe.json",
+    "energy_scale": "qe",
+    "head": "Default",
+    "model_label": "B1",
+    "model_sha256": "3378fab21542a9be93d02ebf53be95c74ceccb887901077c588e6eb3d1a9a2af",
+    "n": 175,
+    "n_atoms": 1400,
+    "n_frames": 175,
+    "n_models": 3,
+    "n_seeds": 3,
+    "per_seed": [
+      {
+        "ci95": [
+          12.575284927851612,
+          14.490228541391525
+        ],
+        "run_id": "20260922T174047-fb89d0-none",
+        "seed": 0,
+        "value": 13.730424038204239
+      },
+      {
+        "ci95": [
+          12.51800053596169,
+          14.344562999807504
+        ],
+        "run_id": "20260922T174127-fb89d0-none",
+        "seed": 0,
+        "value": 13.66000892648476
+      },
+      {
+        "ci95": [
+          11.38695402502558,
+          13.30814511325124
+        ],
+        "run_id": "20260922T174203-fb89d0-none",
+        "seed": 0,
+        "value": 12.53576200821927
+      }
+    ],
+    "reference": {
+      "code": "qe",
+      "cross_functional": false,
+      "e0_source": "E0s_qe.json",
+      "functional": "PBE",
+      "pseudos": "SSSP-efficiency-1.3"
+    },
+    "seed": 0,
+    "split_id": "006f595381e8",
+    "tier": "T2",
+    "train_seed": 0,
+    "train_seeds": "0,1,2",
+    "unit": "meV/\u00c5^3"
+  },
+  "eval.errors.T2.B1.rmse_e": 54.237260466188665,
+  "eval.errors.T2.B1.rmse_e@meta": {
+    "aggregate": "mean_over_seeds",
+    "bootstrap_n": 2000,
+    "bracket": "B1",
+    "ci95": [
+      52.606945572147104,
+      55.30059731229881
+    ],
+    "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+    "e0_source": "E0s_qe.json",
+    "energy_scale": "qe",
+    "head": "Default",
+    "model_label": "B1",
+    "model_sha256": "3378fab21542a9be93d02ebf53be95c74ceccb887901077c588e6eb3d1a9a2af",
+    "n": 175,
+    "n_atoms": 1400,
+    "n_frames": 175,
+    "n_models": 3,
+    "n_seeds": 3,
+    "per_seed": [
+      {
+        "ci95": [
+          48.430266873075986,
+          62.42964664151016
+        ],
+        "run_id": "20260922T174047-fb89d0-none",
+        "seed": 0,
+        "value": 54.80423851412007
+      },
+      {
+        "ci95": [
+          49.74729761155632,
+          62.339762483062245
+        ],
+        "run_id": "20260922T174127-fb89d0-none",
+        "seed": 0,
+        "value": 55.30059731229881
+      },
+      {
+        "ci95": [
+          47.275331054780786,
+          59.03214893065888
+        ],
+        "run_id": "20260922T174203-fb89d0-none",
+        "seed": 0,
+        "value": 52.606945572147104
+      }
+    ],
+    "reference": {
+      "code": "qe",
+      "cross_functional": false,
+      "e0_source": "E0s_qe.json",
+      "functional": "PBE",
+      "pseudos": "SSSP-efficiency-1.3"
+    },
+    "seed": 0,
+    "split_id": "006f595381e8",
+    "tier": "T2",
+    "train_seed": 0,
+    "train_seeds": "0,1,2",
+    "unit": "meV/atom"
+  },
+  "eval.errors.T2.B1.rmse_f": 142.53029500478848,
+  "eval.errors.T2.B1.rmse_f@meta": {
+    "aggregate": "mean_over_seeds",
+    "bootstrap_n": 2000,
+    "bracket": "B1",
+    "ci95": [
+      138.0619612422793,
+      145.81294776452322
+    ],
+    "ci95_reason": "min-max over 3 training seeds; per-seed bootstrap CIs in per_seed",
+    "e0_source": "E0s_qe.json",
+    "energy_scale": "qe",
+    "head": "Default",
+    "model_label": "B1",
+    "model_sha256": "3378fab21542a9be93d02ebf53be95c74ceccb887901077c588e6eb3d1a9a2af",
+    "n": 175,
+    "n_atoms": 1400,
+    "n_frames": 175,
+    "n_models": 3,
+    "n_seeds": 3,
+    "per_seed": [
+      {
+        "ci95": [
+          104.91548008892595,
+          170.2364244727896
+        ],
+        "run_id": "20260922T174047-fb89d0-none",
+        "seed": 0,
+        "value": 143.7159760075629
+      },
+      {
+        "ci95": [
+          105.91482109550265,
+          172.2989225981845
+        ],
+        "run_id": "20260922T174127-fb89d0-none",
+        "seed": 0,
+        "value": 145.81294776452322
+      },
+      {
+        "ci95": [
+          103.4505950624165,
+          162.7233859682277
+        ],
+        "run_id": "20260922T174203-fb89d0-none",
+        "seed": 0,
+        "value": 138.0619612422793
+      }
+    ],
+    "reference": {
+      "code": "qe",
+      "cross_functional": false,
+      "e0_source": "E0s_qe.json",
+      "functional": "PBE",
+      "pseudos": "SSSP-efficiency-1.3"
+    },
+    "seed": 0,
+    "split_id": "006f595381e8",
+    "tier": "T2",
+    "train_seed": 0,
+    "train_seeds": "0,1,2",
+    "unit": "meV/\u00c5"
+  }
+}

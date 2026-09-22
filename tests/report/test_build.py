@@ -230,3 +230,15 @@ def test_run_stage_writes_numbers_and_readme(
     assert dry.status == "partial" and dry.outputs == [] and not numbers_path.exists()
     plain = run_stage("report", cfg, build.run)
     assert plain.summary["readme"] == "" and numbers_path.is_file()
+
+
+def test_make_table_formats_values_and_their_cis() -> None:
+    key = "md.lammps.MnSi.a_300K_A"
+    view = build.NumberView(
+        {key: {"value": 4.556777, "run_id": "r", "meta": {"ci95": [4.55672, 4.55686]}}}
+    )
+    table = build.make_table(
+        view, "t", "md", ["Compound", "a"], "caption", [build.Row("MnSi", [key])],
+        formats={"a_300K_A": "{:.4f}"},
+    )  # fmt: skip
+    assert table.rows[0]["cells"] == [f"<!-- num:{key} -->4.5568<!-- /num --> [4.5567, 4.5569]"]

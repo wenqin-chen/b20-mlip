@@ -1,0 +1,101 @@
+{
+  "eval.phonons.FeSi.B2.omega_mae_meV": 0.6025641017337826,
+  "eval.phonons.FeSi.B2.omega_mae_meV@meta": {
+    "reference": {
+      "code": "qe",
+      "functional": "PBE",
+      "pseudos": "SSSP-efficiency-1.3",
+      "e0_source": null,
+      "cross_functional": false
+    },
+    "head": "Default",
+    "n": 100,
+    "seed": 0,
+    "ci95": null,
+    "ci95_reason": "deterministic harmonic quantity over a fixed q-path; no resampling",
+    "e0_source": "E0s_qe.json",
+    "energy_scale": "qe",
+    "model_label": "B2",
+    "bracket": "B2",
+    "tier": "phonons",
+    "compound": "FeSi",
+    "reference_label": "qe",
+    "cell_source": "dft",
+    "supercell": [
+      2,
+      2,
+      2
+    ],
+    "displacement_A": 0.03,
+    "n_branches": 24,
+    "model_sha256": "2b3f5fc973022174a70ded8f66ca59a954c006049334b3cee6e92c419dd593ee",
+    "cross_functional": false,
+    "unit": "meV"
+  },
+  "eval.phonons.FeSi.B2.softening_index": 1.0036404754220078,
+  "eval.phonons.FeSi.B2.softening_index@meta": {
+    "reference": {
+      "code": "qe",
+      "functional": "PBE",
+      "pseudos": "SSSP-efficiency-1.3",
+      "e0_source": null,
+      "cross_functional": false
+    },
+    "head": "Default",
+    "n": 100,
+    "seed": 0,
+    "ci95": null,
+    "ci95_reason": "deterministic harmonic quantity over a fixed q-path; no resampling",
+    "e0_source": "E0s_qe.json",
+    "energy_scale": "qe",
+    "model_label": "B2",
+    "bracket": "B2",
+    "tier": "phonons",
+    "compound": "FeSi",
+    "reference_label": "qe",
+    "cell_source": "dft",
+    "supercell": [
+      2,
+      2,
+      2
+    ],
+    "displacement_A": 0.03,
+    "n_branches": 24,
+    "model_sha256": "2b3f5fc973022174a70ded8f66ca59a954c006049334b3cee6e92c419dd593ee",
+    "cross_functional": false,
+    "unit": "ratio"
+  },
+  "eval.phonons.FeSi.B2.imaginary_count": 0.0,
+  "eval.phonons.FeSi.B2.imaginary_count@meta": {
+    "reference": {
+      "code": "qe",
+      "functional": "PBE",
+      "pseudos": "SSSP-efficiency-1.3",
+      "e0_source": null,
+      "cross_functional": false
+    },
+    "head": "Default",
+    "n": 100,
+    "seed": 0,
+    "ci95": null,
+    "ci95_reason": "deterministic harmonic quantity over a fixed q-path; no resampling",
+    "e0_source": "E0s_qe.json",
+    "energy_scale": "qe",
+    "model_label": "B2",
+    "bracket": "B2",
+    "tier": "phonons",
+    "compound": "FeSi",
+    "reference_label": "qe",
+    "cell_source": "dft",
+    "supercell": [
+      2,
+      2,
+      2
+    ],
+    "displacement_A": 0.03,
+    "n_branches": 24,
+    "model_sha256": "2b3f5fc973022174a70ded8f66ca59a954c006049334b3cee6e92c419dd593ee",
+    "cross_functional": false,
+    "unit": "count"
+  }
+}

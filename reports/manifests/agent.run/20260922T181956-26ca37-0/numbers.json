@@ -1,0 +1,178 @@
+{
+  "agent.run.t08-relax-report-FeSi.cost_usd": 0.10005499999999999,
+  "agent.run.t08-relax-report-FeSi.cost_usd@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t08-relax-report-FeSi",
+    "trace_path": "runs/agent.run/20260922T181956-26ca37-0/trace.jsonl",
+    "unit": "USD"
+  },
+  "agent.run.t08-relax-report-FeSi.dag_valid": 1,
+  "agent.run.t08-relax-report-FeSi.dag_valid@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t08-relax-report-FeSi",
+    "trace_path": "runs/agent.run/20260922T181956-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t08-relax-report-FeSi.grounded": 1,
+  "agent.run.t08-relax-report-FeSi.grounded@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t08-relax-report-FeSi",
+    "trace_path": "runs/agent.run/20260922T181956-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t08-relax-report-FeSi.invalid_calls": 0,
+  "agent.run.t08-relax-report-FeSi.invalid_calls@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t08-relax-report-FeSi",
+    "trace_path": "runs/agent.run/20260922T181956-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t08-relax-report-FeSi.tokens_in": 14966,
+  "agent.run.t08-relax-report-FeSi.tokens_in@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t08-relax-report-FeSi",
+    "trace_path": "runs/agent.run/20260922T181956-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t08-relax-report-FeSi.tokens_out": 1009,
+  "agent.run.t08-relax-report-FeSi.tokens_out@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t08-relax-report-FeSi",
+    "trace_path": "runs/agent.run/20260922T181956-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t08-relax-report-FeSi.tool_calls": 3,
+  "agent.run.t08-relax-report-FeSi.tool_calls@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t08-relax-report-FeSi",
+    "trace_path": "runs/agent.run/20260922T181956-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t08-relax-report-FeSi.wall_s": 16.23673120798776,
+  "agent.run.t08-relax-report-FeSi.wall_s@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t08-relax-report-FeSi",
+    "trace_path": "runs/agent.run/20260922T181956-26ca37-0/trace.jsonl",
+    "unit": "s"
+  }
+}

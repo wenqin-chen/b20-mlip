@@ -1,0 +1,60 @@
+{
+  "md.lammps.MnSi.B0.nve.300.drift_meV_atom_ps": 1.4234728903947238e-05,
+  "md.lammps.MnSi.B0.nve.300.drift_meV_atom_ps@meta": {
+    "T": 300.0,
+    "ci95": [
+      -0.0001983672659085232,
+      0.0002268367237164177
+    ],
+    "compound": "MnSi",
+    "e0_source": "foundation",
+    "energy_scale": "mp",
+    "engine": "lammps",
+    "ensemble": "nve",
+    "head": "Default",
+    "model_label": "B0",
+    "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+    "n": 251,
+    "natoms": 512,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "steps": 3000,
+    "timestep_fs": 2.0,
+    "unit": "meV/atom/ps"
+  },
+  "md.lammps.MnSi.drift_meV_atom_ps": 1.4234728903947238e-05,
+  "md.lammps.MnSi.drift_meV_atom_ps@meta": {
+    "T": 300.0,
+    "ci95": [
+      -0.0001983672659085232,
+      0.0002268367237164177
+    ],
+    "compound": "MnSi",
+    "e0_source": "foundation",
+    "energy_scale": "mp",
+    "engine": "lammps",
+    "ensemble": "nve",
+    "head": "Default",
+    "model_label": "B0",
+    "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+    "n": 251,
+    "natoms": 512,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "steps": 3000,
+    "timestep_fs": 2.0,
+    "unit": "meV/atom/ps"
+  }
+}

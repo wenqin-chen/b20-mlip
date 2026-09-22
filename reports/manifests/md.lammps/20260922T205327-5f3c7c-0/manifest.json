@@ -1,0 +1,438 @@
+{
+  "schema_version": 1,
+  "stage": "md.lammps",
+  "run_id": "20260922T205327-5f3c7c-0",
+  "created_at": "2026-09-22T20:53:27.096708Z",
+  "host": "Wenqins-MacBook-Pro-10.local",
+  "user": "wenqinchen",
+  "git_sha": "3532d5076abee7725790e579b3fb5f8cadc8e1d3",
+  "git_dirty": true,
+  "uv_lock_sha256": "a039dbcfb95b46c12c7a0b465b82a5728c5b69285be0a7ce472041a0c289bcaf",
+  "python": "3.11.15",
+  "packages": {
+    "b20-mlip": "0.1.0",
+    "mace-torch": "0.3.16",
+    "torch": "2.14.0",
+    "e3nn": "0.4.4",
+    "ase": "3.29.0",
+    "phonopy": "4.5.0",
+    "pymatgen": "2026.5.4",
+    "spglib": "2.7.0",
+    "seekpath": "2.2.1",
+    "pymbar": "4.0.3",
+    "numpy": "2.4.6",
+    "pydantic": "2.13.5",
+    "pydantic-settings": "2.15.0",
+    "anthropic": "1.6.0"
+  },
+  "config_sha256": "5f3c7cdb24a0336d7508c182206d2e260eb89306669c34b06350214e005302bd",
+  "config": {
+    "paths": {
+      "data_dir": "data",
+      "runs_dir": "runs",
+      "models_dir": "models",
+      "dft_dir": "dft",
+      "reports_dir": "reports"
+    },
+    "compute": {
+      "threads": 6,
+      "dtype": "float64",
+      "device": "cpu"
+    },
+    "cluster": {
+      "alias": "tillicum",
+      "control_path": "~/.ssh/tillicum-cm",
+      "account": "stf",
+      "partition_cpu": "gpu-h200-mig",
+      "partition_gpu": "gpu-h200",
+      "scratch": "/gpfs/projects/stf/wenqin98",
+      "modules": [
+        "gcc/13.4.0",
+        "cuda/12.8.2",
+        "cmake/3.31.8",
+        "openmpi/5.0.10"
+      ],
+      "qe_cmd": "/gpfs/projects/stf/wenqin98/qe/bin/mpirun -np 2 --bind-to none --mca pml ob1 --mca btl self,sm /gpfs/projects/stf/wenqin98/qe/bin/pw.x -nk 2",
+      "lammps_cmd": "/gpfs/projects/stf/wenqin98/b20-mlip/bin/lmp",
+      "micromamba_env": "/gpfs/projects/stf/wenqin98/qe",
+      "qos": "normal",
+      "install_qe": false,
+      "lammps_sha": "4d222cb3ee2a6b14083c778968497bf9e0efc4b4",
+      "libtorch_cpu_url": "https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-2.14.0%2Bcpu.zip",
+      "libtorch_cuda_url": "https://download.pytorch.org/libtorch/cu126/libtorch-shared-with-deps-2.14.0%2Bcu126.zip",
+      "resources": {
+        "qe_array": {
+          "ntasks": 2,
+          "cpus_per_task": 1,
+          "gpus": 1,
+          "mem": "30G",
+          "time": "00:45:00",
+          "max_parallel": 24
+        },
+        "qe_phonons": {
+          "ntasks": 8,
+          "cpus_per_task": 1,
+          "gpus": 4,
+          "mem": "120G",
+          "time": "04:00:00",
+          "max_parallel": 8
+        },
+        "train_replay": {
+          "gpus": 1,
+          "cpus_per_task": 2,
+          "mem": "48G",
+          "time": "02:00:00"
+        },
+        "lammps": {
+          "gpus": 1,
+          "cpus_per_task": 2,
+          "mem": "32G",
+          "time": "00:25:00"
+        }
+      }
+    },
+    "data": {
+      "compounds": [
+        "FeSi",
+        "CoSi",
+        "MnSi",
+        "FeGe"
+      ],
+      "strains": [
+        -0.06,
+        -0.04,
+        -0.02,
+        0.02,
+        0.04,
+        0.06
+      ],
+      "shears": [
+        -0.04,
+        -0.02,
+        0.02,
+        0.04
+      ],
+      "rattle_A": 0.15,
+      "eos_pct": 8.0,
+      "temperatures_K": [
+        300.0,
+        600.0,
+        900.0
+      ],
+      "force_cap_eVA": 15.0,
+      "omat24_url": "https://dl.fbaipublicfiles.com/opencatalystproject/data/omat/251210/omat24_1M_251210.tar.gz",
+      "omat24_sha256": null,
+      "wbm_sample_n": 1000,
+      "wbm_seed": 0
+    },
+    "dft": {
+      "ecut_ry": 90.0,
+      "ecut_rho": 1080.0,
+      "k_spacing_inv_A": 0.25,
+      "smearing": "mv",
+      "degauss_ry": 0.01,
+      "nspin": {
+        "FeSi": 1,
+        "CoSi": 1,
+        "MnSi": 2,
+        "FeGe": 2,
+        "MnGe": 2
+      },
+      "starting_magnetization": {
+        "Mn": 0.5,
+        "Fe": 0.5,
+        "Co": 0.0
+      },
+      "pseudo_dir": "/gpfs/projects/stf/wenqin98/pseudos/sssp_efficiency_1.3.0_pbe",
+      "pseudo_family": "SSSP-efficiency-1.3",
+      "pseudos": {
+        "Fe": "Fe.pbe-spn-kjpaw_psl.0.2.1.UPF",
+        "Mn": "mn_pbe_v1.5.uspp.F.UPF",
+        "Co": "Co_pbe_v1.2.uspp.F.UPF",
+        "Si": "Si.pbe-n-rrkjus_psl.1.0.0.UPF",
+        "Ge": "ge_pbe_v1.4.uspp.F.UPF"
+      },
+      "pseudo_md5s": {
+        "Fe": "e86618425769142926afa95317d90200",
+        "Mn": "82ef2b46521d7a7d9e736dc3972e4928",
+        "Co": "5f91765df6ddd3222702df6e7b74a16d",
+        "Si": "0b0bb1205258b0d07b9f9672cf965d36",
+        "Ge": "9c9eaa91e581c3f09632fb3098b2c6b2"
+      },
+      "sssp_json": "configs/dft/sssp_efficiency_1.3_pbe.json",
+      "conv_thr": 1e-8,
+      "mixing_beta": 0.4,
+      "electron_maxstep": 100,
+      "branch_tol_muB": 0.3,
+      "m_ref_muB": {},
+      "noise_floor_n": 20,
+      "isolated_atom_box_A": 12.0,
+      "converge_ecuts_ry": [
+        40.0,
+        50.0,
+        60.0,
+        70.0,
+        80.0,
+        90.0
+      ],
+      "converge_k_spacings": [
+        0.35,
+        0.3,
+        0.25,
+        0.2
+      ],
+      "thresholds": {
+        "E_meV_atom": 1.0,
+        "F_meV_A": 5.0
+      }
+    },
+    "train": {
+      "foundation": "medium-mpa-0",
+      "lr": 0.0001,
+      "epochs": 30,
+      "batch_size": 4,
+      "energy_weight": 1.0,
+      "forces_weight": 100.0,
+      "stress_weight": 1.0,
+      "ema_decay": 0.99,
+      "replay": {
+        "pt_train_file": "mp",
+        "num_samples_pt": 10000,
+        "subselect_pt": "fps"
+      },
+      "e0s_file": "configs/dft/E0s_qe.json",
+      "scratch": {
+        "hidden_irreps": "64x0e+64x1o",
+        "r_max": 5.0
+      },
+      "loss": "universal",
+      "extra_args": []
+    },
+    "eval": {
+      "bootstrap_n": 2000,
+      "bootstrap_seed": 0,
+      "fmax": 0.05,
+      "max_steps": 500,
+      "offset_residual_gate_meV": 20.0
+    },
+    "md": {
+      "timestep_fs": 2.0,
+      "friction": 0.01,
+      "taut": 100.0,
+      "taup": 1000.0,
+      "equil_ps": 10.0,
+      "natoms": 64,
+      "bulk_modulus_GPa": 150.0,
+      "thermo_every_steps": 10,
+      "dump_every_steps": 100,
+      "vdos_every_steps": 5,
+      "rdf_rmax_A": 6.0,
+      "rdf_nbins": 200
+    },
+    "sampling": {
+      "k_eVA2": 5.0,
+      "windows": 12,
+      "ps_per_window": 15.0,
+      "T": 300.0
+    },
+    "agent": {
+      "backend": "mock",
+      "model_id": "claude-opus-5",
+      "budget": {
+        "max_calls": 25,
+        "max_wall_s": 1800,
+        "max_dft_frames": 200,
+        "max_node_hours": 10.0,
+        "max_atoms": 512,
+        "max_md_ps": 20.0,
+        "approve_cluster": false
+      },
+      "trace_dir": "runs/agent/traces",
+      "tasks_path": "evals/agent_tasks.jsonl",
+      "refs_dir": "evals/refs",
+      "phonon_supercell": [
+        2,
+        2,
+        2
+      ],
+      "phonon_distance": 0.03,
+      "max_tokens": 16000
+    },
+    "report": {
+      "numbers_path": "reports/numbers.json"
+    },
+    "bench": {
+      "model": null,
+      "tiers": "a,b,c,d,e",
+      "quick": false,
+      "force": false,
+      "compound": "FeSi",
+      "n_frames_8atom": 80,
+      "n_frames_64atom": 20,
+      "finetune_epochs": 2,
+      "finetune_timeout_s": 3600,
+      "md_natoms": [
+        64,
+        512
+      ],
+      "md_steps": 200,
+      "md_warmup_steps": 10,
+      "md_T": 300.0,
+      "n_relax": 20,
+      "phonon_supercell": 2,
+      "phonon_distance": 0.03,
+      "fwbw_batch": 4,
+      "fwbw_natoms": 64,
+      "fwbw_repeats": 3
+    }
+  },
+  "seed": 0,
+  "inputs": [
+    {
+      "path": "models/foundation/mace-mpa-0-medium.model",
+      "sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "bytes": 79462305,
+      "kind": "model"
+    },
+    {
+      "path": "models/foundation/mace-mpa-0-medium.model-lammps.pt",
+      "sha256": "e58db1e723bae4e8ad95619cff252f151adf0021a2f9ddf3ba45f3755990c6c8",
+      "bytes": 79565148,
+      "kind": "model"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "runs/md.lammps/20260922T205327-5f3c7c-0/handle.json",
+      "sha256": "744db3fbac8074679bbca27283a3c39efcb1c388af261ba6de6ffd708c0d8e6b",
+      "bytes": 134,
+      "kind": "json"
+    },
+    {
+      "path": "runs/md.lammps/20260922T205327-5f3c7c-0/job/in.mace",
+      "sha256": "6db05247eae6c2d2897132cf38ddf089ca099e387b254fbacc54909cadc9908a",
+      "bytes": 1203,
+      "kind": "other"
+    },
+    {
+      "path": "runs/md.lammps/20260922T205327-5f3c7c-0/job/data.lmp",
+      "sha256": "348a9a32794347cfaf6eacdb335179730bf798915ca6cf98b564bd82029f4e10",
+      "bytes": 42737,
+      "kind": "other"
+    },
+    {
+      "path": "runs/md.lammps/20260922T205327-5f3c7c-0/job/log.lammps",
+      "sha256": "7fd8042888994e5fe5875a69b45a7f56f7fe44b193ee91da93f597558d269b8b",
+      "bytes": 152168,
+      "kind": "log"
+    },
+    {
+      "path": "runs/md.lammps/20260922T205327-5f3c7c-0/job/dump.lammpstrj",
+      "sha256": "2785378df4dce62813be851a5f21701dd5da16bc21747c05b4718a9dcdf04deb",
+      "bytes": 2913330,
+      "kind": "traj"
+    },
+    {
+      "path": "runs/md.lammps/20260922T205327-5f3c7c-0/vdos_npt_300K.json",
+      "sha256": "842fa991bce82ae4e70534f4a827ea0d7c5240569192a7c5e82db4adcc02125e",
+      "bytes": 2411,
+      "kind": "json"
+    },
+    {
+      "path": "runs/md.lammps/20260922T205327-5f3c7c-0/rdf_npt_300K.json",
+      "sha256": "b1c74faf3c8447be831503c090b6b989e2054e80adae211e86e9890038fe2d7a",
+      "bytes": 6372,
+      "kind": "json"
+    },
+    {
+      "path": "runs/md.lammps/20260922T205327-5f3c7c-0/md_result_npt_300K.json",
+      "sha256": "cbf60eaa412a2fb832e873d14481014cb933e13d4e3ca8df2f526f25fa9e76b2",
+      "bytes": 679,
+      "kind": "json"
+    },
+    {
+      "path": "runs/md.lammps/20260922T205327-5f3c7c-0/numbers.json",
+      "sha256": "2efce4d5b5a41f2dffc162c7333c634463cbe287384e757f43732040f088c4be",
+      "bytes": 3915,
+      "kind": "json"
+    }
+  ],
+  "wall_seconds": 2532.527455415984,
+  "status": "ok",
+  "slurm": {
+    "job_ids": [
+      "319616"
+    ],
+    "account": "stf",
+    "partition": "gpu-h200",
+    "nodes": 1,
+    "wall": "00:12:45",
+    "units_done": 1,
+    "units_failed": 0
+  },
+  "extras": {
+    "engine": "lammps",
+    "timestep_fs": 2.0,
+    "ensemble": "npt",
+    "thermostat": "fix npt Tdamp 100*dt Pdamp 1000*dt (Nose-Hoover, iso 0 bar)",
+    "lammps_command": "/gpfs/projects/stf/wenqin98/b20-mlip/bin/lmp -k on g 1 -sf kk -pk kokkos newton on neigh half",
+    "gpu": true,
+    "job_dir": "runs/slurm/md-lammps-MnSi-20260922T205327-5f3c7c-0",
+    "natoms": 512,
+    "reps": 4,
+    "steps": 10000,
+    "equil_steps": 5000,
+    "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+    "head": "Default",
+    "model_label": "B0",
+    "e0_source": "foundation",
+    "energy_scale": "mp",
+    "lammps_sha256": "e58db1e723bae4e8ad95619cff252f151adf0021a2f9ddf3ba45f3755990c6c8",
+    "pair_style": "mace no_domain_decomposition",
+    "job_ids": [
+      "319616"
+    ],
+    "job_workdir": "/gpfs/projects/stf/wenqin98/b20-mlip/jobs/md-lammps-MnSi-20260922T205327-5f3c7c-0",
+    "result": {
+      "engine": "lammps",
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "head": "Default",
+      "compound": "MnSi",
+      "natoms": 512,
+      "ensemble": "npt",
+      "temperature_K": 300.0,
+      "pressure_GPa": 0.0,
+      "timestep_fs": 2.0,
+      "steps": 15000,
+      "drift_meV_atom_ps": null,
+      "a_mean_A": 4.556777120776724,
+      "a_std_A": 0.0035193923354897836,
+      "alpha_per_K": null,
+      "traj_sha256": "2785378df4dce62813be851a5f21701dd5da16bc21747c05b4718a9dcdf04deb",
+      "vdos_path": "runs/md.lammps/20260922T205327-5f3c7c-0/vdos_npt_300K.json",
+      "rdf_path": "runs/md.lammps/20260922T205327-5f3c7c-0/rdf_npt_300K.json",
+      "run_id": "20260922T205327-5f3c7c-0"
+    },
+    "stats": {
+      "n_production": 1001,
+      "a_ci95": [
+        4.5566997559777676,
+        4.5568544855756805
+      ],
+      "drift_ci95": null,
+      "T_mean_K": 300.34343573456545,
+      "n_rows": 1501,
+      "n_runs": 2,
+      "production_window": "production (equil_ps excluded)",
+      "n_dump_frames": 101,
+      "loop_seconds": 758.828
+    },
+    "numbers_keys": [
+      "md.lammps.MnSi.B0.npt.300.a_mean_A",
+      "md.lammps.MnSi.B0.npt.300.a_std_A",
+      "md.lammps.MnSi.a_300K_A",
+      "md.lammps.MnSi.a_dev_pct",
+      "md.lammps.MnSi.a_exp_A"
+    ]
+  }
+}

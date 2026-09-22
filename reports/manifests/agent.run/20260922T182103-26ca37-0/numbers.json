@@ -1,0 +1,178 @@
+{
+  "agent.run.t12-phonons-imaginary-CoSi-sum-rule.cost_usd": 0.09577000000000001,
+  "agent.run.t12-phonons-imaginary-CoSi-sum-rule.cost_usd@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": "sum_rule",
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t12-phonons-imaginary-CoSi-sum-rule",
+    "trace_path": "runs/agent.run/20260922T182103-26ca37-0/trace.jsonl",
+    "unit": "USD"
+  },
+  "agent.run.t12-phonons-imaginary-CoSi-sum-rule.dag_valid": 1,
+  "agent.run.t12-phonons-imaginary-CoSi-sum-rule.dag_valid@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": "sum_rule",
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t12-phonons-imaginary-CoSi-sum-rule",
+    "trace_path": "runs/agent.run/20260922T182103-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t12-phonons-imaginary-CoSi-sum-rule.grounded": 1,
+  "agent.run.t12-phonons-imaginary-CoSi-sum-rule.grounded@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": "sum_rule",
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t12-phonons-imaginary-CoSi-sum-rule",
+    "trace_path": "runs/agent.run/20260922T182103-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t12-phonons-imaginary-CoSi-sum-rule.invalid_calls": 0,
+  "agent.run.t12-phonons-imaginary-CoSi-sum-rule.invalid_calls@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": "sum_rule",
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t12-phonons-imaginary-CoSi-sum-rule",
+    "trace_path": "runs/agent.run/20260922T182103-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t12-phonons-imaginary-CoSi-sum-rule.tokens_in": 14849,
+  "agent.run.t12-phonons-imaginary-CoSi-sum-rule.tokens_in@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": "sum_rule",
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t12-phonons-imaginary-CoSi-sum-rule",
+    "trace_path": "runs/agent.run/20260922T182103-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t12-phonons-imaginary-CoSi-sum-rule.tokens_out": 861,
+  "agent.run.t12-phonons-imaginary-CoSi-sum-rule.tokens_out@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": "sum_rule",
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t12-phonons-imaginary-CoSi-sum-rule",
+    "trace_path": "runs/agent.run/20260922T182103-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t12-phonons-imaginary-CoSi-sum-rule.tool_calls": 3,
+  "agent.run.t12-phonons-imaginary-CoSi-sum-rule.tool_calls@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": "sum_rule",
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t12-phonons-imaginary-CoSi-sum-rule",
+    "trace_path": "runs/agent.run/20260922T182103-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t12-phonons-imaginary-CoSi-sum-rule.wall_s": 15.57583429099759,
+  "agent.run.t12-phonons-imaginary-CoSi-sum-rule.wall_s@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": "sum_rule",
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t12-phonons-imaginary-CoSi-sum-rule",
+    "trace_path": "runs/agent.run/20260922T182103-26ca37-0/trace.jsonl",
+    "unit": "s"
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "agent.run.t01-phonons-imaginary-FeSi.cost_usd": 0.06928,
+  "agent.run.t01-phonons-imaginary-FeSi.cost_usd@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t01-phonons-imaginary-FeSi",
+    "trace_path": "runs/agent.run/20260922T181450-26ca37-0/trace.jsonl",
+    "unit": "USD"
+  },
+  "agent.run.t01-phonons-imaginary-FeSi.dag_valid": 1,
+  "agent.run.t01-phonons-imaginary-FeSi.dag_valid@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t01-phonons-imaginary-FeSi",
+    "trace_path": "runs/agent.run/20260922T181450-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t01-phonons-imaginary-FeSi.grounded": 1,
+  "agent.run.t01-phonons-imaginary-FeSi.grounded@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t01-phonons-imaginary-FeSi",
+    "trace_path": "runs/agent.run/20260922T181450-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t01-phonons-imaginary-FeSi.invalid_calls": 0,
+  "agent.run.t01-phonons-imaginary-FeSi.invalid_calls@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t01-phonons-imaginary-FeSi",
+    "trace_path": "runs/agent.run/20260922T181450-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t01-phonons-imaginary-FeSi.tokens_in": 10561,
+  "agent.run.t01-phonons-imaginary-FeSi.tokens_in@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t01-phonons-imaginary-FeSi",
+    "trace_path": "runs/agent.run/20260922T181450-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t01-phonons-imaginary-FeSi.tokens_out": 659,
+  "agent.run.t01-phonons-imaginary-FeSi.tokens_out@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t01-phonons-imaginary-FeSi",
+    "trace_path": "runs/agent.run/20260922T181450-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t01-phonons-imaginary-FeSi.tool_calls": 2,
+  "agent.run.t01-phonons-imaginary-FeSi.tool_calls@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t01-phonons-imaginary-FeSi",
+    "trace_path": "runs/agent.run/20260922T181450-26ca37-0/trace.jsonl",
+    "unit": "count"
+  },
+  "agent.run.t01-phonons-imaginary-FeSi.wall_s": 15.86548362497706,
+  "agent.run.t01-phonons-imaginary-FeSi.wall_s@meta": {
+    "backend": "anthropic",
+    "ci95": null,
+    "ci95_reason": "a single agent run; no resampling",
+    "e0_source": "foundation",
+    "head": "Default",
+    "injected_failure": null,
+    "model_id": "claude-opus-5",
+    "n": 1,
+    "reference": {
+      "code": "mace",
+      "cross_functional": false,
+      "e0_source": "foundation",
+      "functional": "PBE",
+      "pseudos": null
+    },
+    "seed": 0,
+    "task_id": "t01-phonons-imaginary-FeSi",
+    "trace_path": "runs/agent.run/20260922T181450-26ca37-0/trace.jsonl",
+    "unit": "s"
+  }
+}

@@ -154,12 +154,12 @@ class NumberView:
         text = format_value(float(entry["value"]), fmt) if entry is not None else missing
         return num_marker(key, text)
 
-    def ci(self, key: str) -> str:
+    def ci(self, key: str, fmt: str | None = None) -> str:
         if key not in self.entries:
             return ""
         ci = self.meta(key, "ci95")
         if isinstance(ci, list | tuple) and len(ci) == 2:
-            return f"[{format_value(float(ci[0]))}, {format_value(float(ci[1]))}]"
+            return f"[{format_value(float(ci[0]), fmt)}, {format_value(float(ci[1]), fmt)}]"
         reason = self.meta(key, "ci95_reason", default="no CI given")
         return f"(no CI: {reason})"
 
@@ -167,7 +167,7 @@ class NumberView:
         """Value and its CI; a number without an interval shows the value alone (the reason is in
         the provenance line, where gate A3 looks for it)."""
         ci95 = self.meta(key, "ci95")
-        ci = self.ci(key) if isinstance(ci95, list | tuple) and len(ci95) == 2 else ""
+        ci = self.ci(key, fmt) if isinstance(ci95, list | tuple) and len(ci95) == 2 else ""
         return f"{self.marker(key, fmt, missing)} {ci}".rstrip()
 
     def prov(self, key: str) -> str:
@@ -196,7 +196,7 @@ class NumberView:
             length = ""
             if steps is not None and dt is not None:
                 ps = format_value(float(steps) * float(dt) / 1000.0)
-                length = f", {ps} ps at {format_value(float(dt))} fs"
+                length = f", {ps} ps at {format_value(float(dt))} fs incl. equilibration"
             parts.append(f"{natoms} atoms{length}")
         floor = self.meta(key, "noise_floor_f")
         if floor is not None:
@@ -241,9 +241,11 @@ def make_table(
     *,
     missing: dict[str, str] | None = None,
     compact: bool = False,
+    formats: dict[str, str] | None = None,
 ) -> Table:
     """A cell whose key is absent renders ``pending`` (or ``missing[key]``); with ``compact``,
-    rows without any published number are listed by label instead of rendered."""
+    rows without any published number are listed by label instead of rendered; ``formats`` maps a
+    key's last segment to a format string for the value and its CI (e.g. lattice constants)."""
     table = Table(name=name, namespace=namespace, header=header, caption=caption)
     for row in rows:
         cells: list[str] = []
@@ -253,13 +255,15 @@ def make_table(
             if key is None:
                 cells.append("—")
                 continue
-            cells.append(view.cell(key, missing=(missing or {}).get(key, PENDING)))
+            fmt = (formats or {}).get(key.rsplit(".", 1)[-1])
+            cells.append(view.cell(key, fmt=fmt, missing=(missing or {}).get(key, PENDING)))
             if view.has(key):
                 row_present = True
                 table.prov.append(f"**{row.label} / {col}** — {view.prov(key)}")
                 lower_fidelity = lower_fidelity or bool(view.meta(key, "lower_fidelity"))
         table.present = table.present or row_present
-        if compact and not row_present:
+        explained = any(k is not None and k in (missing or {}) for k in row.keys)
+        if compact and not row_present and not explained:  # an n/a row still says why
             table.pending_rows.append(row.label)
             continue
         label = row.label + (" (lower fidelity)" if lower_fidelity else "")
@@ -331,11 +335,19 @@ def build_tables(view: NumberView) -> dict[str, Table]:
         + ", vendored Matbench-Discovery metrics; F1 only as a paired difference vs B0 on the "
         "identical sample with a bootstrap CI. No public ranking is claimed or comparable.",
         [
-            Row(label, [f"eval.discovery.{b}.{m}" for m in discovery_metrics])
+            Row(
+                label,
+                # B0 is the reference of the paired difference: "—", not "pending"
+                [
+                    None if (b == "B0" and m == "delta_f1") else f"eval.discovery.{b}.{m}"
+                    for m in discovery_metrics
+                ],
+            )
             for b, label in BRACKETS
             if b != "B0p"
         ],
         missing=missing if b1_scale_na else None,
+        compact=True,
     )
     phonon_metrics = ("omega_mae_meV", "softening_index", "imaginary_count", "omega_mae_meV_pbesol")
     phonon_rows = [
@@ -383,14 +395,15 @@ def build_tables(view: NumberView) -> dict[str, Table]:
             for engine in engines
         ],
         compact=True,
+        formats={"a_300K_A": "{:.4f}"},
     )
     tables["stability"] = make_table(
         view,
         "stability",
         "md",
         ["Compound / engine", "NVE drift (meV/atom/ps)"],
-        "NVE energy drift of the same trajectories; self-consistency numbers cite reference "
-        "code `mace` with the training functional.",
+        "NVE energy drift of separate NVE runs (cell size and length in the provenance lines); "
+        "self-consistency numbers cite reference code `mace` with the training functional.",
         [
             Row(f"{compound} / {engine.upper()}", [f"md.{engine}.{compound}.drift_meV_atom_ps"])
             for compound in COMPOUNDS
