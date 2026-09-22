@@ -25,8 +25,17 @@ from b20mlip.io import read_frames
 from b20mlip.provenance import run_stage
 
 
-def stage(cfg, ctx, *, compound: str, frames: str, out: str, supercell=(2, 2, 2), distance=0.03,
-          allow_partial: bool = False):
+def stage(
+    cfg,
+    ctx,
+    *,
+    compound: str,
+    frames: str,
+    out: str,
+    supercell=(2, 2, 2),
+    distance=0.03,
+    allow_partial: bool = False,
+):
     path = Path(frames)
     ctx.add_input(path, "frames")
     disp = [
@@ -62,22 +71,36 @@ def stage(cfg, ctx, *, compound: str, frames: str, out: str, supercell=(2, 2, 2)
     data["displacement_set"] = {
         "numbers": numbers,
         "complete": complete,
-        "note": None if complete else "single-sided displacements only for some atoms (partial set)",
+        "note": (
+            None if complete else "single-sided displacements only for some atoms (partial set)"
+        ),
     }
     data["residual_force_correction"] = {
         "reference_frame_id": by_n[-1].frame_id,
         "max_residual_force_eVA": float(np.abs(ref_forces).max()),
     }
-    data["source_frames"] = {"path": str(path), "frame_ids": [by_n[n].frame_id for n in [-1, *numbers]]}
+    data["source_frames"] = {
+        "path": str(path),
+        "frame_ids": [by_n[n].frame_id for n in [-1, *numbers]],
+    }
     local = write_force_sets(data, ctx.out_dir / "force_sets.json")
     ctx.add_output(local, "json")
     out_path = Path(out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     write_force_sets(data, out_path)
     ctx.add_output(out_path, "json")
-    ctx.log(compound=compound, n_displacements=len(numbers), supercell=list(supercell), distance=distance)
-    return {"compound": compound, "n_displacements": len(numbers), "out": str(out_path),
-            "max_residual_force_eVA": data["residual_force_correction"]["max_residual_force_eVA"]}
+    ctx.log(
+        compound=compound,
+        n_displacements=len(numbers),
+        supercell=list(supercell),
+        distance=distance,
+    )
+    return {
+        "compound": compound,
+        "n_displacements": len(numbers),
+        "out": str(out_path),
+        "max_residual_force_eVA": data["residual_force_correction"]["max_residual_force_eVA"],
+    }
 
 
 def main() -> None:
@@ -90,10 +113,16 @@ def main() -> None:
     a = ap.parse_args()
     cfg = load_config([Path(c) for c in a.config], [])
     result = run_stage(
-        "dft.phonons", cfg, stage, compound=a.compound, frames=a.frames, out=a.out,
+        "dft.phonons",
+        cfg,
+        stage,
+        compound=a.compound,
+        frames=a.frames,
+        out=a.out,
         allow_partial=a.allow_partial,
     )
-    print(json.dumps({"status": result.status, "run_id": result.run_id, "summary": result.summary}, indent=2))
+    payload = {"status": result.status, "run_id": result.run_id, "summary": result.summary}
+    print(json.dumps(payload, indent=2))
 
 
 if __name__ == "__main__":

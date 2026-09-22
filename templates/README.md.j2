@@ -57,16 +57,23 @@ typed by hand.
   shear, rattle, equation-of-state scans and finite-temperature snapshots, plus vacancy and phonon
   supercells; OMat24 in-chemsys frames (forces and stress); MPtrj in-family frames for replay and
   forgetting; a labelled, seeded WBM sample. Every frame carries its energy scale (MP, OMat24-VASP
-  or QE/SSSP) and the three are never mixed in one loss.
+  or QE/SSSP) and the three are never mixed in one loss. The fine-tunes train on FeSi, MnSi and
+  CoSi (plus the three relaxed CoGe cells of the offset map); FeGe and MnGe are labelled but never
+  trained on.
 - **Models (brackets).** B0 MACE-MPA-0 medium zero-shot; B0′ MACE-MP-0 medium zero-shot; B1 naive
-  fine-tune with QE isolated-atom E0s; B2 multihead replay (QE data in head `Default`, MPtrj replay
-  in `pt_head`); B3 scratch MACE on identical frames. Three seeds each, bootstrap CIs over groups.
-- **Tiers.** T0 held-out groups; T1 snapshots hotter than any training frame; T2 FeGe, never
-  trained on; T3 OMat24 VASP forces against a cross-code noise floor; T4a forces on held-out MPtrj
-  in-family frames (forgetting); T4b paired ΔF1 on the WBM sample.
-- **Physics checks.** Same-code phonon and elastic references, softening index, ASE NPT thermal
-  expansion against experiment, an umbrella-sampled vacancy hop against NEB, one
-  committee-uncertainty active-learning round.
+  fine-tune with QE isolated-atom E0s; B2 multihead replay (QE data in head `Default`, a
+  farthest-point subset of the MPtrj foundation data replayed in `pt_head`); B3 scratch MACE on
+  identical frames. B1 and B2 are trained with three seeds and published as the seed mean with the
+  seed range as its interval; B3 has one seed; every single-model number carries a bootstrap CI
+  over groups.
+- **Tiers.** T0 held-out groups of the trained compounds; T1 snapshots hotter than any training
+  frame; T2 FeGe and MnGe, never trained on; T3 OMat24 VASP forces against a cross-code noise
+  floor; T4a forces against the MPtrj VASP labels of the MPtrj B20 frames (forgetting: the relaxed
+  parents among them were also relabelled by QE and trained on, so T4a measures drift away from
+  the MP labels, not generalisation); T4b paired ΔF1 on the WBM sample.
+- **Physics checks.** Same-code phonon and elastic references, softening index, NPT thermal
+  expansion against experiment, an umbrella-sampled vacancy hop against NEB, and a
+  committee-uncertainty selector for the next active-learning round.
 - **Agent.** A budgeted tool-calling agent (element allowlist, call, wall-time, DFT-frame and
   node-hour caps, no shell) whose reports are rejected unless every number resolves to a run id;
   a mock backend replays recorded traces in CI.
@@ -213,17 +220,26 @@ explicitly with `uv run pytest -m network`.
 - Negative results ship: a bracket that does not improve on B0, a softening that fine-tuning does
   not fix, or a forgetting cost that outweighs the gain is reported in the same tables with the
   same CIs.
+{% if parity_ok %}
+- The second MD engine is LAMMPS (`pair_style mace`, Kokkos on a cluster GPU) running the same
+  exported model; its only equivalence claim is the parity gate above, and its rows carry their
+  own cell size and length in the provenance lines.
+{% else %}
 - Rows of the second MD engine are absent until the ASE-versus-LAMMPS parity gate passes; if the
   LAMMPS build fails on the cluster the project stays ASE-only and says so.
+{% endif %}
+- Same-code phonon references exist for FeSi and CoSi only; the MnSi and FeGe displacement sets
+  were not computed (cluster budget), so their phonon rows are absent rather than compared
+  against another code.
 
 ## Plan
 
-- Cluster stages (Tillicum): QE production arrays and phonon displacement sets, multihead replay on
-  the GPU partition, the LAMMPS `pair_style mace` build, the parity gate and, after it, the
-  second-engine MD rows above.
-- v0.1: data → fine-tune → eval → MD → phonons without the cluster; v1.0: QE round, brackets with
-  CIs, phonons against the project's own QE, WBM sample for B0 and B2 (B1 if the scale gate
-  passes), parity decided, one active-learning round, agent eval, audit green.
+- Next, cluster budget permitting: QE phonon displacement sets for MnSi and FeGe; one
+  committee-selected active-learning round (the selector is implemented, the QE labelling of its
+  picks is not done); a forgetting tier restricted to MPtrj frames whose geometry was never
+  trained on.
+- Done for v1.0: the QE round, brackets with seed means, phonons against the project's own QE,
+  the WBM sample for B0 and B2, the parity gate, the live agent eval and a green audit.
 
 ## Non-goals
 

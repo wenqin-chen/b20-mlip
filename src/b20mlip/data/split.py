@@ -50,9 +50,9 @@ from b20mlip.models import Frame, Split, Tier
 from b20mlip.provenance import RunContext, sha256_frames
 
 Bucket = Literal["train", "val", "test"]
-POLICY = "group_hash"
-POLICY_V2 = "group_hash_v2"
 Policy = Literal["group_hash", "group_hash_v2"]
+POLICY: Policy = "group_hash"
+POLICY_V2: Policy = "group_hash_v2"
 DEFAULT_FRACTIONS: tuple[float, float, float] = (0.8, 0.1, 0.1)
 DEFAULT_HOLDOUT: tuple[str, ...] = ("FeGe", "MnGe")
 DEFAULT_TRAIN_SOURCES: tuple[str, ...] = ("qe",)
@@ -335,6 +335,19 @@ def run(
     for tier, ids in split.tiers.items():
         summary[f"n_{tier}"] = len(ids)
     ctx.log(split={k: v for k, v in summary.items()})
+    # README counts (``data.*`` keys, harvested by ``report build``): how many QE-labelled frames
+    # the split saw and how many of them the fine-tunes train on.
+    meta = {"unit": "count", "split_id": split.split_id, "policy": policy, "frames": str(src)}
+    numbers: dict[str, Any] = {
+        "data.n_qe_frames": sum(1 for f in data if f.label_source == "qe"),
+        "data.n_train_frames": len(split.train),
+        "data.n_val_frames": len(split.val),
+    }
+    for key in list(numbers):
+        numbers[f"{key}@meta"] = meta
+    numbers_path = ctx.out_dir / "numbers.json"
+    numbers_path.write_text(json.dumps(numbers, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    ctx.add_output(numbers_path, "json")
     return summary
 
 

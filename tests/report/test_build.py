@@ -76,7 +76,10 @@ def full_numbers() -> dict[str, Any]:
     n["md.parity.max_dF_eVA"] = entry(
         0.0004, meta(n=20, ci95=None, ci95_reason="max", reference=REF_MACE)
     )
-    n["sampling.umbrella.FeSi.dF_eV"] = entry(0.83, meta(n=12, reference=REF_MACE))
+    n["sampling.umbrella.FeSi.dF_eV"] = entry(0.01, meta(n=12, reference=REF_MACE))
+    n["sampling.wham.FeSi.B0.dF_barrier_eV"] = entry(
+        0.83, meta(n=12, reference=REF_MACE, n_windows=24, ps_per_window=15.0)
+    )
     n["sampling.neb.FeSi.Ea_eV"] = entry(
         0.79, meta(n=7, ci95=None, ci95_reason="NEB", reference=REF_MACE)
     )
@@ -85,6 +88,7 @@ def full_numbers() -> dict[str, Any]:
     )
     n["agent.eval.n_tasks"] = entry(12, {"backend": "mock", "model_id": "mock", "trace_path": "t"})
     n["data.n_qe_frames"] = entry(512)
+    n["data.n_train_frames"] = entry(400)
     n["active.n_selected"] = entry(96)
     n["offsets.residual_meV_atom"] = entry(11.0)
     return n
@@ -124,7 +128,10 @@ def test_render_with_numbers_formats_cis_and_provenance() -> None:
     bullet = block(text, "bullet")
     assert "→<!-- num:eval.errors.T0.B2.mae_f -->35<!-- /num --> meV/Å" in bullet  # B2 preferred
     assert "one committee-uncertainty active-learning round" in bullet
-    assert "<!-- num:data.n_qe_frames -->512<!-- /num --> in-house" in bullet
+    assert "<!-- num:data.n_train_frames -->400<!-- /num --> in-house" in bullet
+    assert "<!-- num:data.n_qe_frames -->512<!-- /num --> labelled in total" in bullet
+    assert "ΔF‡ = <!-- num:sampling.wham.FeSi.B0.dF_barrier_eV -->0.83<!-- /num --> eV" in bullet
+    assert "24 umbrella windows × 15 ps" in block(text, "sampling")
     assert "<!-- num:md.parity.max_dF_eVA -->0.0004<!-- /num -->" in block(text, "parity")
 
 
@@ -133,13 +140,14 @@ def test_render_gates_and_variants() -> None:
     n["parity.passed"] = entry(0)
     n["offsets.residual_meV_atom"] = entry(25.0)
     n.pop("data.n_qe_frames")
+    n.pop("data.n_train_frames")
     n["data.n_omat24_frames"] = entry(300)
     n.pop("active.n_selected")
     text = build.render(n)
     assert "deploy in ASE MD" in text and "ASE/LAMMPS" not in text and "**not passed**" in text
     assert "LAMMPS" not in block(text, "thermal")
     assert "<!-- num:eval.discovery.B1.delta_f1 -->n/a (scale)<!-- /num -->" in text
-    assert "OMat24 DFT frames" in text and "an active-learning round (pending)" in text
+    assert "OMat24 DFT frames" in text and "active-learning" not in block(text, "bullet")
     n["eval.phonons.CoSi.B0.omega_mae_meV"] = entry(
         3.3, meta(reference={**REF_QE, "code": "pyscf"}, lower_fidelity=True, n=100)
     )
@@ -165,7 +173,7 @@ def test_normalize_and_number_view() -> None:
     assert view.ci("zz") == "" and view.ci("a.b") == "(no CI: no CI given)"
     assert view.value("zz", 7.0) == 7.0 and view.value("a.b") == 1.5
     assert view.meta("a.b", "reference", "code", default="?") == "?"
-    assert view.cell("a.b") == "<!-- num:a.b -->1.5<!-- /num --> (no CI: no CI given)"
+    assert view.cell("a.b") == "<!-- num:a.b -->1.5<!-- /num -->"  # the reason is in prov
     assert view.prov("a.b").startswith("reference ?/?; E0 ?; head ?; n = ?; seed ?; CI95 (no CI")
 
 

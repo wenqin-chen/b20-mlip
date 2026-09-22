@@ -112,7 +112,8 @@ class Table:
 
 
 def format_value(value: float, fmt: str | None = None) -> str:
-    """Canonical text of a published number: integers plain, else four significant digits."""
+    """Canonical text of a published number: integers plain, else four significant digits
+    (fixed notation, scientific below 1e-6)."""
     if fmt:
         return fmt.format(value)
     v = float(value)
@@ -121,6 +122,8 @@ def format_value(value: float, fmt: str | None = None) -> str:
     if v.is_integer() and abs(v) < 1e15:
         return str(int(v))
     s = f"{v:.4g}"
+    if 0.0 < abs(v) < 1e-6:
+        return s  # e.g. a parity maximum of 3.978e-14: fixed notation would print 13 zeros
     if "e" in s or "E" in s:
         s = format(Decimal(s), "f")
     return s

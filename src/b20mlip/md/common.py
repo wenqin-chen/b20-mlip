@@ -39,7 +39,7 @@ from ase.data import atomic_numbers, chemical_symbols
 from numpy.typing import ArrayLike
 
 from b20mlip.config import Settings
-from b20mlip.io import frame_to_atoms, read_frames
+from b20mlip.io import contract_head, frame_to_atoms, read_frames
 from b20mlip.models import CheckpointInfo, MDResult, StageResult, Status
 from b20mlip.provenance import RunContext, sha256_file
 
@@ -292,7 +292,7 @@ def number_meta(
             "cross_functional": False,
         },
         "e0_source": provenance.get("e0_source", "unknown"),
-        "head": head,
+        "head": contract_head(head),
         "n": int(n),
         "seed": int(seed) if seed is not None else 0,
         "ci95": [float(ci95[0]), float(ci95[1])] if ci95 is not None else None,

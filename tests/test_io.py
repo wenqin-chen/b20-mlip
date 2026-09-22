@@ -200,3 +200,17 @@ def test_resolve_head_accepts_the_foundation_lowercase_head() -> None:
     assert resolve_head("Default", None) == "Default"
     with pytest.raises(ValueError, match="not 'pt_head'"):
         resolve_head("pt_head", ["default"])
+
+
+def test_contract_head_labels_the_foundation_head_default() -> None:
+    """Published numbers carry the CONTRACTS label (gate A3), whatever the model calls its head."""
+    from b20mlip.io import contract_head
+    from b20mlip.md.common import number_meta
+
+    assert contract_head("default") == "Default" and contract_head("Default") == "Default"
+    assert contract_head("pt_head") == "pt_head"
+    meta = number_meta(
+        provenance={"e0_source": "foundation"}, head="default", n=20, seed=0,
+        engine="lammps-vs-ase", ensemble=None, T=None, ci95=None, ci95_reason="deterministic",
+    )  # fmt: skip
+    assert meta["head"] == "Default"

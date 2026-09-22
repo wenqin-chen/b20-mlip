@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import numpy as np
@@ -166,7 +167,10 @@ def test_run_stage(data_settings: Settings, tmp_path: Path, wbm_files: tuple[Pat
     assert result.summary["n_train"] + result.summary["n_val"] + result.summary["n_test"] == 61
     manifest = read_manifest(result.manifest_path)
     assert {Path(a.path).name for a in manifest.inputs} == {"frames.extxyz", "wbm_sample.json"}
-    assert [Path(a.path).name for a in manifest.outputs] == [f"{split_id}.json"]
+    assert [Path(a.path).name for a in manifest.outputs] == [f"{split_id}.json", "numbers.json"]
+    counts = json.loads((Path(result.manifest_path).parent / "numbers.json").read_text())
+    assert counts["data.n_train_frames"] == result.summary["n_train"]
+    assert counts["data.n_qe_frames@meta"]["split_id"] == split_id
     explicit = run_stage("data.split", data_settings, sp.run, seed=0, frames=src,
                          out=tmp_path / "v1.json")  # fmt: skip
     assert (tmp_path / "v1.json").is_file() and explicit.summary["n_T4b"] == 0

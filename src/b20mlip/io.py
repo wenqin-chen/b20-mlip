@@ -262,6 +262,7 @@ def write_frames(frames: Iterable[Frame], path: str | Path) -> Artifact:
 
 
 __all__ = [
+    "contract_head",
     "resolve_head",
     "META_KEYS",
     "frame_from_atoms",
@@ -270,6 +271,12 @@ __all__ = [
     "read_frames",
     "write_frames",
 ]
+
+
+def contract_head(head: str) -> str:
+    """The CONTRACTS ``Head`` label a published number records for ``head``: the foundation
+    models' literal single head ``"default"`` is the contract's ``"Default"``."""
+    return "Default" if head.lower() == "default" else head
 
 
 def resolve_head(requested: str, available: list[str] | tuple[str, ...] | None) -> str:

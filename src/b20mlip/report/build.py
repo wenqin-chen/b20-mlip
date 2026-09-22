@@ -31,11 +31,13 @@ thermal          ``md.<ase|lammps>.<compound>.{a_300K_A, a_exp_A, a_dev_pct, alp
                  (all referenced to ``experiment``); ``parity.passed`` unlocks lammps rows
 stability        ``md.<ase|lammps>.<compound>.drift_meV_atom_ps`` (reference code ``mace``)
 parity           ``md.parity.{max_dF_eVA, max_dE_eV_atom}``; ``parity.passed``
-sampling         ``sampling.umbrella.<compound>.{dF_eV, dF_err_eV}``;
-                 ``sampling.neb.<compound>.Ea_eV``
+sampling         ``sampling.wham.<compound>.B0.dF_barrier_eV`` (the barrier compared with NEB),
+                 ``sampling.umbrella.<compound>.{dF_eV, dF_err_eV}`` (end-to-end, ~0 for a
+                 symmetric hop), ``sampling.neb.<compound>.Ea_eV``
 agent            ``agent.eval.{accuracy, invalid_call_rate, dag_valid_rate, provenance_rate,
                  recovery_rate, tokens_per_task, usd_per_task, n_tasks}`` (mock backend hidden)
-bullet           ``data.n_qe_frames`` | ``data.n_omat24_frames``, ``active.n_selected`` + the above
+bullet           ``data.{n_train_frames, n_qe_frames}`` | ``data.n_omat24_frames``,
+                 ``active.n_selected`` + the above
 ===============  ==================================================================================
 """
 
@@ -72,12 +74,14 @@ BRACKETS: tuple[tuple[str, str], ...] = (
 TIERS: tuple[tuple[str, str], ...] = (
     ("T0", "T0 held-out groups"),
     ("T1", "T1 hot snapshots"),
-    ("T2", "T2 FeGe (never trained)"),
+    ("T2", "T2 FeGe + MnGe (never trained)"),
     ("T3", "T3 OMat24 VASP"),
     ("T4a", "T4a MPtrj forgetting"),
 )
 COMPOUNDS: tuple[str, ...] = ("FeSi", "CoSi", "MnSi", "FeGe")
 FINE_TUNED: tuple[str, ...] = ("B2", "B1", "B3")
+# tiers labelled by the project's own QE (energies are comparable only there)
+QE_TIERS: tuple[str, ...] = ("T0", "T1", "T2")
 OFFSET_GATE_MEV_ATOM = 20.0
 # Protocol constants that are not in Settings (SPEC.md section 6); rendered inside a gen block.
 PROTOCOL_CONSTANTS: dict[str, Any] = {
@@ -160,7 +164,10 @@ class NumberView:
         return f"(no CI: {reason})"
 
     def cell(self, key: str, fmt: str | None = None, missing: str = PENDING) -> str:
-        ci = self.ci(key)
+        """Value and its CI; a number without an interval shows the value alone (the reason is in
+        the provenance line, where gate A3 looks for it)."""
+        ci95 = self.meta(key, "ci95")
+        ci = self.ci(key) if isinstance(ci95, list | tuple) and len(ci95) == 2 else ""
         return f"{self.marker(key, fmt, missing)} {ci}".rstrip()
 
     def prov(self, key: str) -> str:
@@ -177,6 +184,20 @@ class NumberView:
             f"seed {self.meta(key, 'seed', default='?')}",
             f"CI95 {self.ci(key) or '?'}",
         ]
+        n_seeds = self.meta(key, "n_seeds")
+        if isinstance(n_seeds, int) and n_seeds > 1:
+            parts.append(
+                f"mean of {n_seeds} models (training seeds {self.meta(key, 'train_seeds')}); "
+                "CI95 = seed min–max"
+            )
+        natoms = self.meta(key, "natoms")
+        if natoms is not None:
+            steps, dt = self.meta(key, "steps"), self.meta(key, "timestep_fs")
+            length = ""
+            if steps is not None and dt is not None:
+                ps = format_value(float(steps) * float(dt) / 1000.0)
+                length = f", {ps} ps at {format_value(float(dt))} fs"
+            parts.append(f"{natoms} atoms{length}")
         floor = self.meta(key, "noise_floor_f")
         if floor is not None:
             parts.append(f"noise floor {format_value(float(floor))} meV/Å")
@@ -273,20 +294,41 @@ def build_tables(view: NumberView) -> dict[str, Table]:
         "energies",
         "eval.errors",
         ["Tier", *bracket_cols],
-        "Energy MAE in meV/atom on the reference's own energy scale; B1 energies are on the QE "
-        "scale (E0s from isolated-atom QE), B0/B0′/B2 `pt_head` numbers on the MP scale.",
-        _tier_rows("mae_e"),
+        "Energy MAE in meV/atom against the project's QE labels. The fine-tuned models predict "
+        "on the QE scale (B1 and B2 head `Default` with isolated-atom QE E0s, B3 with fitted "
+        "E0s); the zero-shot models predict on the MP scale, so their cells read n/a instead "
+        "of mixing scales. Only the QE-labelled tiers are listed (T3 and T4a energies would be "
+        "on other codes' scales).",
+        [row for row in _tier_rows("mae_e") if row.label.split()[0] in QE_TIERS],
+        missing={
+            f"eval.errors.{tier}.{b}.mae_e": "n/a (MP scale)"
+            for tier in QE_TIERS
+            for b in ("B0", "B0p")
+        },
     )
     b1_scale_na = (view.value("offsets.residual_meV_atom") or 0.0) > OFFSET_GATE_MEV_ATOM
     missing = {f"eval.discovery.B1.{m}": "n/a (scale)" for m in ("delta_f1", "mae_e_above_hull")}
     discovery_metrics = ("delta_f1", "mae_e_above_hull", "rmsd")
+    prevalence = next(
+        (
+            view.meta(key, "sample_prevalence")
+            for key in sorted(view.entries)
+            if key.startswith("eval.discovery.") and view.meta(key, "sample_prevalence")
+        ),
+        None,
+    )
     tables["discovery"] = make_table(
         view,
         "discovery",
         "eval.discovery",
         ["Model", "paired ΔF1 vs B0", "e_above_hull MAE (meV/atom)", "RMSD (Å)"],
-        "Labelled, seeded 1,000-structure WBM sample at natural prevalence (16.7 % stable), "
-        "vendored Matbench-Discovery metrics; F1 only as a paired difference vs B0 on the "
+        "Labelled, seeded 1,000-structure WBM sample at natural prevalence"
+        + (
+            f" ({format_value(100.0 * float(prevalence))} % stable in this sample)"
+            if prevalence
+            else ""
+        )
+        + ", vendored Matbench-Discovery metrics; F1 only as a paired difference vs B0 on the "
         "identical sample with a bootstrap CI. No public ranking is claimed or comparable.",
         [
             Row(label, [f"eval.discovery.{b}.{m}" for m in discovery_metrics])
@@ -328,10 +370,10 @@ def build_tables(view: NumberView) -> dict[str, Table]:
         "thermal",
         "md",
         ["Compound / engine", "a(300 K) (Å)", "a experiment (Å)", "deviation (%)", "α (1/K)"],
-        "NPT thermal expansion at 300 K, 64-atom cells, 2 fs steps, against experiment: every "
-        "cell of a row cites reference code `experiment` (the literature lattice constant is "
-        "itself a published number). Rows of a second engine appear only after the parity gate "
-        "passes.",
+        "NPT thermal expansion at 300 K against experiment; cell size, trajectory length and "
+        "time step of every row are in its provenance line. Every cell of a row cites reference "
+        "code `experiment` (the literature lattice constant is itself a published number). Rows "
+        "of a second engine appear only after the parity gate passes.",
         [
             Row(
                 f"{compound} / {engine.upper()}",
@@ -356,17 +398,39 @@ def build_tables(view: NumberView) -> dict[str, Table]:
         ],
         compact=True,
     )
+    windows = next(
+        (
+            (view.meta(key, "n_windows"), view.meta(key, "ps_per_window"))
+            for key in sorted(view.entries)
+            if key.startswith("sampling.") and view.meta(key, "n_windows")
+        ),
+        (None, None),
+    )
+    window_clause = (
+        f"{format_value(float(windows[0]))} umbrella windows × {format_value(float(windows[1]))} ps"
+        if windows[0] is not None and windows[1] is not None
+        else "umbrella windows"
+    )
     tables["sampling"] = make_table(
         view,
         "sampling",
         "sampling",
-        ["Compound", "umbrella ΔF (eV)", "block error (eV)", "NEB E_a (eV)"],
-        "Vacancy hop at 300 K: 12 umbrella windows × 15 ps, MBAR/WHAM free energy with block "
-        "error, against the NEB barrier on the same model (reference code `mace`).",
+        [
+            "Compound",
+            "umbrella barrier ΔF‡ (eV)",
+            "end-to-end ΔF (eV)",
+            "block error (eV)",
+            "NEB E_a (eV)",
+        ],
+        f"Vacancy hop at 300 K: {window_clause} (Langevin), MBAR free-energy profile (WHAM "
+        "cross-check) with block error, against the NEB barrier on the same model (reference "
+        "code `mace`). The hop is between equivalent sites, so the end-to-end ΔF is a "
+        "consistency check that should vanish; the barrier ΔF‡ is the number to compare with NEB.",
         [
             Row(
                 compound,
                 [
+                    f"sampling.wham.{compound}.B0.dF_barrier_eV",
                     f"sampling.umbrella.{compound}.dF_eV",
                     f"sampling.umbrella.{compound}.dF_err_eV",
                     f"sampling.neb.{compound}.Ea_eV",
@@ -422,8 +486,9 @@ def build_bullet(view: NumberView) -> str:
     )
     if view.has("data.n_qe_frames") or not view.has("data.n_omat24_frames"):
         data_clause = (
-            f"on {view.marker('data.n_qe_frames')} in-house spin-polarised Quantum ESPRESSO "
-            "frames of B20 skyrmion hosts (FeSi/MnSi/CoSi)"
+            f"on {view.marker('data.n_train_frames')} in-house spin-polarised Quantum ESPRESSO "
+            "frames of B20 skyrmion hosts (FeSi/MnSi/CoSi; "
+            f"{view.marker('data.n_qe_frames')} labelled in total)"
         )
     else:
         data_clause = (
@@ -436,15 +501,19 @@ def build_bullet(view: NumberView) -> str:
         [f"md.ase.{c}.a_dev_pct" for c in ("MnSi", "FeSi", "CoSi", "FeGe")],
         "md.ase.MnSi.a_dev_pct",
     )
-    umbrella = _first_present(
-        view, [f"sampling.umbrella.{c}.dF_eV" for c in COMPOUNDS], "sampling.umbrella.FeSi.dF_eV"
+    md_compound = thermal.split(".")[2]
+    md_model = str(view.meta(thermal, "model_label", default="B0"))
+    md_who = "zero-shot MPA-0" if md_model == "B0" else md_model
+    barrier = _first_present(
+        view,
+        [f"sampling.wham.{c}.B0.dF_barrier_eV" for c in COMPOUNDS],
+        "sampling.wham.FeSi.B0.dF_barrier_eV",
     )
-    neb = umbrella.replace("sampling.umbrella.", "sampling.neb.").replace(".dF_eV", ".Ea_eV")
-    active = (
-        "one committee-uncertainty active-learning round"
-        if view.has("active.n_selected")
-        else "an active-learning round (pending)"
-    )
+    neb = "sampling.neb." + barrier.split(".")[2] + ".Ea_eV"
+    # a clause for work that has not run is left out, not announced as pending
+    active = ""
+    if view.has("active.n_selected"):
+        active = "one committee-uncertainty active-learning round; "
     delta_f1 = f"eval.discovery.{ft}.delta_f1"
     ci = view.ci(delta_f1) or "[CI pending]"
     f_before = view.marker("eval.errors.T0.B0.mae_f")
@@ -452,15 +521,18 @@ def build_bullet(view: NumberView) -> str:
     w_before = view.marker(f"eval.phonons.{phonon_compound}.B0.omega_mae_meV")
     w_after = view.marker(f"eval.phonons.{phonon_compound}.{ft}.omega_mae_meV")
     fege = view.marker(f"eval.errors.T2.{ft}.mae_f")
+    fege_before = view.marker("eval.errors.T2.B0.mae_f")
     return (
         f"Fine-tuned MACE-MPA-0 (equivariant GNN) {data_clause}: held-out force MAE "
         f"{f_before}→{f_after} meV/Å, phonon ω-MAE vs same-code DFT {w_before}→{w_after} meV "
-        f"({phonon_compound}), never-trained FeGe {fege} meV/Å; forgetting quantified as paired "
-        f"ΔF1 = {view.marker(delta_f1)} {ci} on a labelled 1,000-structure WBM sample "
-        f"(Matbench-Discovery protocol, no public ranking claimed); deployed in {engines} MD "
-        f"(thermal expansion within {view.marker(thermal)} % of experiment), umbrella-sampled a "
-        f"vacancy-hop free energy (ΔF = {view.marker(umbrella)} eV vs NEB {view.marker(neb)} eV), "
-        f"{active}; open-sourced (MIT) with a provenance-checked tool-calling agent."
+        f"({phonon_compound}), never-trained FeGe/MnGe {fege_before}→{fege} meV/Å; forgetting "
+        f"quantified as paired ΔF1 = {view.marker(delta_f1)} {ci} on a labelled 1,000-structure "
+        "WBM sample (Matbench-Discovery protocol, no public ranking claimed); deployed in "
+        f"{engines} MD ({md_who} {md_compound} 300 K lattice constant {view.marker(thermal)} % "
+        "from experiment), umbrella-sampled a "
+        f"vacancy-hop free-energy barrier (ΔF‡ = {view.marker(barrier)} eV vs NEB "
+        f"{view.marker(neb)} eV), "
+        f"{active}open-sourced (MIT) with a provenance-checked tool-calling agent."
     )
 
 
