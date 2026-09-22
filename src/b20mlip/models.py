@@ -103,7 +103,7 @@ class Split(B20Model):
     split_id: str
     seed: int
     frames_sha256: str
-    policy: Literal["group_hash"] = "group_hash"
+    policy: Literal["group_hash", "group_hash_v2"] = "group_hash"
     fractions: tuple[float, float, float] = (0.8, 0.1, 0.1)
     train: list[str]  # frame_ids
     val: list[str]

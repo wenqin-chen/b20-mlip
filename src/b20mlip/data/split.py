@@ -18,6 +18,22 @@ except through these exclusions, which move the affected frames to **test**:
 Tiers: T0 = val + test frames labelled by QE (held-out groups); T1/T2/T3/T4a as above (every
 matching frame, wherever it landed); T4b = the WBM sample ids passed in. ``split_id`` is
 ``sha256(frames_sha256, seed, fractions, policy, holdout, max_train_T, train_sources)[:12]``.
+
+Policy ``group_hash_v2`` (default from 2026-09-22; fixes two flaws of ``group_hash`` found on
+the round-0 data, where only ~20 trainable groups exist):
+
+* ``group_hash`` could hash a *held-out-compound* or *hot* group into **val**, and MACE selects
+  its exported checkpoint (and we selected the learning rate) on val: the never-trained tier T2
+  then steered model selection (round-0 split d195dc5f2104: val = 29 MnGe frames).
+* ``group_hash`` T0 = val + test QE frames, so T0 contained T2 (115 of its 147 frames) and the
+  selection frames.
+
+``group_hash_v2``: a group with ``u >= f_train + f_val`` is **test** (held out as a whole);
+every other group is train+val, and its *trainable* frames go to **val** frame by frame
+(``sha256(f"val|{frame_id}|{seed}") < f_val / (f_train + f_val)``), the rest to **train**.
+Non-trainable frames (hot, held-out compound, non-train source) always go to **test**, never
+to val. **T0 = test frames of trainable groups** (QE-labelled, trained compounds, trained
+temperatures): held-out groups only. Val frames belong to no tier.
 """
 
 from __future__ import annotations
@@ -35,6 +51,8 @@ from b20mlip.provenance import RunContext, sha256_frames
 
 Bucket = Literal["train", "val", "test"]
 POLICY = "group_hash"
+POLICY_V2 = "group_hash_v2"
+Policy = Literal["group_hash", "group_hash_v2"]
 DEFAULT_FRACTIONS: tuple[float, float, float] = (0.8, 0.1, 0.1)
 DEFAULT_HOLDOUT: tuple[str, ...] = ("FeGe", "MnGe")
 DEFAULT_TRAIN_SOURCES: tuple[str, ...] = ("qe",)
@@ -83,8 +101,16 @@ def group_split(
     *,
     wbm_ids: Iterable[str] | None = None,
     train_sources: Iterable[str] = DEFAULT_TRAIN_SOURCES,
+    policy: Policy = POLICY,
 ) -> Split:
-    """Deterministic group split plus tiers (policy in the module docstring)."""
+    """Deterministic group split plus tiers (policies in the module docstring)."""
+    if policy == POLICY_V2:
+        return _group_split_v2(
+            frames, seed, fractions, holdout_compounds, max_train_T,
+            wbm_ids=wbm_ids, train_sources=train_sources,
+        )  # fmt: skip
+    if policy != POLICY:
+        raise ValueError(f"unknown split policy {policy!r}")
     fr = tuple(float(f) for f in fractions)
     if len(fr) != 3 or abs(sum(fr) - 1.0) > 1e-6 or min(fr) < 0:
         raise ValueError(f"fractions must be three non-negative numbers summing to 1, got {fr}")
@@ -157,6 +183,85 @@ def group_split(
     )
 
 
+def _group_split_v2(
+    frames: Sequence[Frame],
+    seed: int,
+    fractions: Sequence[float],
+    holdout_compounds: Iterable[str],
+    max_train_T: float,
+    *,
+    wbm_ids: Iterable[str] | None,
+    train_sources: Iterable[str],
+) -> Split:
+    fr = tuple(float(f) for f in fractions)
+    if len(fr) != 3 or abs(sum(fr) - 1.0) > 1e-6 or min(fr) < 0:
+        raise ValueError(f"fractions must be three non-negative numbers summing to 1, got {fr}")
+    holdout = {c for c in holdout_compounds}
+    sources = {s for s in train_sources}
+    ids = [f.frame_id for f in frames]
+    if len(set(ids)) != len(ids):
+        raise ValueError("duplicate frame_ids; run `data filter` (dedupe) first")
+    groups: dict[str, list[str]] = {}
+    for f in frames:
+        groups.setdefault(f.group_id, []).append(f.frame_id)
+    held_group = {gid: group_hash(gid, seed) >= fr[0] + fr[1] for gid in groups}
+    val_share = fr[1] / (fr[0] + fr[1]) if fr[0] + fr[1] > 0 else 0.0
+
+    train: list[str] = []
+    val: list[str] = []
+    test: list[str] = []
+    tiers: dict[Tier, list[str]] = {t: [] for t in TIERS}
+    for f in frames:
+        hot = f.temperature_K is not None and f.temperature_K > max_train_T
+        held_compound = f.compound in holdout
+        trainable = f.label_source in sources and not hot and not held_compound
+        if hot:
+            tiers["T1"].append(f.frame_id)
+        if held_compound:
+            tiers["T2"].append(f.frame_id)
+        if not trainable or held_group[f.group_id]:
+            bucket = "test"
+        elif group_hash(f"val|{f.frame_id}", seed) < val_share:
+            bucket = "val"
+        else:
+            bucket = "train"
+        if bucket == "train":
+            train.append(f.frame_id)
+        elif bucket == "val":
+            val.append(f.frame_id)
+        else:
+            test.append(f.frame_id)
+        if bucket == "test" and trainable and f.label_source == "qe":
+            tiers["T0"].append(f.frame_id)  # held-out groups of trained compounds only
+        if f.label_source == "omat24" and bucket != "train":
+            tiers["T3"].append(f.frame_id)
+        if f.label_source == "mptrj" and bucket != "train":
+            tiers["T4a"].append(f.frame_id)
+    if train and not val:
+        raise ValueError("group_hash_v2 produced an empty validation set; lower f_train")
+    tiers["T4b"] = [str(i) for i in (wbm_ids or [])]
+    frames_sha = sha256_frames(frames)
+    split_id = split_id_for(
+        frames_sha, seed, fr, POLICY_V2,
+        holdout_compounds=sorted(holdout), max_train_T=float(max_train_T),
+        train_sources=sorted(sources),
+    )  # fmt: skip
+    return Split(
+        split_id=split_id,
+        seed=seed,
+        frames_sha256=frames_sha,
+        policy="group_hash_v2",
+        fractions=(fr[0], fr[1], fr[2]),
+        train=train,
+        val=val,
+        test=test,
+        tiers=tiers,
+        groups=groups,
+        holdout_compounds=sorted(holdout),
+        max_train_T=float(max_train_T),
+    )
+
+
 def write_split(split: Split, path: str | Path) -> Path:
     p = Path(path)
     p.parent.mkdir(parents=True, exist_ok=True)
@@ -188,6 +293,7 @@ def run(
     holdout_compounds: Iterable[str] = DEFAULT_HOLDOUT,
     max_train_T: float = 600.0,
     train_sources: Iterable[str] = DEFAULT_TRAIN_SOURCES,
+    policy: str = POLICY_V2,
 ) -> dict[str, Any]:
     """Stage ``data.split``: ``--frames F --out data/splits/`` -> ``<out>/<split_id>.json``."""
     src = Path(frames)
@@ -211,6 +317,7 @@ def run(
         max_train_T,
         wbm_ids=wbm_ids,
         train_sources=train_sources,
+        policy=policy,  # type: ignore[arg-type]
     )
     out_path = Path(out)
     if out_path.suffix.lower() != ".json":
@@ -232,6 +339,7 @@ def run(
 
 
 __all__ = [
+    "POLICY_V2",
     "DEFAULT_FRACTIONS",
     "DEFAULT_HOLDOUT",
     "DEFAULT_TRAIN_SOURCES",

@@ -191,6 +191,14 @@ def split(
     train_sources: Annotated[
         str, typer.Option("--train-sources", help="label_source values allowed in train.")
     ] = "qe",
+    policy: Annotated[
+        str,
+        typer.Option(
+            "--policy",
+            help="group_hash_v2 (default: val from trainable frames only, T0 = held-out groups "
+            "of trained compounds) or group_hash (legacy, reproduces pre-2026-09-22 splits).",
+        ),
+    ] = "group_hash_v2",
 ) -> None:
     """Group-hash 80/10/10 split with tiers T0-T4b; writes data/splits/<split_id>.json."""
     from b20mlip.cli import finish, state_of
@@ -214,6 +222,7 @@ def split(
         holdout_compounds=_split_csv(holdout) or [],
         max_train_T=max_train_t,
         train_sources=_split_csv(train_sources) or [],
+        policy=policy,
     )
     finish(result)
 

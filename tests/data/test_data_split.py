@@ -172,3 +172,35 @@ def test_run_stage(data_settings: Settings, tmp_path: Path, wbm_files: tuple[Pat
     assert (tmp_path / "v1.json").is_file() and explicit.summary["n_T4b"] == 0
     dry = run_stage("data.split", data_settings, sp.run, frames=src, out=tmp_path, dry_run=True)
     assert dry.status == "partial" and dry.summary == {"planned": 1}
+
+
+def test_group_hash_v2_keeps_holdout_and_hot_frames_out_of_val_and_t0() -> None:
+    """Regression (2026-09-22): under the legacy policy a held-out-compound group hashed into
+    val (MnGe steered checkpoint selection) and T0 contained T2. v2: val only from trainable
+    frames; T0 = held-out groups of trained compounds; T1/T2 frames always test."""
+
+    def qe(compound: str, parent: str, seed: int, temperature_K: float | None = None) -> Frame:
+        return b20_frame(
+            compound, "rattle", rattle=0.05, seed=seed, label_source="qe", energy_scale="qe",
+            parent=parent, temperature_K=temperature_K,
+        )  # fmt: skip
+
+    frames = [qe("FeSi", f"p{k}", 100 * k + j) for k in range(40) for j in range(5)]
+    frames += [qe("MnGe", "mnge", 9000 + j) for j in range(30)]  # held-out compound
+    frames += [qe("CoSi", "md", 9500 + j, temperature_K=900.0) for j in range(6)]  # hot
+    s = sp.group_split(frames, seed=3, policy="group_hash_v2")
+    assert s.policy == "group_hash_v2"
+    t2, t1 = set(s.tiers["T2"]), set(s.tiers["T1"])
+    assert t2 and t1 and not (t2 & set(s.val)) and not (t1 & set(s.val))
+    assert not (t2 & set(s.train)) and not (t1 & set(s.train))
+    assert not (set(s.tiers["T0"]) & (t2 | t1 | set(s.val) | set(s.train)))
+    assert set(s.tiers["T0"]) <= set(s.test)
+    trainable = [f for f in frames if f.compound == "FeSi"]
+    n = len(trainable)
+    assert 0.03 * n < len(s.val) < 0.2 * n  # ~10 % frame-level validation
+    # groups are never split between T0 (test) and train
+    train_groups = {f.group_id for f in frames if f.frame_id in set(s.train)}
+    t0_groups = {f.group_id for f in frames if f.frame_id in set(s.tiers["T0"])}
+    assert not (train_groups & t0_groups)
+    legacy = sp.group_split(frames, seed=3)  # default stays the legacy policy in the library
+    assert legacy.policy == "group_hash" and legacy.split_id != s.split_id
