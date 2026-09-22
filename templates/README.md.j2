@@ -104,8 +104,10 @@ run; a table without any number says so explicitly.
 ### Molecular dynamics and thermal expansion
 
 <!-- gen:start:parity -->
-Parity gate (twenty frames, ASE against the second MD engine): **{{ parity.state }}**;
-max|ΔF| {{ parity.max_df }} eV/Å, max|ΔE| {{ parity.max_de }} eV/atom.
+{% for p in parity %}
+- Parity gate, {{ p.model }} (twenty frames, ASE against the second MD engine): **{{ p.state }}**;
+  max|ΔF| {{ p.max_df }} eV/Å, max|ΔE| {{ p.max_de }} eV/atom.
+{% endfor %}
 <!-- gen:end -->
 
 {{ table(tables.thermal) }}

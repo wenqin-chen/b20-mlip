@@ -20,17 +20,18 @@ compounds ``FeSi CoSi MnSi FeGe``):
 block            keys
 ===============  ==================================================================================
 status           (counts of the numbers file itself)
-oneliner         ``parity.passed`` (== 1 unlocks the second MD engine in the one-liner)
+oneliner         any ``parity.<label>.passed`` == 1 unlocks the second engine in the one-liner
 forces           ``eval.errors.<tier>.<bracket>.mae_f``            [meV/Å]
 energies         ``eval.errors.<tier>.<bracket>.mae_e``            [meV/atom]
 discovery        ``eval.discovery.<bracket>.{delta_f1, mae_e_above_hull, rmsd}``;
                  ``offsets.residual_meV_atom`` (> 20 renders "n/a (scale)" for B1)
 phonons          ``eval.phonons.<compound|phononDB103>.<bracket>.{omega_mae_meV, softening_index,
                  imaginary_count, omega_mae_meV_pbesol}`` (the last one is the cross-functional col)
-thermal          ``md.<ase|lammps>.<compound>.{a_300K_A, a_exp_A, a_dev_pct, alpha_per_K}``
-                 (all referenced to ``experiment``); ``parity.passed`` unlocks lammps rows
-stability        ``md.<ase|lammps>.<compound>.drift_meV_atom_ps`` (reference code ``mace``)
-parity           ``md.parity.{max_dF_eVA, max_dE_eV_atom}``; ``parity.passed``
+thermal          ``md.<ase|lammps>.<compound>.<label>.{a_300K_A, a_exp_A, a_dev_pct, alpha_per_K}``
+                 (all referenced to ``experiment``); ``parity.<label>.passed`` unlocks that model's
+                 lammps rows; runs before 2026-09-22 published the keys without ``<label>`` (= B0)
+stability        ``md.<ase|lammps>.<compound>.<label>.drift_meV_atom_ps`` (reference code ``mace``)
+parity           ``md.parity.<label>.{max_dF_eVA, max_dE_eV_atom}``; ``parity.<label>.passed``
 sampling         ``sampling.wham.<compound>.B0.dF_barrier_eV`` (the barrier compared with NEB),
                  ``sampling.umbrella.<compound>.{dF_eV, dF_err_eV}`` (end-to-end, ~0 for a
                  symmetric hop), ``sampling.neb.<compound>.Ea_eV``
@@ -210,6 +211,73 @@ class NumberView:
         return "; ".join(parts) + f"; run `{self.entries[key].get('run_id', '?')}`"
 
 
+# --- model-labelled MD and parity keys ---------------------------------------------------------
+# Runs from 2026-09-22 on publish ``md.<engine>.<compound>.<label>.<metric>`` and
+# ``parity.<label>.*``; earlier runs published the same numbers without the label and are read as
+# the model named in their meta (all of them B0).
+
+LEGACY_LABEL = "B0"
+MD_ENGINES: tuple[str, ...] = ("ase", "lammps")
+MD_METRICS: tuple[str, ...] = (
+    "a_300K_A",
+    "a_exp_A",
+    "a_dev_pct",
+    "alpha_per_K",
+    "drift_meV_atom_ps",
+)
+
+
+def _labelled_or_legacy(view: NumberView, labelled: str, legacy: str, label: str) -> str:
+    """``labelled`` when published, else ``legacy`` when its run was ``label``'s, else
+    ``labelled`` (renders pending)."""
+    if view.has(labelled):
+        return labelled
+    if view.has(legacy) and str(view.meta(legacy, "model_label", default=LEGACY_LABEL)) == label:
+        return legacy
+    return labelled
+
+
+def md_key(view: NumberView, engine: str, compound: str, label: str, metric: str) -> str:
+    return _labelled_or_legacy(
+        view, f"md.{engine}.{compound}.{label}.{metric}", f"md.{engine}.{compound}.{metric}", label
+    )
+
+
+def parity_key(view: NumberView, label: str, name: str, namespace: str = "parity") -> str:
+    return _labelled_or_legacy(view, f"{namespace}.{label}.{name}", f"{namespace}.{name}", label)
+
+
+def parity_passed(view: NumberView, label: str) -> bool:
+    return view.value(parity_key(view, label, "passed")) == 1.0
+
+
+def md_labels(view: NumberView) -> list[str]:
+    """Models with MD or parity numbers, in bracket order."""
+    found: set[str] = set()
+    for key in view.entries:
+        parts = key.split(".")
+        if parts[0] == "md" and len(parts) in (4, 5) and parts[1] in MD_ENGINES:
+            if parts[-1] in MD_METRICS:
+                found.add(parts[3] if len(parts) == 5 else _meta_label(view, key))
+        elif parts[0] == "parity" and parts[-1] == "passed" and len(parts) in (2, 3):
+            found.add(parts[1] if len(parts) == 3 else _meta_label(view, key))
+    order = [b for b, _ in BRACKETS]
+    return sorted(found, key=lambda lab: (order.index(lab) if lab in order else len(order), lab))
+
+
+def _meta_label(view: NumberView, key: str) -> str:
+    return str(view.meta(key, "model_label", default=LEGACY_LABEL))
+
+
+def md_engines(view: NumberView, label: str) -> list[str]:
+    """ASE always; LAMMPS only once ``label``'s own export passed the parity gate."""
+    return list(MD_ENGINES) if parity_passed(view, label) else ["ase"]
+
+
+def any_parity_passed(view: NumberView) -> bool:
+    return any(parity_passed(view, label) for label in md_labels(view) or [LEGACY_LABEL])
+
+
 # --- tables ---------------------------------------------------------------------------------------
 
 
@@ -374,25 +442,32 @@ def build_tables(view: NumberView) -> dict[str, Table]:
         phonon_rows,
         compact=True,
     )
-    parity_ok = view.value("parity.passed") == 1.0
-    engines = ["ase", "lammps"] if parity_ok else ["ase"]
+    labels = md_labels(view) or [LEGACY_LABEL]
     thermal_metrics = ("a_300K_A", "a_exp_A", "a_dev_pct", "alpha_per_K")
     tables["thermal"] = make_table(
         view,
         "thermal",
         "md",
-        ["Compound / engine", "a(300 K) (Å)", "a experiment (Å)", "deviation (%)", "α (1/K)"],
+        [
+            "Compound / engine / model",
+            "a(300 K) (Å)",
+            "a experiment (Å)",
+            "deviation (%)",
+            "α (1/K)",
+        ],
         "NPT thermal expansion at 300 K against experiment; cell size, trajectory length and "
         "time step of every row are in its provenance line. Every cell of a row cites reference "
-        "code `experiment` (the literature lattice constant is itself a published number). Rows "
-        "of a second engine appear only after the parity gate passes.",
+        "code `experiment` (the literature lattice constant is itself a published number). A "
+        "model's rows for the second engine appear only after that model's export passed the "
+        "parity gate.",
         [
             Row(
-                f"{compound} / {engine.upper()}",
-                [f"md.{engine}.{compound}.{m}" for m in thermal_metrics],
+                f"{compound} / {engine.upper()} / {label}",
+                [md_key(view, engine, compound, label, m) for m in thermal_metrics],
             )
             for compound in COMPOUNDS
-            for engine in engines
+            for label in labels
+            for engine in md_engines(view, label)
         ],
         compact=True,
         formats={"a_300K_A": "{:.4f}"},
@@ -401,13 +476,17 @@ def build_tables(view: NumberView) -> dict[str, Table]:
         view,
         "stability",
         "md",
-        ["Compound / engine", "NVE drift (meV/atom/ps)"],
+        ["Compound / engine / model", "NVE drift (meV/atom/ps)"],
         "NVE energy drift of separate NVE runs (cell size and length in the provenance lines); "
         "self-consistency numbers cite reference code `mace` with the training functional.",
         [
-            Row(f"{compound} / {engine.upper()}", [f"md.{engine}.{compound}.drift_meV_atom_ps"])
+            Row(
+                f"{compound} / {engine.upper()} / {label}",
+                [md_key(view, engine, compound, label, "drift_meV_atom_ps")],
+            )
             for compound in COMPOUNDS
-            for engine in engines
+            for label in labels
+            for engine in md_engines(view, label)
         ],
         compact=True,
     )
@@ -508,15 +587,24 @@ def build_bullet(view: NumberView) -> str:
             f"on {view.marker('data.n_omat24_frames')} OMat24 DFT frames of the "
             "Mn–Fe–Co–Si–Ge space (forces+stress; QE round pending)"
         )
-    engines = "ASE/LAMMPS" if view.value("parity.passed") == 1.0 else "ASE"
-    thermal = _first_present(
-        view,
-        [f"md.ase.{c}.a_dev_pct" for c in ("MnSi", "FeSi", "CoSi", "FeGe")],
-        "md.ase.MnSi.a_dev_pct",
+    engines = "ASE/LAMMPS" if any_parity_passed(view) else "ASE"
+    # the MD clause prefers the fine-tuned model (second engine first, once its parity passed)
+    md_engine, md_compound, md_label, thermal = next(
+        (
+            (engine, c, label, md_key(view, engine, c, label, "a_dev_pct"))
+            for label in dict.fromkeys((ft, LEGACY_LABEL))
+            for engine in ("lammps", "ase")
+            for c in ("MnSi", "FeSi", "CoSi", "FeGe")
+            if view.has(md_key(view, engine, c, label, "a_dev_pct"))
+            and engine in md_engines(view, label)
+        ),
+        ("ase", "MnSi", LEGACY_LABEL, md_key(view, "ase", "MnSi", LEGACY_LABEL, "a_dev_pct")),
     )
-    md_compound = thermal.split(".")[2]
-    md_model = str(view.meta(thermal, "model_label", default="B0"))
-    md_who = "zero-shot MPA-0" if md_model == "B0" else md_model
+    md_who = (
+        "zero-shot MPA-0"
+        if md_label == LEGACY_LABEL
+        else ("the fine-tuned model" if md_label == ft else md_label)
+    )
     barrier = _first_present(
         view,
         [f"sampling.wham.{c}.B0.dF_barrier_eV" for c in COMPOUNDS],
@@ -541,27 +629,36 @@ def build_bullet(view: NumberView) -> str:
         f"({phonon_compound}), never-trained FeGe/MnGe {fege_before}→{fege} meV/Å; forgetting "
         f"quantified as paired ΔF1 = {view.marker(delta_f1)} {ci} on a labelled 1,000-structure "
         "WBM sample (Matbench-Discovery protocol, no public ranking claimed); deployed in "
-        f"{engines} MD ({md_who} {md_compound} 300 K lattice constant {view.marker(thermal)} % "
-        "from experiment), umbrella-sampled a "
+        f"{engines} MD ({md_who} in {md_engine.upper()}: {md_compound} 300 K lattice constant "
+        f"{view.marker(thermal)} % from experiment), umbrella-sampled a "
         f"vacancy-hop free-energy barrier (ΔF‡ = {view.marker(barrier)} eV vs NEB "
         f"{view.marker(neb)} eV), "
         f"{active}open-sourced (MIT) with a provenance-checked tool-calling agent."
     )
 
 
-def build_parity(view: NumberView) -> dict[str, str]:
-    passed = view.value("parity.passed")
-    if passed is None:
-        state = "not yet run"
-    elif passed == 1.0:
-        state = "passed"
-    else:
-        state = "not passed"
-    return {
-        "state": state,
-        "max_df": view.cell("md.parity.max_dF_eVA"),
-        "max_de": view.cell("md.parity.max_dE_eV_atom"),
-    }
+def build_parity(view: NumberView) -> list[dict[str, str]]:
+    """One gate line per model whose export was checked (B0's line when none was)."""
+    names = dict(BRACKETS)
+    labels = [lab for lab in md_labels(view) if view.has(parity_key(view, lab, "passed"))]
+    out: list[dict[str, str]] = []
+    for label in labels or [LEGACY_LABEL]:
+        passed = view.value(parity_key(view, label, "passed"))
+        if passed is None:
+            state = "not yet run"
+        elif passed == 1.0:
+            state = "passed"
+        else:
+            state = "not passed"
+        out.append(
+            {
+                "model": names.get(label, label),
+                "state": state,
+                "max_df": view.cell(parity_key(view, label, "max_dF_eVA", "md.parity")),
+                "max_de": view.cell(parity_key(view, label, "max_dE_eV_atom", "md.parity")),
+            }
+        )
+    return out
 
 
 # --- rendering ------------------------------------------------------------------------------------
@@ -571,7 +668,7 @@ def build_context(numbers: Mapping[str, Any], cfg: Settings | None = None) -> di
     entries, stale = normalize(numbers)
     view = NumberView(entries)
     settings = cfg if cfg is not None else Settings.model_validate({})
-    parity_ok = view.value("parity.passed") == 1.0
+    parity_ok = any_parity_passed(view)
     return {
         "N": view,
         "numbers": entries,

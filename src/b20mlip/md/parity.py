@@ -7,8 +7,8 @@ single-point inputs, their collection and the ``md parity`` stage.
 returns ``{"passed", "max_dF_eVA", "max_dE_eV_atom", "n_frames", "tol_f", "tol_e", "frames":
 [...per-frame table...], "missing": [...]}``; ``passed`` requires every frame present, max|ΔF| <
 tol_f over all force components and |ΔE|/N < tol_e on every frame. The gate needs 20 frames
-(SPEC.md); fewer are compared but flagged (``n_frames``) — ``parity.passed`` is published only
-by the stage, which uses whatever ``--frames`` holds.
+(SPEC.md); fewer are compared but flagged (``n_frames``) — ``parity.<label>.passed`` is published
+only by the stage, which uses whatever ``--frames`` holds.
 
 LAMMPS side: ``parity_lammps_inputs(frames, model_lammps, out_dir)`` writes one unit directory
 per frame (``<out_dir>/<frame_id>/{data.lmp, in.parity}``: ``run 0`` with ``thermo_style custom
@@ -39,6 +39,7 @@ from b20mlip.md.common import (
     model_provenance,
     number_meta,
     relpath,
+    sanitize_key_segment,
     stage_result,
     write_numbers,
 )
@@ -349,18 +350,22 @@ def _numbers(
         tol_f_eVA=verdict["tol_f"], tol_e_eV_atom=verdict["tol_e"], n_missing=verdict["n_missing"],
         enough_frames=bool(verdict["enough_frames"]), gate_frames=GATE_FRAMES,
     )  # fmt: skip
+    # keys carry the model label: every exported model passes its own gate, and a later model's
+    # run must not replace an earlier model's verdict (the report reads the unlabelled keys of
+    # runs made before 2026-09-22 as B0's)
+    tag = sanitize_key_segment(label)
     out: dict[str, Any] = {
-        "parity.passed": 1 if verdict["passed"] else 0,
-        "parity.passed@meta": {**meta, "unit": "bool"},
-        "parity.n_frames": int(verdict["n_frames"]),
-        "parity.n_frames@meta": {**meta, "unit": "frames"},
+        f"parity.{tag}.passed": 1 if verdict["passed"] else 0,
+        f"parity.{tag}.passed@meta": {**meta, "unit": "bool"},
+        f"parity.{tag}.n_frames": int(verdict["n_frames"]),
+        f"parity.{tag}.n_frames@meta": {**meta, "unit": "frames"},
     }
     if verdict["n_frames"]:
         for key, unit in (("max_dF_eVA", "eV/A"), ("max_dE_eV_atom", "eV/atom")):
-            out[f"parity.{key}"] = float(verdict[key])
-            out[f"parity.{key}@meta"] = {**meta, "unit": unit}
-            out[f"md.parity.{key}"] = float(verdict[key])
-            out[f"md.parity.{key}@meta"] = {**meta, "unit": unit}
+            out[f"parity.{tag}.{key}"] = float(verdict[key])
+            out[f"parity.{tag}.{key}@meta"] = {**meta, "unit": unit}
+            out[f"md.parity.{tag}.{key}"] = float(verdict[key])
+            out[f"md.parity.{tag}.{key}@meta"] = {**meta, "unit": unit}
     return out
 
 
@@ -388,8 +393,8 @@ def run(
     are left under ``<run dir>/parity_inputs/`` and the stage ends ``partial`` ("run them, then
     pass --lammps-json"). ``--resume`` with a fetched ``job/`` collects and checks. Outputs:
     ``parity.json`` (verdict + per-frame table), ``parity_lammps.json`` (collected LAMMPS side)
-    and ``numbers.json`` (``parity.passed``, ``parity.max_dF_eVA``, ``parity.max_dE_eV_atom``,
-    ``parity.n_frames`` plus ``md.parity.*`` aliases).
+    and ``numbers.json`` (``parity.<label>.{passed, max_dF_eVA, max_dE_eV_atom, n_frames}`` plus
+    ``md.parity.<label>.*`` aliases).
     """
     executor = executor if executor is not None else ctx.executor
     frames_path = Path(frames)

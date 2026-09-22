@@ -348,6 +348,9 @@ def test_a6(check) -> None:  # type: ignore[no-untyped-def]
     assert len(violations) == 2 and "line 7" in violations[0]
     del numbers["parity.passed"]
     assert len(gate(check(claim, numbers), 6)) == 2
+    numbers["parity.B2.passed"] = entry(1)  # a model-labelled gate (runs from 2026-09-22) counts
+    assert gate(check(claim, numbers), 6) == []
+    del numbers["parity.B2.passed"]
     assert gate(check(doc(plan="LAMMPS later", results="```\nmd lammps\n```"), numbers), 6) == []
     bullet = doc(limitations="<!-- gen:start:bullet -->ASE/LAMMPS MD<!-- gen:end -->")
     assert len(gate(check(bullet, numbers), 6)) == 1  # the bullet is claim text wherever it sits

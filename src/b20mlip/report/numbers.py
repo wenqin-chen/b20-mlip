@@ -19,9 +19,10 @@ File format::
 * Keys are dotted, ``[A-Za-z0-9][A-Za-z0-9_.-]*``; the first segment is the namespace:
   ``eval`` (``eval.errors.<tier>.<bracket>.<metric>``, ``eval.discovery.<bracket>.<metric>``,
   ``eval.phonons.<compound>.<bracket>.<metric>``, ``eval.elastic...``), ``md`` (``md.ase.<compound>
-  .<metric>``, ``md.lammps...``, ``md.parity...``), ``sampling`` (``sampling.umbrella.<compound>
+  .<label>.<metric>``, ``md.lammps...``, ``md.parity.<label>...``; runs before 2026-09-22 omitted
+  ``<label>``), ``sampling`` (``sampling.umbrella.<compound>
   .dF_eV``, ``sampling.neb.<compound>.Ea_eV``), ``agent`` (``agent.eval.<metric>``), ``data``
-  (``data.n_qe_frames`` ...), ``offsets.residual_meV_atom``, ``parity.passed`` (0/1) and
+  (``data.n_qe_frames`` ...), ``offsets.residual_meV_atom``, ``parity.<label>.passed`` (0/1) and
   ``active.n_selected``. Brackets are ``B0, B0p (= B0′), B1, B2, B3, B4``; tiers ``T0..T4a``.
   ``templates/README.md.j2`` documents exactly which keys each README table reads.
 * ``<key>@meta`` is a JSON object merged over the file-level ``"@meta"`` (shallow). The gates need:

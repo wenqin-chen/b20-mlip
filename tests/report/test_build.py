@@ -242,3 +242,29 @@ def test_make_table_formats_values_and_their_cis() -> None:
         formats={"a_300K_A": "{:.4f}"},
     )  # fmt: skip
     assert table.rows[0]["cells"] == [f"<!-- num:{key} -->4.5568<!-- /num --> [4.5567, 4.5569]"]
+
+
+def test_model_labelled_md_rows_need_their_own_parity() -> None:
+    """Runs from 2026-09-22 publish md.<engine>.<compound>.<label>.* and parity.<label>.*; the
+    legacy unlabelled keys stay B0's, and a model's LAMMPS rows need that model's own gate."""
+    n = full_numbers()  # legacy B0 keys: md.ase.MnSi.*, parity.passed, md.parity.*
+    b2 = meta(n=1001, reference=REF_EXP, model_label="B2", natoms=512, steps=15000, timestep_fs=2)
+    n["md.lammps.MnSi.B2.a_300K_A"] = entry(4.5312, b2)
+    n["md.lammps.MnSi.B2.a_exp_A"] = entry(4.558, b2)
+    n["md.lammps.MnSi.B2.a_dev_pct"] = entry(-0.588, b2)
+    text = build.render(n)
+    assert "MnSi / LAMMPS / B2" not in block(text, "thermal")  # no B2 parity yet
+    assert "MnSi / ASE / B0" in block(text, "thermal")  # legacy rows survive
+    assert "zero-shot MPA-0" in block(text, "bullet")
+    n["parity.B2.passed"] = entry(1, meta(model_label="B2"))
+    n["md.parity.B2.max_dF_eVA"] = entry(2e-14, meta(n=20, reference=REF_MACE, model_label="B2"))
+    text = build.render(n)
+    thermal = block(text, "thermal")
+    assert "MnSi / LAMMPS / B2" in thermal and "MnSi / ASE / B0" in thermal
+    assert "<!-- num:md.lammps.MnSi.B2.a_300K_A -->4.5312<!-- /num -->" in thermal
+    parity = block(text, "parity")
+    assert "B0 MPA-0 zero-shot" in parity and "B2 multihead replay" in parity
+    assert "<!-- num:md.parity.B2.max_dF_eVA -->2e-14<!-- /num -->" in parity
+    bullet = block(text, "bullet")
+    assert "the fine-tuned model in LAMMPS: MnSi 300 K lattice constant" in bullet
+    assert "<!-- num:md.lammps.MnSi.B2.a_dev_pct -->-0.588<!-- /num -->" in bullet

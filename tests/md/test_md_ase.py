@@ -351,12 +351,13 @@ def test_stage_npt_three_temperatures_end_to_end(
     keys = {k for k in numbers if not k.endswith("@meta")}
     assert {
         "md.ase.MnSi.tiny_b20.npt.100.a_mean_A", "md.ase.MnSi.tiny_b20.npt.300.a_std_A",
-        "md.ase.MnSi.tiny_b20.npt.500.alpha_per_K", "md.ase.MnSi.a_300K_A", "md.ase.MnSi.a_exp_A",
-        "md.ase.MnSi.a_dev_pct", "md.ase.MnSi.alpha_per_K",
+        "md.ase.MnSi.tiny_b20.npt.500.alpha_per_K", "md.ase.MnSi.tiny_b20.a_300K_A",
+        "md.ase.MnSi.tiny_b20.a_exp_A", "md.ase.MnSi.tiny_b20.a_dev_pct",
+        "md.ase.MnSi.tiny_b20.alpha_per_K",
     } <= keys  # fmt: skip
-    assert numbers["md.ase.MnSi.a_exp_A"] == 4.558
-    assert numbers["md.ase.MnSi.a_dev_pct"] == pytest.approx(
-        100 * (numbers["md.ase.MnSi.a_300K_A"] - 4.558) / 4.558
+    assert numbers["md.ase.MnSi.tiny_b20.a_exp_A"] == 4.558
+    assert numbers["md.ase.MnSi.tiny_b20.a_dev_pct"] == pytest.approx(
+        100 * (numbers["md.ase.MnSi.tiny_b20.a_300K_A"] - 4.558) / 4.558
     )
     meta = numbers["md.ase.MnSi.tiny_b20.npt.300.a_mean_A@meta"]
     assert meta["reference"] == {
@@ -367,8 +368,12 @@ def test_stage_npt_three_temperatures_end_to_end(
     assert meta["ci95"] is None and meta["ci95_reason"] and meta["engine"] == "ase"
     assert meta["ensemble"] == "npt" and meta["T"] == 300.0 and meta["model_label"] == "tiny_b20"
     assert meta["energy_scale"] == "none" and meta["model_sha256"] == tiny_mace.sha256
-    assert numbers["md.ase.MnSi.a_300K_A@meta"]["reference"]["code"] == "experiment"
-    assert numbers["md.ase.MnSi.alpha_per_K@meta"]["temperatures_K"] == [100.0, 300.0, 500.0]
+    assert numbers["md.ase.MnSi.tiny_b20.a_300K_A@meta"]["reference"]["code"] == "experiment"
+    assert numbers["md.ase.MnSi.tiny_b20.alpha_per_K@meta"]["temperatures_K"] == [
+        100.0,
+        300.0,
+        500.0,
+    ]
     for key in keys:  # every value is a finite number
         assert np.isfinite(float(numbers[key])), key
     manifest = read_manifest(result.manifest_path)
@@ -381,7 +386,7 @@ def test_stage_npt_three_temperatures_end_to_end(
     }
     report_numbers = pytest.importorskip("b20mlip.report.numbers")
     parsed = report_numbers.parse_numbers_file(numbers)
-    assert set(parsed) == keys and parsed["md.ase.MnSi.a_300K_A"][1]["head"] == "Default"
+    assert set(parsed) == keys and parsed["md.ase.MnSi.tiny_b20.a_300K_A"][1]["head"] == "Default"
 
 
 def test_stage_nve_and_nvt_numbers(md_settings: Settings, tiny_mace, structure_file: Path) -> None:  # type: ignore[no-untyped-def]
@@ -394,9 +399,9 @@ def test_stage_nve_and_nvt_numbers(md_settings: Settings, tiny_mace, structure_f
     assert nve.status == "ok" and "drift_meV_atom_ps_300K" in nve.summary
     numbers = _numbers(Path(nve.manifest_path).parent)
     assert set(k for k in numbers if not k.endswith("@meta")) == {
-        "md.ase.MnSi.B1.nve.300.drift_meV_atom_ps", "md.ase.MnSi.drift_meV_atom_ps",
+        "md.ase.MnSi.B1.nve.300.drift_meV_atom_ps", "md.ase.MnSi.B1.drift_meV_atom_ps",
     }  # fmt: skip
-    assert numbers["md.ase.MnSi.drift_meV_atom_ps@meta"]["model_label"] == "B1"
+    assert numbers["md.ase.MnSi.B1.drift_meV_atom_ps@meta"]["model_label"] == "B1"
     nvt = run_stage(
         "md.ase", md_settings, ase_md.stage, model=tiny_mace.model_path, compound="MnSi",
         ensemble="nvt", T=[300.0], ps=0.01, natoms=8, structure=structure_file, calc=calc,

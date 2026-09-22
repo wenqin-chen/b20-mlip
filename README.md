@@ -7,7 +7,7 @@ what it fixes (force/phonon softening) and costs (forgetting); deploy in ASE and
 umbrella-sample a vacancy hop; drive it with a provenance-checked tool-calling agent.
 <!-- gen:end -->
 
-**Status: under construction.** <!-- gen:start:status -->370 numbers from 58 runs are published in `reports/numbers.json` (0 stale).<!-- gen:end -->
+**Status: under construction.** <!-- gen:start:status -->381 numbers from 60 runs are published in `reports/numbers.json` (0 stale).<!-- gen:end -->
 Every number on this page is regenerated from `reports/numbers.json`, which is itself built from
 run manifests and gated by `b20mlip report audit --strict` (honesty gates A1–A11 in
 `CONTRACTS.md`). A value that reads `pending` has not been produced by any run; nothing here is
@@ -187,60 +187,66 @@ _ω-MAE over sorted branches at 100 seekpath q-points, model at the DFT cell; s 
 ### Molecular dynamics and thermal expansion
 
 <!-- gen:start:parity -->
-Parity gate (twenty frames, ASE against the second MD engine): **passed**;
-max|ΔF| <!-- num:md.parity.max_dF_eVA -->3.908e-14<!-- /num --> eV/Å, max|ΔE| <!-- num:md.parity.max_dE_eV_atom -->7.994e-15<!-- /num --> eV/atom.
+- Parity gate, B0 MPA-0 zero-shot (twenty frames, ASE against the second MD engine): **passed**;
+  max|ΔF| <!-- num:md.parity.max_dF_eVA -->3.908e-14<!-- /num --> eV/Å, max|ΔE| <!-- num:md.parity.max_dE_eV_atom -->7.994e-15<!-- /num --> eV/atom.
+- Parity gate, B2 multihead replay (twenty frames, ASE against the second MD engine): **passed**;
+  max|ΔF| <!-- num:md.parity.B2.max_dF_eVA -->3.619e-14<!-- /num --> eV/Å, max|ΔE| <!-- num:md.parity.B2.max_dE_eV_atom -->7.731e-12<!-- /num --> eV/atom.
 <!-- gen:end -->
 
 <!-- gen:start:thermal -->
-| Compound / engine | a(300 K) (Å) | a experiment (Å) | deviation (%) | α (1/K) |
+| Compound / engine / model | a(300 K) (Å) | a experiment (Å) | deviation (%) | α (1/K) |
 | --- | --- | --- | --- | --- |
-| FeSi / ASE | <!-- num:md.ase.FeSi.a_300K_A -->4.4346<!-- /num --> [4.4304, 4.4387] | <!-- num:md.ase.FeSi.a_exp_A -->4.489<!-- /num --> | <!-- num:md.ase.FeSi.a_dev_pct -->-1.213<!-- /num --> | <!-- num:md.ase.FeSi.alpha_per_K -->pending<!-- /num --> |
-| CoSi / ASE | <!-- num:md.ase.CoSi.a_300K_A -->4.4279<!-- /num --> [4.4267, 4.4290] | <!-- num:md.ase.CoSi.a_exp_A -->4.444<!-- /num --> | <!-- num:md.ase.CoSi.a_dev_pct -->-0.3629<!-- /num --> | <!-- num:md.ase.CoSi.alpha_per_K -->pending<!-- /num --> |
-| MnSi / ASE | <!-- num:md.ase.MnSi.a_300K_A -->4.5573<!-- /num --> [4.5543, 4.5603] | <!-- num:md.ase.MnSi.a_exp_A -->4.558<!-- /num --> | <!-- num:md.ase.MnSi.a_dev_pct -->-0.01557<!-- /num --> | <!-- num:md.ase.MnSi.alpha_per_K -->0.000006563<!-- /num --> |
-| MnSi / LAMMPS | <!-- num:md.lammps.MnSi.a_300K_A -->4.5568<!-- /num --> [4.5567, 4.5569] | <!-- num:md.lammps.MnSi.a_exp_A -->4.558<!-- /num --> | <!-- num:md.lammps.MnSi.a_dev_pct -->-0.02683<!-- /num --> | <!-- num:md.lammps.MnSi.alpha_per_K -->pending<!-- /num --> |
-| FeGe / ASE | <!-- num:md.ase.FeGe.a_300K_A -->4.7009<!-- /num --> [4.6956, 4.7062] | <!-- num:md.ase.FeGe.a_exp_A -->4.7<!-- /num --> | <!-- num:md.ase.FeGe.a_dev_pct -->0.01874<!-- /num --> | <!-- num:md.ase.FeGe.alpha_per_K -->pending<!-- /num --> |
+| FeSi / ASE / B0 | <!-- num:md.ase.FeSi.a_300K_A -->4.4346<!-- /num --> [4.4304, 4.4387] | <!-- num:md.ase.FeSi.a_exp_A -->4.489<!-- /num --> | <!-- num:md.ase.FeSi.a_dev_pct -->-1.213<!-- /num --> | <!-- num:md.ase.FeSi.B0.alpha_per_K -->pending<!-- /num --> |
+| CoSi / ASE / B0 | <!-- num:md.ase.CoSi.a_300K_A -->4.4279<!-- /num --> [4.4267, 4.4290] | <!-- num:md.ase.CoSi.a_exp_A -->4.444<!-- /num --> | <!-- num:md.ase.CoSi.a_dev_pct -->-0.3629<!-- /num --> | <!-- num:md.ase.CoSi.B0.alpha_per_K -->pending<!-- /num --> |
+| MnSi / ASE / B0 | <!-- num:md.ase.MnSi.a_300K_A -->4.5573<!-- /num --> [4.5543, 4.5603] | <!-- num:md.ase.MnSi.a_exp_A -->4.558<!-- /num --> | <!-- num:md.ase.MnSi.a_dev_pct -->-0.01557<!-- /num --> | <!-- num:md.ase.MnSi.alpha_per_K -->0.000006563<!-- /num --> |
+| MnSi / LAMMPS / B0 | <!-- num:md.lammps.MnSi.a_300K_A -->4.5568<!-- /num --> [4.5567, 4.5569] | <!-- num:md.lammps.MnSi.a_exp_A -->4.558<!-- /num --> | <!-- num:md.lammps.MnSi.a_dev_pct -->-0.02683<!-- /num --> | <!-- num:md.lammps.MnSi.B0.alpha_per_K -->pending<!-- /num --> |
+| MnSi / LAMMPS / B2 | <!-- num:md.lammps.MnSi.B2.a_300K_A -->4.5306<!-- /num --> [4.5305, 4.5306] | <!-- num:md.lammps.MnSi.B2.a_exp_A -->4.558<!-- /num --> | <!-- num:md.lammps.MnSi.B2.a_dev_pct -->-0.6019<!-- /num --> | <!-- num:md.lammps.MnSi.B2.alpha_per_K -->pending<!-- /num --> |
+| FeGe / ASE / B0 | <!-- num:md.ase.FeGe.a_300K_A -->4.7009<!-- /num --> [4.6956, 4.7062] | <!-- num:md.ase.FeGe.a_exp_A -->4.7<!-- /num --> | <!-- num:md.ase.FeGe.a_dev_pct -->0.01874<!-- /num --> | <!-- num:md.ase.FeGe.B0.alpha_per_K -->pending<!-- /num --> |
 
-_Pending rows (no number published yet): FeSi / LAMMPS, CoSi / LAMMPS, FeGe / LAMMPS._
+_Pending rows (no number published yet): FeSi / LAMMPS / B0, FeSi / ASE / B2, FeSi / LAMMPS / B2, CoSi / LAMMPS / B0, CoSi / ASE / B2, CoSi / LAMMPS / B2, MnSi / ASE / B2, FeGe / LAMMPS / B0, FeGe / ASE / B2, FeGe / LAMMPS / B2._
 
-_NPT thermal expansion at 300 K against experiment; cell size, trajectory length and time step of every row are in its provenance line. Every cell of a row cites reference code `experiment` (the literature lattice constant is itself a published number). Rows of a second engine appear only after the parity gate passes._
+_NPT thermal expansion at 300 K against experiment; cell size, trajectory length and time step of every row are in its provenance line. Every cell of a row cites reference code `experiment` (the literature lattice constant is itself a published number). A model's rows for the second engine appear only after that model's export passed the parity gate._
 
 <details><summary>Provenance (one line per cell)</summary>
 
-- **FeSi / ASE / a(300 K) (Å)** — reference experiment/None; E0 foundation; head Default; n = 501; seed 0; CI95 [4.43, 4.439]; 64 atoms, 20 ps at 2 fs incl. equilibration; run `20260920T224837-fd5fe0-0`
-- **FeSi / ASE / a experiment (Å)** — reference experiment/None; E0 foundation; head Default; n = 501; seed 0; CI95 (no CI: tabulated experimental value); 64 atoms, 20 ps at 2 fs incl. equilibration; run `20260920T224837-fd5fe0-0`
-- **FeSi / ASE / deviation (%)** — reference experiment/None; E0 foundation; head Default; n = 501; seed 0; CI95 (no CI: derived from a_300K_A and a_exp_A); 64 atoms, 20 ps at 2 fs incl. equilibration; run `20260920T224837-fd5fe0-0`
-- **CoSi / ASE / a(300 K) (Å)** — reference experiment/None; E0 foundation; head Default; n = 501; seed 0; CI95 [4.427, 4.429]; 64 atoms, 20 ps at 2 fs incl. equilibration; run `20260920T225220-fd5fe0-0`
-- **CoSi / ASE / a experiment (Å)** — reference experiment/None; E0 foundation; head Default; n = 501; seed 0; CI95 (no CI: tabulated experimental value); 64 atoms, 20 ps at 2 fs incl. equilibration; run `20260920T225220-fd5fe0-0`
-- **CoSi / ASE / deviation (%)** — reference experiment/None; E0 foundation; head Default; n = 501; seed 0; CI95 (no CI: derived from a_300K_A and a_exp_A); 64 atoms, 20 ps at 2 fs incl. equilibration; run `20260920T225220-fd5fe0-0`
-- **MnSi / ASE / a(300 K) (Å)** — reference experiment/None; E0 foundation; head Default; n = 1501; seed 0; CI95 [4.554, 4.56]; 64 atoms, 40 ps at 2 fs incl. equilibration; run `20260920T230308-fd5fe0-0`
-- **MnSi / ASE / a experiment (Å)** — reference experiment/None; E0 foundation; head Default; n = 1501; seed 0; CI95 (no CI: tabulated experimental value); 64 atoms, 40 ps at 2 fs incl. equilibration; run `20260920T230308-fd5fe0-0`
-- **MnSi / ASE / deviation (%)** — reference experiment/None; E0 foundation; head Default; n = 1501; seed 0; CI95 (no CI: derived from a_300K_A and a_exp_A); 64 atoms, 40 ps at 2 fs incl. equilibration; run `20260920T230308-fd5fe0-0`
-- **MnSi / ASE / α (1/K)** — reference experiment/None; E0 foundation; head Default; n = 3; seed 0; CI95 (no CI: fewer than 4 temperatures: no slope error); run `20260920T230308-fd5fe0-0`
-- **MnSi / LAMMPS / a(300 K) (Å)** — reference experiment/None; E0 foundation; head Default; n = 1001; seed 0; CI95 [4.557, 4.557]; 512 atoms, 30 ps at 2 fs incl. equilibration; run `20260922T205327-5f3c7c-0`
-- **MnSi / LAMMPS / a experiment (Å)** — reference experiment/None; E0 foundation; head Default; n = 1001; seed 0; CI95 (no CI: tabulated experimental value); 512 atoms, 30 ps at 2 fs incl. equilibration; run `20260922T205327-5f3c7c-0`
-- **MnSi / LAMMPS / deviation (%)** — reference experiment/None; E0 foundation; head Default; n = 1001; seed 0; CI95 (no CI: derived from a_300K_A and a_exp_A); 512 atoms, 30 ps at 2 fs incl. equilibration; run `20260922T205327-5f3c7c-0`
-- **FeGe / ASE / a(300 K) (Å)** — reference experiment/None; E0 foundation; head Default; n = 501; seed 0; CI95 [4.696, 4.706]; 64 atoms, 20 ps at 2 fs incl. equilibration; run `20260920T225557-fd5fe0-0`
-- **FeGe / ASE / a experiment (Å)** — reference experiment/None; E0 foundation; head Default; n = 501; seed 0; CI95 (no CI: tabulated experimental value); 64 atoms, 20 ps at 2 fs incl. equilibration; run `20260920T225557-fd5fe0-0`
-- **FeGe / ASE / deviation (%)** — reference experiment/None; E0 foundation; head Default; n = 501; seed 0; CI95 (no CI: derived from a_300K_A and a_exp_A); 64 atoms, 20 ps at 2 fs incl. equilibration; run `20260920T225557-fd5fe0-0`
+- **FeSi / ASE / B0 / a(300 K) (Å)** — reference experiment/None; E0 foundation; head Default; n = 501; seed 0; CI95 [4.43, 4.439]; 64 atoms, 20 ps at 2 fs incl. equilibration; run `20260920T224837-fd5fe0-0`
+- **FeSi / ASE / B0 / a experiment (Å)** — reference experiment/None; E0 foundation; head Default; n = 501; seed 0; CI95 (no CI: tabulated experimental value); 64 atoms, 20 ps at 2 fs incl. equilibration; run `20260920T224837-fd5fe0-0`
+- **FeSi / ASE / B0 / deviation (%)** — reference experiment/None; E0 foundation; head Default; n = 501; seed 0; CI95 (no CI: derived from a_300K_A and a_exp_A); 64 atoms, 20 ps at 2 fs incl. equilibration; run `20260920T224837-fd5fe0-0`
+- **CoSi / ASE / B0 / a(300 K) (Å)** — reference experiment/None; E0 foundation; head Default; n = 501; seed 0; CI95 [4.427, 4.429]; 64 atoms, 20 ps at 2 fs incl. equilibration; run `20260920T225220-fd5fe0-0`
+- **CoSi / ASE / B0 / a experiment (Å)** — reference experiment/None; E0 foundation; head Default; n = 501; seed 0; CI95 (no CI: tabulated experimental value); 64 atoms, 20 ps at 2 fs incl. equilibration; run `20260920T225220-fd5fe0-0`
+- **CoSi / ASE / B0 / deviation (%)** — reference experiment/None; E0 foundation; head Default; n = 501; seed 0; CI95 (no CI: derived from a_300K_A and a_exp_A); 64 atoms, 20 ps at 2 fs incl. equilibration; run `20260920T225220-fd5fe0-0`
+- **MnSi / ASE / B0 / a(300 K) (Å)** — reference experiment/None; E0 foundation; head Default; n = 1501; seed 0; CI95 [4.554, 4.56]; 64 atoms, 40 ps at 2 fs incl. equilibration; run `20260920T230308-fd5fe0-0`
+- **MnSi / ASE / B0 / a experiment (Å)** — reference experiment/None; E0 foundation; head Default; n = 1501; seed 0; CI95 (no CI: tabulated experimental value); 64 atoms, 40 ps at 2 fs incl. equilibration; run `20260920T230308-fd5fe0-0`
+- **MnSi / ASE / B0 / deviation (%)** — reference experiment/None; E0 foundation; head Default; n = 1501; seed 0; CI95 (no CI: derived from a_300K_A and a_exp_A); 64 atoms, 40 ps at 2 fs incl. equilibration; run `20260920T230308-fd5fe0-0`
+- **MnSi / ASE / B0 / α (1/K)** — reference experiment/None; E0 foundation; head Default; n = 3; seed 0; CI95 (no CI: fewer than 4 temperatures: no slope error); run `20260920T230308-fd5fe0-0`
+- **MnSi / LAMMPS / B0 / a(300 K) (Å)** — reference experiment/None; E0 foundation; head Default; n = 1001; seed 0; CI95 [4.557, 4.557]; 512 atoms, 30 ps at 2 fs incl. equilibration; run `20260922T205327-5f3c7c-0`
+- **MnSi / LAMMPS / B0 / a experiment (Å)** — reference experiment/None; E0 foundation; head Default; n = 1001; seed 0; CI95 (no CI: tabulated experimental value); 512 atoms, 30 ps at 2 fs incl. equilibration; run `20260922T205327-5f3c7c-0`
+- **MnSi / LAMMPS / B0 / deviation (%)** — reference experiment/None; E0 foundation; head Default; n = 1001; seed 0; CI95 (no CI: derived from a_300K_A and a_exp_A); 512 atoms, 30 ps at 2 fs incl. equilibration; run `20260922T205327-5f3c7c-0`
+- **MnSi / LAMMPS / B2 / a(300 K) (Å)** — reference experiment/None; E0 E0s_qe.json; head Default; n = 1001; seed 0; CI95 [4.53, 4.531]; 512 atoms, 30 ps at 2 fs incl. equilibration; run `20260922T222526-5f3c7c-0`
+- **MnSi / LAMMPS / B2 / a experiment (Å)** — reference experiment/None; E0 E0s_qe.json; head Default; n = 1001; seed 0; CI95 (no CI: tabulated experimental value); 512 atoms, 30 ps at 2 fs incl. equilibration; run `20260922T222526-5f3c7c-0`
+- **MnSi / LAMMPS / B2 / deviation (%)** — reference experiment/None; E0 E0s_qe.json; head Default; n = 1001; seed 0; CI95 (no CI: derived from a_300K_A and a_exp_A); 512 atoms, 30 ps at 2 fs incl. equilibration; run `20260922T222526-5f3c7c-0`
+- **FeGe / ASE / B0 / a(300 K) (Å)** — reference experiment/None; E0 foundation; head Default; n = 501; seed 0; CI95 [4.696, 4.706]; 64 atoms, 20 ps at 2 fs incl. equilibration; run `20260920T225557-fd5fe0-0`
+- **FeGe / ASE / B0 / a experiment (Å)** — reference experiment/None; E0 foundation; head Default; n = 501; seed 0; CI95 (no CI: tabulated experimental value); 64 atoms, 20 ps at 2 fs incl. equilibration; run `20260920T225557-fd5fe0-0`
+- **FeGe / ASE / B0 / deviation (%)** — reference experiment/None; E0 foundation; head Default; n = 501; seed 0; CI95 (no CI: derived from a_300K_A and a_exp_A); 64 atoms, 20 ps at 2 fs incl. equilibration; run `20260920T225557-fd5fe0-0`
 
 </details>
 <!-- gen:end -->
 
 
 <!-- gen:start:stability -->
-| Compound / engine | NVE drift (meV/atom/ps) |
+| Compound / engine / model | NVE drift (meV/atom/ps) |
 | --- | --- |
-| MnSi / ASE | <!-- num:md.ase.MnSi.drift_meV_atom_ps -->0.0001657<!-- /num --> [0.00002303, 0.0003084] |
-| MnSi / LAMMPS | <!-- num:md.lammps.MnSi.drift_meV_atom_ps -->0.00001423<!-- /num --> [-0.0001984, 0.0002268] |
+| MnSi / ASE / B0 | <!-- num:md.ase.MnSi.drift_meV_atom_ps -->0.0001657<!-- /num --> [0.00002303, 0.0003084] |
+| MnSi / LAMMPS / B0 | <!-- num:md.lammps.MnSi.drift_meV_atom_ps -->0.00001423<!-- /num --> [-0.0001984, 0.0002268] |
 
-_Pending rows (no number published yet): FeSi / ASE, FeSi / LAMMPS, CoSi / ASE, CoSi / LAMMPS, FeGe / ASE, FeGe / LAMMPS._
+_Pending rows (no number published yet): FeSi / ASE / B0, FeSi / LAMMPS / B0, FeSi / ASE / B2, FeSi / LAMMPS / B2, CoSi / ASE / B0, CoSi / LAMMPS / B0, CoSi / ASE / B2, CoSi / LAMMPS / B2, MnSi / ASE / B2, MnSi / LAMMPS / B2, FeGe / ASE / B0, FeGe / LAMMPS / B0, FeGe / ASE / B2, FeGe / LAMMPS / B2._
 
 _NVE energy drift of separate NVE runs (cell size and length in the provenance lines); self-consistency numbers cite reference code `mace` with the training functional._
 
 <details><summary>Provenance (one line per cell)</summary>
 
-- **MnSi / ASE / NVE drift (meV/atom/ps)** — reference mace/PBE; E0 foundation; head Default; n = 501; seed 0; CI95 [0.00002303, 0.0003084]; 64 atoms, 20 ps at 2 fs incl. equilibration; run `20260920T225932-fd5fe0-0`
-- **MnSi / LAMMPS / NVE drift (meV/atom/ps)** — reference mace/PBE; E0 foundation; head Default; n = 251; seed 0; CI95 [-0.0001984, 0.0002268]; 512 atoms, 6 ps at 2 fs incl. equilibration; run `20260922T190745-a730b0-0`
+- **MnSi / ASE / B0 / NVE drift (meV/atom/ps)** — reference mace/PBE; E0 foundation; head Default; n = 501; seed 0; CI95 [0.00002303, 0.0003084]; 64 atoms, 20 ps at 2 fs incl. equilibration; run `20260920T225932-fd5fe0-0`
+- **MnSi / LAMMPS / B0 / NVE drift (meV/atom/ps)** — reference mace/PBE; E0 foundation; head Default; n = 251; seed 0; CI95 [-0.0001984, 0.0002268]; 512 atoms, 6 ps at 2 fs incl. equilibration; run `20260922T190745-a730b0-0`
 
 </details>
 <!-- gen:end -->
@@ -302,7 +308,7 @@ _Twelve-task eval (`evals/agent_tasks.jsonl`, gold from `b20mlip screen`); backe
 ### One-line summary
 
 <!-- gen:start:bullet -->
-> Fine-tuned MACE-MPA-0 (equivariant GNN) on <!-- num:data.n_train_frames -->193<!-- /num --> in-house spin-polarised Quantum ESPRESSO frames of B20 skyrmion hosts (FeSi/MnSi/CoSi; <!-- num:data.n_qe_frames -->457<!-- /num --> labelled in total): held-out force MAE <!-- num:eval.errors.T0.B0.mae_f -->24.24<!-- /num -->→<!-- num:eval.errors.T0.B2.mae_f -->8.578<!-- /num --> meV/Å, phonon ω-MAE vs same-code DFT <!-- num:eval.phonons.FeSi.B0.omega_mae_meV -->8.321<!-- /num -->→<!-- num:eval.phonons.FeSi.B2.omega_mae_meV -->0.6026<!-- /num --> meV (FeSi), never-trained FeGe/MnGe <!-- num:eval.errors.T2.B0.mae_f -->90.02<!-- /num -->→<!-- num:eval.errors.T2.B2.mae_f -->77.84<!-- /num --> meV/Å; forgetting quantified as paired ΔF1 = <!-- num:eval.discovery.B2.delta_f1 -->-0.1098<!-- /num --> [-0.1603, -0.06316] on a labelled 1,000-structure WBM sample (Matbench-Discovery protocol, no public ranking claimed); deployed in ASE/LAMMPS MD (zero-shot MPA-0 MnSi 300 K lattice constant <!-- num:md.ase.MnSi.a_dev_pct -->-0.01557<!-- /num --> % from experiment), umbrella-sampled a vacancy-hop free-energy barrier (ΔF‡ = <!-- num:sampling.wham.FeSi.B0.dF_barrier_eV -->0.7417<!-- /num --> eV vs NEB <!-- num:sampling.neb.FeSi.Ea_eV -->0.6923<!-- /num --> eV), open-sourced (MIT) with a provenance-checked tool-calling agent.
+> Fine-tuned MACE-MPA-0 (equivariant GNN) on <!-- num:data.n_train_frames -->193<!-- /num --> in-house spin-polarised Quantum ESPRESSO frames of B20 skyrmion hosts (FeSi/MnSi/CoSi; <!-- num:data.n_qe_frames -->457<!-- /num --> labelled in total): held-out force MAE <!-- num:eval.errors.T0.B0.mae_f -->24.24<!-- /num -->→<!-- num:eval.errors.T0.B2.mae_f -->8.578<!-- /num --> meV/Å, phonon ω-MAE vs same-code DFT <!-- num:eval.phonons.FeSi.B0.omega_mae_meV -->8.321<!-- /num -->→<!-- num:eval.phonons.FeSi.B2.omega_mae_meV -->0.6026<!-- /num --> meV (FeSi), never-trained FeGe/MnGe <!-- num:eval.errors.T2.B0.mae_f -->90.02<!-- /num -->→<!-- num:eval.errors.T2.B2.mae_f -->77.84<!-- /num --> meV/Å; forgetting quantified as paired ΔF1 = <!-- num:eval.discovery.B2.delta_f1 -->-0.1098<!-- /num --> [-0.1603, -0.06316] on a labelled 1,000-structure WBM sample (Matbench-Discovery protocol, no public ranking claimed); deployed in ASE/LAMMPS MD (the fine-tuned model in LAMMPS: MnSi 300 K lattice constant <!-- num:md.lammps.MnSi.B2.a_dev_pct -->-0.6019<!-- /num --> % from experiment), umbrella-sampled a vacancy-hop free-energy barrier (ΔF‡ = <!-- num:sampling.wham.FeSi.B0.dF_barrier_eV -->0.7417<!-- /num --> eV vs NEB <!-- num:sampling.neb.FeSi.Ea_eV -->0.6923<!-- /num --> eV), open-sourced (MIT) with a provenance-checked tool-calling agent.
 <!-- gen:end -->
 
 ## How to reproduce

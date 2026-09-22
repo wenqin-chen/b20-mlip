@@ -445,17 +445,20 @@ def test_run_end_to_end_with_the_fake_lammps(
     )  # fmt: skip
     assert nve.status == "ok" and "drift_meV_atom_ps" in nve.summary
     numbers = json.loads((Path(nve.manifest_path).parent / "numbers.json").read_text())
-    assert {"md.lammps.Ar.B0.nve.300.drift_meV_atom_ps", "md.lammps.Ar.drift_meV_atom_ps"} <= set(
-        numbers
-    )
+    assert {
+        "md.lammps.Ar.B0.nve.300.drift_meV_atom_ps",
+        "md.lammps.Ar.B0.drift_meV_atom_ps",
+    } <= set(numbers)
     npt300 = _run(
         cfg, model=tiny_mace.model_path, compound="Ar", T=300.0, ps=0.04, natoms=32,
         structure=argon_file, a_exp_A=5.3,
     )  # fmt: skip
     assert npt300.status == "ok" and npt300.summary["a_exp_A"] == 5.3
     numbers = json.loads((Path(npt300.manifest_path).parent / "numbers.json").read_text())
-    assert numbers["md.lammps.Ar.a_exp_A"] == 5.3 and "md.lammps.Ar.a_dev_pct" in numbers
-    assert numbers["md.lammps.Ar.a_300K_A@meta"]["reference"]["code"] == "experiment"
+    # no --label: the aliases carry the model's own label
+    assert numbers["md.lammps.Ar.tiny_b20.a_exp_A"] == 5.3
+    assert "md.lammps.Ar.tiny_b20.a_dev_pct" in numbers
+    assert numbers["md.lammps.Ar.tiny_b20.a_300K_A@meta"]["reference"]["code"] == "experiment"
 
 
 def test_run_fails_cleanly_without_lammps(

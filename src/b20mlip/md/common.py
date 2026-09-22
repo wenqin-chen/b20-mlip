@@ -427,8 +427,8 @@ def md_numbers(
             )  # fmt: skip
             numbers[f"{base}.drift_meV_atom_ps"] = res.drift_meV_atom_ps
             numbers[f"{base}.drift_meV_atom_ps@meta"] = meta
-            numbers[f"md.{engine}.{compound}.drift_meV_atom_ps"] = res.drift_meV_atom_ps
-            numbers[f"md.{engine}.{compound}.drift_meV_atom_ps@meta"] = meta
+            numbers[f"md.{engine}.{compound}.{label}.drift_meV_atom_ps"] = res.drift_meV_atom_ps
+            numbers[f"md.{engine}.{compound}.{label}.drift_meV_atom_ps@meta"] = meta
         if res.ensemble == "npt" and res.a_mean_A is not None:
             meta = number_meta(
                 n=n, ci95=st.get("a_ci95"),
@@ -445,18 +445,18 @@ def md_numbers(
                     ci95_reason="fewer than 10 production samples: no block error", unit="A",
                     reference_code="experiment", a_exp_source=EXPERIMENTAL_A_SOURCE, **common,
                 )  # fmt: skip
-                numbers[f"md.{engine}.{compound}.a_300K_A"] = res.a_mean_A
-                numbers[f"md.{engine}.{compound}.a_300K_A@meta"] = exp_meta
+                numbers[f"md.{engine}.{compound}.{label}.a_300K_A"] = res.a_mean_A
+                numbers[f"md.{engine}.{compound}.{label}.a_300K_A@meta"] = exp_meta
                 exp = a_exp_A if a_exp_A is not None else EXPERIMENTAL_A_A.get(res.compound)
                 if exp is not None:
-                    numbers[f"md.{engine}.{compound}.a_exp_A"] = float(exp)
-                    numbers[f"md.{engine}.{compound}.a_exp_A@meta"] = {
+                    numbers[f"md.{engine}.{compound}.{label}.a_exp_A"] = float(exp)
+                    numbers[f"md.{engine}.{compound}.{label}.a_exp_A@meta"] = {
                         **exp_meta, "ci95": None, "ci95_reason": "tabulated experimental value",
                     }  # fmt: skip
-                    numbers[f"md.{engine}.{compound}.a_dev_pct"] = (
+                    numbers[f"md.{engine}.{compound}.{label}.a_dev_pct"] = (
                         100.0 * (res.a_mean_A - float(exp)) / float(exp)
                     )
-                    numbers[f"md.{engine}.{compound}.a_dev_pct@meta"] = {
+                    numbers[f"md.{engine}.{compound}.{label}.a_dev_pct@meta"] = {
                         **exp_meta, "unit": "%", "ci95": None,
                         "ci95_reason": "derived from a_300K_A and a_exp_A",
                     }  # fmt: skip
@@ -473,8 +473,8 @@ def md_numbers(
             base = f"md.{engine}.{compound}.{label}.npt.{fmt_T(res.temperature_K)}"
             numbers[f"{base}.alpha_per_K"] = fit["alpha_per_K"]
             numbers[f"{base}.alpha_per_K@meta"] = {**alpha_meta, "T": res.temperature_K}
-        numbers[f"md.{engine}.{compound}.alpha_per_K"] = fit["alpha_per_K"]
-        numbers[f"md.{engine}.{compound}.alpha_per_K@meta"] = {
+        numbers[f"md.{engine}.{compound}.{label}.alpha_per_K"] = fit["alpha_per_K"]
+        numbers[f"md.{engine}.{compound}.{label}.alpha_per_K@meta"] = {
             **alpha_meta,
             "reference": {**alpha_meta["reference"], "code": "experiment", "functional": None},
             "a_exp_source": EXPERIMENTAL_A_SOURCE,

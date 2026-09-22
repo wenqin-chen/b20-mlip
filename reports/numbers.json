@@ -56,7 +56,9 @@
     "md.ase/20260920T230308-fd5fe0-0": "reports/manifests/md.ase/20260920T230308-fd5fe0-0",
     "md.lammps/20260922T190745-a730b0-0": "reports/manifests/md.lammps/20260922T190745-a730b0-0",
     "md.lammps/20260922T205327-5f3c7c-0": "reports/manifests/md.lammps/20260922T205327-5f3c7c-0",
+    "md.lammps/20260922T222526-5f3c7c-0": "reports/manifests/md.lammps/20260922T222526-5f3c7c-0",
     "md.parity/20260922T181556-2ecb63-0": "reports/manifests/md.parity/20260922T181556-2ecb63-0",
+    "md.parity/20260922T222439-f9cb38-0": "reports/manifests/md.parity/20260922T222439-f9cb38-0",
     "sampling.neb/20260919T085607-fb89d0-none": "reports/manifests/sampling.neb/20260919T085607-fb89d0-none",
     "sampling.wham/20260920T225238-fb89d0-none": "reports/manifests/sampling.wham/20260920T225238-fb89d0-none"
   },
@@ -12463,6 +12465,173 @@
       "unit": "meV/atom/ps"
     }
   },
+  "md.lammps.MnSi.B2.a_300K_A": {
+    "value": 4.530564906950549,
+    "run_id": "20260922T222526-5f3c7c-0",
+    "manifest_sha256": "39c593cf8a31b09d4291d6490aa3bec1f95efa59c9665f3efb1157b03a2c0e3d",
+    "stage": "md.lammps",
+    "meta": {
+      "T": 300.0,
+      "a_exp_source": "room-temperature literature lattice parameters; MnSi 4.558 A per SPEC.md section 6",
+      "ci95": [
+        4.5304941594006465,
+        4.530635654500452
+      ],
+      "compound": "MnSi",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "engine": "lammps",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B2",
+      "model_sha256": "2b3f5fc973022174a70ded8f66ca59a954c006049334b3cee6e92c419dd593ee",
+      "n": 1001,
+      "natoms": 512,
+      "reference": {
+        "code": "experiment",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": null,
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 15000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "md.lammps.MnSi.B2.a_dev_pct": {
+    "value": -0.6019107733534548,
+    "run_id": "20260922T222526-5f3c7c-0",
+    "manifest_sha256": "39c593cf8a31b09d4291d6490aa3bec1f95efa59c9665f3efb1157b03a2c0e3d",
+    "stage": "md.lammps",
+    "meta": {
+      "T": 300.0,
+      "a_exp_source": "room-temperature literature lattice parameters; MnSi 4.558 A per SPEC.md section 6",
+      "ci95": null,
+      "ci95_reason": "derived from a_300K_A and a_exp_A",
+      "compound": "MnSi",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "engine": "lammps",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B2",
+      "model_sha256": "2b3f5fc973022174a70ded8f66ca59a954c006049334b3cee6e92c419dd593ee",
+      "n": 1001,
+      "natoms": 512,
+      "reference": {
+        "code": "experiment",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": null,
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 15000,
+      "timestep_fs": 2.0,
+      "unit": "%"
+    }
+  },
+  "md.lammps.MnSi.B2.a_exp_A": {
+    "value": 4.558,
+    "run_id": "20260922T222526-5f3c7c-0",
+    "manifest_sha256": "39c593cf8a31b09d4291d6490aa3bec1f95efa59c9665f3efb1157b03a2c0e3d",
+    "stage": "md.lammps",
+    "meta": {
+      "T": 300.0,
+      "a_exp_source": "room-temperature literature lattice parameters; MnSi 4.558 A per SPEC.md section 6",
+      "ci95": null,
+      "ci95_reason": "tabulated experimental value",
+      "compound": "MnSi",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "engine": "lammps",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B2",
+      "model_sha256": "2b3f5fc973022174a70ded8f66ca59a954c006049334b3cee6e92c419dd593ee",
+      "n": 1001,
+      "natoms": 512,
+      "reference": {
+        "code": "experiment",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": null,
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 15000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "md.lammps.MnSi.B2.npt.300.a_mean_A": {
+    "value": 4.530564906950549,
+    "run_id": "20260922T222526-5f3c7c-0",
+    "manifest_sha256": "39c593cf8a31b09d4291d6490aa3bec1f95efa59c9665f3efb1157b03a2c0e3d",
+    "stage": "md.lammps",
+    "meta": {
+      "T": 300.0,
+      "ci95": [
+        4.5304941594006465,
+        4.530635654500452
+      ],
+      "compound": "MnSi",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "engine": "lammps",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B2",
+      "model_sha256": "2b3f5fc973022174a70ded8f66ca59a954c006049334b3cee6e92c419dd593ee",
+      "n": 1001,
+      "natoms": 512,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 15000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
+  "md.lammps.MnSi.B2.npt.300.a_std_A": {
+    "value": 0.003182300812746902,
+    "run_id": "20260922T222526-5f3c7c-0",
+    "manifest_sha256": "39c593cf8a31b09d4291d6490aa3bec1f95efa59c9665f3efb1157b03a2c0e3d",
+    "stage": "md.lammps",
+    "meta": {
+      "T": 300.0,
+      "ci95": null,
+      "ci95_reason": "a spread",
+      "compound": "MnSi",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "engine": "lammps",
+      "ensemble": "npt",
+      "head": "Default",
+      "model_label": "B2",
+      "model_sha256": "2b3f5fc973022174a70ded8f66ca59a954c006049334b3cee6e92c419dd593ee",
+      "n": 1001,
+      "natoms": 512,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "steps": 15000,
+      "timestep_fs": 2.0,
+      "unit": "A"
+    }
+  },
   "md.lammps.MnSi.a_300K_A": {
     "value": 4.556777120776724,
     "run_id": "20260922T205327-5f3c7c-0",
@@ -12598,6 +12767,72 @@
       "unit": "meV/atom/ps"
     }
   },
+  "md.parity.B2.max_dE_eV_atom": {
+    "value": 7.73070496506989e-12,
+    "run_id": "20260922T222439-f9cb38-0",
+    "manifest_sha256": "da873b973efa155dd41f1c3241710192dbd9f06416062f059d357223f19d5b41",
+    "stage": "md.parity",
+    "meta": {
+      "T": null,
+      "ci95": null,
+      "ci95_reason": "deterministic maximum over frames",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "engine": "lammps-vs-ase",
+      "enough_frames": true,
+      "ensemble": null,
+      "gate_frames": 20,
+      "head": "Default",
+      "model_label": "B2",
+      "model_sha256": "2b3f5fc973022174a70ded8f66ca59a954c006049334b3cee6e92c419dd593ee",
+      "n": 20,
+      "n_missing": 0,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "tol_e_eV_atom": 0.0001,
+      "tol_f_eVA": 0.001,
+      "unit": "eV/atom"
+    }
+  },
+  "md.parity.B2.max_dF_eVA": {
+    "value": 3.6193270602780103e-14,
+    "run_id": "20260922T222439-f9cb38-0",
+    "manifest_sha256": "da873b973efa155dd41f1c3241710192dbd9f06416062f059d357223f19d5b41",
+    "stage": "md.parity",
+    "meta": {
+      "T": null,
+      "ci95": null,
+      "ci95_reason": "deterministic maximum over frames",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "engine": "lammps-vs-ase",
+      "enough_frames": true,
+      "ensemble": null,
+      "gate_frames": 20,
+      "head": "Default",
+      "model_label": "B2",
+      "model_sha256": "2b3f5fc973022174a70ded8f66ca59a954c006049334b3cee6e92c419dd593ee",
+      "n": 20,
+      "n_missing": 0,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "tol_e_eV_atom": 0.0001,
+      "tol_f_eVA": 0.001,
+      "unit": "eV/A"
+    }
+  },
   "md.parity.max_dE_eV_atom": {
     "value": 7.993605777301127e-15,
     "run_id": "20260922T181556-2ecb63-0",
@@ -12662,6 +12897,138 @@
       "tol_e_eV_atom": 0.0001,
       "tol_f_eVA": 0.001,
       "unit": "eV/A"
+    }
+  },
+  "parity.B2.max_dE_eV_atom": {
+    "value": 7.73070496506989e-12,
+    "run_id": "20260922T222439-f9cb38-0",
+    "manifest_sha256": "da873b973efa155dd41f1c3241710192dbd9f06416062f059d357223f19d5b41",
+    "stage": "md.parity",
+    "meta": {
+      "T": null,
+      "ci95": null,
+      "ci95_reason": "deterministic maximum over frames",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "engine": "lammps-vs-ase",
+      "enough_frames": true,
+      "ensemble": null,
+      "gate_frames": 20,
+      "head": "Default",
+      "model_label": "B2",
+      "model_sha256": "2b3f5fc973022174a70ded8f66ca59a954c006049334b3cee6e92c419dd593ee",
+      "n": 20,
+      "n_missing": 0,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "tol_e_eV_atom": 0.0001,
+      "tol_f_eVA": 0.001,
+      "unit": "eV/atom"
+    }
+  },
+  "parity.B2.max_dF_eVA": {
+    "value": 3.6193270602780103e-14,
+    "run_id": "20260922T222439-f9cb38-0",
+    "manifest_sha256": "da873b973efa155dd41f1c3241710192dbd9f06416062f059d357223f19d5b41",
+    "stage": "md.parity",
+    "meta": {
+      "T": null,
+      "ci95": null,
+      "ci95_reason": "deterministic maximum over frames",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "engine": "lammps-vs-ase",
+      "enough_frames": true,
+      "ensemble": null,
+      "gate_frames": 20,
+      "head": "Default",
+      "model_label": "B2",
+      "model_sha256": "2b3f5fc973022174a70ded8f66ca59a954c006049334b3cee6e92c419dd593ee",
+      "n": 20,
+      "n_missing": 0,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "tol_e_eV_atom": 0.0001,
+      "tol_f_eVA": 0.001,
+      "unit": "eV/A"
+    }
+  },
+  "parity.B2.n_frames": {
+    "value": 20.0,
+    "run_id": "20260922T222439-f9cb38-0",
+    "manifest_sha256": "da873b973efa155dd41f1c3241710192dbd9f06416062f059d357223f19d5b41",
+    "stage": "md.parity",
+    "meta": {
+      "T": null,
+      "ci95": null,
+      "ci95_reason": "deterministic maximum over frames",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "engine": "lammps-vs-ase",
+      "enough_frames": true,
+      "ensemble": null,
+      "gate_frames": 20,
+      "head": "Default",
+      "model_label": "B2",
+      "model_sha256": "2b3f5fc973022174a70ded8f66ca59a954c006049334b3cee6e92c419dd593ee",
+      "n": 20,
+      "n_missing": 0,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "tol_e_eV_atom": 0.0001,
+      "tol_f_eVA": 0.001,
+      "unit": "frames"
+    }
+  },
+  "parity.B2.passed": {
+    "value": 1.0,
+    "run_id": "20260922T222439-f9cb38-0",
+    "manifest_sha256": "da873b973efa155dd41f1c3241710192dbd9f06416062f059d357223f19d5b41",
+    "stage": "md.parity",
+    "meta": {
+      "T": null,
+      "ci95": null,
+      "ci95_reason": "deterministic maximum over frames",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "engine": "lammps-vs-ase",
+      "enough_frames": true,
+      "ensemble": null,
+      "gate_frames": 20,
+      "head": "Default",
+      "model_label": "B2",
+      "model_sha256": "2b3f5fc973022174a70ded8f66ca59a954c006049334b3cee6e92c419dd593ee",
+      "n": 20,
+      "n_missing": 0,
+      "reference": {
+        "code": "mace",
+        "cross_functional": false,
+        "e0_source": "E0s_qe.json",
+        "functional": "PBE",
+        "pseudos": null
+      },
+      "seed": 0,
+      "tol_e_eV_atom": 0.0001,
+      "tol_f_eVA": 0.001,
+      "unit": "bool"
     }
   },
   "parity.max_dE_eV_atom": {

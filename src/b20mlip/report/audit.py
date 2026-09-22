@@ -80,7 +80,8 @@ HEADS: frozenset[str] = frozenset({"Default", "pt_head"})
 BACKENDS: frozenset[str] = frozenset({"anthropic", "mock", "scripted"})
 NON_CLAIM_PREFIXES: tuple[str, ...] = ("limitations", "plan", "non-goals", "non goals", "nongoals")
 BULLET_BLOCK = "bullet"
-PARITY_KEY = "parity.passed"
+PARITY_KEY = "parity.passed"  # legacy (runs before 2026-09-22); now parity.<label>.passed
+PARITY_LABELLED_RE = re.compile(r"^parity\.[A-Za-z0-9_-]+\.passed$")
 OFFSET_KEY = "offsets.residual_meV_atom"
 OFFSET_GATE_MEV_ATOM = 20.0
 F1_RE = re.compile(r"(?<![a-z0-9])(?:delta_)?f1(?![a-z0-9])")
@@ -531,8 +532,11 @@ def gate_a5(a: Audit) -> list[str]:
 
 
 def gate_a6(a: Audit) -> list[str]:
-    """The string LAMMPS in claim sections or the bullet needs parity.passed == 1."""
-    if a.value(PARITY_KEY) == 1.0:
+    """The string LAMMPS in claim sections or the bullet needs a passed parity gate: the legacy
+    ``parity.passed`` or any model's ``parity.<label>.passed`` equal to 1."""
+    if a.value(PARITY_KEY) == 1.0 or any(
+        a.value(key) == 1.0 for key in a.entries if PARITY_LABELLED_RE.match(key)
+    ):
         return []
     v: list[str] = []
     seen: set[int] = set()

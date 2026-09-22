@@ -229,9 +229,12 @@ def test_stage_with_a_lammps_json(
     assert s["max_dF_eVA"] <= floor["max_dF_eVA_below"] and s["result"] == "parity.json"
     assert s["max_dE_eV_atom"] <= floor["max_dE_eV_atom_below"]
     numbers = _numbers(result)
-    assert numbers["parity.passed"] == 1 and numbers["parity.n_frames"] == 3
-    assert numbers["parity.max_dF_eVA"] <= 1e-9 and numbers["md.parity.max_dE_eV_atom"] <= 1e-9
-    meta = numbers["parity.passed@meta"]
+    assert numbers["parity.tiny_b20.passed"] == 1 and numbers["parity.tiny_b20.n_frames"] == 3
+    assert (
+        numbers["parity.tiny_b20.max_dF_eVA"] <= 1e-9
+        and numbers["md.parity.tiny_b20.max_dE_eV_atom"] <= 1e-9
+    )
+    meta = numbers["parity.tiny_b20.passed@meta"]
     assert meta["reference"]["code"] == "mace" and meta["n"] == 3 and meta["seed"] == 0
     assert meta["ci95"] is None and meta["ci95_reason"] and meta["enough_frames"] is False
     assert (
@@ -260,11 +263,13 @@ def test_stage_with_a_lammps_json(
         failed_gate.status == "ok" and failed_gate.summary["parity_passed"] == 0
     )  # negative results ship
     numbers = _numbers(failed_gate)
-    assert numbers["parity.passed"] == 0 and numbers["parity.max_dF_eVA"] == pytest.approx(0.0025)
-    assert numbers["parity.passed@meta"]["model_label"] == "B2"
+    assert numbers["parity.B2.passed"] == 0 and numbers["parity.B2.max_dF_eVA"] == pytest.approx(
+        0.0025
+    )
+    assert numbers["parity.B2.passed@meta"]["model_label"] == "B2"
     report_numbers = pytest.importorskip("b20mlip.report.numbers")
     parsed = report_numbers.parse_numbers_file(numbers)
-    assert parsed["parity.passed"][0] == 0.0 and "md.parity.max_dF_eVA" in parsed
+    assert parsed["parity.B2.passed"][0] == 0.0 and "md.parity.B2.max_dF_eVA" in parsed
 
 
 def test_stage_runs_the_lammps_single_points_through_the_local_executor(
