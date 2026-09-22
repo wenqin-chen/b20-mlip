@@ -44,6 +44,11 @@ export {{ k }}="{{ v }}"
 {% if cluster.scratch %}
 export LD_LIBRARY_PATH="{{ cluster.scratch }}/b20-mlip/lib:{{ cluster.scratch }}/b20-mlip/lib64:{{ cluster.scratch }}/b20-mlip/build/libtorch/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 {% endif %}
+# TorchScript's TensorExpr fuser JIT-compiles CUDA kernels with NVRTC once a graph has run a few
+# times; the libtorch cu126 bundle lacks libnvrtc-builtins.so.12.6 and the cluster has no CUDA
+# 12.6, so MD died at the first fusion (job 319084). Unfused kernels are also what the parity
+# gate validated (single-point frames never reach the fuser).
+export PYTORCH_TENSOREXPR=0
 {% if gpu %}
 export LAMMPS_CMD="{{ lammps_cmd }} -k on g 1 -sf kk -pk kokkos newton on neigh half"
 {% else %}

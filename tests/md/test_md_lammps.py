@@ -312,6 +312,7 @@ def test_lammps_sbatch_template(slurm_settings: Settings, repo: Path) -> None:
     )
     assert "module load gcc\nmodule load cuda/12.6\n" in text
     assert "export OMP_NUM_THREADS=6\n" in text
+    assert "export PYTORCH_TENSOREXPR=0\n" in text  # no NVRTC fusion (job 319084)
     assert 'export LAMMPS_CMD="/gscratch/b20/b20-mlip/bin/lmp -k on g 1 -sf kk"\n' in text
     assert (
         "run_unit() { /gscratch/b20/b20-mlip/bin/lmp -k on g 1 -sf kk -pk kokkos newton on "
