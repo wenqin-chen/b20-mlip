@@ -7,7 +7,7 @@ what it fixes (force/phonon softening) and costs (forgetting); deploy in ASE MD;
 umbrella-sample a vacancy hop; drive it with a provenance-checked tool-calling agent.
 <!-- gen:end -->
 
-**Status: under construction.** <!-- gen:start:status -->201 numbers from 33 runs are published in `reports/numbers.json` (0 stale).<!-- gen:end -->
+**Status: under construction.** <!-- gen:start:status -->219 numbers from 39 runs are published in `reports/numbers.json` (0 stale).<!-- gen:end -->
 Every number on this page is regenerated from `reports/numbers.json`, which is itself built from
 run manifests and gated by `b20mlip report audit --strict` (honesty gates A1–A11 in
 `CONTRACTS.md`). A value that reads `pending` has not been produced by any run; nothing here is
@@ -136,9 +136,41 @@ _Labelled, seeded 1,000-structure WBM sample at natural prevalence (16.7 % stabl
 ### Phonons
 
 <!-- gen:start:phonons -->
-_Not yet run: no `eval.phonons` numbers are published in `reports/numbers.json`._
+| Compound / model | ω-MAE (meV) | softening index s | imaginary modes | ω-MAE vs PBEsol (cross-functional) |
+| --- | --- | --- | --- | --- |
+| FeSi / B0 | <!-- num:eval.phonons.FeSi.B0.omega_mae_meV -->8.218<!-- /num --> (no CI: deterministic harmonic quantity over a fixed q-path; no resampling) | <!-- num:eval.phonons.FeSi.B0.softening_index -->0.7799<!-- /num --> (no CI: deterministic harmonic quantity over a fixed q-path; no resampling) | <!-- num:eval.phonons.FeSi.B0.imaginary_count -->0<!-- /num --> (no CI: deterministic harmonic quantity over a fixed q-path; no resampling) | <!-- num:eval.phonons.FeSi.B0.omega_mae_meV_pbesol -->pending<!-- /num --> |
+| FeSi / B1 | <!-- num:eval.phonons.FeSi.B1.omega_mae_meV -->0.6782<!-- /num --> (no CI: deterministic harmonic quantity over a fixed q-path; no resampling) | <!-- num:eval.phonons.FeSi.B1.softening_index -->1.005<!-- /num --> (no CI: deterministic harmonic quantity over a fixed q-path; no resampling) | <!-- num:eval.phonons.FeSi.B1.imaginary_count -->0<!-- /num --> (no CI: deterministic harmonic quantity over a fixed q-path; no resampling) | <!-- num:eval.phonons.FeSi.B1.omega_mae_meV_pbesol -->pending<!-- /num --> |
+| FeSi / B2 | <!-- num:eval.phonons.FeSi.B2.omega_mae_meV -->0.6612<!-- /num --> (no CI: deterministic harmonic quantity over a fixed q-path; no resampling) | <!-- num:eval.phonons.FeSi.B2.softening_index -->1.004<!-- /num --> (no CI: deterministic harmonic quantity over a fixed q-path; no resampling) | <!-- num:eval.phonons.FeSi.B2.imaginary_count -->0<!-- /num --> (no CI: deterministic harmonic quantity over a fixed q-path; no resampling) | <!-- num:eval.phonons.FeSi.B2.omega_mae_meV_pbesol -->pending<!-- /num --> |
+| CoSi / B0 | <!-- num:eval.phonons.CoSi.B0.omega_mae_meV -->2.182<!-- /num --> (no CI: deterministic harmonic quantity over a fixed q-path; no resampling) | <!-- num:eval.phonons.CoSi.B0.softening_index -->0.9341<!-- /num --> (no CI: deterministic harmonic quantity over a fixed q-path; no resampling) | <!-- num:eval.phonons.CoSi.B0.imaginary_count -->0<!-- /num --> (no CI: deterministic harmonic quantity over a fixed q-path; no resampling) | <!-- num:eval.phonons.CoSi.B0.omega_mae_meV_pbesol -->pending<!-- /num --> |
+| CoSi / B1 | <!-- num:eval.phonons.CoSi.B1.omega_mae_meV -->0.5111<!-- /num --> (no CI: deterministic harmonic quantity over a fixed q-path; no resampling) | <!-- num:eval.phonons.CoSi.B1.softening_index -->1.005<!-- /num --> (no CI: deterministic harmonic quantity over a fixed q-path; no resampling) | <!-- num:eval.phonons.CoSi.B1.imaginary_count -->0<!-- /num --> (no CI: deterministic harmonic quantity over a fixed q-path; no resampling) | <!-- num:eval.phonons.CoSi.B1.omega_mae_meV_pbesol -->pending<!-- /num --> |
+| CoSi / B2 | <!-- num:eval.phonons.CoSi.B2.omega_mae_meV -->0.5421<!-- /num --> (no CI: deterministic harmonic quantity over a fixed q-path; no resampling) | <!-- num:eval.phonons.CoSi.B2.softening_index -->1.006<!-- /num --> (no CI: deterministic harmonic quantity over a fixed q-path; no resampling) | <!-- num:eval.phonons.CoSi.B2.imaginary_count -->0<!-- /num --> (no CI: deterministic harmonic quantity over a fixed q-path; no resampling) | <!-- num:eval.phonons.CoSi.B2.omega_mae_meV_pbesol -->pending<!-- /num --> |
+
+_Pending rows (no number published yet): FeSi / B3, CoSi / B3, MnSi / B0, MnSi / B1, MnSi / B2, MnSi / B3, FeGe / B0, FeGe / B1, FeGe / B2, FeGe / B3, phononDB103 / B0, phononDB103 / B1, phononDB103 / B2, phononDB103 / B3._
 
 _ω-MAE over sorted branches at 100 seekpath q-points, model at the DFT cell; s = median ω_model/ω_ref; imaginary = ω < −0.4 meV. B20 rows cite the project's own QE PBE; phononDB103 rows cite VASP PBE (other code, same functional). The last column is the only place a PBEsol reference appears._
+
+<details><summary>Provenance (one line per cell)</summary>
+
+- **FeSi / B0 / ω-MAE (meV)** — reference qe/PBE (SSSP-efficiency-1.3); E0 foundation; head Default; n = 100; seed 0; CI95 (no CI: deterministic harmonic quantity over a fixed q-path; no resampling); run `20260922T074049-fb89d0-none`
+- **FeSi / B0 / softening index s** — reference qe/PBE (SSSP-efficiency-1.3); E0 foundation; head Default; n = 100; seed 0; CI95 (no CI: deterministic harmonic quantity over a fixed q-path; no resampling); run `20260922T074049-fb89d0-none`
+- **FeSi / B0 / imaginary modes** — reference qe/PBE (SSSP-efficiency-1.3); E0 foundation; head Default; n = 100; seed 0; CI95 (no CI: deterministic harmonic quantity over a fixed q-path; no resampling); run `20260922T074049-fb89d0-none`
+- **FeSi / B1 / ω-MAE (meV)** — reference qe/PBE (SSSP-efficiency-1.3); E0 E0s_qe.json; head Default; n = 100; seed 0; CI95 (no CI: deterministic harmonic quantity over a fixed q-path; no resampling); run `20260922T074143-fb89d0-none`
+- **FeSi / B1 / softening index s** — reference qe/PBE (SSSP-efficiency-1.3); E0 E0s_qe.json; head Default; n = 100; seed 0; CI95 (no CI: deterministic harmonic quantity over a fixed q-path; no resampling); run `20260922T074143-fb89d0-none`
+- **FeSi / B1 / imaginary modes** — reference qe/PBE (SSSP-efficiency-1.3); E0 E0s_qe.json; head Default; n = 100; seed 0; CI95 (no CI: deterministic harmonic quantity over a fixed q-path; no resampling); run `20260922T074143-fb89d0-none`
+- **FeSi / B2 / ω-MAE (meV)** — reference qe/PBE (SSSP-efficiency-1.3); E0 E0s_qe.json; head Default; n = 100; seed 0; CI95 (no CI: deterministic harmonic quantity over a fixed q-path; no resampling); run `20260922T074150-fb89d0-none`
+- **FeSi / B2 / softening index s** — reference qe/PBE (SSSP-efficiency-1.3); E0 E0s_qe.json; head Default; n = 100; seed 0; CI95 (no CI: deterministic harmonic quantity over a fixed q-path; no resampling); run `20260922T074150-fb89d0-none`
+- **FeSi / B2 / imaginary modes** — reference qe/PBE (SSSP-efficiency-1.3); E0 E0s_qe.json; head Default; n = 100; seed 0; CI95 (no CI: deterministic harmonic quantity over a fixed q-path; no resampling); run `20260922T074150-fb89d0-none`
+- **CoSi / B0 / ω-MAE (meV)** — reference qe/PBE (SSSP-efficiency-1.3); E0 foundation; head Default; n = 100; seed 0; CI95 (no CI: deterministic harmonic quantity over a fixed q-path; no resampling); run `20260922T074127-fb89d0-none`
+- **CoSi / B0 / softening index s** — reference qe/PBE (SSSP-efficiency-1.3); E0 foundation; head Default; n = 100; seed 0; CI95 (no CI: deterministic harmonic quantity over a fixed q-path; no resampling); run `20260922T074127-fb89d0-none`
+- **CoSi / B0 / imaginary modes** — reference qe/PBE (SSSP-efficiency-1.3); E0 foundation; head Default; n = 100; seed 0; CI95 (no CI: deterministic harmonic quantity over a fixed q-path; no resampling); run `20260922T074127-fb89d0-none`
+- **CoSi / B1 / ω-MAE (meV)** — reference qe/PBE (SSSP-efficiency-1.3); E0 E0s_qe.json; head Default; n = 100; seed 0; CI95 (no CI: deterministic harmonic quantity over a fixed q-path; no resampling); run `20260922T074156-fb89d0-none`
+- **CoSi / B1 / softening index s** — reference qe/PBE (SSSP-efficiency-1.3); E0 E0s_qe.json; head Default; n = 100; seed 0; CI95 (no CI: deterministic harmonic quantity over a fixed q-path; no resampling); run `20260922T074156-fb89d0-none`
+- **CoSi / B1 / imaginary modes** — reference qe/PBE (SSSP-efficiency-1.3); E0 E0s_qe.json; head Default; n = 100; seed 0; CI95 (no CI: deterministic harmonic quantity over a fixed q-path; no resampling); run `20260922T074156-fb89d0-none`
+- **CoSi / B2 / ω-MAE (meV)** — reference qe/PBE (SSSP-efficiency-1.3); E0 E0s_qe.json; head Default; n = 100; seed 0; CI95 (no CI: deterministic harmonic quantity over a fixed q-path; no resampling); run `20260922T074202-fb89d0-none`
+- **CoSi / B2 / softening index s** — reference qe/PBE (SSSP-efficiency-1.3); E0 E0s_qe.json; head Default; n = 100; seed 0; CI95 (no CI: deterministic harmonic quantity over a fixed q-path; no resampling); run `20260922T074202-fb89d0-none`
+- **CoSi / B2 / imaginary modes** — reference qe/PBE (SSSP-efficiency-1.3); E0 E0s_qe.json; head Default; n = 100; seed 0; CI95 (no CI: deterministic harmonic quantity over a fixed q-path; no resampling); run `20260922T074202-fb89d0-none`
+
+</details>
 <!-- gen:end -->
 
 
@@ -229,7 +261,7 @@ _Twelve-task eval (`evals/agent_tasks.jsonl`, gold from `b20mlip screen`); backe
 ### One-line summary
 
 <!-- gen:start:bullet -->
-> Fine-tuned MACE-MPA-0 (equivariant GNN) on <!-- num:data.n_qe_frames -->pending<!-- /num --> in-house spin-polarised Quantum ESPRESSO frames of B20 skyrmion hosts (FeSi/MnSi/CoSi): held-out force MAE <!-- num:eval.errors.T0.B0.mae_f -->65.59<!-- /num -->→<!-- num:eval.errors.T0.B2.mae_f -->57<!-- /num --> meV/Å, phonon ω-MAE vs same-code DFT <!-- num:eval.phonons.FeSi.B0.omega_mae_meV -->pending<!-- /num -->→<!-- num:eval.phonons.FeSi.B2.omega_mae_meV -->pending<!-- /num --> meV (FeSi), never-trained FeGe <!-- num:eval.errors.T2.B2.mae_f -->70.29<!-- /num --> meV/Å; forgetting quantified as paired ΔF1 = <!-- num:eval.discovery.B2.delta_f1 -->-0.08736<!-- /num --> [-0.1397, -0.03739] on a labelled 1,000-structure WBM sample (Matbench-Discovery protocol, no public ranking claimed); deployed in ASE MD (thermal expansion within <!-- num:md.ase.MnSi.a_dev_pct -->-0.01557<!-- /num --> % of experiment), umbrella-sampled a vacancy-hop free energy (ΔF = <!-- num:sampling.umbrella.FeSi.dF_eV -->-0.001228<!-- /num --> eV vs NEB <!-- num:sampling.neb.FeSi.Ea_eV -->0.6923<!-- /num --> eV), an active-learning round (pending); open-sourced (MIT) with a provenance-checked tool-calling agent.
+> Fine-tuned MACE-MPA-0 (equivariant GNN) on <!-- num:data.n_qe_frames -->pending<!-- /num --> in-house spin-polarised Quantum ESPRESSO frames of B20 skyrmion hosts (FeSi/MnSi/CoSi): held-out force MAE <!-- num:eval.errors.T0.B0.mae_f -->65.59<!-- /num -->→<!-- num:eval.errors.T0.B2.mae_f -->57<!-- /num --> meV/Å, phonon ω-MAE vs same-code DFT <!-- num:eval.phonons.FeSi.B0.omega_mae_meV -->8.218<!-- /num -->→<!-- num:eval.phonons.FeSi.B2.omega_mae_meV -->0.6612<!-- /num --> meV (FeSi), never-trained FeGe <!-- num:eval.errors.T2.B2.mae_f -->70.29<!-- /num --> meV/Å; forgetting quantified as paired ΔF1 = <!-- num:eval.discovery.B2.delta_f1 -->-0.08736<!-- /num --> [-0.1397, -0.03739] on a labelled 1,000-structure WBM sample (Matbench-Discovery protocol, no public ranking claimed); deployed in ASE MD (thermal expansion within <!-- num:md.ase.MnSi.a_dev_pct -->-0.01557<!-- /num --> % of experiment), umbrella-sampled a vacancy-hop free energy (ΔF = <!-- num:sampling.umbrella.FeSi.dF_eV -->-0.001228<!-- /num --> eV vs NEB <!-- num:sampling.neb.FeSi.Ea_eV -->0.6923<!-- /num --> eV), an active-learning round (pending); open-sourced (MIT) with a provenance-checked tool-calling agent.
 <!-- gen:end -->
 
 ## How to reproduce

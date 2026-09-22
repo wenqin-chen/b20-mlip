@@ -1,0 +1,343 @@
+{
+  "schema_version": 1,
+  "stage": "eval.phonons",
+  "run_id": "20260922T074127-fb89d0-none",
+  "created_at": "2026-09-22T07:41:27.229662Z",
+  "host": "Wenqins-MacBook-Pro-10.local",
+  "user": "wenqinchen",
+  "git_sha": "dce30722904bdda17b1f59064708be8072974952",
+  "git_dirty": true,
+  "uv_lock_sha256": "a039dbcfb95b46c12c7a0b465b82a5728c5b69285be0a7ce472041a0c289bcaf",
+  "python": "3.11.15",
+  "packages": {
+    "b20-mlip": "0.1.0",
+    "mace-torch": "0.3.16",
+    "torch": "2.14.0",
+    "e3nn": "0.4.4",
+    "ase": "3.29.0",
+    "phonopy": "4.5.0",
+    "pymatgen": "2026.5.4",
+    "spglib": "2.7.0",
+    "seekpath": "2.2.1",
+    "pymbar": "4.0.3",
+    "numpy": "2.4.6",
+    "pydantic": "2.13.5",
+    "pydantic-settings": "2.15.0",
+    "anthropic": "1.6.0"
+  },
+  "config_sha256": "fb89d009e83d5720bf258f31408545d4c5192d2f617ce8cc06bb358770e19633",
+  "config": {
+    "paths": {
+      "data_dir": "data",
+      "runs_dir": "runs",
+      "models_dir": "models",
+      "dft_dir": "dft",
+      "reports_dir": "reports"
+    },
+    "compute": {
+      "threads": 6,
+      "dtype": "float64",
+      "device": "cpu"
+    },
+    "cluster": {
+      "alias": "tillicum",
+      "control_path": "~/.ssh/tillicum-cm",
+      "account": null,
+      "partition_cpu": null,
+      "partition_gpu": null,
+      "scratch": null,
+      "modules": [],
+      "qe_cmd": null,
+      "lammps_cmd": null,
+      "micromamba_env": null,
+      "qos": null,
+      "install_qe": false,
+      "lammps_sha": "4d222cb3ee2a6b14083c778968497bf9e0efc4b4",
+      "libtorch_cpu_url": "https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-2.14.0%2Bcpu.zip",
+      "libtorch_cuda_url": "https://download.pytorch.org/libtorch/cu126/libtorch-shared-with-deps-2.14.0%2Bcu126.zip",
+      "resources": {}
+    },
+    "data": {
+      "compounds": [
+        "FeSi",
+        "CoSi",
+        "MnSi",
+        "FeGe"
+      ],
+      "strains": [
+        -0.06,
+        -0.04,
+        -0.02,
+        0.02,
+        0.04,
+        0.06
+      ],
+      "shears": [
+        -0.04,
+        -0.02,
+        0.02,
+        0.04
+      ],
+      "rattle_A": 0.15,
+      "eos_pct": 8.0,
+      "temperatures_K": [
+        300.0,
+        600.0,
+        900.0
+      ],
+      "force_cap_eVA": 15.0,
+      "omat24_url": "https://dl.fbaipublicfiles.com/opencatalystproject/data/omat/251210/omat24_1M_251210.tar.gz",
+      "omat24_sha256": null,
+      "wbm_sample_n": 1000,
+      "wbm_seed": 0
+    },
+    "dft": {
+      "ecut_ry": 90.0,
+      "ecut_rho": 1080.0,
+      "k_spacing_inv_A": 0.25,
+      "smearing": "mv",
+      "degauss_ry": 0.01,
+      "nspin": {
+        "FeSi": 1,
+        "CoSi": 1,
+        "MnSi": 2,
+        "FeGe": 2,
+        "MnGe": 2
+      },
+      "starting_magnetization": {
+        "Mn": 0.5,
+        "Fe": 0.5,
+        "Co": 0.0
+      },
+      "pseudo_dir": "pseudos/sssp_efficiency",
+      "pseudo_family": "SSSP-efficiency-1.3",
+      "pseudos": {
+        "Fe": "Fe.pbe-spn-kjpaw_psl.0.2.1.UPF",
+        "Mn": "mn_pbe_v1.5.uspp.F.UPF",
+        "Co": "Co_pbe_v1.2.uspp.F.UPF",
+        "Si": "Si.pbe-n-rrkjus_psl.1.0.0.UPF",
+        "Ge": "ge_pbe_v1.4.uspp.F.UPF"
+      },
+      "pseudo_md5s": {
+        "Fe": "e86618425769142926afa95317d90200",
+        "Mn": "82ef2b46521d7a7d9e736dc3972e4928",
+        "Co": "5f91765df6ddd3222702df6e7b74a16d",
+        "Si": "0b0bb1205258b0d07b9f9672cf965d36",
+        "Ge": "9c9eaa91e581c3f09632fb3098b2c6b2"
+      },
+      "sssp_json": "configs/dft/sssp_efficiency_1.3_pbe.json",
+      "conv_thr": 1e-8,
+      "mixing_beta": 0.4,
+      "electron_maxstep": 100,
+      "branch_tol_muB": 0.3,
+      "m_ref_muB": {},
+      "noise_floor_n": 20,
+      "isolated_atom_box_A": 12.0,
+      "converge_ecuts_ry": [
+        40.0,
+        50.0,
+        60.0,
+        70.0,
+        80.0,
+        90.0
+      ],
+      "converge_k_spacings": [
+        0.35,
+        0.3,
+        0.25,
+        0.2
+      ],
+      "thresholds": {
+        "E_meV_atom": 1.0,
+        "F_meV_A": 5.0
+      }
+    },
+    "train": {
+      "foundation": "medium-mpa-0",
+      "lr": 0.0001,
+      "epochs": 30,
+      "batch_size": 4,
+      "energy_weight": 1.0,
+      "forces_weight": 100.0,
+      "stress_weight": 1.0,
+      "ema_decay": 0.99,
+      "replay": {
+        "pt_train_file": "mp",
+        "num_samples_pt": 10000,
+        "subselect_pt": "fps"
+      },
+      "e0s_file": "configs/dft/E0s_qe.json",
+      "scratch": {
+        "hidden_irreps": "64x0e+64x1o",
+        "r_max": 5.0
+      },
+      "loss": "universal",
+      "extra_args": []
+    },
+    "eval": {
+      "bootstrap_n": 2000,
+      "bootstrap_seed": 0,
+      "fmax": 0.05,
+      "max_steps": 500,
+      "offset_residual_gate_meV": 20.0
+    },
+    "md": {
+      "timestep_fs": 2.0,
+      "friction": 0.01,
+      "taut": 100.0,
+      "taup": 1000.0,
+      "equil_ps": 10.0,
+      "natoms": 64,
+      "bulk_modulus_GPa": 150.0,
+      "thermo_every_steps": 10,
+      "dump_every_steps": 100,
+      "vdos_every_steps": 5,
+      "rdf_rmax_A": 6.0,
+      "rdf_nbins": 200
+    },
+    "sampling": {
+      "k_eVA2": 5.0,
+      "windows": 12,
+      "ps_per_window": 15.0,
+      "T": 300.0
+    },
+    "agent": {
+      "backend": "mock",
+      "model_id": "claude-opus-5",
+      "budget": {
+        "max_calls": 25,
+        "max_wall_s": 1800,
+        "max_dft_frames": 200,
+        "max_node_hours": 10.0,
+        "max_atoms": 512,
+        "max_md_ps": 20.0,
+        "approve_cluster": false
+      },
+      "trace_dir": "runs/agent/traces",
+      "tasks_path": "evals/agent_tasks.jsonl",
+      "refs_dir": "evals/refs",
+      "phonon_supercell": [
+        2,
+        2,
+        2
+      ],
+      "phonon_distance": 0.03,
+      "max_tokens": 16000
+    },
+    "report": {
+      "numbers_path": "reports/numbers.json"
+    },
+    "bench": {
+      "model": null,
+      "tiers": "a,b,c,d,e",
+      "quick": false,
+      "force": false,
+      "compound": "FeSi",
+      "n_frames_8atom": 80,
+      "n_frames_64atom": 20,
+      "finetune_epochs": 2,
+      "finetune_timeout_s": 3600,
+      "md_natoms": [
+        64,
+        512
+      ],
+      "md_steps": 200,
+      "md_warmup_steps": 10,
+      "md_T": 300.0,
+      "n_relax": 20,
+      "phonon_supercell": 2,
+      "phonon_distance": 0.03,
+      "fwbw_batch": 4,
+      "fwbw_natoms": 64,
+      "fwbw_repeats": 3
+    }
+  },
+  "seed": null,
+  "inputs": [
+    {
+      "path": "models/foundation/mace-mpa-0-medium.model",
+      "sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "bytes": 79462305,
+      "kind": "model"
+    },
+    {
+      "path": "data/phonons/force_sets_CoSi.json",
+      "sha256": "c5582f395f0ece99127648855aa8a44dc920aab5eeeb4a1906dadd9e5b94f1bd",
+      "bytes": 17881,
+      "kind": "json"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "runs/eval.phonons/20260922T074127-fb89d0-none/plan.json",
+      "sha256": "0b23b055ef0f9523846aa07853774fd02163cdefff0194f3be0d92ac4a04650f",
+      "bytes": 465,
+      "kind": "json"
+    },
+    {
+      "path": "runs/eval.phonons/20260922T074127-fb89d0-none/phonons_model.json",
+      "sha256": "102aa14bc564327d8f474810b00c06c5891191119ca5424d3828e26cc116d7e5",
+      "bytes": 79007,
+      "kind": "json"
+    },
+    {
+      "path": "runs/eval.phonons/20260922T074127-fb89d0-none/phonons_reference.json",
+      "sha256": "6daa0df2f42b04d716e7e890e8087eb50db9686c4dd107b10e4aad2e1ef3617c",
+      "bytes": 78942,
+      "kind": "json"
+    },
+    {
+      "path": "runs/eval.phonons/20260922T074127-fb89d0-none/phonon_compare.json",
+      "sha256": "265e438f89b2b325a132f597b936c68b802f982dc8cce9945bd7e221e9710c10",
+      "bytes": 653,
+      "kind": "json"
+    },
+    {
+      "path": "runs/eval.phonons/20260922T074127-fb89d0-none/numbers.json",
+      "sha256": "373ba6d78f519eb47ba737efc45679e31d729b634742423241ea5d7933b554d1",
+      "bytes": 2653,
+      "kind": "json"
+    }
+  ],
+  "wall_seconds": 6.14785429101903,
+  "status": "ok",
+  "slurm": null,
+  "extras": {
+    "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+    "head": "Default",
+    "tier": "phonons",
+    "compound": "CoSi",
+    "n": 100,
+    "bootstrap_seed": null,
+    "reference": {
+      "code": "qe",
+      "functional": "PBE",
+      "pseudos": "SSSP-efficiency-1.3",
+      "e0_source": null,
+      "cross_functional": false
+    },
+    "reference_label": "qe",
+    "e0_source": "foundation",
+    "energy_scale": null,
+    "model_label": "B0",
+    "cell_source": "dft",
+    "supercell": [
+      [
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        2,
+        0
+      ],
+      [
+        0,
+        0,
+        2
+      ]
+    ],
+    "displacement": 0.03
+  }
+}

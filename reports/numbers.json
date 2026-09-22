@@ -27,6 +27,12 @@
     "eval.errors/20260921T210124-fb89d0-none": "reports/manifests/eval.errors/20260921T210124-fb89d0-none",
     "eval.errors/20260921T210140-fb89d0-none": "reports/manifests/eval.errors/20260921T210140-fb89d0-none",
     "eval.errors/20260921T210145-fb89d0-none": "reports/manifests/eval.errors/20260921T210145-fb89d0-none",
+    "eval.phonons/20260922T074049-fb89d0-none": "reports/manifests/eval.phonons/20260922T074049-fb89d0-none",
+    "eval.phonons/20260922T074127-fb89d0-none": "reports/manifests/eval.phonons/20260922T074127-fb89d0-none",
+    "eval.phonons/20260922T074143-fb89d0-none": "reports/manifests/eval.phonons/20260922T074143-fb89d0-none",
+    "eval.phonons/20260922T074150-fb89d0-none": "reports/manifests/eval.phonons/20260922T074150-fb89d0-none",
+    "eval.phonons/20260922T074156-fb89d0-none": "reports/manifests/eval.phonons/20260922T074156-fb89d0-none",
+    "eval.phonons/20260922T074202-fb89d0-none": "reports/manifests/eval.phonons/20260922T074202-fb89d0-none",
     "md.ase/20260920T224837-fd5fe0-0": "reports/manifests/md.ase/20260920T224837-fd5fe0-0",
     "md.ase/20260920T225220-fd5fe0-0": "reports/manifests/md.ase/20260920T225220-fd5fe0-0",
     "md.ase/20260920T225557-fd5fe0-0": "reports/manifests/md.ase/20260920T225557-fd5fe0-0",
@@ -6420,6 +6426,690 @@
       "bootstrap_n": 2000,
       "n_frames": 65,
       "n_atoms": 520
+    }
+  },
+  "eval.phonons.CoSi.B0.imaginary_count": {
+    "value": 0.0,
+    "run_id": "20260922T074127-fb89d0-none",
+    "manifest_sha256": "e942eb07065c0c08b156804d6eb05aa086792454f100b7349a7bdb30d4a7b89a",
+    "stage": "eval.phonons",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": null,
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 100,
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic harmonic quantity over a fixed q-path; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "tier": "phonons",
+      "compound": "CoSi",
+      "reference_label": "qe",
+      "cell_source": "dft",
+      "supercell": [
+        2,
+        2,
+        2
+      ],
+      "displacement_A": 0.03,
+      "n_branches": 24,
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "cross_functional": false,
+      "unit": "count"
+    }
+  },
+  "eval.phonons.CoSi.B0.omega_mae_meV": {
+    "value": 2.18184938719614,
+    "run_id": "20260922T074127-fb89d0-none",
+    "manifest_sha256": "e942eb07065c0c08b156804d6eb05aa086792454f100b7349a7bdb30d4a7b89a",
+    "stage": "eval.phonons",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": null,
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 100,
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic harmonic quantity over a fixed q-path; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "tier": "phonons",
+      "compound": "CoSi",
+      "reference_label": "qe",
+      "cell_source": "dft",
+      "supercell": [
+        2,
+        2,
+        2
+      ],
+      "displacement_A": 0.03,
+      "n_branches": 24,
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "cross_functional": false,
+      "unit": "meV"
+    }
+  },
+  "eval.phonons.CoSi.B0.softening_index": {
+    "value": 0.9340814288565398,
+    "run_id": "20260922T074127-fb89d0-none",
+    "manifest_sha256": "e942eb07065c0c08b156804d6eb05aa086792454f100b7349a7bdb30d4a7b89a",
+    "stage": "eval.phonons",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": null,
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 100,
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic harmonic quantity over a fixed q-path; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "tier": "phonons",
+      "compound": "CoSi",
+      "reference_label": "qe",
+      "cell_source": "dft",
+      "supercell": [
+        2,
+        2,
+        2
+      ],
+      "displacement_A": 0.03,
+      "n_branches": 24,
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "cross_functional": false,
+      "unit": "ratio"
+    }
+  },
+  "eval.phonons.CoSi.B1.imaginary_count": {
+    "value": 0.0,
+    "run_id": "20260922T074156-fb89d0-none",
+    "manifest_sha256": "7db17b0963ee3ff24fde643b0030c9de555df891a78ae0020c1decd316f7851f",
+    "stage": "eval.phonons",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": null,
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 100,
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic harmonic quantity over a fixed q-path; no resampling",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B1",
+      "bracket": "B1",
+      "tier": "phonons",
+      "compound": "CoSi",
+      "reference_label": "qe",
+      "cell_source": "dft",
+      "supercell": [
+        2,
+        2,
+        2
+      ],
+      "displacement_A": 0.03,
+      "n_branches": 24,
+      "model_sha256": "31f32a4f55bbd6bff35821a5dc2d3b6ab565e0b17037b6e4d61895d24634dcea",
+      "cross_functional": false,
+      "unit": "count"
+    }
+  },
+  "eval.phonons.CoSi.B1.omega_mae_meV": {
+    "value": 0.5111496161936869,
+    "run_id": "20260922T074156-fb89d0-none",
+    "manifest_sha256": "7db17b0963ee3ff24fde643b0030c9de555df891a78ae0020c1decd316f7851f",
+    "stage": "eval.phonons",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": null,
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 100,
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic harmonic quantity over a fixed q-path; no resampling",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B1",
+      "bracket": "B1",
+      "tier": "phonons",
+      "compound": "CoSi",
+      "reference_label": "qe",
+      "cell_source": "dft",
+      "supercell": [
+        2,
+        2,
+        2
+      ],
+      "displacement_A": 0.03,
+      "n_branches": 24,
+      "model_sha256": "31f32a4f55bbd6bff35821a5dc2d3b6ab565e0b17037b6e4d61895d24634dcea",
+      "cross_functional": false,
+      "unit": "meV"
+    }
+  },
+  "eval.phonons.CoSi.B1.softening_index": {
+    "value": 1.0047143067305815,
+    "run_id": "20260922T074156-fb89d0-none",
+    "manifest_sha256": "7db17b0963ee3ff24fde643b0030c9de555df891a78ae0020c1decd316f7851f",
+    "stage": "eval.phonons",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": null,
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 100,
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic harmonic quantity over a fixed q-path; no resampling",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B1",
+      "bracket": "B1",
+      "tier": "phonons",
+      "compound": "CoSi",
+      "reference_label": "qe",
+      "cell_source": "dft",
+      "supercell": [
+        2,
+        2,
+        2
+      ],
+      "displacement_A": 0.03,
+      "n_branches": 24,
+      "model_sha256": "31f32a4f55bbd6bff35821a5dc2d3b6ab565e0b17037b6e4d61895d24634dcea",
+      "cross_functional": false,
+      "unit": "ratio"
+    }
+  },
+  "eval.phonons.CoSi.B2.imaginary_count": {
+    "value": 0.0,
+    "run_id": "20260922T074202-fb89d0-none",
+    "manifest_sha256": "7b752001f8a21f04575f4d30b42778f0f60f87b57fa52e3f464cf2abbc09c7ba",
+    "stage": "eval.phonons",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": null,
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 100,
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic harmonic quantity over a fixed q-path; no resampling",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "phonons",
+      "compound": "CoSi",
+      "reference_label": "qe",
+      "cell_source": "dft",
+      "supercell": [
+        2,
+        2,
+        2
+      ],
+      "displacement_A": 0.03,
+      "n_branches": 24,
+      "model_sha256": "23702c4f91bf71cf2e2df6422a077b1ac065d5c04b0fc4ac6ea066a45620e844",
+      "cross_functional": false,
+      "unit": "count"
+    }
+  },
+  "eval.phonons.CoSi.B2.omega_mae_meV": {
+    "value": 0.5421279708859698,
+    "run_id": "20260922T074202-fb89d0-none",
+    "manifest_sha256": "7b752001f8a21f04575f4d30b42778f0f60f87b57fa52e3f464cf2abbc09c7ba",
+    "stage": "eval.phonons",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": null,
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 100,
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic harmonic quantity over a fixed q-path; no resampling",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "phonons",
+      "compound": "CoSi",
+      "reference_label": "qe",
+      "cell_source": "dft",
+      "supercell": [
+        2,
+        2,
+        2
+      ],
+      "displacement_A": 0.03,
+      "n_branches": 24,
+      "model_sha256": "23702c4f91bf71cf2e2df6422a077b1ac065d5c04b0fc4ac6ea066a45620e844",
+      "cross_functional": false,
+      "unit": "meV"
+    }
+  },
+  "eval.phonons.CoSi.B2.softening_index": {
+    "value": 1.0064006541906831,
+    "run_id": "20260922T074202-fb89d0-none",
+    "manifest_sha256": "7b752001f8a21f04575f4d30b42778f0f60f87b57fa52e3f464cf2abbc09c7ba",
+    "stage": "eval.phonons",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": null,
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 100,
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic harmonic quantity over a fixed q-path; no resampling",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "phonons",
+      "compound": "CoSi",
+      "reference_label": "qe",
+      "cell_source": "dft",
+      "supercell": [
+        2,
+        2,
+        2
+      ],
+      "displacement_A": 0.03,
+      "n_branches": 24,
+      "model_sha256": "23702c4f91bf71cf2e2df6422a077b1ac065d5c04b0fc4ac6ea066a45620e844",
+      "cross_functional": false,
+      "unit": "ratio"
+    }
+  },
+  "eval.phonons.FeSi.B0.imaginary_count": {
+    "value": 0.0,
+    "run_id": "20260922T074049-fb89d0-none",
+    "manifest_sha256": "f8a15a88f20a1d96a6e6d303647dcb7312fc58b7d40f7540d9122f791e02bc2c",
+    "stage": "eval.phonons",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": null,
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 100,
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic harmonic quantity over a fixed q-path; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "tier": "phonons",
+      "compound": "FeSi",
+      "reference_label": "qe",
+      "cell_source": "dft",
+      "supercell": [
+        2,
+        2,
+        2
+      ],
+      "displacement_A": 0.03,
+      "n_branches": 24,
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "cross_functional": false,
+      "unit": "count"
+    }
+  },
+  "eval.phonons.FeSi.B0.omega_mae_meV": {
+    "value": 8.218283355514375,
+    "run_id": "20260922T074049-fb89d0-none",
+    "manifest_sha256": "f8a15a88f20a1d96a6e6d303647dcb7312fc58b7d40f7540d9122f791e02bc2c",
+    "stage": "eval.phonons",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": null,
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 100,
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic harmonic quantity over a fixed q-path; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "tier": "phonons",
+      "compound": "FeSi",
+      "reference_label": "qe",
+      "cell_source": "dft",
+      "supercell": [
+        2,
+        2,
+        2
+      ],
+      "displacement_A": 0.03,
+      "n_branches": 24,
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "cross_functional": false,
+      "unit": "meV"
+    }
+  },
+  "eval.phonons.FeSi.B0.softening_index": {
+    "value": 0.7799313533778433,
+    "run_id": "20260922T074049-fb89d0-none",
+    "manifest_sha256": "f8a15a88f20a1d96a6e6d303647dcb7312fc58b7d40f7540d9122f791e02bc2c",
+    "stage": "eval.phonons",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": null,
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 100,
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic harmonic quantity over a fixed q-path; no resampling",
+      "e0_source": "foundation",
+      "energy_scale": null,
+      "model_label": "B0",
+      "bracket": "B0",
+      "tier": "phonons",
+      "compound": "FeSi",
+      "reference_label": "qe",
+      "cell_source": "dft",
+      "supercell": [
+        2,
+        2,
+        2
+      ],
+      "displacement_A": 0.03,
+      "n_branches": 24,
+      "model_sha256": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638",
+      "cross_functional": false,
+      "unit": "ratio"
+    }
+  },
+  "eval.phonons.FeSi.B1.imaginary_count": {
+    "value": 0.0,
+    "run_id": "20260922T074143-fb89d0-none",
+    "manifest_sha256": "87d84ba013ca63ca00f07d364ef428c44a8fed228489ac8f61b01bae636a30cd",
+    "stage": "eval.phonons",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": null,
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 100,
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic harmonic quantity over a fixed q-path; no resampling",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B1",
+      "bracket": "B1",
+      "tier": "phonons",
+      "compound": "FeSi",
+      "reference_label": "qe",
+      "cell_source": "dft",
+      "supercell": [
+        2,
+        2,
+        2
+      ],
+      "displacement_A": 0.03,
+      "n_branches": 24,
+      "model_sha256": "31f32a4f55bbd6bff35821a5dc2d3b6ab565e0b17037b6e4d61895d24634dcea",
+      "cross_functional": false,
+      "unit": "count"
+    }
+  },
+  "eval.phonons.FeSi.B1.omega_mae_meV": {
+    "value": 0.6781597800872722,
+    "run_id": "20260922T074143-fb89d0-none",
+    "manifest_sha256": "87d84ba013ca63ca00f07d364ef428c44a8fed228489ac8f61b01bae636a30cd",
+    "stage": "eval.phonons",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": null,
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 100,
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic harmonic quantity over a fixed q-path; no resampling",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B1",
+      "bracket": "B1",
+      "tier": "phonons",
+      "compound": "FeSi",
+      "reference_label": "qe",
+      "cell_source": "dft",
+      "supercell": [
+        2,
+        2,
+        2
+      ],
+      "displacement_A": 0.03,
+      "n_branches": 24,
+      "model_sha256": "31f32a4f55bbd6bff35821a5dc2d3b6ab565e0b17037b6e4d61895d24634dcea",
+      "cross_functional": false,
+      "unit": "meV"
+    }
+  },
+  "eval.phonons.FeSi.B1.softening_index": {
+    "value": 1.0053455649135452,
+    "run_id": "20260922T074143-fb89d0-none",
+    "manifest_sha256": "87d84ba013ca63ca00f07d364ef428c44a8fed228489ac8f61b01bae636a30cd",
+    "stage": "eval.phonons",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": null,
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 100,
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic harmonic quantity over a fixed q-path; no resampling",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B1",
+      "bracket": "B1",
+      "tier": "phonons",
+      "compound": "FeSi",
+      "reference_label": "qe",
+      "cell_source": "dft",
+      "supercell": [
+        2,
+        2,
+        2
+      ],
+      "displacement_A": 0.03,
+      "n_branches": 24,
+      "model_sha256": "31f32a4f55bbd6bff35821a5dc2d3b6ab565e0b17037b6e4d61895d24634dcea",
+      "cross_functional": false,
+      "unit": "ratio"
+    }
+  },
+  "eval.phonons.FeSi.B2.imaginary_count": {
+    "value": 0.0,
+    "run_id": "20260922T074150-fb89d0-none",
+    "manifest_sha256": "2e35280a5f203e36995546660d61456f5ffdf0ccfc8e205d10389a3d63e44575",
+    "stage": "eval.phonons",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": null,
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 100,
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic harmonic quantity over a fixed q-path; no resampling",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "phonons",
+      "compound": "FeSi",
+      "reference_label": "qe",
+      "cell_source": "dft",
+      "supercell": [
+        2,
+        2,
+        2
+      ],
+      "displacement_A": 0.03,
+      "n_branches": 24,
+      "model_sha256": "23702c4f91bf71cf2e2df6422a077b1ac065d5c04b0fc4ac6ea066a45620e844",
+      "cross_functional": false,
+      "unit": "count"
+    }
+  },
+  "eval.phonons.FeSi.B2.omega_mae_meV": {
+    "value": 0.6612016711807309,
+    "run_id": "20260922T074150-fb89d0-none",
+    "manifest_sha256": "2e35280a5f203e36995546660d61456f5ffdf0ccfc8e205d10389a3d63e44575",
+    "stage": "eval.phonons",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": null,
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 100,
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic harmonic quantity over a fixed q-path; no resampling",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "phonons",
+      "compound": "FeSi",
+      "reference_label": "qe",
+      "cell_source": "dft",
+      "supercell": [
+        2,
+        2,
+        2
+      ],
+      "displacement_A": 0.03,
+      "n_branches": 24,
+      "model_sha256": "23702c4f91bf71cf2e2df6422a077b1ac065d5c04b0fc4ac6ea066a45620e844",
+      "cross_functional": false,
+      "unit": "meV"
+    }
+  },
+  "eval.phonons.FeSi.B2.softening_index": {
+    "value": 1.00363097842064,
+    "run_id": "20260922T074150-fb89d0-none",
+    "manifest_sha256": "2e35280a5f203e36995546660d61456f5ffdf0ccfc8e205d10389a3d63e44575",
+    "stage": "eval.phonons",
+    "meta": {
+      "reference": {
+        "code": "qe",
+        "functional": "PBE",
+        "pseudos": "SSSP-efficiency-1.3",
+        "e0_source": null,
+        "cross_functional": false
+      },
+      "head": "Default",
+      "n": 100,
+      "seed": 0,
+      "ci95": null,
+      "ci95_reason": "deterministic harmonic quantity over a fixed q-path; no resampling",
+      "e0_source": "E0s_qe.json",
+      "energy_scale": "qe",
+      "model_label": "B2",
+      "bracket": "B2",
+      "tier": "phonons",
+      "compound": "FeSi",
+      "reference_label": "qe",
+      "cell_source": "dft",
+      "supercell": [
+        2,
+        2,
+        2
+      ],
+      "displacement_A": 0.03,
+      "n_branches": 24,
+      "model_sha256": "23702c4f91bf71cf2e2df6422a077b1ac065d5c04b0fc4ac6ea066a45620e844",
+      "cross_functional": false,
+      "unit": "ratio"
     }
   },
   "md.ase.CoSi.B0.npt.300.a_mean_A": {
