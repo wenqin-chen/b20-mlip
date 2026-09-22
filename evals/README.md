@@ -84,3 +84,10 @@ price ($5 / $25 per million input / output tokens, `b20mlip.agent.backends.PRICE
 Rough live cost: a task takes 3-8 turns of ~2-6k input tokens (system prompt + tool schemas +
 history) and ~100-300 output tokens each, i.e. ~$0.10-0.30 per task and ~$2-4 for the 12-task
 eval at list price (no prompt caching is used).
+
+## Task revisions
+
+- 2026-09-22 (before the first live run): t03 ranks FeSi and CoSi only (the MnSi QE phonon
+  reference was not computed: budget); t04/t05 evaluate `labelled_r0plus` on split `v2`
+  (`data/splits/006f595381e8.json`, policy `group_hash_v2`) because the round-0 split
+  `d195dc5f2104` let never-trained MnGe frames into T0 and val. Gold is regenerated with `screen`.
